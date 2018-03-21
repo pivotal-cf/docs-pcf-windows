@@ -5,20 +5,20 @@ owner: Windows
 
 This topic describes how to install and configure the Pivotal Application Service (PAS) for Windows tile. The PAS for Windows tile installs Windows cells on your PCF deployment.
 
-## <a id='ert'></a> Step 1: Confirm PAS Settings
+## <a id='ert'></a> Step 1: Confirm Shared PAS Tile Settings
 
-There are two settings in the PAS tile that affect the Windows cells installed by the PAS for Windows tile. Configure these settings as desired:
+There are two settings in the **Pivotal Application Service** tile that affect the Windows cells installed by the **PAS for Windows** tile. Configure these settings as desired:
 
 * In the **Networking** section, if you select the **Disable SSL certificate verification for this environment** checkbox, SSL certificate verification is disabled for Windows cells.
 * In the **System Logging** section, if you configure an external syslog aggregator, logs are drained from Windows cells as well as non-Windows cells.
 
 ##<a id='install'></a> Step 2: Install the Tile
 
-1. Download the product file from the **Pivotal Application Service for Windows** page of [Pivotal Network](https://network.pivotal.io/products/pas-windows).
+1. Download the **Pivotal Application Service for Windows** product file from the product page of [Pivotal Network](https://network.pivotal.io/products/pas-windows).
 
 1. From the same [Pivotal Network](https://network.pivotal.io/products/pas-windows) page, download the **PAS for Windows File System Injector** tool for your workstation OS, Windows, Linux, or Mac. The Injector tool is an executable binary `winfs-injector` that adds the Windows Server container base image into the product file. This step requires internet access and can take up to 20 minutes.
 
-1. Run `winfs-injector` with the following options, replacing `PAS-WINDOWS-DOWNLOADED.pivotal` with the path to the downloaded PAS for Windows product file and `PAS-WINDOWS-INJECTED.pivotal` with a file path to write the importable product file out to:
+1. Run `winfs-injector` with the following options, replacing `PAS-WINDOWS-DOWNLOADED.pivotal` with the path to the downloaded **PAS for Windows** product file and `PAS-WINDOWS-INJECTED.pivotal` with a desired output path for the importable product file:
     <pre class="terminal">
     $ winfs-injector --input-tile PAS-WINDOWS-DOWNLOADED.pivotal \
     --output-tile PAS-WINDOWS-INJECTED.pivotal
@@ -34,7 +34,7 @@ There are two settings in the PAS tile that affect the Windows cells installed b
 
 1. Click the newly added **PAS for Windows** tile.
 
-    <%= image_tag('pcf-windows-tile-orange-1-12.png') %>
+    <%= image_tag('pcf-windows-tile-orange.png') %>
 
 1. Click **Assign AZs and Networks** or **Assign Networks**. The name of the section varies depending on your IaaS.
 
@@ -49,21 +49,16 @@ There are two settings in the PAS tile that affect the Windows cells installed b
 
     <p class="note"><strong>Note</strong>: This feature is beta and not considered production-ready.</p>
 
-1. (Optional) If you want all VMs to support connection through Remote Desktop Protocol (RDP), click **Enable Remote Desktop Protocol**. 
+1. (Optional) If you want all VMs to support connection through Remote Desktop Protocol (RDP), click **Enable Remote Desktop Protocol**.
 
-1. (Optional) If you want to configure a Key Management Service (KMS) that your volume-licensed Windows cell can register with, perform the following steps:
-    1. Click **Enable**
-    2. For the **Host** field, enter the KMS hostname.
-    3. For the **Port** field, enter the port number. The default port number is `1688`.
-
-    ![The enable KMS text fields: host and port](enable-kms.png)
+1. (Optional) If you want to configure a Key Management Service (KMS) with which your volume-licensed Windows cell can register, perform the steps in the [Configuring a KMS Host](./configure-kms.html) section.
 
 1. (Optional) To deploy your PAS for Windows application workloads to an isolation segment, click **Application Containers** and perform the steps in the [Assign a Tile to an Isolation Segment](#assign-isolation) section below.
 
 1. (Optional) To configure Windows cells to send Windows Event logs to an external syslog server, click **System Logging** and perform the steps in the [Send Cell Logs to a Syslog Server](./troubleshooting.html#syslog) section.
 
 1. Click **Errands**. Pivotal recommends that you set the **Install HWC Buildpack Errand** to **On**. This ensures that you receive the most up-to-date HWC Buildpack.
-    
+
     <%= image_tag('errands-hwc.png') %>
 
 1. Click **Save**.
@@ -117,7 +112,7 @@ When you deploy or upgrade PAS for Windows, configure the resources of the BOSH 
 
 ### Select Master Compilation VM disk size
 
-1. On the Ops Manager Installation Dashboard, select the **BOSH Director** tile.
+1. On the Ops Manager Installation Dashboard, select the BOSH Director tile (usually the first tile).
 
 1. In the **Settings** tab, select **Resource Config**.
 
@@ -157,7 +152,7 @@ If the isolation segments do not already exist in the Cloud Controller Database 
 
 See [Replicate a Tile](#replicate) for how to create multiple copies of the PAS for Windows tile.
 
-See [Assign a Tile to an Isolation Segment](#assign-isolation) for how to associate a PAS for Windows tile with an isolation segment, so that its cells run in that segment. 
+See [Assign a Tile to an Isolation Segment](#assign-isolation) for how to associate a PAS for Windows tile with an isolation segment, so that its cells run in that segment.
 
 See the [Create an Isolation Segment](https://docs.pivotal.io/pivotalcf/adminguide/isolation-segments.html#create-an-is) section of the <em>Managing Isolation Segments</em> topic for how to add an isolation segment to the CCDB.
 
@@ -165,7 +160,7 @@ See the [Create an Isolation Segment](https://docs.pivotal.io/pivotalcf/admingui
 
 To make multiple copies of the **PAS for Windows** tile that you can assign to different isolation segments, use the Replicator tool as follows:
 
-1. Download the Replicator tool from the **Pivotal Cloud Foundry Runtime for Windows** section of [Pivotal Network](https://network.pivotal.io/products/p-windows-runtime).
+1. Download the Replicator tool from the **Pivotal Cloud Foundry Runtime for Windows** section of [Pivotal Network](https://network.pivotal.io/products/pas-windows).
 
 1. Navigate to the directory where you downloaded the Replicator tool.
 
