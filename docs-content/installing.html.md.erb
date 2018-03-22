@@ -16,13 +16,14 @@ There are two settings in the **Pivotal Application Service** tile that affect t
 
 1. Download the **Pivotal Application Service for Windows** product file from the product page of [Pivotal Network](https://network.pivotal.io/products/pas-windows).
 
-1. From the same [Pivotal Network](https://network.pivotal.io/products/pas-windows) page, download the **PAS for Windows File System Injector** tool for your workstation OS, Windows, Linux, or Mac. The Injector tool is an executable binary `winfs-injector` that adds the Windows Server container base image into the product file. This step requires internet access and can take up to 20 minutes.
+1. From the same [Pivotal Network](https://network.pivotal.io/products/pas-windows) page, download the **PAS for Windows File System Injector** tool for your workstation OS, Windows, Linux, or Mac. The Injector tool is an executable binary `winfs-injector` that adds the Windows Server container base image into the product file. This step requires internet access and can take up to 20 minutes. Note that you will need the `git` and `tar` (BSD) executables on your `$PATH` in order in order to run the `winfs-injector`.
 
 1. Run `winfs-injector` with the following options, replacing `PAS-WINDOWS-DOWNLOADED.pivotal` with the path to the downloaded **PAS for Windows** product file and `PAS-WINDOWS-INJECTED.pivotal` with a desired output path for the importable product file:
     <pre class="terminal">
     $ winfs-injector --input-tile PAS-WINDOWS-DOWNLOADED.pivotal \
     --output-tile PAS-WINDOWS-INJECTED.pivotal
     </pre>
+  For troubleshooting the `winfs-injector`, see [PAS for Windows File System Injector Troubleshooting](/windows/troubleshooting.html#winfs-injector-issues).
 
 1. Navigate to the Ops Manager Installation Dashboard and click **Import a Product**.
 

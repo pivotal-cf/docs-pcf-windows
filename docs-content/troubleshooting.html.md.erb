@@ -11,6 +11,23 @@ This topic describes how to troubleshoot Windows Diego cells deployed by Pivotal
 
 Here are some issues and resolutions that one may run into during the installation process.
 
+###<a id='winfs-injector-issues'></a>PAS for Windows File System Injector Troubleshooting
+
+**Sympton**
+
+You run the `winfs-injector` and see an error about certificates.
+```
+Get https://auth.docker.io/token?service=registry.docker.io&scope=repository:cloudfoundry/windows2016fs:pull: x509: failed to load system roots and no roots provided
+```
+
+**Explanation**
+
+Local certificates are needed to communicate with Dockerhub.
+
+**Solution**
+
+Install necessary certificates on your local machine (on Ubuntu, this can be done via the `ca-certificates` package).
+
 ###<a id='no-os'></a>Missing Container Image
 
 **Symptom**
