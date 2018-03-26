@@ -1,5 +1,5 @@
 ---
-title: Troubleshooting Windows Cells 
+title: Troubleshooting Windows Cells
 owner: Greenhouse
 ---
 
@@ -9,17 +9,38 @@ This topic describes how to troubleshoot Windows Diego cells deployed by Pivotal
 
 ##<a id='issues'></a> Installation Issues
 
-###<a id='no-os'></a> Missing OS
+Here are some issues and resolutions that one may run into during the installation process.
 
-#### Symptom
+###<a id='winfs-injector-issues'></a>PAS for Windows File System Injector Troubleshooting
 
-You click the **+** icon in Ops Manager to add the PAS for Windows tile to the Installation Dashboard, and you see the error `is invalid: has an invalid release 'windows2016fs' specified for job type 'Windows Diego Cell'`.
+**Symptom**
 
-#### Explanation
+You run the `winfs-injector` and see an error about certificates.
+```
+Get https://auth.docker.io/token?service=registry.docker.io&scope=repository:cloudfoundry/windows2016fs:pull: x509: failed to load system roots and no roots provided
+```
+
+**Explanation**
+
+Local certificates are needed to communicate with Dockerhub.
+
+**Solution**
+
+Install necessary certificates on your local machine (on Ubuntu, this can be done via the `ca-certificates` package).
+
+###<a id='no-os'></a>Missing Container Image
+
+**Symptom**
+
+You click the **+** icon in Ops Manager to add the PAS for Windows tile to the Installation Dashboard, and you see the error:
+
+<%= image_tag('error-invalid-release-uninjected-tile.png') %>
+
+**Explanation**
 
 The product file you are trying to upload does not contain the Windows Server container base image.
 
-#### Solution
+**Solution**
 
 1. Delete the product file listing from Ops Manager by clicking its trash can icon under **Import a Product**.
 
@@ -120,9 +141,9 @@ Perform the following steps to connect to a Windows cell to run diagnostics:
 
 1. To mount a directory on your local machine as a drive in the Windows cell, perform the following steps:
 	1. From the same **Edit Remote Desktops** window as above, click **Redirection**.
-	1. Click the plus icon at the bottom left. 
+	1. Click the plus icon at the bottom left.
 	<%= image_tag('rdp-redirection.png') %>
-	1. For **Name**, enter the name of the drive as it will appear in the Windows cell. For **Path**, enter the path of the local directory. 
+	1. For **Name**, enter the name of the drive as it will appear in the Windows cell. For **Path**, enter the path of the local directory.
 	1. Click **OK**.
 
 1. Close the **Edit Remote Desktops** window and double-click the newly added connection under **My Desktops** to open a RDP connection to the Windows cell.
@@ -136,7 +157,7 @@ Perform the following steps to use the Consul CLI on your Windows cell to diagno
 1. In your RDP session, open a PowerShell window.
 1. Change into the directory that contains the Consul CLI binary:
 	<pre class="terminal">
-	PS C:\Users\Administrator> cd C:\var\vcap\packages\consul-windows\bin\ 
+	PS C:\Users\Administrator> cd C:\var\vcap\packages\consul-windows\bin\
 	</pre>
 1. Use the Consul CLI to list the members of your Consul cluster:
 	<pre class="terminal">
