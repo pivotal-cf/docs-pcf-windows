@@ -44,14 +44,14 @@ Perform the following steps to push a .NET app to a Windows cell:
 
 1. Run one of the following commands to deploy your .NET app, replacing `APP-NAME` with the name of your app.
     <br><br>
-    * If you want to deploy a .NET Framework app, run `cf push APP-NAME -s windows -b hwc_buildpack`:
+    * If you want to deploy a .NET Framework app, run `cf push APP-NAME -s windows2016 -b hwc_buildpack`:
     <pre class="terminal">
-    $ cf push APP-NAME -s windows -b hwc_buildpack
+    $ cf push APP-NAME -s windows2016 -b hwc_buildpack
     </pre>
-    * If you want to deploy an app with <code>.bat</code> or <code>.exe</code> files, run `cf push -s windows -b binary_buildpack`:
-    <pre class="terminal">$ cf push -s windows -b binary_buildpack</pre>
+    * If you want to deploy an app with <code>.bat</code> or <code>.exe</code> files, run `cf push -s windows2016 -b binary_buildpack`:
+    <pre class="terminal">$ cf push -s windows2016 -b binary_buildpack</pre>
     <br>
-    The `-s windows` option instructs PCF to run the app in the Windows cell. If you are not pushing your app from its directory, use the `-p` option and specify the path to the directory that contains the app.
+    The `-s windows2016` option instructs PCF to run the app in the Windows cell. If you are not pushing your app from its directory, use the `-p` option and specify the path to the directory that contains the app.
 
 1. Wait for your app to stage and start. If you see an error message, refer to the [Troubleshoot App Errors](#troubleshoot) section of this topic.
 
@@ -85,10 +85,10 @@ Perform the following steps to push a self-hosted app:
     $ cf api api.YOUR-SYSTEM-DOMAIN
     </pre>
 
-1. Run `cf push APP-NAME -s windows -b binary_buildpack -c PATH-TO-BINARY` to push your .NET app from the app root. Replace `APP-NAME` with the name of your app and `PATH-TO-BINARY` with the path to your executable.
+1. Run `cf push APP-NAME -s windows2016 -b binary_buildpack -c PATH-TO-BINARY` to push your .NET app from the app root. Replace `APP-NAME` with the name of your app and `PATH-TO-BINARY` with the path to your executable.
 
     <pre class="terminal">
-    $ cf push APP-NAME -s windows -b binary_buildpack -c PATH-TO-BINARY
+    $ cf push APP-NAME -s windows2016 -b binary_buildpack -c PATH-TO-BINARY
     </pre>
 
 1. Wait for your app to stage and start. If you see an error message, refer to the [Troubleshoot App Errors](#troubleshoot) section of this topic.
@@ -103,9 +103,9 @@ Perform the following steps to deploy a SOAP web service:
 
 1. Develop the service as an ASMX web service in Microsoft Visual Studio.
 1. Publish the service to your local file system.
-1. Run `cf push SERVICE-NAME -s windows -b hwc_buildpack -u none` to push your service from the directory containing the published web service. Replace `SERVICE-NAME` with the name of your service:
+1. Run `cf push SERVICE-NAME -s windows2016 -b hwc_buildpack -u none` to push your service from the directory containing the published web service. Replace `SERVICE-NAME` with the name of your service:
     <pre class="terminal">
-    $ cf push SERVICE-NAME -s windows -b hwc_buildpack -u none
+    $ cf push SERVICE-NAME -s windows2016 -b hwc_buildpack -u none
     </pre>
     <br>
     The push command must include the `-s` flag to specify the stack as `windows`, which instructs PCF to run the app in the Windows cell.
