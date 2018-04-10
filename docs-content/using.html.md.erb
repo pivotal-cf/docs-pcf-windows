@@ -44,14 +44,14 @@ Perform the following steps to push a .NET app to a Windows cell:
 
 1. Run one of the following commands to deploy your .NET app, replacing `APP-NAME` with the name of your app.
     <br><br>
-    * If you want to deploy a .NET Framework app, run `cf push APP-NAME -s windows -b hwc_buildpack`:
+    * If you want to deploy a .NET Framework app, run `cf push APP-NAME -s windows2016 -b hwc_buildpack`:
     <pre class="terminal">
-    $ cf push APP-NAME -s windows -b hwc_buildpack
+    $ cf push APP-NAME -s windows2016 -b hwc_buildpack
     </pre>
-    * If you want to deploy an app with <code>.bat</code> or <code>.exe</code> files, run `cf push -s windows -b binary_buildpack`:
-    <pre class="terminal">$ cf push -s windows -b binary_buildpack</pre>
+    * If you want to deploy an app with <code>.bat</code> or <code>.exe</code> files, run `cf push -s windows2016 -b binary_buildpack`:
+    <pre class="terminal">$ cf push -s windows2016 -b binary_buildpack</pre>
     <br>
-    The `-s windows` option instructs PCF to run the app in the Windows cell. If you are not pushing your app from its directory, use the `-p` option and specify the path to the directory that contains the app.
+    The `-s windows2016` option instructs PCF to run the app in the Windows cell. If you are not pushing your app from its directory, use the `-p` option and specify the path to the directory that contains the app.
 
 1. Wait for your app to stage and start. If you see an error message, refer to the [Troubleshoot App Errors](#troubleshoot) section of this topic.
 
