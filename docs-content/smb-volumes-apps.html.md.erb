@@ -23,7 +23,6 @@ The following is required to use SMB Volumes in your .NET App:
 <li> An existing .NET Framework application </li>
 <li>SMB Username</li>
 <li>SMB Password</li>
-<li>Windows 1803.x or Windows 1709.x Stemcell</li>
 </ul>
 
 ### <a id='steeltoe'></a> Using SMB Volumes in .NET Apps with Steeltoe
@@ -40,11 +39,7 @@ If you are using Steeltoe, add the following environment variables to your Confi
 </ul>
     Where:
     <ul>
-    <li><code>SMB\_PATH</code> is the UNC path to your SMB.
-    <ul>
-    <li>If you are using the Windows 1709 Stemcell, your UNC is the IP of the machine you are using.</li>
-    <li>If you are using the Windows 1803 Stemcell, your UNC is the FQDN of the machine you are using.</li>
-    </ul>
+    <li><code>SMB\_PATH</code> is the UNC path to your SMB.</li>
     <li><code>SMB\_USERNAME</code> is your Azure account username.</li>
     <li><code>SMB\_PASSWORD</code> is  is your Azure account password.</li>
     </ul>
@@ -57,10 +52,7 @@ After adding your environment variables to your Config Server Provider, proceed 
 
 If you do not want to modify your application code to include Steeltoe, you can utilize SMB Mounting without Steeltoe. 
 
-1. Retrieve the UNC of your existing SMB share.
-    1. If you are using the Windows 1709.x Stemcell, your UNC is your machine's IP address.
-        1. To look up your machine's IP address, you can run the `nslookup` command. For more information, see [nslookup](https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/nslookup) in Microsoft's _Commands by Server Role_ Documentation.
-    1. If you are using the Windows 1803 Stemcell, your UNC is your machine's FQDN.
+1. Retrieve the UNC of your existing SMB share (your UNC is your machinee's FQDN)9
 1. Create a `.profile.bat` file in your .NET app's root directory.
 1. Use Apps Manager or the Cloud Foundry Command Line Interface (cf CLI) to set the following environment variables:
 <ul>
