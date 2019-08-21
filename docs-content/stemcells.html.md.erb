@@ -38,6 +38,24 @@ To use the Azure light stemcell, you must first accept the corresponding Microso
 1. Review the Terms of Use in the page "Configure Programmatic Deployment" that appears.
 1. Under **Choose the subscriptions**, click **Enable** for each Azure subscription with which you want to use the stemcell.
 1. Click **Save**.
+1. Login to to Azure with Azure CLI `az login`
+1. List available Windows stemcells and find latest Windows stemcell `urn`, for example, `pivotal:bosh-windows-server-1803:1803-8plus:1803.13.042002`
+
+	```
+	az vm image list --all --publisher pivotal --sku 1803-8plus --offer bosh-windows-server-1803
+	Offer                     Publisher    Sku         Urn                                                         Version
+	------------------------  -----------  ----------  ----------------------------------------------------------  --------------
+	bosh-windows-server-1803  pivotal      1803-8plus  pivotal:bosh-windows-server-1803:1803-8plus:1803.10.045001  1803.10.045001
+	bosh-windows-server-1803  pivotal      1803-8plus  pivotal:bosh-windows-server-1803:1803-8plus:1803.11.011001  1803.11.011001
+	bosh-windows-server-1803  pivotal      1803-8plus  pivotal:bosh-windows-server-1803:1803-8plus:1803.12.021001  1803.12.021001
+	bosh-windows-server-1803  pivotal      1803-8plus  pivotal:bosh-windows-server-1803:1803-8plus:1803.13.042002  1803.13.042002
+	bosh-windows-server-1803  pivotal      1803-8plus  pivotal:bosh-windows-server-1803:1803-8plus:1803.8.021001   1803.8.021001
+	bosh-windows-server-1803  pivotal      1803-8plus  pivotal:bosh-windows-server-1803:1803-8plus:1803.9.037002   1803.9.037002
+	```
+
+1. Accept terms for this Windows stemcell for each Azure subscription with which you want to use the stemcell, for example,
+   `az vm image accept-terms --subscription SUBSCRIPTION_ID --urn pivotal:bosh-windows-server-1803:1803-8plus:1803.13.042002`
+
 
 ### <a id="download"></a> Download the Azure Light Stemcell
 
