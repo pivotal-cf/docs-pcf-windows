@@ -39,22 +39,24 @@ To use the Azure light stemcell, you must first accept the corresponding Microso
 1. Under **Choose the subscriptions**, click **Enable** for each Azure subscription with which you want to use the stemcell.
 1. Click **Save**.
 1. Login to to Azure with Azure CLI `az login`
-1. List available Windows stemcells and find latest Windows stemcell `urn`, for example, `pivotal:bosh-windows-server-1803:1803-8plus:1803.13.042002`
+1. List available Windows stemcells and find latest Windows stemcell `urn`, for example, `pivotal:bosh-windows-server-2019:2019:2019.8.028001`
 
 	```
-	az vm image list --all --publisher pivotal --sku 1803-8plus --offer bosh-windows-server-1803
-	Offer                     Publisher    Sku         Urn                                                         Version
-	------------------------  -----------  ----------  ----------------------------------------------------------  --------------
-	bosh-windows-server-1803  pivotal      1803-8plus  pivotal:bosh-windows-server-1803:1803-8plus:1803.10.045001  1803.10.045001
-	bosh-windows-server-1803  pivotal      1803-8plus  pivotal:bosh-windows-server-1803:1803-8plus:1803.11.011001  1803.11.011001
-	bosh-windows-server-1803  pivotal      1803-8plus  pivotal:bosh-windows-server-1803:1803-8plus:1803.12.021001  1803.12.021001
-	bosh-windows-server-1803  pivotal      1803-8plus  pivotal:bosh-windows-server-1803:1803-8plus:1803.13.042002  1803.13.042002
-	bosh-windows-server-1803  pivotal      1803-8plus  pivotal:bosh-windows-server-1803:1803-8plus:1803.8.021001   1803.8.021001
-	bosh-windows-server-1803  pivotal      1803-8plus  pivotal:bosh-windows-server-1803:1803-8plus:1803.9.037002   1803.9.037002
+	az vm image list --all --publisher pivotal --sku 2019
+	Offer                     Publisher    Sku    Urn                                                  Version
+	------------------------  -----------  -----  ---------------------------------------------------  -------------
+	bosh-windows-server-2019  pivotal      2019   pivotal:bosh-windows-server-2019:2019:2019.1.050001  2019.1.050001
+	bosh-windows-server-2019  pivotal      2019   pivotal:bosh-windows-server-2019:2019:2019.2.022001  2019.2.022001
+	bosh-windows-server-2019  pivotal      2019   pivotal:bosh-windows-server-2019:2019:2019.3.041001  2019.3.041001
+	bosh-windows-server-2019  pivotal      2019   pivotal:bosh-windows-server-2019:2019:2019.4.044001  2019.4.044001
+	bosh-windows-server-2019  pivotal      2019   pivotal:bosh-windows-server-2019:2019:2019.5.006001  2019.5.006001
+	bosh-windows-server-2019  pivotal      2019   pivotal:bosh-windows-server-2019:2019:2019.6.025001  2019.6.025001
+	bosh-windows-server-2019  pivotal      2019   pivotal:bosh-windows-server-2019:2019:2019.7.012001  2019.7.012001
+	bosh-windows-server-2019  pivotal      2019   pivotal:bosh-windows-server-2019:2019:2019.8.028001  2019.8.028001
 	```
 
 1. Accept terms for this Windows stemcell for each Azure subscription with which you want to use the stemcell, for example,
-   `az vm image accept-terms --subscription SUBSCRIPTION_ID --urn pivotal:bosh-windows-server-1803:1803-8plus:1803.13.042002`
+   `az vm image accept-terms --subscription SUBSCRIPTION_ID --urn pivotal:bosh-windows-server-2019:2019:2019.8.028001`
 
 
 ### <a id="download"></a> Download the Azure Light Stemcell
