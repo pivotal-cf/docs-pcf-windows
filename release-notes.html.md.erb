@@ -16,11 +16,10 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 
 ### <a id='4.0.0'></a> 4.0.0
 
-**Release Date:** 01/31/2023
+**Release Date:** 02/09/2023
 
-* Bump garden-runc to version `1.22.9`
-* Bump loggregator-agent to version `7.0.1`
-* Bump windowsfs-release to version `2.42.0`
+* **[Bug Fix]** Allows docker app workloads without a `sh` binary in the docker image to execute properly.
+* Bump loggregator-agent to version `7.1.0`
 
 <table border="1" class="nice">
   <thead>
@@ -36,14 +35,25 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
     <tr><td>envoy-nginx</td><td>0.14.0</td><td></td></tr>
     <tr><td>garden-runc</td><td>1.22.9</td><td></td></tr>
     <tr><td>hwc-offline-buildpack</td><td>3.1.27</td><td></td></tr>
-    <tr><td>loggregator-agent</td><td>7.0.1</td>
+    <tr><td>loggregator-agent</td><td>7.1.0</td>
       <td>
         <details>
-          <summary>v7.0.1</summary>
+          <summary>v7.1.0</summary>
           <pre style="max-width: 30em">
   ## What's Changed
-  * Fix: anonymize URL in syslog drain logs and metrics by @ctlong in https://github.com/cloudfoundry/loggregator-agent-release/pull/186
-  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.0.0...v7.0.1
+  * Add app-id and drain url in the error message by @chombium in https://github.com/cloudfoundry/loggregator-agent-release/pull/212
+  ## New Contributors
+  * @chombium made their first contribution in https://github.com/cloudfoundry/loggregator-agent-release/pull/212
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.0.2...v7.1.0
+          </pre>
+        </details>
+        <details>
+          <summary>v7.0.2</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Sanitize ProcID in syslog messages so messages with utf-8 in the source_type are not dropped by @Benjamintf1 in https://github.com/cloudfoundry/loggregator-agent-release/pull/200
+  * Update dependencies
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.0.1...v7.0.2
           </pre>
         </details>
       </td>
@@ -53,7 +63,6 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
     <tr><td>winc</td><td>2.9.0</td><td></td></tr>
     <tr><td>windows-syslog</td><td>1.1.11</td><td></td></tr>
     <tr><td>windows-utilities</td><td>0.17.0</td><td></td></tr>
-    <tr><td>windowsfs-release</td><td>2.42.0</td></tr>
   </tbody>
 </table>
 
