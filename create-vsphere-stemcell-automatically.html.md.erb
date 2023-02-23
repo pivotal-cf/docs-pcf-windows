@@ -27,8 +27,7 @@ The BOSH stemcell that you create in this topic is based on Windows Server 2019.
 If you already have a BOSH stemcell for Windows on vSphere, see [Monthly Stemcell Upgrades](#upgrade-stemcell) below.
 
 For more information, see
-[Best Practices for Stembuild for Tanzu Application Service & Tanzu Kubernetes Grid Integrated Edition]
-(https://tanzu.vmware.com/content/practitioners/best-practices-for-stembuild-for-tanzu-application-service-tanzu-kubernetes-grid-integrated-edition)
+[Best Practices for Stembuild for Tanzu Application Service & Tanzu Kubernetes Grid Integrated Edition](https://tanzu.vmware.com/content/practitioners/best-practices-for-stembuild-for-tanzu-application-service-tanzu-kubernetes-grid-integrated-edition)
 in _VMware Tanzu Tech Tutorials_.
 
 ## <a id='stembuild-overview'></a> Overview of Stembuild
@@ -54,8 +53,7 @@ Before you create a BOSH stemcell for Windows on vSphere, you must have:
 
 * A vSphere environment. To ensure the VM hardware used by the stemcell is compatible
   with your deployment environment's ESXi/ESX host and vCenter Server versions, see
-  [ESXi/ESX hosts and compatible virtual machine hardware versions list (2007240)]
-  (https://kb.vmware.com/s/article/2007240) in the VMware Knowledge Base.
+  [ESXi/ESX hosts and compatible virtual machine hardware versions list (2007240)](https://kb.vmware.com/s/article/2007240) in the VMware Knowledge Base.
 
 * An ISO for a Windows Server 2019 Server Core installation, build number: 17763,
   from [Microsoft Developer Network (MSDN)](https://msdn.microsoft.com/en-us) or
@@ -189,11 +187,11 @@ To install VMware Tools on the base VM:
 
 1. In the vSphere Web Client, right-click the base VM and select **Guest OS** > **Install VMware Tools**.
 
-1. When prompted, choose **Mount**.  
+1. When prompted, choose **Mount**.
 
-1. Log in to the the VM.  
+1. Log in to the the VM.
 
-1. Navigate to the `D:` drive.  
+1. Navigate to the `D:` drive.
 
 1. To install the VMware Tools, run:
 
@@ -201,11 +199,11 @@ To install VMware Tools on the base VM:
     setup64.exe
     ```
 
-1. Wait for a pop-up dialog.  
+1. Wait for a pop-up dialog.
 
-    <p class="note"><strong>Note:</strong> 
-    The VMware Tools install window might display behind the command line window. 
-    To avoid this, shrink or minimize the command line window while you are waiting. 
+    <p class="note"><strong>Note:</strong>
+    The VMware Tools install window might display behind the command line window.
+    To avoid this, shrink or minimize the command line window while you are waiting.
     </p>
 
 1. When prompted, follow the instructions to finish the install.
