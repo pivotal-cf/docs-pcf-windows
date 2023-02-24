@@ -45,17 +45,17 @@ To push a .NET Framework app to a Windows Diego Cell:
 1. Run one of the following commands to deploy your .NET app:
     * To deploy an app with `.bat` or `.exe` files, run:
 
-    ```
-    cf push -s windows -b binary_buildpack
-    ```
+        ```
+        cf push -s windows -b binary_buildpack
+        ```
     *  To deploy a .NET Framework app, run:
 
-    ```shell
-    cf push APP-NAME -s windows -b hwc_buildpack
-    ```
-    Where `APP-NAME` is the name of your app.
-    <p class="note"><strong>Note:</strong> The <code>-s windows</code> option instructs <%= vars.platform_name %> to run the app in the Windows Diego Cell.</p>
-    <p class="note"><strong>Note:</strong> If you are not pushing your app from its directory, use the <code>-p</code> option and specify the path to the directory that contains the app.</p>
+        ```shell
+        cf push APP-NAME -s windows -b hwc_buildpack
+        ```
+        Where `APP-NAME` is the name of your app.
+        <p class="note"><strong>Note:</strong> The <code>-s windows</code> option instructs <%= vars.platform_name %> to run the app in the Windows Diego Cell.</p>
+        <p class="note"><strong>Note:</strong> If you are not pushing your app from its directory, use the <code>-p</code> option and specify the path to the directory that contains the app.</p>
 
 1. Wait for your app to stage and start. If you see an error message,
    see [Troubleshoot App Errors](#troubleshoot) below.
@@ -78,10 +78,13 @@ Making an app accessible under another app's URL requires a pair of commands. To
     ```
     cf push LOWER-LEVEL-APP-NAME -d APP-DOMAIN --hostname TOP-LEVEL-APP-NAME --route-path LOWER-LEVEL-APP-NAME
     ```
+
     Where:
-    * `TOP-LEVEL-APP-NAME` is the name of your top-level app.
-    * `LOWER-LEVEL-APP-NAME` is the name of your lower-level app.
-    * `APP-DOMAIN` is your app's public domain name. For example, `example.com`.
+    <ul>
+      <li><code>TOP-LEVEL-APP-NAME</code> is the name of your top-level app.</li>
+      <li><code>LOWER-LEVEL-APP-NAME</code> is the name of your lower-level app.</li>
+      <li><code>APP-DOMAIN</code> is your app&#39;s public domain name. For example, <code>example.com</code>.</li>
+    </ul>
     <p class="note"><strong>Note:</strong> The <code>-d</code> parameter is only needed when pushing an app to a non-default domain.</p>
 
 ### <a id='graceful-shutdown'></a> Enable Graceful Shutdown for a .NET App
@@ -109,9 +112,12 @@ To push a self-hosted app:
     ```
     cf push APP-NAME -s windows -b binary_buildpack -c PATH-TO-BINARY
     ```
+
     Where:
-    * `APP-NAME` is the name of your app.
-    * `PATH-TO-BINARY` is the path to your executable.
+    <ul>
+      <li><code>APP-NAME</code> is the name of your app.</li>
+      <li><code>PATH-TO-BINARY</code> is the path to your executable.</li>
+    </ul>
 
 1. Wait for your app to stage and start. If you see an error message,
    see [Troubleshoot App Errors](#troubleshoot) below.
@@ -136,14 +142,17 @@ To deploy a SOAP web service:
     ```
     cf push SOAP-SERVICE-NAME -s windows -b hwc_buildpack -p WEB-SERVICE-DIRECTORY -u none
     ```
-    Where
-    * `SOAP-SERVICE-NAME` is the name of your service.
-    * `WEB-SERVICE-DIRECTORY` is the path to the directory containing the published web service.
-    <br>
+
+    Where:
+    <ul>
+      <li><code>SOAP-SERVICE-NAME</code> is the name of your service.</li>
+      <li><code>WEB-SERVICE-DIRECTORY</code> is the path to the directory containing the published web service.</li>
+    </ul>
+
     For example:
     <pre class="terminal">
     $ cf push webservice -s windows -b hwc_buildpack -u none
-    <br>
+
     requested state: started
     instances: 1/1
     usage: 1G x 1 instances
@@ -192,16 +201,19 @@ To use a modified version of the WSDL file:
     ```
     https://SOAP-SERVICE-NAME.APP-DOMAIN/ASMX-FILE?wsdl
     ```
+
     Where:
-    * `SOAP-SERVICE-NAME` is the name of your service.
-    * `APP-DOMAIN` is your site's public domain name.
-    * `ASMX-FILE` is the filename of your asmx file.
-    <br>
+    <ul>
+      <li><code>SOAP-SERVICE-NAME</code> is the name of your service.</li>
+      <li><code>APP-DOMAIN</code> is your site&#39;s public domain name.</li>
+      <li><code>ASMX-FILE</code> is the filename of your asmx file.</li>
+    </ul>
+
     For example:
 
-    ```
+    <pre class="terminal">
     https://webservice.example.com/WebService1.asmx?wsdl
-    ```
+    </pre>
 
 1. Download the WSDL file to your local machine.
 
