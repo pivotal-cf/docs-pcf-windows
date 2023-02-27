@@ -16,10 +16,14 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 
 ### <a id='4.0.0'></a> 4.0.0
 
-**Release Date:** 02/09/2023
+**Release Date:** 02/27/2023
 
-* **[Bug Fix]** Allows docker app workloads without a `sh` binary in the docker image to execute properly.
-* Bump loggregator-agent to version `7.1.0`
+* Bump garden-runc to version `1.23.0`
+* Bump hwc-offline-buildpack to version `3.1.28`
+* Bump loggregator-agent to version `7.1.1`
+* Bump metrics-discovery to version `3.2.7`
+* Bump winc to version `2.10.0`
+* Bump windows-syslog to version `1.1.13`
 
 <table border="1" class="nice">
   <thead>
@@ -33,37 +37,92 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
     <tr><td>windows2019 stemcell</td><td>2019.44</td><td></td></tr>
     <tr><td>diego</td><td>2.71.0</td><td></td></tr>
     <tr><td>envoy-nginx</td><td>0.14.0</td><td></td></tr>
-    <tr><td>garden-runc</td><td>1.22.9</td><td></td></tr>
-    <tr><td>hwc-offline-buildpack</td><td>3.1.27</td><td></td></tr>
-    <tr><td>loggregator-agent</td><td>7.1.0</td>
+    <tr><td>garden-runc</td><td>1.23.0</td><td></td></tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.28</td>
       <td>
         <details>
-          <summary>v7.1.0</summary>
+          <summary>3.1.28</summary>
           <pre style="max-width: 30em">
-  ## What's Changed
-  * Add app-id and drain url in the error message by @chombium in https://github.com/cloudfoundry/loggregator-agent-release/pull/212
-  ## New Contributors
-  * @chombium made their first contribution in https://github.com/cloudfoundry/loggregator-agent-release/pull/212
-  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.0.2...v7.1.0
-          </pre>
-        </details>
-        <details>
-          <summary>v7.0.2</summary>
-          <pre style="max-width: 30em">
-  ## What's Changed
-  * Sanitize ProcID in syslog messages so messages with utf-8 in the source_type are not dropped by @Benjamintf1 in https://github.com/cloudfoundry/loggregator-agent-release/pull/200
-  * Update dependencies
-  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.0.1...v7.0.2
+  * Updates github-config (#104)
+  * Bump github.com/onsi/gomega from 1.24.2 to 1.26.0
+  Packaged binaries:
+  | name | version | cf_stacks |
+  |-|-|-|
+  | hwc | 21.0.0 | windows, windows2016 |
+  Default binary versions:
+  | name | version |
+  |-|-|
+  | hwc | 21.0.0 |
+  * Uncached buildpack SHA256: 92a52f3346131abbe2472b1f12a2ff4e304aeb6c497b7e3f10a3537be8c1e721
+  * Uncached buildpack SHA256: 37813ac6ded74a0e87924a3a9cec19afb6d4e6dfc6a8ef8da83f7d02fecfdc82
           </pre>
         </details>
       </td>
     </tr>
-    <tr><td>metrics-discovery</td><td>3.2.4</td><td></td></tr>
+    <tr><td>loggregator-agent</td><td>7.1.1</td>
+      <td>
+        <details>
+          <summary>v7.1.1</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * update dependencies
+  * Add error messages for better traceability of filtered out syslog drain bindings by @chombium in https://github.com/cloudfoundry/loggregator-agent-release/pull/216
+  * Upgrade to go 1.20 by @rroberts2222 in https://github.com/cloudfoundry/loggregator-agent-release/pull/223
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.1.0...v7.1.1
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>metrics-discovery</td><td>3.2.7</td>
+      <td>
+        <details>
+          <summary>v3.2.7</summary>
+          <pre style="max-width: 30em">
+  * update golang to 1.20.1
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.6...v3.2.7###
+          </pre>
+        </details>
+        <details>
+          <summary>v3.2.6</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Upgrade to go 1.20 by @rroberts2222 in https://github.com/cloudfoundry/metrics-discovery-release/pull/104
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.5...v3.2.6
+          </pre>
+        </details>
+        <details>
+          <summary>v3.2.5</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Update dependencies
+  * Expire individual metrics by @rroberts2222 in https://github.com/cloudfoundry/metrics-discovery-release/pull/103
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.4...v3.2.5
+          </pre>
+        </details>
+      </td>
+    </tr>
     <tr><td>smoke-tests</td><td>4.8.2</td><td></td></tr>
-    <tr><td>winc</td><td>2.9.0</td><td></td></tr>
-    <tr><td>windows-syslog</td><td>1.1.11</td><td></td></tr>
+    <tr><td>winc</td><td>2.10.0</td><td></td></tr>
+    <tr><td>windows-syslog</td><td>1.1.13</td>
+      <td>
+        <details>
+          <summary>v1.1.13</summary>
+          <pre style="max-width: 30em">
+  * update golang to 1.20.1
+  **Full Changelog**: https://github.com/cloudfoundry/windows-syslog-release/compare/v1.1.12...v1.1.13
+          </pre>
+        </details>
+        <details>
+          <summary>v1.1.12</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * use go 1.20 by @rroberts2222 in https://github.com/cloudfoundry/windows-syslog-release/pull/18
+  **Full Changelog**: https://github.com/cloudfoundry/windows-syslog-release/compare/v1.1.11...v1.1.12
+          </pre>
+        </details>
+      </td>
+    </tr>
     <tr><td>windows-utilities</td><td>0.17.0</td><td></td></tr>
-    <tr><td>windowsfs-release</td><td>2.42.0</td><td></td></tr>
   </tbody>
 </table>
 
