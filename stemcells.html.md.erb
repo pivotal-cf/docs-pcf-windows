@@ -77,7 +77,7 @@ To enable the Azure subscriptions with which you want to use your stemcell:
 
 1. Select **BOSH Stemcell for Windows Server 2019** from your search results. A description of the Azure stemcell offering appears.
 
-1. Below the description, at the bottom of the page, click the blue banner that reads **Want to deploy programmatically? Get started ➔**.
+1. Below the description, at the bottom of the page, click the blue banner that reads **Want to deploy programmatically? Get started**.
 
 1. Review the Terms of Use on the "Configure Programmatic Deployment" page that appears.
 
@@ -91,14 +91,14 @@ To accept the license agreement for your stemcell:
 
 1. To log in to to Azure with the Azure CLI, use the following command:
 
-    ```
+    ```console
     az login
     ```
 
 1. To list the available Windows stemcells and find latest Windows stemcell `urn`,
 run the following Azure CLI command:
 
-	```
+	```console
 	az vm image list --all --publisher pivotal --sku 2019
 	```
 
@@ -129,8 +129,10 @@ with which you want to use the stemcell, run the following command:
     ```
 
     Where:
-    * `SUBSCRIPTION_ID` is an Azure subscription with which you want to use the stemcell.
-    * `URN-ID` is the `urn` for the latest Windows stemcell.
+        <ul>
+           <li>`SUBSCRIPTION_ID` is an Azure subscription with which you want to use the stemcell.</li>
+           <li>`URN-ID` is the `urn` for the latest Windows stemcell.
+        </ul>
 
 
 ### <a id="download"></a> Download the Azure Light Stemcell

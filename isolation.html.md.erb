@@ -39,13 +39,17 @@ To use the Replicator tool:
 
 1. Replicate the tile by running:
 
-    ```
+    ```console
     replicator-windows -name "TILE-NAME" -path PATH-TO-ORIGINAL -output PATH-TO-COPY
     ```
+
     Where:
-    * `TILE-NAME` is a unique name for the new <%= vars.windows_runtime_abbr %> tile. The name must be ten or fewer characters in length and contain only alphanumeric characters, dashes, underscores, and spaces.
-    * `PATH-TO-ORIGINAL` is the absolute path to the original `.pivotal` <%= vars.windows_runtime_abbr %> tile you downloaded from <%= vars.product_network %>.
-    * `PATH-TO-COPY` is the absolute path for the copy of the `.pivotal` <%= vars.windows_runtime_abbr %> tile that the Replicator tool produces.
+         <ul>
+            <li>`TILE-NAME` is a unique name for the new <%= vars.windows_runtime_abbr %> tile. The name must be ten or fewer characters in length and contain only alphanumeric characters, dashes, underscores, and spaces.</li>
+            <li>`PATH-TO-ORIGINAL` is the absolute path to the original `.pivotal` <%= vars.windows_runtime_abbr %> tile you downloaded from <%= vars.product_network %>.</li>
+            <li>`PATH-TO-COPY` is the absolute path for the copy of the `.pivotal` <%= vars.windows_runtime_abbr %> tile that the Replicator tool produces.</li>
+         </ul>
+
     For example:
     <pre class="terminal">
     C:\Users\admin\> replicator-windows -name "Shiny Tile" ^
