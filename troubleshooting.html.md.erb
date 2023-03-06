@@ -58,7 +58,7 @@ for the tile.
 You click the **+** icon in <%= vars.platform_name %> to add the <%= vars.windows_runtime_abbr %>
 tile to the Installation Dashboard and see the following error:
 
-<%= image_tag('./images/error-invalid-release-uninjected-tile.png') %>
+![alt-text="Error message: Has an invalid release (windows 2016fs) specified for job type Windows Diego Cell."](./images/error-invalid-release-uninjected-tile.png)
 
 **Explanation**
 
@@ -77,7 +77,7 @@ information, see [Install the Tile](./installing.html#install) in _Installing an
 
 1. Click **Import a Product** to upload the injected product file.
 
-1. Click the **+** icon next to the product listing to add the <%= vars.windows_runtime_abbr %>
+2. Click the **+** icon next to the product listing to add the <%= vars.windows_runtime_abbr %>
 tile to the Installation Dashboard.
 
 ## <a id='issues'></a> Upgrade Issues
@@ -118,7 +118,7 @@ When upgrading between versions of Windows rootfs that have a shared Microsoft b
 
 **Solution**
 
-For available workarounds, see 
+For available workarounds, see
 [Failure to create containers when upgrading with shared Microsoft base
 image](https://community.pivotal.io/s/article/knowledge-base-failure-to-create-containers-when-upgrading-with-shared-microsoft-base-image) in the Knowledge Base.
 
@@ -185,8 +185,8 @@ To download Windows Diego Cell logs:
 
 ## <a id='compilation_vms'></a> Troubleshoot Windows Compilation VMs
 
-BOSH automatically deletes a compilation VM after the compilation VM fails. 
-In a vSphere environment, use one of the procedures below to troubleshoot your 
+BOSH automatically deletes a compilation VM after the compilation VM fails.
+In a vSphere environment, use one of the procedures below to troubleshoot your
 Windows stemcell v2019.7 and later compilation VM issues:
 
 * [Troubleshoot a Slowly-Deleted Windows Compilation VM](#compilation-vms-slow)
@@ -194,24 +194,23 @@ Windows stemcell v2019.7 and later compilation VM issues:
 
 ### <a name='compilation-vms-slow'></a> Troubleshoot a Slowly-Deleted Windows Compilation VM
 
-The easiest method to troubleshoot a Windows compilation VM is to 
-`bosh ssh` to the VM before BOSH deletes it. 
+The easiest method to troubleshoot a Windows compilation VM is to SSH into the VM before BOSH deletes it.
 
 To troubleshoot a compilation VM from an `ssh` session:
 
-1. Open the vSphere UI.  
+1. Open the vSphere UI.
 
-1. Open two different BOSH CLI terminal sessions.  
-1. Open <%= vars.ops_manager %>.  
+1. Open two different BOSH CLI terminal sessions.
+1. Open <%= vars.ops_manager %>.
 1. Enable the two following settings in <%= vars.ops_manager %>:
-    * Select **Keep Unreachable Director VMs** from 
-    **BOSH Director** tile > **Director config**. 
-    * Select **enable BOSH-native SSH support on all VMs** from 
-    **<%= vars.windows_runtime_abbr %>** tile > **VM options**. 
+    * Select **Keep Unreachable Director VMs** from
+    **BOSH Director** tile > **Director config**.
+    * Select **Enable BOSH-native SSH support on all VMs** from
+    **<%= vars.windows_runtime_abbr %>** tile > **VM options**.
 1. Click **Apply Changes** against the <%= vars.windows_runtime_abbr %> tile.
-1. From the first BOSH CLI terminal, monitor the BOSH task:  
+1. From the first BOSH CLI terminal, monitor the BOSH task:
 
-    ```
+    ```console
     watch -n 5 "bosh -d TAS-WINDOWS-DEPLOYMENT is --details | grep compilation"
     ```
 
@@ -221,24 +220,25 @@ To troubleshoot a compilation VM from an `ssh` session:
 
 1. From the second BOSH CLI terminal, SSH to the Windows compilation VM:
 
-    ```
+    ```console
     bosh -d TAS-WINDOWS-DEPLOYMENT ssh COMPILATION-NAME
     ```
+
     Where:
-    * `TAS-WINDOWS-DEPLOYMENT` is the name of your <%= vars.windows_runtime_abbr %> deployment.
-    * `COMPILATION-NAME` is the name of your  Windows compilation VM.  
+        <ul>
+          <li>`TAS-WINDOWS-DEPLOYMENT` is the name of your <%= vars.windows_runtime_abbr %> deployment.</li>
+          <li>`COMPILATION-NAME` is the name of your  Windows compilation VM.</li>
+        </ul>
 
-1. To prevent BOSH from deleting the compilation VM after the compilation VM fails, 
-search for the compilation VM CID in the vSphere UI and rename it.
+1. To prevent BOSH from deleting the compilation VM after the compilation VM fails,
+search for the compilation VM CID in the vSphere UI and rename it. You can now troubleshoot within this session.
 
-1. You can now troubleshoot within this session.  
-
-1. After troubleshooting, delete the VM manually.  
+1. After troubleshooting, delete the VM manually.
 
 ### <a name='compilation-vms-quick'></a> Troubleshoot a Quickly-Deleted Windows Compilation VM
 
-In some situations, the Windows compilation VM might be deleted very quickly, 
-making it impossible to `bosh ssh` to the VM before BOSH deletes it. 
+In some situations, the Windows compilation VM might be deleted very quickly,
+making it impossible to SSH into the VM before BOSH deletes it.
 
 To troubleshoot a quickly-deleted compilation VM:
 
@@ -246,20 +246,20 @@ To troubleshoot a quickly-deleted compilation VM:
 
 1. Upload the Ubuntu desktop image into your vSphere datastore.
 
-1. Open the vSphere UI.  
+1. Open the vSphere UI.
 
-1. Open a BOSH CLI terminal session.  
-1. Open <%= vars.ops_manager %>.  
+1. Open a BOSH CLI terminal session.
+1. Open <%= vars.ops_manager %>.
 1. Enable the two following settings in <%= vars.ops_manager %>:
-    * Select **Keep Unreachable Director VMs** from 
-    **BOSH Director** tile > **Director config**. 
-    * Select **enable BOSH-native SSH support on all VMs** from 
-    **<%= vars.windows_runtime_abbr %>** tile > **VM options**. 
+    * Select **Keep Unreachable Director VMs** from
+    **BOSH Director** tile > **Director config**.
+    * Select **enable BOSH-native SSH support on all VMs** from
+    **<%= vars.windows_runtime_abbr %>** tile > **VM options**.
 1. Click **Apply Changes** in <%= vars.ops_manager %>.
 
-1. From the BOSH CLI terminal, monitor the BOSH task:  
+1. From the BOSH CLI terminal, monitor the BOSH task:
 
-    ```
+    ```console
     watch -n 5 "bosh -d TAS-WINDOWS-DEPLOYMENT is --details | grep compilation"
     ```
 
@@ -268,28 +268,28 @@ To troubleshoot a quickly-deleted compilation VM:
 1. Wait until the compilation VM CID is up.
 
 1. From the vSphere UI:
-    1. Locate the compilation VM CID in the vSphere UI.  
-    1. To prevent BOSH from deleting the compilation VM after the compilation VM fails, 
+    1. Locate the compilation VM CID in the vSphere UI.
+    1. To prevent BOSH from deleting the compilation VM after the compilation VM fails,
     rename the compilation VM.
-    1. On the Windows compilation VM, go to **Edit settings** > **add a device CD/DVD drive** > 
+    1. On the Windows compilation VM, go to **Edit settings** > **add a device CD/DVD drive** >
     **browse Datastore ISO file**, and select the Ubuntu desktop iso -> select **Connect at Power ON**.
     1. Go to **Edit settings** -> **VM options** tab -> **Boot Options**.
     1. Increase the **Boot Delay** to `10000 milliseconds`.
     1. Select **Force BIOS Setup**.
-    1. Select **Start/Restart** to restart the VM. 
+    1. Select **Start/Restart** to restart the VM.
 
 1. On the BIOS setup screen, boot with the CD-ROM Drive.
 
-1. After Ubuntu desktop starts, select **try Ubuntu** and launch a terminal. 
+1. After Ubuntu desktop starts, select **try Ubuntu** and launch a terminal.
 
 1. In the terminal, run:
 
-    ```
+    ```console
     sudo fdisk -l
     sudo mkdir /mnt/windows
     sudo mount /dev/sda1 /mnt/windows
     ```
-1. You can now troubleshoot within this session by 
-exploring the contents of the windows VM's file system within `/mnt/windows`
+
+1. You can now troubleshoot inside this session by exploring the contents of the Windows VMs file system in `/mnt/windows`.
 
 1. After troubleshooting, delete the VM manually.
