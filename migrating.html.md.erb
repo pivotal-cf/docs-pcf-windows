@@ -35,14 +35,14 @@ To redeploy a running app with zero downtime using the blue-green method:
 
 1. To find the name of the existing <%= vars.windows_runtime_abbr %> 2012 R2 app you are migrating to <%= vars.windows_runtime_abbr %> Diego, run:
 
-    ```
+    ```console
     cf apps
     ```
 
 1. Create a name for the replacement <%= vars.windows_runtime_abbr %> app.
    VMware recommends you append `-green` to your existing app name, using the following format:
 
-    ```
+    ```console
     APP-NAME-green
     ```
     Where `APP-NAME` is the name of the existing <%= vars.windows_runtime_abbr %> Diego 2012 R2 app.
@@ -52,57 +52,69 @@ To redeploy a running app with zero downtime using the blue-green method:
     ```
     cf push APP-NAME-GREEN -s windows -b BUILDPACK -n HOSTNAME --no-start --no-route
     ```
+
     Where:
-    * `APP-NAME-GREEN` is the newly created "green" name for your app.
-    * `BUILDPACK` is your custom buildpack. Specify the buildpack either by name or GitHub URL with an optional branch or tag.
-    * `HOSTNAME` is the name of your app's subdomain. For example, if `example.com` is your domain and you want the URL to your app to be `http://my-app.example.com`, then specify `my-app` as the `HOSTNAME`.
-    <br>
+        <ul>
+          <li>`APP-NAME-GREEN` is the newly created "green" name for your app.</li>
+          <li>`BUILDPACK` is your custom buildpack. Specify the buildpack either by name or GitHub URL with an optional branch or tag.</li>
+          <li>`HOSTNAME` is the name of your app's subdomain. For example, if `example.com` is your domain and you want the URL to your app to be `http://my-app.example.com`, then specify `my-app` as the `HOSTNAME`.</li>
+        </ul>
+
     For example:
     <pre class="terminal">
     C:\Users\admin\> cf push ExampleApp-green -s windows ^
     -b https://github.com/cloudfoundry/binary-buildpack.git ^
     -n my-app --no-start --no-route
     </pre>
+
     <p class="note"><strong>Note:</strong> The <code>--no-start</code> and <code>--no-route</code> parameters included in this <code>cf push</code> command are required for the this procedure. <code>--no-start</code> is used to create the instance VMs and not start the app, and <code>--no-route</code> is used to prevent the push command from automatically mapping a route to the app.
     For more information about <code>cf push</code>, see <a href="http://cli.cloudfoundry.org/en-US/cf/push.html">cf push</a> in the Cloud Foundry CLI Reference Guide.</p>
+
     <p class="note"><strong>Note:</strong> The <code>windows</code> stack is a renaming of the old <code>windows2016</code> stack. These stacks are identical and differ in name only. If the <code>windows</code> stack is available, specify <code>-s windows</code>. Otherwise, specify <code>-s windows2016</code>. In <%= vars.windows_runtime_abbr %> v2.5 and later, the <code>windows2016</code> stack is deprecated. For more information, see <a href="https://docs.pivotal.io/pivotalcf/2-5/pcf-release-notes/windows-rn.html#-deprecation-of-the-windows2016-stack">Deprecation of the windows2016 Stack</a> in <em><%= vars.windows_runtime_full %> v2.5 Release Notes</em>.</p>
 
 1. To configure the router so all incoming requests go to both `APP-NAME` and `APP-NAME-green`, run:
 
-    ```
+    ```console
 	cf map-route APP-NAME-green DOMAIN -n HOSTNAME
     ```
+
     Where:
-    * `APP-NAME-green` is the name of the new "green" version of your app.
-    * `DOMAIN` is your domain name. For example, `example.com`.
-    * `HOSTNAME` is the name of your app's subdomain. For example, if `example.com` is your domain and you want the URL to your app to be `http://my-app.example.com`, then specify `my-app` as the `HOSTNAME`.
+        <ul>
+          <li>`APP-NAME-green` is the name of the new "green" version of your app.</li>
+          <li>`DOMAIN` is your domain name. For example, `example.com`.</li>
+          <li>`HOSTNAME` is the name of your app's subdomain. For example, if `example.com` is your domain and you want the URL to your app to be `http://my-app.example.com`, then specify `my-app` as the `HOSTNAME`.</li>
+        </ul>
+
     <p class="note"><strong>Note:</strong> When using the <code>cf map-route</code> command, you must specify domain name after specifying app name.</p>
     For additional information about `cf map-route`, see [cf map-route](http://cli.cloudfoundry.org/en-US/cf/map-route.html) in the Cloud Foundry CLI Reference Guide.
 
 1. To start the green app, run:
 
-    ```
+    ```console
 	cf start APP-NAME-green
     ```
     Where `APP-NAME-green` is the name of the new "green" version of your app.
 
 1. To confirm that both your `APP-NAME` and `APP-NAME-green` apps are running, run:
 
-    ```
+    ```console
     cf apps
     ```
     If you experience a problem, see [Troubleshooting App Deployment and Health](../devguide/deploy-apps/troubleshoot-app-health.html).
 
 1. To unmap the original app's route, run:
 
-    ```
+    ```console
     cf unmap-route APP-NAME DOMAIN -n HOSTNAME
     ```
+
     Where:
-    * `APP-NAME` is the name of the existing version of your app you want to replace with `APP-NAME-green`.
-    * `DOMAIN` is your domain name, for example, `example.com`.
-    * `HOSTNAME` is the name of your app's subdomain. For example, if `example.com` is your domain and the existing app is currently accessed using the URL `http://my-app.example.com`, then specify `my-app` as the `HOSTNAME`.
-    <br>
+        <ul>
+          <li>`APP-NAME` is the name of the existing version of your app you want to replace with `APP-NAME-green`.</li>
+          <li>`DOMAIN` is your domain name, for example, `example.com`.</li>
+          <li>`HOSTNAME` is the name of your app's subdomain. For example, if `example.com` is your domain and the existing app is currently accessed using the URL `http://my-app.example.com`, then specify `my-app` as the `HOSTNAME`.</li>
+        </ul>
+
     For additional information about `cf-unmap-route`, see [cf unmap-route](http://cli.cloudfoundry.org/en-US/cf/unmap-route.html) in the Cloud Foundry CLI Reference Guide.
 
 
@@ -112,10 +124,12 @@ To delete the original app:
 
 1. Run:
 
-    ```
+    ```console
     cf delete APP-NAME
     ```
+
     Where `APP-NAME` is the name of the app that you have replaced with `APP-NAME-green`.
+
     <p class="note"><strong>Note:</strong> To also delete any mapped routes, run the command with the <code>-r</code> flag.</p>
     For additional information about `cf delete`, see [cf delete](http://cli.cloudfoundry.org/en-US/cf/delete.html) in the Cloud Foundry CLI Reference Guide.
 
