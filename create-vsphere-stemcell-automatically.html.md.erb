@@ -195,7 +195,7 @@ To install VMware Tools on the base VM:
 
 1. To install the VMware Tools, run:
 
-    ```
+    ```console
     setup64.exe
     ```
 
@@ -304,7 +304,7 @@ For each of the following environment variables, run `echo $GOVC_VAR` to record 
 
 1. To construct the BOSH stemcell, run the following command from the folder where you downloaded the CLI:
 
-    ```
+    ```console
     ./STEMBUILD-BINARY construct  ^
       -vm-ip 'TARGET-VM-IP'  ^
       -vm-username TARGET-USERNAME  ^
@@ -317,16 +317,18 @@ For each of the following environment variables, run `echo $GOVC_VAR` to record 
     ```
 
     Where:
-    * `STEMBUILD-BINARY` is the `stembuild` file for the version of your local host operating system and the version of the stemcell that you want to build. For example, `stembuild-windows-2019-2`.
-    * `TARGET-VM-IP` is the IP address of your target VM.
-    * `TARGET-USERNAME` is the username of an account with administrator privileges.
-    * `TARGET-VM-PASSWORD` is the password for the administrator account. The password must be enclosed in single quotes.
-    * `VCENTER-URL` is the URL of your vCenter.
-    * `VCENTER-USERNAME` is the username of your account in vCenter.
-    * `VCENTER-PASSWORD` is your password. The password must be enclosed in single quotes.
-    * `INVENTORY-PATH` is the vCenter inventory path to the target VM.
-    * `CUSTOM-CERTS-PATH` is the file path to custom CA certificates
-    for the destination vCenter. The `-vcenter-ca-certs` flag is optional.
+        <ul>
+          <li>`STEMBUILD-BINARY` is the `stembuild` file for the version of your local host operating system and the version of the stemcell that you want to build. For example, `stembuild-windows-2019-2`.</li>
+          <li>`TARGET-VM-IP` is the IP address of your target VM.</li>
+          <li>`TARGET-USERNAME` is the username of an account with administrator privileges.</li>
+          <li>`TARGET-VM-PASSWORD` is the password for the administrator account. The password must be enclosed in single quotes.</li>
+          <li>`VCENTER-URL` is the URL of your vCenter.</li>
+          <li>`VCENTER-USERNAME` is the username of your account in vCenter.</li>
+          <li>`VCENTER-PASSWORD` is your password. The password must be enclosed in single quotes.</li>
+          <li>`INVENTORY-PATH` is the vCenter inventory path to the target VM.</li>
+          <li>`CUSTOM-CERTS-PATH` is the file path to custom CA certificates for the destination vCenter. The `-vcenter-ca-certs` flag is optional.</li>
+        </ul>
+
     For more information, see [Authenticate into a Destination vCenter Using CA Certificates](#authenticate-using-certs)
     below.
 
@@ -381,7 +383,7 @@ For more information about `stembuild construct`, see [stembuild construct](http
 
 To package the BOSH stemcell:
 
-1. Gather the  vCenter Web Client **VMs and Templates** information that you recorded in the previous step:
+1. Gather the vCenter Web Client **VMs and Templates** information that you recorded in the previous step:
   * vCenter inventory path to the target VM in the `/YOUR-DATA-CENTER/vm/YOUR-FOLDER/YOUR-VM` format, where:
       * `YOUR-DATA-CENTER` is the name of the data center.
       * `vm` is a static string.
@@ -395,7 +397,7 @@ To package the BOSH stemcell:
 
 1. To package the BOSH stemcell, run the following PowerShell command from your local host:
 
-    ```
+    ```console
     ./STEMBUILD-BINARY package ^
       -vcenter-url VCENTER-URL ^
       -vcenter-username VCENTER-USERNAME ^
@@ -404,20 +406,19 @@ To package the BOSH stemcell:
       -vm-inventory-path 'INVENTORY-PATH'  ^
       -vcenter-ca-certs 'CUSTOM-CERTS-PATH'
     ```
+
     Where:
-    * `STEMBUILD-BINARY` is the `stembuild` file for the version of your local host operating system and the
-    version of the stemcell that you want to build. For example, `stembuild-windows-2019-2`.
-    * `VCENTER-URL` is the URL of your vCenter.
-    * `VCENTER-USERNAME` is the username of your account in vCenter.
-    * `VCENTER-PASSWORD` is your password. The password must be enclosed in single quotes.
-    * `PATCH-VERSION` is the patch version for the stemcell being built.
-    `PATCH-VERSION` can be specified as an unquoted version name, for example `2019.12.3`,
-    or as a quoted patch number, for example `“3”`.
-    * `INVENTORY-PATH` is the vCenter inventory path to the target VM.
-    * `CUSTOM-CERTS-PATH` is the file path to custom CA certificates
-    for the destination vCenter. The `-vcenter-ca-certs` flag is optional.
-    For more information, see [Authenticate into a Destination vCenter Using CA Certificates](#authenticate-using-certs)
-    below.
+        <ul>
+          <li>`STEMBUILD-BINARY` is the `stembuild` file for the version of your local host operating system and the version of the stemcell that you want to build. For example, `stembuild-windows-2019-2`.</li>
+          <li>`VCENTER-URL` is the URL of your vCenter.</li>
+          <li>`VCENTER-USERNAME` is the username of your account in vCenter.</li>
+          <li>`VCENTER-PASSWORD` is your password. The password must be enclosed in single quotes.</li>
+          <li>`PATCH-VERSION` is the patch version for the stemcell being built.</li>
+          <li>`PATCH-VERSION` can be specified as an unquoted version name, for example `2019.12.3`, or as a quoted patch number, for example `“3”`.</li>
+          <li>`INVENTORY-PATH` is the vCenter inventory path to the target VM.</li>
+          <li>`CUSTOM-CERTS-PATH` is the file path to custom CA certificates for the destination vCenter. The `-vcenter-ca-certs` flag is optional.For more information, see [Authenticate into a Destination vCenter Using CA Certificates](#authenticate-using-certs) below.</li>
+        </ul>
+
     <p class='note'><strong>Note:</strong> This command creates a stemcell on your local host in the folder where you ran the command and might take up to 30 minutes to complete.</p>
 
 For more information about `stembuild package`, see [stembuild package](https://github.com/cloudfoundry-incubator/stembuild#stembuild-package) in the Cloud Foundry stembuild GitHub repository.
@@ -479,14 +480,14 @@ If your vCenter username or password contains `/`, `#`, or `:`, or `'` on Window
 
 * For **Linux**:
 
-    ```
+    ```console
     export GOVC_USERNAME=VCENTER-USERNAME
     export GOVC_PASSWORD=VCENTER-PASSWORD
     ```
 
 * For **Windows**:
 
-    ```
+    ```console
     set GOVC_USERNAME=VCENTER-USERNAME
     set GOVC_PASSWORD=VCENTER-PASSWORD
     set GOVC_PATH=VCENTER-INVENTORY-PATH
@@ -504,7 +505,7 @@ For example:
 
 * For **Linux**:
 
-    ```
+    ```console
     ./STEMBUILD-BINARY package \
       -vcenter-url VCENTER-URL \
       -vcenter-username 'admin@' \
@@ -513,18 +514,17 @@ For example:
       -vm-inventory-path 'INVENTORY-PATH' \
       -vcenter-ca-certs 'CUSTOM-CERTS-PATH'
     ```
+
     Where:
-    * `STEMBUILD-BINARY` is the `stembuild` file for the version of your local host operating system and the version of the stemcell that you want to build. For example, `stembuild-windows-2019-2`.
-    * `VCENTER-URL` is the URL of your vCenter.
-    * `VCENTER-PASSWORD` is your password. The password must be enclosed in single quotes.
-    * `PATCH-VERSION` is the patch version for the stemcell being built.
-    `PATCH-VERSION` can be specified as an unquoted version name, for example `2019.12.3`,
-    or as a quoted patch number, for example `“3”`.
-    * `INVENTORY-PATH` is the vCenter inventory path to the target VM.
-    * `CUSTOM-CERTS-PATH` is the file path to custom CA certificates
-    for the destination vCenter. The `-vcenter-ca-certs` flag is optional.
-    For more information, see [Authenticate into a Destination vCenter Using CA Certificates](#authenticate-using-certs)
-    below.
+        <ul>
+          <li>`STEMBUILD-BINARY` is the `stembuild` file for the version of your local host operating system and the version of the stemcell that you want to build. For example, `stembuild-windows-2019-2`.</li>
+          <li>`VCENTER-URL` is the URL of your vCenter.</li>
+          <li>`VCENTER-PASSWORD` is your password. The password must be enclosed in single quotes.</li>
+          <li>`PATCH-VERSION` is the patch version for the stemcell being built.</li>
+          <li>`PATCH-VERSION` can be specified as an unquoted version name, for example `2019.12.3`, or as a quoted patch number, for example `“3”`.</li>
+          <li>`INVENTORY-PATH` is the vCenter inventory path to the target VM.</li>
+          <li>`CUSTOM-CERTS-PATH` is the file path to custom CA certificates for the destination vCenter. The `-vcenter-ca-certs` flag is optional. For more information, see [Authenticate into a Destination vCenter Using CA Certificates](#authenticate-using-certs) below.</li>
+        </ul>
 
 * For **Windows**:
 
@@ -538,17 +538,15 @@ For example:
       -vm-inventory-path %GOVC_PATH% ^
       -vcenter-ca-certs 'CUSTOM-CERTS-PATH'
     ```
+
     Where:
-    * `VCENTER-PASSWORD` is your vCenter account password. For example, `A_Strange!PAssword@Here#1`.
-    * `STEMBUILD-BINARY` is the `stembuild` file for the version of your local host operating system and the version of the stemcell that you want to build. For example, `stembuild-windows-2019-2`.
-    * `VCENTER-URL` is the URL of your vCenter.
-    * `PATCH-VERSION` is the patch version for the stemcell being built.
-    `PATCH-VERSION` can be specified as an unquoted version name, for example `2019.12.3`,
-    or as a quoted patch number, for example `“3”`.
-    * `CUSTOM-CERTS-PATH` is the file path to custom CA certificates
-    for the destination vCenter. The `-vcenter-ca-certs` flag is optional.
-    For more information, see [Authenticate into a Destination vCenter Using CA Certificates](#authenticate-using-certs)
-    below.
+        <ul>
+          <li>`VCENTER-PASSWORD` is your vCenter account password. For example, `A_Strange!PAssword@Here#1`.</li>
+          <li>`STEMBUILD-BINARY` is the `stembuild` file for the version of your local host operating system and the version of the stemcell that you want to build. For example, `stembuild-windows-2019-2`.</li>
+          <li>`VCENTER-URL` is the URL of your vCenter.</li>
+          <li>`PATCH-VERSION` is the patch version for the stemcell being built. `PATCH-VERSION` can be specified as an unquoted version name, for example `2019.12.3`, or as a quoted patch number, for example `“3”`.</li>
+          <li>`CUSTOM-CERTS-PATH` is the file path to custom CA certificates for the destination vCenter. The `-vcenter-ca-certs` flag is optional. For more information, see [Authenticate into a Destination vCenter Using CA Certificates](#authenticate-using-certs) below.</li>
+        </ul>
 
     <p class="note"><strong>Note:</strong> Windows environment variables do not automatically override vCenter command line parameters, so you must specify the environment variables in the vCenter command as shown above.</p>
 
