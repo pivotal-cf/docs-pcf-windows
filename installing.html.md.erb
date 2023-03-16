@@ -105,6 +105,14 @@ To install the <%= vars.windows_runtime_abbr %> tile: <%# After adding or removi
 
     This step takes up to 20 minutes to complete.
 
+    **Note**: If you have the `BOSH_ALL_PROXY` environment variable set, this can cause the `winfs-injector` to fail, with an error like the following:
+
+    ```
+    -- Failed downloading 'golang-1-windows/789a42163ee8b705cfcd8a62e590d5cbf01322c773497d6c53247cf6a4e39965' (sha1=sha256:55db4fe9804edfff5f01c5cee0d2541333a71f40c905135912c9c22783e038c1)
+    ```
+
+    If this happens, try unsetting the `BOSH_ALL_PROXY` environment variable, and trying again.
+
 1. Navigate to the Ops Manager Installation Dashboard and click **Import a Product**.
 
 2. To add the <%= vars.windows_runtime_abbr %> tile to the **Import a Product** product list, select
