@@ -16,7 +16,7 @@ This section describes issues that may occur during the installation process.
 
 You run the `winfs-injector` and see the following error about certificates:
 
-```
+```console
 Get https://auth.docker.io/token?service=registry.docker.io&
 scope=repository:cloudfoundry/windows2016fs:pull: x509:
 failed to load system roots and no roots provided
@@ -37,7 +37,7 @@ with the `ca-certificates` package.
 
 You run the `winfs-injector` and see the following error about a missing file or directory:
 
-```
+```console
 open ...windows2016fs-release/VERSION: no such file or directory
 ```
 
@@ -71,7 +71,7 @@ image.
   under **Import a Product**.
 
 1. Follow the <%= vars.windows_runtime_abbr %> installation instructions to run the
-`winfs-injector` tool locally on the product file. This step adds the Windows Server container base image to the product file, requires internet access, and can take up to 20 minutes. For more
+`winfs-injector` tool locally on the product file. This step adds the Windows Server container base image to the product file, requires Internet access, and can take up to 20 minutes. For more
 information, see [Install the Tile](./installing.html#install) in _Installing and Configuring
 <%= vars.windows_runtime_abbr %>_.
 
@@ -90,7 +90,7 @@ This section describes issues that may occur during the upgrade process.
 
 The pre-start script for the `windowsfs` job fails, and the upgrade fails with the following output:
 
-```
+```console
 Task 308031 | 13:47:04 | Preparing deployment: Preparing deployment (00:00:03)
 
 Task 308031 | 13:47:11 | Preparing package compilation: Finding packages to compile (00:00:00)
@@ -105,7 +105,7 @@ Task 308031 | 13:47:56 | Error: Action Failed get_task: Task 59ba76d1-14c5-4d7b-
 Otherwise, the post-start script for the `rep_windows` job fails, and the upgrade fails with the
 following output:
 
-```
+```console
 Task 8192 | 21:12:30 | Updating instance windows2019-cell: windows2019-cell/bd6d70b9-ed1f-412f-9d49-8045627f4ab3 (0) (canary) (00:17:24)
                      L Error: Action Failed get_task: Task a9555020-1a3b-40c7-677c-d6fc392ce135 result: 1 of 3 post-start scripts failed. Failed Jobs: rep_windows. Successful Jobs: route_emitter_windows, bosh-dns-windows.
 Task 8192 | 21:29:55 | Error: Action Failed get_task: Task a9555020-1a3b-40c7-677c-d6fc392ce135 result: 1 of 3 post-start scripts failed. Failed Jobs: rep_windows. Successful Jobs: route_emitter_windows, bosh-dns-windows.
@@ -145,7 +145,7 @@ To forward Windows logs to an external syslog server:
 
 1. Under **Enable syslog for VM logs?**, select **Enable**.
 
-1. Under **Address**, enter the hostname or IP address of your syslog server.
+1. Under **Address**, enter the host name or IP address of your syslog server.
 
 1. Under **Port**, enter the port of your syslog server. The default port is `514`.
   <p class="note"><strong>Note:</strong> The host must be reachable from the <%= vars.app_runtime_abbr %> network. Ensure that your syslog server listens on external interfaces.</p>
@@ -153,10 +153,10 @@ To forward Windows logs to an external syslog server:
 1. Under **Protocol**, select the transport protocol to use when forwarding logs.
 
 1. If you are using a TCP protocol and want to allow TLS communication:
-  1. Activate the **TLS Enabled** checkbox.
+  1. Activate the **TLS Enabled** check box.
   1. For **Ca certificate**, provide the CA certificate that validates connections to an external server.
 
-1. Activate the **Enable system metrics** checkbox. For a list of the VM metrics that the System Metric Agent emits, see
+1. Activate the **Enable system metrics** check box. For a list of the VM metrics that the System Metric Agent emits, see
 [VM Metrics](https://github.com/cloudfoundry/system-metrics-release/blob/develop/docs/system-metrics-agent.md#vm-metrics) in the System Metrics repository on GitHub.
 
 1. Click **Save**.
@@ -301,7 +301,7 @@ To troubleshoot a quickly-deleted compilation VM:
 
 The Windows Authentication feature uses the Windows event log system. To access a log from the Windows Diego Cell, `ssh` onto the cell, then enter `powershell`. To get the events in an event log, use the command [`Get-WinEvent`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-winevent):
 
-```
+```console
 > bosh ssh -d TAS-WINDOWS-DEPLOYMENT windows_diego_cell/INDEX
 > powershell
 PS> Get-WinEvent -LogName LOG-NAME
@@ -313,7 +313,7 @@ Where `TAS-WINDOWS-DEPLOYMENT` is the name of your <%= vars.windows_runtime_abbr
 
 TAS [gMSA plugin](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#gmsa-architecture-and-improvements) logs are in the event log `Cloudfoundry-CCG-Plugin`. They will tell you if the plugin is successfully invoked, and if the input to the plugin is correct. Successful logs look similar to the following example:
 
-```
+```console
 PS>  Get-WinEvent -LogName Cloudfoundry-CCG-Plugin
    ProviderName: CfCcgPlugin
 
@@ -328,7 +328,7 @@ TimeCreated                     Id LevelDisplayName Message
 
 If Windows containers aren't starting, you can check the logs for the Host Compute Service, which is the Windows component that administers Windows containers. Successful logs may look like:
 
-```
+```console
 PS> Get-WinEvent -LogName Microsoft-Windows-Hyper-V-Compute-Admin
 
 ProviderName: Microsoft-Windows-Hyper-V-Compute
@@ -342,7 +342,7 @@ TimeCreated                     Id LevelDisplayName Message
 
 In the event that Windows containers aren't starting, or Windows Authentication isn't working through an app, you can check the logs for the [CCG.exe](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#gmsa-architecture-and-improvements) process, which invokes the TAS plugin and establishes connectivity to Active Directory. Successful logs look similar to the following:
 
-```
+```console
 PS>  Get-WinEvent -LogName Microsoft-Windows-Containers-CCG/Admin
 
 
@@ -365,7 +365,7 @@ Both the Windows Diego Cell and the app container must have network connectivity
 
 From inside an app container, the following commands should complete successfully if the network connectivity is set up properly:
 
-```
+```console
 nslookup AD.DOMAIN          # Make sure DNS is properly set
 ping AD.DOMAIN              # Make sure basic connectivity to the Domain Controllers is working
 nltest /sc_query:AD.DOMAIN  # Make sure the secure channel to the Domain Controllers is working
