@@ -27,15 +27,16 @@ To install, configure, and deploy <%= vars.windows_runtime_abbr %>:
 
 ## <a id='prerequisites'></a> Prerequisites
 
-Before you install and configure the <%= vars.windows_runtime_abbr %> tile, ensure that you meet the requirements to use the **Windows FS Injector** tool. For more information, see [Windows FS Injector Prerequisites](#prerequisite-injector).
+Before you install and configure the <%= vars.windows_runtime_abbr %> tile, ensure that you meet the requirements to use the **Windows FS Injector** tool. For more information, see [Windows FS injector prerequisites](#prerequisite-injector).
 
-### <a id='prerequisite-injector'></a> Windows FS Injector Prerequisites
+### <a id='prerequisite-injector'></a> Windows FS injector prerequisites
 
 You use the **Windows FS Injector** tool to install the <%= vars.windows_runtime_abbr %> tile. The **Windows FS Injector** tool requires:
 
 * The `git` and `tar` executables must be in your `%PATH%`. If `git` and `tar` are not in your `%PATH%`, either add your `git` and `tar` executable locations to your existing `%PATH%` configuration, or copy the `git.exe` and `tar.exe` executables to a directory in your `%PATH%`.
 
 *  Your installation environment must allow the **Windows FS Injector** tool access to all of the following URLs:
+
   * [network.pivotal.io](https://network.pivotal.io), for downloading the tile and injector.
   * [s3.amazonaws.com](https://s3.amazonaws.com/).
   * [auth.docker.io](https://auth.docker.io/).
@@ -44,11 +45,11 @@ You use the **Windows FS Injector** tool to install the <%= vars.windows_runtime
   * [go.microsoft.com](https://go.microsoft.com/).
   * [https://winlayers.cdn.mscr.io](https://winlayers.cdn.mscr.io/).
   * [mcr.microsoft.com](https://mcr.microsoft.com).
-  * [*.msecnd.net](https://msecnd.net), or any domain within the Microsoft Windows Azure Content Delivery Network.
-  For more information about the Windows Azure Content Delivery Network, see [Introducing the Windows Azure Content Delivery Network](https://azure.microsoft.com/en-us/blog/introducing-the-windows-azure-content-delivery-network/) in the Microsoft Azure documentation.
+  * [*.msecnd.net](https://msecnd.net), or any domain within the Microsoft Windows Azure Content Delivery Network. For more information about the Windows Azure Content Delivery Network, see [Introducing the Windows Azure Content Delivery Network](https://azure.microsoft.com/en-us/blog/introducing-the-windows-azure-content-delivery-network/) in the Microsoft Azure documentation.
+
   <p class="note"><strong>Note:</strong> To ensure the authenticity of Microsoft container images, Microsoft does not permit the distribution of its base images. This includes Microsoft container images consumed through Docker Hub, which are actually delivered by an Microsoft CDN endpoint.</p>
 
-## <a id='install'></a> Install the Tile
+## <a id='install'></a> Install the tile
 
 To install the <%= vars.windows_runtime_abbr %> tile:
     <%# After adding or removing a step here be sure to change the step number
@@ -64,9 +65,9 @@ To install the <%= vars.windows_runtime_abbr %> tile:
   for step 4 referenced below in the air-gapped environment section.  %>
 
 1. Download the **Windows FS Injector** tool for your workstation OS. The Injector tool, `winfs-injector`, is an executable binary that adds the Windows Server container base image into the product file. This step requires internet access and can take up to 20 minutes.
+
   <p class="note"><strong>Note:</strong> You need the <code>git</code> and <code>tar</code> executables in your <code>%PATH%</code> to run <code>winfs-injector.exe</code>. For example, copy <code>git.exe</code> and <code>tar.exe</code> to a directory in your <code>%PATH%</code>.</p>
-    <%# After adding or removing a step here be sure to change the step number
-  for step 4 referenced below in the air-gapped environment section.  %>
+    <%# After adding or removing a step here be sure to change the step number for step 4 referenced below in the air-gapped environment section.  %>
 
 1. Add the Windows Server container base image to the product file:
 
@@ -90,18 +91,18 @@ To install the <%= vars.windows_runtime_abbr %> tile:
 
 1. Navigate to the Ops Manager Installation Dashboard and click **Import a Product**.
 
-1. To add the <%= vars.windows_runtime_abbr %> tile to the **Import a Product** product list,
+2. To add the <%= vars.windows_runtime_abbr %> tile to the **Import a Product** product list,
    select the importable `PASW-IMPORTABLE-PATH` file on your workstation.
 
-1. To add the <%= vars.windows_runtime_abbr %> tile to your staging area, click **+** under the **<%= vars.windows_runtime_full %>** product listing.
+3. To add the <%= vars.windows_runtime_abbr %> tile to your staging area, click **+** under the **<%= vars.windows_runtime_full %>** product listing.
 
-## <a id='config'></a> Configure the Tile
+## <a id='config'></a> Configure the tile
 
 The following sections describe how to configure the settings for the <%= vars.windows_runtime_abbr %> tile.
 
-### <a id='config-azs-networks'></a> Assign Availability Zones and Networks
+### <a id='config-azs-networks'></a> Assign Availability Zones and networks
 
-In **Assign AZ and Networks**, you assign jobs to your Availability Zones (AZs) and networks.
+Assign jobs to your Availability Zones (AZs) and networks.
 
 To configure AZs and networks:
 
@@ -124,22 +125,23 @@ In **VM Options**, you configure settings for accessing your VMs.
 
 To configure VM access:
 
-1. Select **VM Options**.
+1. Click **VM Options**.
 
 1. Select one of the following for **Manage administrator password**:
-  * To randomize the admin password, select **Use random password**. If you select this option, the admin password is not retrievable by an operator. This is the default selection.
-  * To set the same admin password for every Windows Diego Cell, select **Set the password** and enter a password in **Password**. If you select this option, this password can be used to access any Windows Diego Cell.
 
-1. (Optional) To start the Microsoft beta port of the OpenSSH daemon on port 22 on all VMs, select the **Enable BOSH-native SSH support on all VMs (beta)** checkbox. If you select this option, users can SSH into Windows VMs with the `bosh ssh` command and enter a CMD terminal as an admin user. They can then run `powershell.exe` to start a PowerShell session.
+  * **Use random password** - Use this option to randomize the admin password. If you select this option, the admin password is not retrievable by an operator. This is the default.
+  * **Set the password** - Use this option to set the same admin password for every Windows Diego Cell. Enter a password in **Password**. If you select this option, this password can be used to access any Windows Diego Cell.
 
-1. (Optional) To configure a Key Management Service (KMS) that your volume-licensed Windows Diego Cell can register with:
+1. (Optional) To start the Microsoft beta port of the OpenSSH daemon on port 22 on all VMs, select the **Enable BOSH-native SSH support on all VMs (beta)** check box. If you select this option, users can SSH into Windows VMs with the `bosh ssh` command and enter a CMD terminal as an admin user. You can then run `powershell.exe` to start a PowerShell session.
+
+2. (Optional) To configure a Key Management Service (KMS) that your volume-licensed Windows Diego Cell can register with:
     1. Under **Key Management Service**, select **Enable**.
-    1. For the **Host** field, enter the KMS hostname.
-    1. For the **Port** field, enter the port number. The default port number is 1688.
+    2. In the **Host** field, enter the KMS hostname.
+    3. In the **Port** field, enter the port number. The default port number is 1688.
 
-1. Click **Save**.
+3. Click **Save**.
 
-### <a id='config-smoke-tests'></a> Configure Smoke Tests
+### <a id='config-smoke-tests'></a> Configure smoke tests
 
 In **Smoke Tests**, you specify the org and space where smoke tests are run.
 
@@ -151,22 +153,21 @@ The Smoke Test errand is on by default. You can turn off the Smoke Test errand i
 
 To configure smoke tests:
 
-1. Select **Smoke Tests**.
+1. Select **Smoke Tests**, followed by one of these options:
 
-1. If you have a shared apps domain, select **A temporary space within the system org**, which creates a temporary space within the system org for running smoke tests and deletes the space afterwards. Otherwise, select **A specified org and space** and complete these fields to configure where <%= vars.windows_runtime_abbr %> pushes an app to run smoke tests:
-    * For **Org**, enter the org <%= vars.windows_runtime_abbr %> should use when pushing an app to run smoke tests.
-    * For **Space**, enter the space <%= vars.windows_runtime_abbr %> should use when pushing an app to run smoke tests.
-    * For **Domain**, enter the domain <%= vars.windows_runtime_abbr %> should use when pushing an app to run smoke tests.
+  * If you have a shared apps domain, select **A temporary space within the system org**. This creates a temporary space within the system org for running smoke tests and deletes the space afterwards.
+  * Otherwise, select **A specified org and space** and complete these fields to configure where <%= vars.windows_runtime_abbr %> pushes an app to run smoke tests:
+    * For **Org**, enter the org <%= vars.windows_runtime_abbr %> will use when pushing an app to run smoke tests.
+    * For **Space**, enter the space <%= vars.windows_runtime_abbr %> will use when pushing an app to run smoke tests.
+    * For **Domain**, enter the domain <%= vars.windows_runtime_abbr %> will use when pushing an app to run smoke tests.
 
 ### <a id='config-advanced-features'></a> Configure Advanced Features
 
-**Advanced Features** includes new functionality that might have certain constraints.
-  Although these features are fully supported,
-  VMware recommends caution when using them in production environments.
+**Advanced Features** includes new functionality that might have certain constraints. Although these features are fully supported, VMware recommends caution when using them in production environments.
 
 The following sections describe how to configure these advanced features.
 
-#### <a id='config-memory-disk'></a> Diego Cell Memory and Disk Overcommit
+#### <a id='config-memory-disk'></a> Diego cell memory and disk overcommit
 
 If your apps do not use the full allocation of disk space and memory set in **Resource Config**, you might want use this feature. These fields control the amount to overcommit disk and memory resources to each host VM.
 
@@ -186,7 +187,7 @@ To enable overcommit:
 
 <p class="note"><strong>Note:</strong> Entries made to each of these two fields set the total amount of resources allocated, not the overage.</p>
 
-#### <a id='enable-route-integrity'></a> TLS Connections from the Gorouter to Apps (Beta)
+#### <a id='enable-route-integrity'></a> TLS Connections from the Gorouter to apps (Beta)
 
 You can choose the method the Gorouter uses to verify app identity. Verifying app identity using TLS or mutual TLS (mTLS) enables encryption between the Gorouter and app containers and guards against misrouting during control plane failures. This feature is disabled by default.
 
@@ -198,29 +199,18 @@ To configure app identity verification:
 
 1. Under **TLS connections from the Gorouter to apps (beta)**, select one of the
 following options:
-      * **Disable route integrity and mutual TLS**: Disables app identity
-      verification and mTLS.
-      * **The Gorouter uses TLS to verify app identity**: Enables the Gorouter
-      to verify app identity using TLS. This is the default option.
-      * **The Gorouter and apps use mutual TLS to verify each other's identity**:
-      Enables the Gorouter and your apps to verify each other's identity using
-      TLS. Before you enable this option, be aware of the following:
-          * This option disables TCP routing because app containers accept incoming
-      communication only from the Gorouter.
-          * If you enable mTLS in the <%= vars.windows_runtime_abbr %> tile, you
-          must also enable mTLS in the <strong>App Containers</strong> pane of the
-          <%= vars.app_runtime_abbr %> tile.
-          * You need v2.3 or later of both <%= vars.app_runtime_abbr %> and
-          Isolation Segment. The Gorouter and Diego Cell components in
-          <%= vars.platform_old %> v2.2 and earlier do not support mTLS handshakes.
+    * **Disable route integrity and mutual TLS**: Disables app identity verification and mTLS.
+    * **The Gorouter uses TLS to verify app identity**: Enables the Gorouter to verify app identity using TLS. This is the default option.
+    * **The Gorouter and apps use mutual TLS to verify each other's identity**: Enables the Gorouter and your apps to verify each other's identity using TLS. Before you enable this option, be aware of the following:
+        * This option disables TCP routing because app containers accept incoming communication only from the Gorouter.
+        * If you enable mTLS in the <%= vars.windows_runtime_abbr %> tile, you must also enable mTLS in the <strong>App Containers</strong> pane of the <%= vars.app_runtime_abbr %> tile.
+        * You need v2.3 or later of both <%= vars.app_runtime_abbr %> and Isolation Segment. The Gorouter and Diego Cell components in <%= vars.platform_old %> v2.2 and earlier do not support mTLS handshakes.
 
 1. Click **Save**.
 
-#### <a id='custom-cell-overlay'></a> Custom Windows Diego Cell Overlay Subnet
+#### <a id='custom-cell-overlay'></a> Custom Windows Diego cell overlay subnet
 
-By default, Windows Diego Cells use the `172.30.0.0/22` IP address space for container networking. If this conflicts with any internal IP addresses that your
-organization uses, you can customize this subnet. Unlike in <%= vars.windows_runtime_abbr %> deployments using Linux Diego Cells, you configure this subnet
-per Diego Cell. When you configure a custom subnet for a Windows Diego Cell, ensure the following:
+By default, Windows Diego Cells use the `172.30.0.0/22` IP address space for container networking. If this conflicts with any internal IP addresses that your organization uses, you can customize this subnet. Unlike in <%= vars.windows_runtime_abbr %> deployments using Linux Diego Cells, you configure this subnet per Diego Cell. When you configure a custom subnet for a Windows Diego Cell, verify the following:
 
 * The CIDR range of your custom subnet does not conflict with any resources that your apps may need to use.
 
@@ -234,7 +224,7 @@ To configure a custom Windows Diego Cell overlay subnet:
 
 1. Click **Save**.
 
-### <a id='config-errands'></a> Configure Errands
+### <a id='config-errands'></a> Configure errands
 
 Errands are scripts that Ops Manager runs automatically when it installs or uninstalls a product,
 such as a new version of <%= vars.windows_runtime_abbr %>.
@@ -265,15 +255,15 @@ To deploy your <%= vars.windows_runtime_abbr %> app workloads to an isolation se
 
 ### <a id='config-windows-authentication'></a> (Optional) Configure Windows Authentication
 
-To configure Windows Diego Cells to allow app containers to perform Windows Authentication, select **Windows Authentication** and follow the procedure in [Configuring the tile for Windows Authentication](./windows-authentication.html#configure-tile) in _Windows Authentication for .Net apps_.
+To configure Windows Diego Cells to allow app containers to perform Windows Authentication, select **Windows Authentication** and follow the procedure in [Configuring the tile for Windows Authentication](./windows-authentication.html#configure-tile) in _Windows Authentication for .NET apps_.
 
-<p class="note"><strong>Note:</strong> We strongly recommend using an isolation segment for Windows Authentication, as all apps in the <%= vars.windows_runtime_abbr %> installation will have access to the GMSA credentials.</p>
+<p class="note"><strong>Note:</strong> VMware strongly recommends using an isolation segment for Windows Authentication, as all apps in the <%= vars.windows_runtime_abbr %> installation will have access to the GMSA credentials.</p>
 
 ### <a id='config-system-logging'></a> (Optional) Configure System Logging
 
 To configure Windows Diego Cells to send VM logs to an external syslog server, select **System Logging** and follow the procedure in [Forwarding Logs to a Syslog Server](troubleshooting.html#syslog) in _Troubleshooting Windows Diego Cells_.
 
-### <a id='dns-search-domains'></a> (Optional) Configure DNS Search Domains
+### <a id='dns-search-domains'></a> (Optional) Configure DNS search domains
 
 To configure DNS search domains for your app containers:
 
@@ -282,7 +272,7 @@ To configure DNS search domains for your app containers:
 1. In the **DNS search domains** field, enter DNS search domains as a comma-separated list.
 1. Click **Save**.
 
-## <a id='resources'></a> Configure Tile Resources
+## <a id='resources'></a> Configure tile resources
 
 In **Resource Config**, you must associate load balancers with the VMs in your deployment to enable traffic.
 
@@ -320,7 +310,7 @@ To configure your tile resources:
 1. Click **Save**.
 
 
-## <a id='stemcells'></a> Upload the Stemcell
+## <a id='stemcells'></a> Upload the stemcell
 
 After configuring resources for the <%= vars.windows_runtime_abbr %> tile, you must upload the Windows stemcell to the tile.
 
@@ -330,7 +320,7 @@ To upload the stemcell:
 
 1. Retrieve the stemcell that you downloaded or created in [Downloading or Creating a Windows Stemcell](./stemcells.html).
 
-1. Follow the procedure in [Importing and Managing Stemcells](https://docs.pivotal.io/ops-manager/2-10/opsguide/managing-stemcells.html) to upload the Windows stemcell to <%= vars.windows_runtime_abbr %>.
+1. Follow the procedure in [Importing and managing stemcells](https://docs.pivotal.io/ops-manager/2-10/opsguide/managing-stemcells.html) to upload the Windows stemcell to <%= vars.windows_runtime_abbr %>.
 
 <p class='note'><strong>Note:</strong> If you use vSphere, you must create your own stemcell.
 The default root disk size of Windows stemcells v2019.x line is 30&nbsp;GB.
@@ -340,7 +330,7 @@ for vSphere Using stembuild</a>.
 </p>
 
 
-## <a id='deploy'></a> Deploy the Tile
+## <a id='deploy'></a> Deploy the tile
 
 After uploading the Windows stemcell to the <%= vars.windows_runtime_abbr %> tile, you are ready to deploy the tile.
 
@@ -355,12 +345,12 @@ To deploy the <%= vars.windows_runtime_abbr %> tile:
 1. Click **Apply Changes**.
 
 
-## <a id='copy'></a> (Optional) Create More Tiles
+## <a id='copy'></a> (Optional) Create more tiles
 
 To run Windows Diego Cells in multiple isolation segments, you must create and configure additional <%= vars.windows_runtime_abbr %> tiles. For more information, see [Windows Diego Cells in Isolation Segments](./isolation.html).
 
 
-## <a id='air-gapped'></a> Install and Configure <%= vars.windows_runtime_abbr %> in an Air-Gapped Environment
+## <a id='air-gapped'></a> Install and configure <%= vars.windows_runtime_abbr %> in an air-gapped environment
 
 To install, configure, and deploy <%= vars.windows_runtime_abbr %> in an air-gapped environment:
 
@@ -369,15 +359,14 @@ To install, configure, and deploy <%= vars.windows_runtime_abbr %> in an air-gap
 1. Complete the steps in [Install the Tile](#install) above with the following exceptions:
     * To add the Windows Server container base image to the product file,
     replace step 4's internet-enabled `winfs-injector` command line
-    with the `winfs-injector` procedure in
-    [Add the Windows Server Container Base Image to the Product File](#add-win-image-air-gapped)
+    with the `winfs-injector` procedure in [Add the Windows Server Container Base Image to the Product File](#add-win-image-air-gapped)
     below.
 1. Configure required settings for the tile. See [Configure the Tile](#config) above.
 1. Configure resources for the tile. See [Configure Tile Resources](#resources) above.
 1. Upload the Windows stemcell to the tile. See [Upload the Stemcell](#stemcells) above.
 1. Deploy the tile. See [Deploy the Tile](#deploy) above.
 
-### <a id='prepare-registry'></a> Prepare a Windows Rootfs Image in a Private Registry
+### <a id='prepare-registry'></a> Prepare a Windows rootfs image in a private registry
 
 To create a <%= vars.windows_runtime_abbr %> tile, a windows file-system container image is typically
 fetched from a Docker registry. An administrator can fetch the windows file-system image
@@ -415,9 +404,9 @@ run the following command:
     ```
 
     Where `IMAGE-URI` is the URI to the Windows rootfs image in your private registry.
-    Your image URI should follow the pattern: `my.private.registry/cloudfoundry/windows2016fs:2019`.
+    Your image URI must follow the pattern: `my.private.registry/cloudfoundry/windows2016fs:2019`.
 
-### <a id='add-win-image-air-gapped'></a> Add the Windows Server Container Base Image to the Product File
+### <a id='add-win-image-air-gapped'></a> Add the Windows Server container base image to the product file
 
 To add the Windows Server container base image to the product file in an air-gapped environment,
 run the following:
@@ -431,19 +420,19 @@ winfs-injector ^
 
 Where:
 
-* `PASW-DOWNLOAD-PATH` is the path and filename to the PASW product file you downloaded.
-* `PASW-IMPORTABLE-PATH` is the desired output path for the importable product file.
-* `PASW-REGISTRY-URI` is the uri to the container registry hosting your cloudfoundry/windows2016fs image.
-<br>
+   * `PASW-DOWNLOAD-PATH` is the path and filename to the PASW product file you downloaded.
+   * `PASW-IMPORTABLE-PATH` is the desired output path for the importable product file.
+   * `PASW-REGISTRY-URI` is the uri to the container registry hosting your cloudfoundry/windows2016fs image.
+
 For example:
+
 <pre class="terminal">
 C:\Users\admin> winfs-injector ^
 --input-tile c:\temp\pas-windows-2.6.0-build.1.pivotal ^
 --output-tile c:\temp\pas-windows-2.6.0-build.1-INJECTED.pivotal ^
 --registry https<span>:</span>//my.registry.com
 </pre>
-<br>
+
 For information about troubleshooting `winfs-injector`,
 see [Missing Local Certificates for Windows File System Injector](./troubleshooting.html#missing-certs-winfs-issues)
 in _Troubleshooting Windows Diego Cells_.
-<br><br>
