@@ -26,7 +26,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 * Bump windows-syslog to version `1.1.13`
 * Bump windowsfs-release to version `2.44.0`
 
-<table border="1" class="nice">
+<table border="1" class="nice">https://docs.pivotal.io/application-service/3-0/release-notes/runtime-rn.html3.0
   <thead>
     <tr>
       <th>Component</th>
@@ -128,115 +128,6 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
     <tr><td>windows-utilities</td><td>0.17.0</td><td></td></tr>
   </tbody>
 </table>
-
-
-
-### <a id='3.0.1'></a> 3.0.1
-
-**Release Date:** 11/15/2022
-
-* Bump envoy-nginx to version `0.13.0`
-* Bump garden-runc to version `1.22.5`
-* Bump hwc-offline-buildpack to version `3.1.26`
-* Bump windowsfs-release to version `2.39.0`
-
-<table border="1" class="nice">
-  <thead>
-    <tr>
-      <th>Component</th>
-      <th>Version</th>
-      <th>Release Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>windows2019 stemcell</td><td>2019.44</td><td></td></tr>
-    <tr><td>diego</td><td>2.66.3</td><td></td></tr>
-    <tr><td>envoy-nginx</td><td>0.13.0</td><td></td></tr>
-    <tr><td>garden-runc</td><td>1.22.5</td><td></td></tr>
-    <tr><td>hwc-offline-buildpack</td><td>3.1.26</td>
-      <td>
-        <details>
-          <summary>3.1.26</summary>
-          <pre style="max-width: 30em">
-  * Update libbuildpack
-  Packaged binaries:
-  | name | version | cf_stacks |
-  |-|-|-|
-  | hwc | 20.0.0 | windows, windows2016 |
-  Default binary versions:
-  | name | version |
-  |-|-|
-  | hwc | 20.0.0 |
-  * Uncached buildpack SHA256: b9b2cec9ada73d9a2933a14e8e56f025c35b02d8bed7e74e20b093a23e13ec43
-  * Uncached buildpack SHA256: f633f0f686fc9539ec8f4ef205e778c820602e51434730fd69f7caad4cfb3d4f
-          </pre>
-        </details>
-        <details>
-          <summary>3.1.25</summary>
-          <pre style="max-width: 30em">
-  * Update libbuildpack
-  * Bump github.com/onsi/gomega from 1.19.0 to 1.20.2
-  Packaged binaries:
-  | name | version | cf_stacks |
-  |-|-|-|
-  | hwc | 20.0.0 | windows, windows2016 |
-  Default binary versions:
-  | name | version |
-  |-|-|
-  | hwc | 20.0.0 |
-  * Uncached buildpack SHA256: 5a0c73cda7fe06118e554a93d78b0587f581e3eb2a4d108274814d372935469b
-  * Uncached buildpack SHA256: fa7565740a5f73f2b87cbce06104517fcbc69bb513497ed8db492cb7d42f3dd1
-          </pre>
-        </details>
-      </td>
-    </tr>
-    <tr><td>loggregator-agent</td><td>6.5.0</td><td></td></tr>
-    <tr><td>metrics-discovery</td><td>3.2.0</td><td></td></tr>
-    <tr><td>smoke-tests</td><td>4.5.0</td><td></td></tr>
-    <tr><td>winc</td><td>2.7.0</td><td></td></tr>
-    <tr><td>windows-syslog</td><td>1.1.7</td><td></td></tr>
-    <tr><td>windows-utilities</td><td>0.17.0</td><td></td></tr>
-    <tr><td>windowsfs-release</td><td>2.39.0</td></tr>
-  </tbody>
-</table>
-
-
-
-<%# DO NOT DELETE THIS LINE - robots use this to add new release notes %>
-
-### <a id='3-0-0'></a> v3.0.0
-
-**Release Date:** 10/06/2022
-
-<p class='note warning'><strong>Warning:</strong> Breaking change. Some customers have encountered a VCS stamping failure
-  when deploying this release. This deployment error occurs when git is not present on the stemcell in the PATH.
-  This will be fixed in future tile releases.</p>
-
-* **[Feature Improvement]** Bump golang to 1.18 for diego, routing, cf-networking, and silk
-
-<table border="1" class="nice">
-  <thead>
-    <tr>
-      <th>Component</th>
-      <th>Version</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>windows2019 stemcell</td><td>2019.44</td></tr>
-    <tr><td>diego</td><td>2.66.3</td></tr>
-    <tr><td>envoy-nginx</td><td>0.11.0</td></tr>
-    <tr><td>garden-runc</td><td>1.22.2</td></tr>
-    <tr><td>hwc-offline-buildpack</td><td>3.1.24</td></tr>
-    <tr><td>loggregator-agent</td><td>6.5.0</td></tr>
-    <tr><td>metrics-discovery</td><td>3.2.0</td></tr>
-    <tr><td>smoke-tests</td><td>4.5.0</td></tr>
-    <tr><td>winc</td><td>2.7.0</td></tr>
-    <tr><td>windows-syslog</td><td>1.1.7</td></tr>
-    <tr><td>windows-utilities</td><td>0.17.0</td></tr>
-    <tr><td>windowsfs-release</td><td>2.36.0</td></tr>
-  </tbody>
-</table>
-
 
 ## <a id='upgrade'></a> How to Upgrade
 
