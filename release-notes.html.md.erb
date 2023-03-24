@@ -140,20 +140,6 @@ The <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> tile is availab
 
 <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> includes the following major feature:
 
-### <a id='windows-syslog'></a> <%= vars.windows_runtime_abbr %> Uses windows-syslog for Syslog Forwarding
-
-<%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> uses `windows-syslog` to forward logs from BOSH jobs on <%= vars.windows_runtime_abbr %> VMs to
-the syslog endpoint you configure.
-
-`windows-syslog` also allows you to configure <%= vars.windows_runtime_abbr %> VMs to connect to the syslog endpoint over TLS.
-
-If you are upgrading to <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> from <%= vars.windows_runtime_abbr %> v2.13, and you manually added
-`windows-syslog` as a BOSH add-on to the runtime configuration for your <%= vars.windows_runtime_abbr %> v2.13 deployment, you must remove the add-on before
-you upgrade.
-
-For more information, see the [windows-syslog-release](https://www.github.com/cloudfoundry/windows-syslog-release) on GitHub.
-
-
 ## <a id='breaking-changes'></a> Breaking Changes
 
 <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> includes the following breaking change:
@@ -170,40 +156,6 @@ mitigate this, either:
 
 * Scale up your logging system before upgrading to TASW v4.0 to compensate for the increased log load.
 * Upgrade to TAS/TASW v3.0 first to set app-level log rate limits while retaining the global log rate limit. For details, see [App Log Rate Limits](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/app-log-rate-limits.html).
-
-### <a id='syslog-format'></a> windows-syslog Uses a Different Log Format
-
-The logs that `windows-syslog` forwards to the configured syslog endpoint for your <%= vars.windows_runtime_abbr %> deployment follow a different format from
-that of previous logs.
-
-If your observability platform is configured to gather data by parsing forwarded system logs, you may need to re-configure your rules to accommodate the
-following format changes:
-
-* The priority is changed from `kernel/debug(7)` to `user/info(14)`.
-
-* The app name is changed from `Microsoft-Windows-Security-Auditing` to `event_logger`.
-
-* The process number is changed from a numerical process ID to `rs2`.
-
-* Logs contain structured data for instance and deployment details.
-
-* The event log JSON string includes additional fields.
-
-* In the event log JSON string, field names are written in camel case.
-
-* In the event log JSON string, fields may appear in a different order.
-
-The following example shows the previous log format:
-
-<pre class="terminal">
-<7>1 2022-07-06T22:19:38.1413061Z 10.0.4.14 Microsoft-Windows-Security-Auditing 160 - - {"message":"A new process has been created.\r\n\r\nCreator Subject:\r\n\tSecurity ID:\t\tS-1-5-18\r\n\tAccount Name:\t\tVM-7F65ECCF-0D0$\r\n\tAccount Domain:\t\tWORKGROUP\r\n\tLogon ID:\t\t0x3e7\r\n\r\nTarget Subject:\r\n\tSecurity ID:\t\tS-1-0-0\r\n\tAccount Name:\t\t-\r\n\tAccount Domain:\t\t-\r\n\tLogon ID:\t\t0x0\r\n\r\nProcess Information:\r\n\tNew Process ID:\t\t0x1f7c\r\n\tNew Process Name:\tC\r\n\tToken Elevation Type:\t%%1936\r\n\tMandatory Label:\t\tS-1-16-16384\r\n\tCreator Process ID:\t0x248\r\n\tCreator Process Name:\tC\r\n\tProcess Command Line:\t\r\n\r\nToken Elevation Type indicates the type of token that was assigned to the new process in accordance with User Account Control policy.\r\n\r\nType 1 is a full token with no privileges removed or groups disabled.  A full token is only used if User Account Control is disabled or if the user is the built-in Administrator account or a service account.\r\n\r\nType 2 is an elevated token with no privileges removed or groups disabled.  An elevated token is used when User Account Control is enabled and the user chooses to start the program using Run as administrator.  An elevated token is also used when an application is configured to always require administrative privilege or to always require maximum privilege, and the user is a member of the Administrators group.\r\n\r\nType 3 is a limited token with administrative privileges removed and administrative groups disabled.  The limited token is used when User Account Control is enabled, the application does not require administrative privilege, and the user does not choose to start the program using Run as administrator.","source":"Microsoft-Windows-Security-Auditing"}
-</pre>
-
-The following example shows the new log format:
-
-<pre class="terminal">
-<14>1 2022-07-11T22:27:08.279742Z 10.0.4.12 event_logger rs2 - [instance@47450 az="us-central1-b" deployment="pas-windows-dfc8956c7081f9369571" director="" group="windows_diego_cell" id="d0564a0e-684f-4b58-99ee-6a59d1e7caf8"] {"MachineName":"vm-c5547227-c4fa-44ae-79d0-ee56f96e82a4","Data":[],"Index":162257,"Category":"(13312)","CategoryNumber":13312,"EventID":4688,"EntryType":8,"Message":"A new process has been created.\r\n\r\nCreator Subject:\r\n\tSecurity ID:\t\tS-1-5-18\r\n\tAccount Name:\t\tVM-C5547227-C4F$\r\n\tAccount Domain:\t\tWORKGROUP\r\n\tLogon ID:\t\t0x3e7\r\n\r\nTarget Subject:\r\n\tSecurity ID:\t\tS-1-0-0\r\n\tAccount Name:\t\t-\r\n\tAccount Domain:\t\t-\r\n\tLogon ID:\t\t0x0\r\n\r\nProcess Information:\r\n\tNew Process ID:\t\t0x1590\r\n\tNew Process Name:\tC\r\n\tToken Elevation Type:\t%%1936\r\n\tMandatory Label:\t\tS-1-16-16384\r\n\tCreator Process ID:\t0x1120\r\n\tCreator Process Name:\tC\r\n\tProcess Command Line:\t\r\n\r\nToken Elevation Type indicates the type of token that was assigned to the new process in accordance with User Account Control policy.\r\n\r\nType 1 is a full token with no privileges removed or groups disabled.  A full token is only used if User Account Control is disabled or if the user is the built-in Administrator account or a service account.\r\n\r\nType 2 is an elevated token with no privileges removed or groups disabled.  An elevated token is used when User Account Control is enabled and the user chooses to start the program using Run as administrator.  An elevated token is also used when an application is configured to always require administrative privilege or to always require maximum privilege, and the user is a member of the Administrators group.\r\n\r\nType 3 is a limited token with administrative privileges removed and administrative groups disabled.  The limited token is used when User Account Control is enabled, the application does not require administrative privilege, and the user does not choose to start the program using Run as administrator.","Source":"Microsoft-Windows-Security-Auditing","ReplacementStrings":["S-1-5-18","VM-C5547227-C4F$","WORKGROUP","0x3e7","0x1590","C:\\Windows\\System32\\wbem\\WMIC.exe","%%1936","0x1120","","S-1-0-0","-","-","0x0","C:\\bosh\\bosh-agent.exe","S-1-16-16384"],"InstanceId":4688,"TimeGenerated":"\/Date(1657578421000)\/","TimeWritten":"\/Date(1657578421000)\/","UserName":null,"Site":null,"Container":null}
-</pre>
 
 ## <a id='known-issues'></a> Known Issues
 
