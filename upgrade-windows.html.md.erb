@@ -8,7 +8,6 @@ and update the Windows stemcell.
 
 For information about migrating apps to <%= vars.windows_runtime_abbr %> from <%= vars.windows_runtime_abbr %> 2012 R2, see [Migrating Apps to <%= vars.windows_runtime_abbr %>](./migrating.html).
 
-
 ## <a id='rotate'></a> Rotating Credentials
 
 The <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) tile handles all of the credentials for <%= vars.windows_runtime_abbr %>.
@@ -19,44 +18,48 @@ To rotate your credentials in <%= vars.windows_runtime_abbr %>, you must re-depl
 
 1. Click **Review Pending Changes**.
 
-1. Select the <%= vars.app_runtime_abbr %> and <%= vars.windows_runtime_abbr %> tiles and review the changes. For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html).
+1. Select the <%= vars.app_runtime_abbr %> and <%= vars.windows_runtime_abbr %> tiles and review the changes.
 
-1. Click **Apply Changes**.
+   For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html).
 
+2. Click **Apply Changes**.
 
 ## <a id='upgrade-tile'></a> Upgrade <%= vars.windows_runtime_abbr %>
 
 To upgrade <%= vars.windows_runtime_abbr %>:
 
 1. Download the latest <%= vars.windows_runtime_abbr %> version from the [<%= vars.windows_runtime_full %>](https://network.pivotal.io/products/pas-windows) page on <%= vars.product_network %>.
+
    For more information about upgrading your <%= vars.platform_name %> products,
    see [Upgrading <%= vars.platform_name %> Products](https://docs.pivotal.io/ops-manager/2-10/install/upgrading-products.html#other-products)
    in _Upgrading <%= vars.app_runtime_abbr %> and Other <%= vars.platform_name %> Products_.
 
-1. If necessary, configure the product. For more information about configuring <%= vars.windows_runtime_abbr %>, see [Installing and Configuring <%= vars.windows_runtime_abbr %>](./installing.html).
+1. If necessary, configure the product.
 
-1. Click **Review Pending Changes**.
+   For more information about configuring <%= vars.windows_runtime_abbr %>, see [Installing and Configuring <%= vars.windows_runtime_abbr %>](./installing.html).
 
-1. Select the <%= vars.windows_runtime_abbr %> tile and review the changes. For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html).
+2. Click **Review Pending Changes**.
 
-1. Click **Apply Changes**.
+3. Select the <%= vars.windows_runtime_abbr %> tile and review the changes. For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html).
 
+4. Click **Apply Changes**.
 
 ## <a id='upgrade-stemcell'></a> Upgrade the Windows Stemcell
 
 To upgrade your Windows stemcell:
 
-1. Retrieve the stemcell by following the steps for your IaaS:
-    * For vSphere, you must build your own stemcell. For more information, see [Creating a Windows Stemcell for vSphere](https://bosh.io/docs/windows-stemcell-create/) in the BOSH documentation.
+1. Retrieve the stemcell by following the steps for your IaaS (infrastructure as a service):
+    * For vSphere, you must build your own stemcell.
+    For more information, see [Creating a Windows Stemcell for vSphere](https://bosh.io/docs/windows-stemcell-create/) in the BOSH documentation.
     * For AWS, GCP, and Azure, go to [Stemcells
       (Windows)](https://network.pivotal.io/products/stemcells-windows-server) on <%= vars.product_network %>.
 
-1. Go to **Stemcell Library**.
+2. Go to **Stemcell Library**.
 
-1. Click **Import Stemcell** to import the stemcell file.
+3. Click **Import Stemcell** to import the stemcell file.
 
-1. When prompted, enable the Ops Manager product checkbox to stage your stemcell.
+4. Activate the Ops Manager product check box to stage your stemcell.
 
-1. Click **Apply Stemcell to Products**.
+5. Click **Apply Stemcell to Products**.
 
 For more information about Windows stemcells, see [Downloading or Creating Windows Stemcells](stemcells.html).

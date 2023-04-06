@@ -7,54 +7,53 @@ This topic describes how to integrate Windows Diego Cells with an existing Activ
 
 ## <a id='overview'></a> Overview
 
-Windows Authentication allows users accessing a Windows app on <%= vars.windows_runtime_abbr %> to transparently authenticate using their domain credentials.
+With Windows Authentication you can access a Windows app on <%= vars.windows_runtime_abbr %> to transparently authenticate using your domain credentials.
 
 ## <a id='security'></a> Security considerations
 
-Do not use HTTP routing via the GoRouter for apps that use Windows Authentication. Windows Authentication sessions are cached by source IP and port. The GoRouter [maintains TCP connections](../concepts/http-routing.html#back-end) to app containers and re-uses them for subsequent inbound HTTP requests. This implies that a given GoRouter uses the same port to talk to an app for multiple users. User authentication sessions end up being shared among multiple users making HTTP requests to the Windows Authentication app, which is a serious security hazard.
+Do not use HTTP routing via the GoRouter for apps that use Windows Authentication. Windows Authentication sessions are cached by source IP and port. The GoRouter [maintains TCP connections](../concepts/http-routing.html#back-end) to app containers and reuses them for subsequent inbound HTTP requests. This implies that a given GoRouter uses the same port to talk to an app for multiple users. User authentication sessions end up being shared among multiple users making HTTP requests to the Windows Authentication app, which is a serious security issue.
 
-To avoid this risk, use TCP routing. The TCP router does not maintain connections to app containers in the same fashion as the GoRouter does, so user authentication sessions are not shared among multiple users. To enable TCP routing, see [Configure Networking](../operating/configure-pas.html#networking) for the <%= vars.app_runtime_abbr %> tile.
+To avoid this risk, use TCP routing. The TCP router does not maintain connections to app containers in the same way, the GoRouter does, because user authentication sessions are not shared among multiple users.
 
-Apps using Windows Authentication should use the `--no-route` flag to `cf push`, or specify a `routes` stanza in the app manifest with only a TCP route.
+To activate TCP routing, see [Configure Networking](../operating/configure-pas.html#networking) for the <%= vars.app_runtime_abbr %> tile.
 
+Apps using Windows Authentication can use the `--no-route` flag to `cf push`, or specify a `routes` stanza in the app manifest with only a TCP route.
 
 ## <a id='prerequisites'></a> Prerequisites
 
-Before you configure the <%= vars.windows_runtime_abbr %> tile for Windows Authentication, ensure that you meet the following requirements:
+Before you configure the <%= vars.windows_runtime_abbr %> tile for Windows Authentication, make sure that you meet the following requirements:
 
 * Your Active Directory instance must be configured with a GMSA and a regular user that has been granted access to the GMSA credentials. See the [Microsoft docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts) for specifics.
 * Your Windows Diego cells must have the appropriate [firewall rules](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/gmsa-troubleshooting#check-the-firewall-configuration) to access the Active Directory instance.
 * [Application Security Groups](../concepts/asg.html) must be configured to allow traffic from app containers to the Active Directory instance.
 * [TCP Routing](../operating/configure-pas.html#networking) must be enabled and configured.
 
-<p class="note caution"><strong>Caution:</strong> Using Windows Authentication via the GoRouter is strongly discouraged because it will result in authentication sessions for one user being returned to a different user. Apps using Windows Authentication should <strong>only</strong> be accessed via TCP routes.</p>
+<p class="note caution"><strong>Caution:</strong> Using Windows Authentication through GoRouter is strongly discouraged because it results in authentication sessions for one user being returned to a different user. Apps using Windows Authentication must <strong>only</strong> be accessed through TCP routes.</p>
 
-* The **The Gorouter and apps use mutual TLS to verify each other’s identity** setting described in [Advanced Features](installing.html#config-advanced-features) must not be selected, as this disables TCP routing.
-* Depending on your IaaS, you may need to configure BOSH DNS handlers so that your app containers can resolve domain resources via the Active Directory instance. See the <a class="external-link" href="https://docs.pivotal.io/ops-manager/install"><strong>Ops Manager Documentation</strong></a> for IaaS-specific instructions.
+* The **The Gorouter and apps use mutual TLS to verify each other’s identity** setting described in [Advanced Features](installing.html#config-advanced-features) must not be selected, as this deactivates TCP routing.
+* Depending on your IaaS, you might need to configure BOSH DNS handlers so that your app containers can resolve domain resources through the Active Directory instance. See the <a class="external-link" href="https://docs.pivotal.io/ops-manager/install"><strong>Ops Manager Documentation</strong></a> for IaaS-specific instructions.
 * Apps intending to use Windows Authentication must use the HWC buildpack.
 
-<p class="note"><strong>Note:</strong> We strongly recommend using an isolation segment for Windows Authentication, as all apps in the <%= vars.windows_runtime_abbr %> installation will have access to the GMSA credentials. To associate a <%= vars.windows_runtime_abbr %> tile with an isolation segment so that its Diego Cells run in that segment, see <a href="./isolation.html">Windows Diego Cells in Isolation Segments</a>.</p>
-
+<p class="note"><strong>Note:</strong> Use an isolation segment for Windows Authentication, as all apps in the <%= vars.windows_runtime_abbr %> installation have access to GMSA credentials. To associate a <%= vars.windows_runtime_abbr %> tile with an isolation segment so that its Diego Cells run in that segment, see <a href="./isolation.html">Windows Diego Cells in Isolation Segments</a>.</p>
 
 ## <a id='limitations'></a> Limitations
 
-* Authenticating via the cf cli with Windows Authentication is not supported.
-* Every app in the <%= vars.windows_runtime_abbr %> installation will have access to the GMSA credentials. There is no way to configure it on an app-by-app basis.
+* Authenticating through the cf cli with Windows Authentication is not supported.
+* Every app in the <%= vars.windows_runtime_abbr %> installation has access to GMSA credentials. There is no way to configure it on an app-by-app basis.
 * Windows Authentication delegation from app to service is not supported.
 
 ## <a id='configure-tile'></a> Configure the tile
 
-Start by following the steps in the [Microsoft docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#create-a-credential-spec) to create the appropriate values, then select **Windows Authentication** and follow this procedure:
+Start by following the steps in the [Microsoft docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#create-a-credential-spec) to create the appropriate values, then select **Windows Authentication** and use this procedure:
 
 1. Under **Windows Authentication**, select **Enable**.
-2. In the **Type X to acknowledge**, field, enter `X`. See [Security considerations](#security) above for the details.
+2. In the **Type X to acknowledge**, field, enter `X`. See [Security considerations](#security) for the details.
 3. In the **Fully-qualified Active Directory domain name** field, enter the domain name of the Active Directory instance you want to integrate with.
 4. In the **Standard user name** field, enter the name of a user that has been granted access to retrieve the GMSA password.
 5. In the **Standard user password** field, enter the password for that user.
 6. In the **Container credential spec** field, enter the JSON credential spec generated during the procedure in the [Microsoft docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#create-a-credential-spec).
 7. Click **Save**.
 8. [Deploy the tile](installing.html#deploy).
-
 
 ## <a id='rotating'></a> Rotating the standard user
 
@@ -66,7 +65,6 @@ Follow the steps in the [Microsoft docs](https://learn.microsoft.com/en-us/virtu
 4. Click **Save**.
 5. [Deploy the tile](installing.html#deploy).
 
-
 ## <a id='troubleshooting'></a> Troubleshooting
 
-For troubleshooting steps, see [Troubleshooting Windows Authentication](./troubleshooting.html#windows-authentication).
+For troubleshooting details, see [Troubleshooting Windows Authentication](./troubleshooting.html#windows-authentication).

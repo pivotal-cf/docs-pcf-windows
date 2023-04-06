@@ -41,8 +41,8 @@ For more information about adding environment variables to your Config Server Pr
 [Config Server Provider](https://steeltoe.io/docs/2-configuration/config-server-provider) in the
 Steeltoe documentation.
 
-After adding your environment variables to your Config Server Provider,
-proceed to [SMB Mounting](smb-volumes-apps.html#smb-mounting) below.
+After you add your environment variables to your Config Server Provider,
+go to [SMB Mounting](smb-volumes-apps.html#smb-mounting).
 
 ### <a id='batch'></a> Using SMB Volumes in .NET Apps with Your Batch Profile
 
@@ -61,12 +61,11 @@ To mount SMB Volumes:
 
 1. Add the following command to your `.profile.bat` file:
 
-    ```
+    ```console
     net use z: %SMB_PATH% %SMB_PASSWORD% /USER:%SMB_USERNAME%
     ```
 
-1. Proceed to [SMB Mounting](smb-volumes-apps.html#smb-mounting) below.
-
+1. Go to [SMB Mounting](smb-volumes-apps.html#smb-mounting).
 
 ## <a id='smb-mounting'></a> SMB Mounting
 
@@ -76,14 +75,14 @@ To configure SMB mounting:
    as environment variables to your local computer or the computer you are using
    to deploy your app.
     <p class='note'><strong>Note:</strong> If you are using SMB Volumes with your batch profile and have already added these environment variables, ignore this step.</p>
-    <p class="note"><strong>Note:</strong> If Visual Studio does not detect these new environment variables, restart Visual Studio.</p>
+    <p class="note"><strong>Note:</strong> If Visual Studio does not detect these new environment variables, start Visual Studio again.</p>
 
 1. In Visual Studio, create a new file in your solution named `SMBConfiguration.cs`.
    This file is the single representation of your SMB Volume configuration and
    reads the connection data from the environment variables you established previously.
    Include the following in your `SMBConfiguration.cs` file:
 
-    ```
+    ```console
     // SMBConfiguration.cs
     using System;
 
@@ -119,12 +118,12 @@ To configure SMB mounting:
    If you are not using Steeltoe, ignore this step.
 
 1. Edit `NoteController.cs` to read from a file named `note.txt`.
-   This `note.txt` does not exist yet but will be created by the `FileMode.OpenOrCreate` method.
-   See the example code snippet below, which reads the contents of the note file and
+   This `note.txt` does not exist yet but is created by the `FileMode.OpenOrCreate` method.
+   See the following example code snippet, which reads the contents of the note file and
    stashes the `note.txt` content in the Viewbag.
    If you are not using Steeltoe, ignore the reference to `Steeltoe.Common.Net` in the following code snippet.
 
-    ```
+    ```console
     // NoteController.cs
     using System;
     using System.Collections.Generic;
@@ -169,15 +168,16 @@ in the Microsoft documentation.
 
 1. In Visual Studio, create an `Index.cshtml` file that contains the following:
 
-    ```
+    ```console
     // Index.cshtml
 
     @ViewBag.Note
     ```
+
     If you were to run the app now, you would see an empty page with no errors.
 
 1. Modify the `Index.cshtml` file to contain a form. This form posts to a yet-to-be-created update endpoint and also
-displays our note inside a text area.
+displays the note inside a text area.
 
     ```
     <big>
@@ -200,9 +200,11 @@ into the `note.txt`. See the example code snippet in the following step.
 1. Modify the `NoteController.cs` to include the ControllerBase class `RedirectToAction` method, which redirects to the
 index page so the user can see what was just saved. For more information about the ControllerBase class, see
 [ControllerBase.RedirectToAction Method](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.redirecttoaction?view=aspnetcore-2.2)
-in the Microsoft documentation. See the example code snippet below:
+in the Microsoft documentation.
 
-    ```
+    See the following example code snippet:
+
+    ```console
     // NoteController.cs
     namespace NetFrameworkApp.Controllers
     {
@@ -233,5 +235,5 @@ in the Microsoft documentation. See the example code snippet below:
 
 ### <a id='cannont-find-path'></a> Inability to SSH Into App Instance
 
-Even though you have successfully created the SMB mapping, you cannot `cf ssh` into that app instance.
+Even though you have successfully created the SMB mapping, you cannot run `cf ssh` into that app instance.
 Trying to access the created mapping through SSH results in an unspecified path error.

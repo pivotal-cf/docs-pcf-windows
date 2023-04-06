@@ -6,9 +6,9 @@ owner: Windows
 This topic describes the process of migrating apps running on <%= vars.windows_runtime_full %>
 2012 R2 stemcells to run on <%= vars.windows_runtime_abbr %> stemcells, which run Windows Server 2019.
 
-<p class="note"><strong>Note</strong>: <%= vars.windows_runtime_abbr %> 2012 R2 has reached its end of availability (EoA) and is no longer generally available.</p>
+<p class="note"><strong>Note</strong>: <%= vars.windows_runtime_abbr %> 2012 R2 has reached its end of availability (EoA) and is no longer available.</p>
 
-VMware recommends you use the blue-green deployment method for high availability.
+VMware recommends the blue-green deployment method for high availability.
 For more information about blue-green deployments,
 see [Using Blue-Green Deployment to Reduce Downtime and
 Risk](../devguide/deploy-apps/blue-green.html).
@@ -25,7 +25,7 @@ To redeploy a running app with zero downtime using the blue-green method:
 
 1. Log in to the Cloud Foundry Command Line Interface (cf CLI) by running:
 
-    ```
+    ```console
     cf login
     ```
 
@@ -45,6 +45,7 @@ To redeploy a running app with zero downtime using the blue-green method:
     ```console
     APP-NAME-green
     ```
+
     Where `APP-NAME` is the name of the existing <%= vars.windows_runtime_abbr %> Diego 2012 R2 app.
 
 1. To push your app to a <%= vars.windows_runtime_abbr %> Diego Cell using your newly created name, run:
@@ -67,7 +68,7 @@ To redeploy a running app with zero downtime using the blue-green method:
     -n my-app --no-start --no-route
     </pre>
 
-    <p class="note"><strong>Note:</strong> The <code>--no-start</code> and <code>--no-route</code> parameters included in this <code>cf push</code> command are required for the this procedure. <code>--no-start</code> is used to create the instance VMs and not start the app, and <code>--no-route</code> is used to prevent the push command from automatically mapping a route to the app.
+    <p class="note"><strong>Note:</strong> The <code>--no-start</code> and <code>--no-route</code> parameters included in this <code>cf push</code> command are required for the this procedure. The <code>--no-start</code> parameter is used to create the instance VMs and not start the app, and the <code>--no-route</code> parameter is used to prevent the push command from automatically mapping a route to the app.
     For more information about <code>cf push</code>, see <a href="http://cli.cloudfoundry.org/en-US/cf/push.html">cf push</a> in the Cloud Foundry CLI Reference Guide.</p>
 
     <p class="note"><strong>Note:</strong> The <code>windows</code> stack is a renaming of the old <code>windows2016</code> stack. These stacks are identical and differ in name only. If the <code>windows</code> stack is available, specify <code>-s windows</code>. Otherwise, specify <code>-s windows2016</code>. In <%= vars.windows_runtime_abbr %> v2.5 and later, the <code>windows2016</code> stack is deprecated. For more information, see <a href="https://docs.pivotal.io/pivotalcf/2-5/pcf-release-notes/windows-rn.html#-deprecation-of-the-windows2016-stack">Deprecation of the windows2016 Stack</a> in <em><%= vars.windows_runtime_full %> v2.5 Release Notes</em>.</p>
@@ -93,16 +94,17 @@ To redeploy a running app with zero downtime using the blue-green method:
     ```console
 	cf start APP-NAME-green
     ```
+
     Where `APP-NAME-green` is the name of the new "green" version of your app.
 
-1. To confirm that both your `APP-NAME` and `APP-NAME-green` apps are running, run:
+2. To confirm that both your `APP-NAME` and `APP-NAME-green` apps are running, run:
 
     ```console
     cf apps
     ```
     If you experience a problem, see [Troubleshooting App Deployment and Health](../devguide/deploy-apps/troubleshoot-app-health.html).
 
-1. To unmap the original app's route, run:
+3. To unmap the original app's route, run:
 
     ```console
     cf unmap-route APP-NAME DOMAIN -n HOSTNAME
@@ -134,17 +136,17 @@ To delete the original app:
     For additional information about `cf delete`, see [cf delete](http://cli.cloudfoundry.org/en-US/cf/delete.html) in the Cloud Foundry CLI Reference Guide.
 
 
-## <a id="uninstall-old-tile"></a> Step 4: (Optional) Uninstall Old Tile
+## <a id="uninstall-old-tile"></a> Step 4: Uninstall Old Tile (Optional)
 
-Once you have migrated all of your apps and you are no longer using the <%= vars.windows_runtime_abbr %> 2012 R2 tile, a <%= vars.platform_name %> operator uninstall the tile.
+Once you migrate all of your apps and you are no longer use the <%= vars.windows_runtime_abbr %> 2012 R2 tile, a <%= vars.platform_name %> uninstall the tile.
 
 To uninstall the tile:
 
-1. From the Installation Dashboard, click the trash icon on the tile to remove that product. In the **Delete Product** dialog box that appears, click **Confirm**.
+1. From the Installation Dashboard, click the Trash icon on the tile to remove that product. In the **Delete Product** pane, click **Confirm**.
 
 1. Click **Review Pending Changes**.
 
 1. Select the <%= vars.windows_runtime_abbr %> tile and review the changes. For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html).
 
 1. Click **Apply Changes**.
-  <p class="note"><strong>Note:</strong> After you delete a product, the product tile is removed from the installation and the Installation Dashboard. However, the product appears in the Available Products view.</p>
+  <p class="note"><strong>Note:</strong> After you delete a product, the product tile is removed from the installation and the Installation Dashboard. However, the product appears in the <strong>Available Products</strong> view.</p>
