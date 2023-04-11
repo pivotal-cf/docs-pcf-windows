@@ -11,13 +11,13 @@ With Windows Authentication you can access a Windows app on <%= vars.windows_run
 
 ## <a id='security'></a> Security considerations
 
-Do not use HTTP routing via the GoRouter for apps that use Windows Authentication. Windows Authentication sessions are cached by source IP and port. The GoRouter [maintains TCP connections](../concepts/http-routing.html#back-end) to app containers and reuses them for subsequent inbound HTTP requests. This implies that a given GoRouter uses the same port to talk to an app for multiple users. User authentication sessions end up being shared among multiple users making HTTP requests to the Windows Authentication app, which is a serious security issue.
+Do not use HTTP routing through the GoRouter for apps that use Windows Authentication. Windows Authentication sessions are cached by source IP and port. The GoRouter [maintains TCP connections](../concepts/http-routing.html#back-end) to app containers and reuses them for subsequent inbound HTTP requests. This implies that a given GoRouter uses the same port to talk to an app for multiple users. User authentication sessions end up being shared among multiple users making HTTP requests to the Windows Authentication app, which is a serious security issue.
 
 To avoid this risk, use TCP routing. The TCP router does not maintain connections to app containers in the same way, the GoRouter does, because user authentication sessions are not shared among multiple users.
 
 To activate TCP routing, see [Configure Networking](../operating/configure-pas.html#networking) for the <%= vars.app_runtime_abbr %> tile.
 
-Apps using Windows Authentication can use the `--no-route` flag to `cf push`, or specify a `routes` stanza in the app manifest with only a TCP route.
+Apps using Windows Authentication can use the `--no-route` flag to `cf push`, or specify a `routes` stanza in the app manifest with only a TCP route. The `--no-route` flag no longer unbinds all existing routes associated with the app.
 
 ## <a id='prerequisites'></a> Prerequisites
 

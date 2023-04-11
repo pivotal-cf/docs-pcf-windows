@@ -68,7 +68,7 @@ To redeploy a running app with zero downtime using the blue-green method:
     -n my-app --no-start --no-route
     </pre>
 
-    <p class="note"><strong>Note:</strong> The <code>--no-start</code> and <code>--no-route</code> parameters included in this <code>cf push</code> command are required for the this procedure. The <code>--no-start</code> parameter is used to create the instance VMs and not start the app, and the <code>--no-route</code> parameter is used to prevent the push command from automatically mapping a route to the app.
+    <p class="note"><strong>Note:</strong> The <code>--no-start</code> and <code>--no-route</code> parameters included in this <code>cf push</code> command are required for the this procedure. The <code>--no-start</code> parameter is used to create the instance VMs and not start the app, and the <code>--no-route</code> parameter is used to prevent the push command from automatically mapping a route to the app, but no longer unbinds all existing routes associated with the app.
     For more information about <code>cf push</code>, see <a href="http://cli.cloudfoundry.org/en-US/cf/push.html">cf push</a> in the Cloud Foundry CLI Reference Guide.</p>
 
     <p class="note"><strong>Note:</strong> The <code>windows</code> stack is a renaming of the old <code>windows2016</code> stack. These stacks are identical and differ in name only. If the <code>windows</code> stack is available, specify <code>-s windows</code>. Otherwise, specify <code>-s windows2016</code>. In <%= vars.windows_runtime_abbr %> v2.5 and later, the <code>windows2016</code> stack is deprecated. For more information, see <a href="https://docs.pivotal.io/pivotalcf/2-5/pcf-release-notes/windows-rn.html#-deprecation-of-the-windows2016-stack">Deprecation of the windows2016 Stack</a> in <em><%= vars.windows_runtime_full %> v2.5 Release Notes</em>.</p>
@@ -86,8 +86,8 @@ To redeploy a running app with zero downtime using the blue-green method:
           <li>`HOSTNAME` is the name of your app's subdomain. For example, if `example.com` is your domain and you want the URL to your app to be `http://my-app.example.com`, then specify `my-app` as the `HOSTNAME`.</li>
         </ul>
 
-    <p class="note"><strong>Note:</strong> When using the <code>cf map-route</code> command, you must specify domain name after specifying app name.</p>
-    For additional information about `cf map-route`, see [cf map-route](http://cli.cloudfoundry.org/en-US/cf/map-route.html) in the Cloud Foundry CLI Reference Guide.
+    <p class="note"><strong>Note:</strong> When using the <code>cf map-route</code> command, you must specify domain name after you specify the app name.</p>
+    For additional information, see [cf map-route](http://cli.cloudfoundry.org/en-US/cf/map-route.html) in the Cloud Foundry CLI Reference Guide.
 
 1. To start the green app, run:
 
@@ -132,8 +132,8 @@ To delete the original app:
 
     Where `APP-NAME` is the name of the app that you have replaced with `APP-NAME-green`.
 
-    <p class="note"><strong>Note:</strong> To also delete any mapped routes, run the command with the <code>-r</code> flag.</p>
-    For additional information about `cf delete`, see [cf delete](http://cli.cloudfoundry.org/en-US/cf/delete.html) in the Cloud Foundry CLI Reference Guide.
+    <p class="note"><strong>Note:</strong> Running the command with the <code>-r</code> flag no longer deletes routes when the route is mapped to more than one app.</p>
+    For additional information about `cf delete` command, see [cf delete](http://cli.cloudfoundry.org/en-US/cf/delete.html) in the Cloud Foundry CLI Reference Guide.
 
 
 ## <a id="uninstall-old-tile"></a> Step 4: Uninstall Old Tile (Optional)

@@ -88,7 +88,7 @@ To define a context path route, such as `app1.example.com/app2`:
       <li><code>LOWER-LEVEL-APP-NAME</code> is the name of your lower-level app.</li>
       <li><code>APP-DOMAIN</code> is your app&#39;s public domain name. For example, <code>example.com</code>.</li>
     </ul>
-    <p class="note"><strong>Note:</strong> The <code>-d</code> parameter is only needed when pushing an app to a non-default domain.</p>
+    <p class="note"><strong>Note:</strong> The <code>-d</code> parameter is only needed when pushing an app to a non-default domain. You can use the routes property in the manifest instead.</p>
 
 ### <a id='graceful-shutdown'></a> Activate Graceful Shutdown for a .NET App
 
@@ -161,7 +161,7 @@ To deploy a SOAP web service:
     urls: webservice.example.com
     </pre>
     <p class="note"><strong>Note:</strong> The push command must include the <code>-s</code> flag to specify the stack, which instructs <%= vars.platform_name %> to run the app in the Windows Diego Cell.</p>
-    <p class="note"><strong>Note:</strong> The <code>-p</code> and <code>-u </code> parameters are optional parameters. The <code>-p</code> parameter is needed only when pushing your service from a directory that does not contain the published web service. The <code>-u</code> parameter is needed only when disabling the health check when you do not have a route serving <code>/</code>.</p>
+    <p class="note"><strong>Note:</strong> The <code>-p</code> and <code>-u </code> parameters are optional parameters. The <code>-p</code> parameter is needed only when pushing your service from a directory that does not contain the published web service. The <code>-u</code> parameter is needed only when deactivating the health check when you do not have a route serving <code>/</code>.</p>
 
 1. Confirm your service is running by finding your service's URL in the push command's output and browsing to it. In the previous example, the URL for the service is `http://webservice.example.com`.
 
@@ -182,7 +182,9 @@ See the following portion of an example WSDL file:
 - </wsdl:service>
 ```
 
-The WSDL file provides the port number for the SOAP web service as `62492`. This is the port that the web service listens on in the Garden container, but external apps cannot access the service on this port. Instead, external apps must use port 80, and the Gorouter routes requests to the web service in the container. For more information about the Garden container, see [Container Mechanics](../concepts/container-security.html#mechanics) in _Container Security_. For more information about the Gorouter, see [<%= vars.app_runtime_abbr %> Routing Architecture](../concepts/cf-routing-architecture.html).
+The WSDL file provides the port number for the SOAP web service as `62492`. This is the port that the web service listens on in the Garden container, but external apps cannot access the service on this port. Instead, external apps must use port 80, and the Gorouter routes requests to the web service in the container. For more information about the Garden container, see [Container Mechanics](../concepts/container-security.html#mechanics) in _Container Security_.
+
+ For more information about the Gorouter, see [<%= vars.app_runtime_abbr %> Routing Architecture](../concepts/cf-routing-architecture.html).
 
 The URL of the web service in the WSDL file must be modified to remove `62492`. With no port number, the URL defaults to port 80. In the previous example, the modified URL is `http://webservice.example.com/WebService1.asmx`.
 
@@ -248,6 +250,6 @@ If a .NET app fails to start, see the following list of errors and their possibl
 
 * `NoCompatibleCell`: Your <%= vars.platform_name %> deployment cannot connect to your Windows Diego Cell. For more information about troubleshooting your Windows Diego Cell configuration, see [Troubleshooting Windows Diego Cells](troubleshooting.html).
 
-* `Start unsuccessful`: Your app may may be misconfigured or lacks the required DLL files and dependencies.
+* `Start unsuccessful`: Your app might be configured wrong  or lacks the required DLL files and dependencies.
     * Ensure that your app directory contains either a valid `.exe` binary or a valid `Web.config` file.
     * Ensure that you are pushing from a directory containing your app dependencies. If it does not, specify the app dependency directory with the `-p` flag.
