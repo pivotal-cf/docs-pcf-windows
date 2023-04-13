@@ -17,7 +17,7 @@ To avoid this risk, use TCP routing. The TCP router does not maintain connection
 
 To activate TCP routing, see [Configure Networking](../operating/configure-pas.html#networking) for the <%= vars.app_runtime_abbr %> tile.
 
-Apps using Windows Authentication can use the `--no-route` flag to `cf push`, or specify a `routes` stanza in the app manifest with only a TCP route. The `--no-route` flag no longer unbinds all existing routes associated with the app.
+Apps using Windows Authentication can use the `--no-route` flag for the  `cf push` command, or specify a `routes` stanza in the app manifest with only a TCP route. The `--no-route` flag no longer unbinds all existing routes associated with the app.
 
 ## <a id='prerequisites'></a> Prerequisites
 
@@ -46,12 +46,12 @@ Before you configure the <%= vars.windows_runtime_abbr %> tile for Windows Authe
 
 Start by following the steps in the [Microsoft docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#create-a-credential-spec) to create the appropriate values, then select **Windows Authentication** and use this procedure:
 
-1. Under **Windows Authentication**, select **Enable**.
-2. In the **Type X to acknowledge**, field, enter `X`. See [Security considerations](#security) for the details.
-3. In the **Fully-qualified Active Directory domain name** field, enter the domain name of the Active Directory instance you want to integrate with.
-4. In the **Standard user name** field, enter the name of a user that has been granted access to retrieve the GMSA password.
-5. In the **Standard user password** field, enter the password for that user.
-6. In the **Container credential spec** field, enter the JSON credential spec generated during the procedure in the [Microsoft docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#create-a-credential-spec).
+1. Under **Windows Authentication**, select **Configure**.
+2. In the **For security reasons, apps using Windows Authentication must use TCP routing.**, field, enter `X` to acknowledge this requirement. See [Security considerations](#security) for the details.
+3. In the **Active Directory FQDN** field, enter the domain of the Active Directory instance that app containers use for authentication.
+4. In the **Standard user name** field, enter the name of the user account with access to the gMSA password. This is a user account.
+5. In the **Standard user password** field, enter the password of the user account with access to the gMSA password. This is a user account.
+6. In the **Container credential spec** field, enter a JSON string that describes the gMSA account and domain details. For more information on Windows Authentication, see [Microsoft docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#create-a-credential-spec).
 7. Click **Save**.
 8. [Deploy the tile](installing.html#deploy).
 

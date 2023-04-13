@@ -34,16 +34,16 @@ Use the **Windows FS Injector** tool to install the <%= vars.windows_runtime_abb
 
 * The `git` and `tar` executables must be in your `%PATH%`. If `git` and `tar` are not in your `%PATH%`, either add your `git` and `tar` to the locations in your existing `%PATH%` configuration, or copy the `git.exe` and `tar.exe` executables to a directory in your `%PATH%`.
 
-*  Your installation environment must allow the **Windows FS Injector** tool access to all of the following URLs:
-  * [network.pivotal.io](https://network.pivotal.io), for downloading the tile and injector
-  * [s3.amazonaws.com](https://s3.amazonaws.com/)
-  * auth.docker.io
-  * [registry.hub.docker.com](https://registry.hub.docker.com/)
-  * [https://production.cloudflare.docker.com](https://production.cloudflare.docker.com/)
-  * [go.microsoft.com](https://go.microsoft.com/)
-  * https://winlayers.cdn.mscr.io
-  * [mcr.microsoft.com](https://mcr.microsoft.com)
-  * https://msecnd.net, or any domain within the Microsoft Windows Azure Content Delivery Network
+* Your installation environment must allow the **Windows FS Injector** tool access to all of the following URLs:
+* [network.pivotal.io](https://network.pivotal.io), for downloading the tile and injector
+* [s3.amazonaws.com](https://s3.amazonaws.com/)
+* auth.docker.io
+* [registry.hub.docker.com](https://registry.hub.docker.com/)
+* [https://production.cloudflare.docker.com](https://production.cloudflare.docker.com/)
+* [go.microsoft.com](https://go.microsoft.com/)
+* <https://winlayers.cdn.mscr.io>
+* [mcr.microsoft.com](https://mcr.microsoft.com)
+* <https://msecnd.net>, or any domain within the Microsoft Windows Azure Content Delivery Network
   For more information about the Windows Azure Content Delivery Network, see [Introducing the Windows Azure Content Delivery Network](https://azure.microsoft.com/en-us/blog/introducing-the-windows-azure-content-delivery-network/) in the Microsoft Azure documentation.
 
   <p class="note"><strong>Note:</strong> To ensure the authenticity of Microsoft container images, Microsoft does not permit the distribution of its base images. This includes Microsoft container images consumed through Docker Hub, which are actually delivered by an Microsoft CDN endpoint.</p>
@@ -123,7 +123,7 @@ To configure AZs and networks:
 
   <p class='note'><strong>Note:</strong> For production deployments, VMware recommends at least three AZs for a highly available installation.</p>
 
-1. From the **Network** dropdown, choose the runtime network that you created when configuring the BOSH Director tile.
+1. From the **Network** drop down menu, choose the runtime network that you created when you configured the BOSH Director tile.
 
 1. Click **Save**.
 
@@ -135,19 +135,19 @@ To configure VM access:
 
 1. Select **VM Options**.
 
-1. Select one of the following for **Manage administrator password**:
+1. Select one of the following for **Administrator passwords**:
 
-* To randomize the admin password, select **Use random password**. If you select this option, the admin password is not retrievable by an operator. This is the default selection.
-* To set the same admin password for every Windows Diego Cell, select **Set the password** and enter a password in **Password**. If you select this option, this password can be used to access any Windows Diego Cell.
+* To randomize the admin password, select **Use randomized password**. If you select this option, the admin password is not retrievable by an operator. This is the default selection.
+* To set the same admin password for every Windows Diego Cell, select **Configure a password** and enter a password in **Password**. If you select this option, it specifies a password for all VMs that can be used to access any Windows Diego Cell.
 
-1. (Optional) To start the Microsoft beta port of the OpenSSH daemon on port 22 on all VMs, select the **Enable BOSH-native SSH support on all VMs (beta)** checkbox. If you select this option, users can SSH into Windows VMs with the `bosh ssh` command and enter a CMD terminal as an admin user. They can then run `powershell.exe` to start a PowerShell session.
+1. (Optional) To start the Microsoft beta port of the OpenSSH daemon on port 22 for all VMs, select the **Access VMs with BOSH SSH (beta))** check box. If you select this option, it allows users to SSH into Windows VMs with the `bosh ssh` command and enter a CMD terminal as an admin user.
 
-1. (Optional) To configure a Key Management Service (KMS) that your volume-licensed Windows Diego Cell can register with:
-    1. Under **Key Management Service**, select **Enable**.
-    1. For the **Host** field, enter the KMS hostname.
-    1. For the **Port** field, enter the port number. The default port number is 1688.
+2. (Optional) To configure a Key Management Service (KMS) that your volume-licensed Windows Diego Cell can register with:
+    1. Under **KMS**, select **Use**.
+    2. For the **Hostname** field, enter the hostname for your KMS server.
+    3. For the **Port** field, enter he port number of your KMS server. The default port number is 1688.
 
-1. Click **Save**.
+3. Click **Save**.
 
 ### <a id='config-smoke-tests'></a> Configure Smoke Tests
 
@@ -159,20 +159,32 @@ after an installation or update.
 
 The Smoke Test errand is turned on by default. You can turn off the Smoke Test errand in the **Errands** pane. For more information on settings for errands, see [Configure Errands](#config-errands).
 
+For help configuring these fields, see
+[Configure Smoke Tests](https://docs.pivotal.io/platform/application-service-windows/4-0/installing.html#config-smoke-tests)
+in _Installing and Configuring TAS for VMs [Windows]_ in the VMware documentation.
+
+
 To configure smoke tests:
 
 1. Select **Smoke Tests**.
 
-1. If you have a shared apps domain, select **A temporary space within the system org**, which creates a temporary space within the system org for running smoke tests and deletes the space afterwards. Otherwise, select **A specified org and space** and complete these fields to configure where <%= vars.windows_runtime_abbr %> pushes an app to run smoke tests:
-    * For **Org**, enter the org <%= vars.windows_runtime_abbr %> should use when pushing an app to run smoke tests.
-    * For **Space**, enter the space <%= vars.windows_runtime_abbr %> should use when pushing an app to run smoke tests.
-    * For **Domain**, enter the domain <%= vars.windows_runtime_abbr %> should use when pushing an app to run smoke tests.
+1. If you have a shared apps domain, select **A temporary space within the system org**, which creates a temporary space within the system org for running smoke tests and deletes the space afterwards. Otherwise, select **Smoke test location** a specified domain, org, and space.
+   Complete the following fields to configure where <%= vars.windows_runtime_abbr %> pushes an app to run smoke tests:
+   * For **Smoke test location**, enter the location where to deploy apps when running smoke tests.
+   * For **Org**, enter the org <%= vars.windows_runtime_abbr %> should use when pushing an app to run smoke tests.
+   * For **Space**, enter the space <%= vars.windows_runtime_abbr %> should use when pushing an app to run smoke tests.
+    * For **Apps Domain**, enter the domain <%= vars.windows_runtime_abbr %> should use when pushing an app to run smoke tests.
 
 ### <a id='config-advanced-features'></a> Configure Advanced Features
 
 **Advanced Features** includes new capability that might have certain constraints.
   Although these features are fully supported,
   VMware recommends caution when using them in production environments.
+
+For help configuring these fields, see
+[Configure Advanced Features](https://docs.pivotal.io/platform/application-service-windows/4-0/installing.html#config-advanced-features)
+in _Installing and Configuring TAS for VMs [Windows]_ in the VMware documentation.
+
 
 The following sections describe how to configure the advanced features.
 
@@ -188,15 +200,15 @@ To enable overcommit:
 
 1. Select **Advanced Features**.
 
-1. Enter in MB the total desired amount of Diego Cell memory in the **Diego Cell memory capacity** field. See the **Diego Cell** row in **Resource Config** for the current Diego Cell memory capacity settings that this field overrides.
+2. In the **Diego Cell memory capacity** field, enter the value in MB for the total amount of memory to allocate to each Diego Cell. See the **Diego Cell** row in **Resource Config** for the current Diego Cell memory capacity settings that this field overrides.
 
-1. Enter in MB the total desired amount of Diego Cell disk capacity in the **Diego Cell disk capacity** field. See the **Diego Cell** row in **Resource Config** for the current Diego Cell disk capacity settings that this field overrides.
+3. In the **Diego Cell disk capacity** field, enter the value in MB, for the total amount of disk to allocate to each Diego Cell. See the **Diego Cell** row in **Resource Config** for the current Diego Cell disk capacity settings that this field overrides.
 
-1. Click **Save**.
+4. Click **Save**.
 
 <p class="note"><strong>Note:</strong> Entries made to each of these two fields set the total amount of resources allocated, not the overage.</p>
 
-#### <a id='enable-route-integrity'></a> TLS Connections from the Gorouter to Apps (Beta)
+#### <a id='enable-route-integrity'></a> Gorouter app identity verification (beta)
 
 You can choose the method the Gorouter uses to verify app identity. Verifying app identity using TLS or mutual TLS (mTLS) activates encryption between the Gorouter and app containers, and guards against mis routing during control plane failures. This feature is deactivated by default.
 
@@ -206,15 +218,17 @@ To configure app identity verification:
 
 1. Select **Advanced Features**.
 
-1. Under **TLS connections from the Gorouter to apps (beta)**, select one of the
+1. Under **Gorouter app identity verification (beta)**, select one of the
 following options:
-      * **Disable route integrity and mutual TLS**: Deactivates app identity
-      verification and mTLS.
+
       * **The Gorouter uses TLS to verify app identity**: Activates the Gorouter
       to verify app identity using TLS. This is the default option.
-      * **The Gorouter and apps use mutual TLS to verify each other's identity**:
+      * **The Gorouter and apps use mutual TLS to verify each other's identity**.
+      * **Disallow app identity verification and mutual TLS**: Deactivates app identity
+      verification and mutual TLS.
       Activates the Gorouter and your apps to verify each other's identity using
-      TLS. Before you turn on this option, be aware of the following:
+      TLS.
+      Before you turn on this option, be aware of the following:
           * This option deactivates TCP routing because app containers accept incoming
       communication only from the Gorouter.
           * If you activate mTLS in the <%= vars.windows_runtime_abbr %> tile, you
@@ -226,9 +240,11 @@ following options:
 
 1. Click **Save**.
 
-#### <a id='custom-cell-overlay'></a> Custom Windows Diego Cell Overlay Subnet
+#### <a id='custom-cell-overlay'></a> Custom Windows Diego Cell overlay subnet
 
-By default, Windows Diego Cells use the `172.30.0.0/22` IP address space for container networking. If this conflicts with any internal IP addresses that your
+The IP range for the overlay network of your Windows Diego Cell. The default range is `172.30.0.0/22`.
+
+IP address space for container networking. If this conflicts with any internal IP addresses that your
 organization uses, you can customize this subnet. Unlike in <%= vars.windows_runtime_abbr %> deployments using Linux Diego Cells, you configure this subnet
 per Diego Cell. When you configure a custom subnet for a Windows Diego Cell, ensure the following:
 
@@ -240,9 +256,11 @@ To configure a custom Windows Diego Cell overlay subnet:
 
 1. In the <%= vars.windows_runtime_abbr %> tile, select **Advanced Features**.
 
-1. For **Diego Cell Overlay Subnet**, enter the subnet you want to configure for your Diego Cell.
+2. For **Diego Cell overlay subnet**, enter the subnet you want to configure for your Diego Cell.
 
-1. Click **Save**.
+  WARNING: Setting the subnet too small will limit  the number of containers that can run on each Windows Diego Cell.
+
+3. Click **Save**.
 
 ### <a id='config-errands'></a> Configure Errands
 
