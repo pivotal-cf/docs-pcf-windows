@@ -143,18 +143,18 @@ To forward Windows logs to an external syslog server:
 
 1. Select **System Logging**.
 
-1. Under **Enable syslog for VM logs?**, select **Enable**.
+1. Under **VM log forwarding**, select **Configure**.
 
-1. Under **Address**, enter the host name or IP address of your syslog server.
+1. Under **Syslog server address**, enter the hostname or IP address of your syslog server.
 
-1. Under **Port**, enter the port of your syslog server. The default port is `514`.
+1. Under **Syslog server port**, enter the port of your syslog server. The default port is `514`.
   <p class="note"><strong>Note:</strong> The host must be reachable from the <%= vars.app_runtime_abbr %> network. Ensure that your syslog server listens on external interfaces.</p>
 
-1. Under **Protocol**, select the transport protocol to use when forwarding logs.
+1. Under **Transport protocol**, select the transport protocol for forwarding logs.
 
 1. If you are using a TCP protocol and want to allow TLS communication:
-  1. Activate the **TLS Enabled** check box.
-  1. For **Ca certificate**, provide the CA certificate that validates connections to an external server.
+  1. Activate the **Send logs over TLS** check box.
+  1. For **CA certificate**, provide the CA certificate that validates connections to an external server. The certificate used to send logs to your syslog server over TLS.
 
 1. Activate the **Enable system metrics** check box. For a list of the VM metrics that the System Metric Agent emits, see
 [VM Metrics](https://github.com/cloudfoundry/system-metrics-release/blob/develop/docs/system-metrics-agent.md#vm-metrics) in the System Metrics repository on GitHub.
@@ -205,7 +205,7 @@ To troubleshoot a compilation VM from an `ssh` session:
 1. Enable the two following settings in <%= vars.ops_manager %>:
     * Select **Keep Unreachable Director VMs** from
     **BOSH Director** tile > **Director config**.
-    * Select **Enable BOSH-native SSH support on all VMs** from
+    * Select **Access VMs with BOSH SSH ** from
     **<%= vars.windows_runtime_abbr %>** tile > **VM options**.
 1. Click **Apply Changes** against the <%= vars.windows_runtime_abbr %> tile.
 1. From the first BOSH CLI terminal, monitor the BOSH task:
@@ -253,7 +253,7 @@ To troubleshoot a quickly-deleted compilation VM:
 1. Enable the two following settings in <%= vars.ops_manager %>:
     * Select **Keep Unreachable Director VMs** from
     **BOSH Director** tile > **Director config**.
-    * Select **enable BOSH-native SSH support on all VMs** from
+    * Select **Access VMs with BOSH SSH** from
     **<%= vars.windows_runtime_abbr %>** tile > **VM options**.
 1. Click **Apply Changes** in <%= vars.ops_manager %>.
 
