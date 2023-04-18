@@ -42,7 +42,7 @@ For more information about adding environment variables to your Config Server Pr
 Steeltoe documentation.
 
 After adding your environment variables to your Config Server Provider,
-proceed to [SMB Mounting](smb-volumes-apps.html#smb-mounting) below.
+proceed to [SMB Mounting](smb-volumes-apps.html#smb-mounting).
 
 ### <a id='batch'></a> Using SMB Volumes in .NET Apps with Your Batch Profile
 
@@ -65,7 +65,7 @@ To mount SMB Volumes:
     net use z: %SMB_PATH% %SMB_PASSWORD% /USER:%SMB_USERNAME%
     ```
 
-1. Proceed to [SMB Mounting](smb-volumes-apps.html#smb-mounting) below.
+1. Proceed to [SMB Mounting](smb-volumes-apps.html#smb-mounting).
 
 
 ## <a id='smb-mounting'></a> SMB Mounting
@@ -120,7 +120,7 @@ To configure SMB mounting:
 
 1. Edit `NoteController.cs` to read from a file named `note.txt`.
    This `note.txt` does not exist yet but will be created by the `FileMode.OpenOrCreate` method.
-   See the example code snippet below, which reads the contents of the note file and
+   See the following example code snippet, which reads the contents of the note file and
    stashes the `note.txt` content in the Viewbag.
    If you are not using Steeltoe, ignore the reference to `Steeltoe.Common.Net` in the following code snippet.
 
@@ -200,7 +200,7 @@ into the `note.txt`. See the example code snippet in the following step.
 1. Modify the `NoteController.cs` to include the ControllerBase class `RedirectToAction` method, which redirects to the
 index page so the user can see what was just saved. For more information about the ControllerBase class, see
 [ControllerBase.RedirectToAction Method](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.redirecttoaction?view=aspnetcore-2.2)
-in the Microsoft documentation. See the example code snippet below:
+in the Microsoft documentation. See the following example code snippet:
 
     ```
     // NoteController.cs

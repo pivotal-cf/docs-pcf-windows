@@ -58,7 +58,7 @@ To push a .NET Framework app to a Windows Diego Cell:
         <p class="note"><strong>Note:</strong> If you are not pushing your app from its directory, use the <code>-p</code> option and specify the path to the directory that contains the app.</p>
 
 1. Wait for your app to stage and start. If you see an error message,
-   see [Troubleshoot App Errors](#troubleshoot) below.
+   see [Troubleshoot App Errors](#troubleshoot).
 
 ### <a id='context-routing'></a> Context Path Routing Support for ASP.NET Apps
 
@@ -68,14 +68,14 @@ Making an app accessible under another app's URL requires a pair of commands. To
 
 1. Push the top-level app by running:
 
-    ```
+    ```console
     cf push TOP-LEVEL-APP-NAME
     ```
     Where `TOP-LEVEL-APP-NAME` is the name of your top-level app.
 
 1. Push the lower-level app by running:
 
-    ```
+    ```console
     cf push LOWER-LEVEL-APP-NAME -d APP-DOMAIN --hostname TOP-LEVEL-APP-NAME --route-path LOWER-LEVEL-APP-NAME
     ```
 
@@ -92,7 +92,6 @@ Making an app accessible under another app's URL requires a pair of commands. To
 Developers can configure .NET apps to shut down gracefully after running `cf stop`. When you run `cf stop`, the .NET app receives a `CTRL_SHUTDOWN_EVENT` and is allowed ten seconds to shut down. To enable graceful shutdown, you must include a control handler in the app.
 
 For more information, see [Graceful Shutdown](https://tanzu.vmware.com/developer/cookbooks/dotnet/aspnet/graceful-shutdown/) in the .NET Cookbook.
-
 
 ## <a id='self-hosted'></a> Push a Self-Hosted App
 
@@ -120,12 +119,12 @@ To push a self-hosted app:
     </ul>
 
 1. Wait for your app to stage and start. If you see an error message,
-   see [Troubleshoot App Errors](#troubleshoot) below.
+   see [Troubleshoot App Errors](#troubleshoot).
 
 
 ## <a id='soap'></a> Push a SOAP Service
 
-Developers can push Simple Object Access Protocol (SOAP) web services to their <%= vars.platform_name %> deployment by following the procedures in the sections below.
+Developers can push Simple Object Access Protocol (SOAP) web services to their <%= vars.platform_name %> deployment by following the procedures in the following sections.
 
 ### <a id='push-soap'></a> Step 1: Deploy Your Web Service
 
