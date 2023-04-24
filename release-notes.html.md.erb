@@ -74,9 +74,28 @@ The <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> tile is availab
 
 <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> includes the following major feature:
 
+### Integrated Windows Authentication
+
+You can now log in to your .NET Framework applications using your existing Active Directory Domain. For setup details, see [Windows Authentication for .Net apps](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/windows-authentication.html)
 
 ## <a id='breaking-changes'></a> Breaking Changes
 
+<%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> includes the following breaking change:
+
+### Option to Enable (Deprecated) Global Log Rate Limit is Removed
+
+This feature was in beta until IST v3.0, when it was deprecated. For details, see [VMware Tanzu Application Service for Windows v3.0 Release Notes](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/release-notes.html#global-log-rate-limit-is-deprecated-14)
+following the introduction of app log rate limits. For more information, see [App Log Rate Feature](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/runtime-rn.html#app-log-rate-limits-for-orgs-spaces-and-individual-apps-14).
+This option to enable the feature has now been removed, and you must apply app log rate limits instead.
+
+Note that if you were using this feature to limit your overall app log
+throughput, then you might see an increase in log load after you upgrade.
+
+To
+mitigate this, either:
+
+* Scale up your logging system before you upgrade to TASW v4.0 to compensate for the increased log load.
+* Upgrade to TAS/TASW v3.0 first to set app-level log rate limits while retaining the global log rate limit. For more details, see [App Log Rate Limits](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/app-log-rate-limits.html).
 
 ## <a id='known-issues'></a> Known Issues
 
