@@ -8,7 +8,7 @@ deploys to run containerized .NET apps and the stemcells that it supplies to BOS
 as the operating system for the Windows Diego Cell VMs.
 
 
-## <a id='overview'></a>Overview
+## <a id='overview'></a>Overview of the Windows Diego Cells Architecture
 
 Operators, who want to run Windows Diego Cells in <%= vars.platform_name %> to enable developers to push .NET apps,
 can deploy the <%= vars.windows_runtime_abbr %> tile.
@@ -19,10 +19,9 @@ After the Windows Diego Cell is running,
 developers can specify a Windows stack when pushing .NET apps from the command line.
 <%= vars.platform_name %> passes the app to the Windows Diego Cell
 in the <%= vars.windows_runtime_abbr %> BOSH deployment.
-The diagram below illustrates the process.
+The following diagram illustrates the process:
 
-<%= image_tag('./images/windows-overview.png') %>
-
+![alt-text="You can specify a Windows stack when pushing .NET apps from the command line."](./images/windows-overview.png)
 
 ## <a id="cells"></a> About Windows Cells
 
@@ -56,18 +55,17 @@ A Windows Diego Cell includes the following components:
 * Diego Rep: Runs and manages [Tasks and Long Running Processes](../concepts/diego/diego-auction.html#processes). For more information, see [Tasks and Long-Running Processes](../concepts/diego/diego-auction.html#processes) in _How Diego Balances App Processes_.
 
 The following diagram illustrates the architecture of a Windows Diego Cell:
-
-<%= image_tag('./images/windows-cell.png') %>
+![alt-text="The architecture of a Windows Diego Cell."](./images/windows-cell.png)
 
 ### <a id="container"></a> Container Implementation
 
 Garden on Windows uses the following runtime plugins to create and manage Windows containers for <%= vars.app_runtime_full %>:
 
-* Container plugin `winc`: Creates Open Container Initiative (OCI)-compliant containers, executes processes in the containers, and sets their CPU and RAM limits. For more information about OCI compliance, see the [Open Container Initiative](https://www.opencontainers.org) website.
+* Container plug-in `winc`: Creates Open Container Initiative (OCI)-compliant containers, executes processes in the containers, and sets their CPU and RAM limits. For more information about OCI compliance, see the [Open Container Initiative](https://www.opencontainers.org) website.
 
-* Network plugin `winc-network`: Creates a network compartment for the container, applies its DNS settings, and defines its inbound and outbound network access rules.
+* Network plug-in `winc-network`: Creates a network compartment for the container, applies its DNS settings, and defines its inbound and outbound network access rules.
 
-* Rootfs image plugin `groot`: Sets up the container filesystem volume and uses the File Server Resource Manager (FSRM) API to define its disk usage quotas. For more information about the FSRM, see [File Server Resource Manager (FSRM) overview](https://docs.microsoft.com/en-us/windows-server/storage/fsrm/fsrm-overview) in the Microsoft documentation.
+* Rootfs image plug-in `groot`: Sets up the container filesystem volume and uses the File Server Resource Manager (FSRM) API to define its disk usage quotas. For more information about the FSRM, see [File Server Resource Manager (FSRM) overview](https://docs.microsoft.com/en-us/windows-server/storage/fsrm/fsrm-overview) in the Microsoft documentation.
 
 
 ## <a id="stemcells"></a> About Windows Stemcells
