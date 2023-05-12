@@ -145,7 +145,7 @@ To create and customize a base VM:
 4. On the **Customize hardware** page, configure the VM hardware using the information below and click **Next**.
   1. For **New Hard disk**, specify 30&nbsp;GB or greater.
   2. For **New CD\DVD Drive**:
-  3.  Select **Datastore ISO File**.
+  3. Select **Datastore ISO File**.
         1. Select the Windows Server 2019 ISO file you uploaded to your datastore and click **OK**.
         2. Enable the **Connect At Power On** check box.
 
@@ -156,8 +156,8 @@ To create and customize a base VM:
 To install Windows Server on the base VM:
 
 1. After creating the VM, click **Power** > **Power On** in the **Actions** tab for your VM.
+![alt-text="Install a Windows server, click Power, then Power On in Actions tab for the VM."](./images/power-on.png)
 
-![alt-text=""](./images/power-on.png)
 1. Select **Windows Server 2019 Standard**.
 
 ![alt-text=""](./images/windows-version.png)
@@ -173,7 +173,7 @@ To verify that you are using the correct OS version, run the following PowerShel
 &#91;System.Environment&#93;::OSVersion.Version
 </pre>
 
-The following output appears:
+The output displays the following:
 
 <pre class="terminal">
 &#91;System.Environment&#93;::OSVersion.Version
@@ -192,7 +192,7 @@ To install VMware Tools on the base VM:
 
 1. Log in to the the VM.
 
-1. Navigate to the `D:` drive.
+1. Go to the `D:` drive.
 
 1. To install the VMware Tools, run:
 
@@ -261,8 +261,8 @@ This is important because your base VM and the clone VM you create share the sam
 1. Right-click the base VM.
 
 1. Select **Clone** > **Clone to Virtual Machine**. This clone is your target VM.
+![alt-text="The clone is your target VM"](./images/clone-vm.png)
 
-![alt-text="Clone to VM."](./images/clone-vm.png)
 1. Save the base VM. You run Windows updates on this VM for future stemcells.
 
 2. Take snapshots of both your base and target VMs.
@@ -345,9 +345,9 @@ For each of the following environment variables, run `echo $GOVC_VAR` to record 
     Stembuild construct has finished running and the VM has now been shutdown. Run 'stembuild package' to finish building the stemcell.
     </pre>
 
-    <p class='note'><strong>Note:</strong> Your <code>stembuild construct</code> operation may take up to an hour to complete.
-    Although the WinRM connection terminates during <code>construct</code> execution,
-    <code>construct</code> is still running. Do not attempt to re-run the <code>construct</code> command.
+    <p class='note'><strong>Note:</strong> Your <code>stembuild construct</code> operation can take up to an hour to complete.
+    Although the WinRM connection stops during <code>construct</code> processing,
+    <code>construct</code> is still running. Do not attempt to run the <code>construct</code> command again.
     </p>
 
     The following example shows the messages that appear as `stembuild construct` runs
@@ -429,7 +429,7 @@ For more information about `stembuild package`, see [stembuild package](https://
 
 To upload the BOSH stemcell to <%= vars.ops_manager %>:
 
-1. In <%= vars.ops_manager %>, navigate to **Stemcell Library**.
+1. In <%= vars.ops_manager %>, go to **Stemcell Library**.
 
 1. Upload your BOSH stemcell.
 
