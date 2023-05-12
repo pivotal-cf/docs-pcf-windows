@@ -1,5 +1,5 @@
 ---
-title: Creating a Windows Stemcell for vSphere Using stembuild
+title: Creating a Windows Stemcell for vSphere using stembuild
 owner: Windows
 ---
 
@@ -119,7 +119,7 @@ To create and customize a base VM:
 1. Right-click an object and select **New Virtual Machine** > **New Virtual Machine**.
 
 1. On the **Select a creation type** page, select **Create a new virtual machine** and click **Next**.
-  <%= image_tag('./images/new-vm.png') %>
+![alt-text=""](./images/new-vm.png)
 
 1. On the **Select a name and folder** page:
   1. Enter a name for the VM.
@@ -144,7 +144,7 @@ To create and customize a base VM:
 1. On the **Customize hardware** page, configure the VM hardware using the following information and click **Next**.
   1. For **New Hard disk**, specify 30&nbsp;GB or greater.
   2. For **New CD\DVD Drive**:
-  3.  Select **Datastore ISO File**.
+  3. Select **Datastore ISO File**.
         1. Select the Windows Server 2019 ISO file you uploaded to your datastore and click **OK**.
         2. Enable the **Connect At Power On** check box.
 
@@ -155,7 +155,7 @@ To create and customize a base VM:
 To install Windows Server on the base VM:
 
 1. After creating the VM, click **Power** > **Power On** in the **Actions** tab for your VM.
-  <%= image_tag('./images/power-on.png') %>
+![alt-text="Install a Windows server, click Power, then Power On in Actions tab for the VM."](./images/power-on.png)
 
 1. Select **Windows Server 2019 Standard**.
   <%= image_tag('./images/windows-version.png') %>
@@ -172,7 +172,7 @@ To verify that you are using the correct OS version, run the following PowerShel
 &#91;System.Environment&#93;::OSVersion.Version
 </pre>
 
-The output should display the following:
+The output displays the following:
 
 <pre class="terminal">
 &#91;System.Environment&#93;::OSVersion.Version
@@ -191,7 +191,7 @@ To install VMware Tools on the base VM:
 
 1. Log in to the the VM.
 
-1. Navigate to the `D:` drive.
+1. Go to the `D:` drive.
 
 1. To install the VMware Tools, run:
 
@@ -244,7 +244,7 @@ To configure the base VM network settings and install Windows updates:
 
 1. From the vSphere Web Client select **Actions > Edit Settings** on the VM.
 
-1. In the **CD/DVD drive 1** row disable the **Connected** checkbox. Do not remove the CD/DVD drive.
+1. In the **CD/DVD drive 1** row deactivate the **Connected** check box. Do not remove the CD/DVD drive.
 
 1. Restart the VM.
 
@@ -260,7 +260,7 @@ This is important because your base VM and the clone VM you create share the sam
 1. Right-click the base VM.
 
 1. Select **Clone** > **Clone to Virtual Machine**. This clone is your target VM.
-  <%= image_tag('./images/clone-vm.png') %>
+![alt-text="The clone is your target VM"](./images/clone-vm.png)
 
 1. Save the base VM. You run Windows updates on this VM for future stemcells.
 
@@ -343,7 +343,7 @@ For each of the following environment variables, run `echo $GOVC_VAR` to record 
     Stembuild construct has finished running and the VM has now been shutdown. Run 'stembuild package' to finish building the stemcell.
     </pre>
 
-    <p class='note'><strong>Note:</strong> Your <code>stembuild construct</code> operation may take up to an hour to complete.
+    <p class='note'><strong>Note:</strong> Your <code>stembuild construct</code> operation can take up to an hour to complete.
     Although the WinRM connection stops during <code>construct</code> processing,
     <code>construct</code> is still running. Do not attempt to run the <code>construct</code> command again.
     </p>
@@ -426,7 +426,7 @@ For more information about `stembuild package`, see [stembuild package](https://
 
 To upload the BOSH stemcell to <%= vars.ops_manager %>:
 
-1. In <%= vars.ops_manager %>, navigate to **Stemcell Library**.
+1. In <%= vars.ops_manager %>, go to **Stemcell Library**.
 
 1. Upload your BOSH stemcell.
 
@@ -437,7 +437,7 @@ For more information about `stembuild`, see [Stembuild](https://github.com/cloud
 
 ## <a id='upgrade-stemcell'></a> Monthly Stemcell Upgrades
 
-After Microsoft releases operating system updates, you should upgrade your BOSH stemcell. Microsoft typically releases Windows updates on the second Tuesday of each month.
+After Microsoft releases operating system updates, you must upgrade your BOSH stemcell. Microsoft typically releases Windows updates on the second Tuesday of each month.
 
 To upgrade your BOSH stemcell:
 
