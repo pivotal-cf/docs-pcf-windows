@@ -14,6 +14,275 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 
 ## <a id='releases'></a> Releases
 
+### <a id='3.0.10'></a> 3.0.10
+
+**Release Date:** 05/17/2023
+
+* **[Bug Fix]** Resolve Issue where Garden failed during BOSH/OpsMan deploys due to healthcheck
+* Bump count-cores-indicator to version `2.0.0`
+* Bump diego to version `2.76.0`
+* Bump garden-runc to version `1.29.0`
+* Bump hwc-offline-buildpack to version `3.1.30`
+* Bump loggregator-agent to version `6.5.10`
+* Bump metrics-discovery to version `3.2.9`
+* Bump winc to version `2.11.1`
+* Bump windows-syslog to version `1.1.14`
+
+<table border="1" class="nice">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+      <th>Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>windows2019 stemcell</td><td>2019.60</td><td></td></tr>
+    <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
+    <tr><td>diego</td><td>2.76.0</td>
+      <td>
+        <details>
+          <summary>v2.76.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bump to Go 1.20.4
+  - Bump dependencies
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/auctioneer/spec b/jobs/auctioneer/spec
+  index ae685ceb9..1fac48936 100644
+  --- a/jobs/auctioneer/spec
+  +++ b/jobs/auctioneer/spec
+  @@ -88,6 +88,12 @@ properties:
+  diego.auctioneer.locket.api_location:
+  description: "Hostname and port of the Locket server. When set, the auctioneer attempts to claim a lock from the Locket API."
+  default: locket.service.cf.internal:8891
+  +  diego.auctioneer.locket.client_keepalive_time:
+  +    description: "Period in seconds after which the locket gRPC client sends keepalive ping requests to the locket server it is connected to."
+  +    default: 10
+  +  diego.auctioneer.locket.client_keepalive_timeout:
+  +    description: "Timeout in seconds to receive a response to the keepalive ping. If a response is not received within this time, the locket client will reconnect to another server."
+  +    default: 22
+  locks.locket.enabled:
+  description: When set, the auctioneer attempts to claim a lock from the Locket API.
+  diff --git a/jobs/bbs/spec b/jobs/bbs/spec
+  index b6f1040c2..9204a8d4c 100644
+  --- a/jobs/bbs/spec
+  +++ b/jobs/bbs/spec
+  @@ -140,6 +140,12 @@ properties:
+  diego.bbs.locket.api_location:
+  description: "Hostname and port of the Locket server. When set, the BBS attempts to claim a lock from the Locket API and will detect Diego cells registered with the Locket API."
+  default: locket.service.cf.internal:8891
+  +  diego.bbs.locket.client_keepalive_time:
+  +    description: "Period in seconds after which the locket gRPC client sends keepalive ping requests to the locket server it is connected to."
+  +    default: 10
+  +  diego.bbs.locket.client_keepalive_timeout:
+  +    description: "Timeout in seconds to receive a response to the keepalive ping. If a response is not received within this time, the locket client will reconnect to another server."
+  +    default: 22
+  limits.open_files:
+  description: Maximum number of files (including sockets) the BBS process may have open.
+  diff --git a/jobs/rep/spec b/jobs/rep/spec
+  index df7bd7c49..1383b67c0 100644
+  --- a/jobs/rep/spec
+  +++ b/jobs/rep/spec
+  @@ -217,6 +217,12 @@ properties:
+  diego.rep.locket.api_location:
+  description: "Hostname and port of the Locket server. When set, the cell rep will establish its cell registration in the Locket API."
+  default: locket.service.cf.internal:8891
+  +  diego.rep.locket.client_keepalive_time:
+  +    description: "Period in seconds after which the locket gRPC client sends keepalive ping requests to the locket server it is connected to."
+  +    default: 10
+  +  diego.rep.locket.client_keepalive_timeout:
+  +    description: "Timeout in seconds to receive a response to the keepalive ping. If a response is not received within this time, the locket client will reconnect to another server."
+  +    default: 22
+  enable_declarative_healthcheck:
+  description: "When set, enables the rep to prefer the LRP CheckDefinition to healthcheck instances over the Monitor action. Requires Garden-Runc v1.10.0+"
+  diff --git a/jobs/rep_windows/spec b/jobs/rep_windows/spec
+  index 4fc4504bf..023d76f18 100644
+  --- a/jobs/rep_windows/spec
+  +++ b/jobs/rep_windows/spec
+  @@ -227,7 +227,13 @@ properties:
+  diego.rep.locket.api_location:
+  description: "Hostname and port of the locket server"
+  default: locket.service.cf.internal:8891
+  -
+  +  diego.rep.locket.client_keepalive_time:
+  +    description: "Period in seconds after which the locket gRPC client sends keepalive ping requests to the locket server it is connected to."
+  +    default: 10
+  +  diego.rep.locket.client_keepalive_timeout:
+  +    description: "Timeout in seconds to receive a response to the keepalive ping. If a response is not received within this time, the locket client will reconnect to another server."
+  +    default: 22
+  +
+  enable_declarative_healthcheck:
+  description: "When set, enables the rep to prefer the LRP CheckDefinition to healthcheck instances over the Monitor action."
+  default: false
+  diff --git a/jobs/vizzini/spec b/jobs/vizzini/spec
+  index fa6c8d0d0..40b5eb74b 100644
+  --- a/jobs/vizzini/spec
+  +++ b/jobs/vizzini/spec
+  @@ -47,9 +47,6 @@ properties:
+  vizzini.verbose:
+  description: Run tests in verbose mode
+  default: false
+  -  vizzini.stream:
+  -    description: Stream output from parallel test nodes. This option will lead to less coherent output but is useful when debugging
+  -    default: false
+  enable_declarative_healthcheck:
+  description: "When set, enables the declarative check tests in vizzini"
+  ```
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.75.0...v2.76.0
+  ## Resources
+  - [Download release v2.76.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.76.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v2.75.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  * Bump ginkgo to v2 and lager to v3
+  * [Bug fix] Rep does not clean up resources when deleting container fails
+  ## ✨  Built with go 1.20.3
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.73.0...v2.75.0
+  ## Resources
+  - [Download release v2.75.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.75.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>envoy-nginx</td><td>0.15.0</td><td></td></tr>
+    <tr><td>garden-runc</td><td>1.29.0</td>
+      <td>
+        <details>
+          <summary>v1.29.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  ⚠️We have removed the garden-healthcheck job from garden while we investigate a way to make it less painful. From v1.22.6 through v1.28.0, garden restarts with a high container count could result in BOSH deploys failing due to a race condition between garden, bpm, monit, and garden-healthchecker. This will be re-enabled at a later time when we resolve the race condition.
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.28.0...v1.29.0
+  ## Resources
+  - [Download release v1.29.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.29.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.28.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bump to golang 1.20.4
+  - Bump dependencies
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.27.0...v1.28.0
+  ## Resources
+  - [Download release v1.28.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.28.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.27.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  * Bump ginkgo to v2 and lager to v3
+  ## ✨  Built with go 1.20.3
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.26.0...v1.27.0
+  ## Resources
+  - [Download release v1.27.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.27.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.30</td>
+      <td>
+        <details>
+          <summary>3.1.30</summary>
+          <pre style="max-width: 30em">
+  * Update libbuildpack
+  * Bump github.com/onsi/gomega from 1.27.4 to 1.27.6
+  * Bump github.com/onsi/gomega from 1.26.0 to 1.27.4
+  Packaged binaries:
+  | name | version | cf_stacks |
+  |-|-|-|
+  | hwc | 23.0.0 | windows, windows2016 |
+  Default binary versions:
+  | name | version |
+  |-|-|
+  | hwc | 23.0.0 |
+  * Uncached buildpack SHA256: 6f4ed709322d792dfe1ac4d28dd1d488e7db2807ef372bff1bfe1cfe23672373
+  * Uncached buildpack SHA256: 470d6da338b0bdd646ddda4e7da5f5394eb535cef5923df6da4ec8e306652819
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>loggregator-agent</td><td>6.5.10</td>
+      <td>
+        <details>
+          <summary>v6.5.10</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump to [go1.20.4](https://groups.google.com/g/golang-announce/c/MEb0UyuSMsU/m/QvrjqM4XAgAJ)
+  * Bump dependencies
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v6.5.9...v6.5.10
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>metrics-discovery</td><td>3.2.9</td>
+      <td>
+        <details>
+          <summary>v3.2.9</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump to [go1.20.4](https://groups.google.com/g/golang-announce/c/MEb0UyuSMsU/m/QvrjqM4XAgAJ)
+  * Bump dependencies
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.8...v3.2.9
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>smoke-tests</td><td>4.8.2</td><td></td></tr>
+    <tr><td>winc</td><td>2.11.1</td>
+      <td>
+        <details>
+          <summary>v2.11.1</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - There were no changes in this release. It was created to test the release pipeline.
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/winc-release/compare/v2.11.0...v2.11.1
+  ## Resources
+  - [Download release v2.11.1 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/winc-release?version=2.11.1).
+          </pre>
+        </details>
+        <details>
+          <summary>v2.11.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bump to go 1.20.4
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/winc-release/compare/v2.10.0...v2.11.0
+  ## Resources
+  - [Download release v2.11.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry-incubator/winc-release?version=2.11.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-syslog</td><td>1.1.14</td>
+      <td>
+        <details>
+          <summary>v1.1.14</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * update dependencies
+  * update golang to 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/windows-syslog-release/compare/v1.1.13...v1.1.14
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-utilities</td><td>0.17.0</td><td></td></tr>
+  </tbody>
+</table>
+
+
+
 ### <a id='3.0.9'></a> 3.0.9
 
 **Release Date:** 04/20/2023
