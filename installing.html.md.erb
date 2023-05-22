@@ -50,23 +50,15 @@ Use the **Windows FS Injector** tool to install the <%= vars.windows_runtime_abb
 ## <a id='install'></a> Install the Tile
 
 To install the <%= vars.windows_runtime_abbr %> tile:
-    <%# After adding or removing a step here be sure to change the step number
-  for step 4 referenced below in the air-gap environment section.  %>
 
 1. Go to the [<%= vars.windows_runtime_full %>](https://network.pivotal.io/products/pas-windows)
    page on <%= vars.product_network %>.
-    <%# After adding or removing a step here be sure to change the step number
-  for step 4 referenced below in the air-gapped environment section.  %>
 
 1. Download the **<%= vars.windows_runtime_full %>** product file.
-    <%# After adding or removing a step here be sure to change the step number
-  for step 4 referenced below in the air-gapped environment section.  %>
 
 1. Download the **Windows FS Injector** tool for your workstation OS. The Injector tool, `winfs-injector`, is an executable binary that adds the Windows Server container base image into the product file. This step requires internet access and can take up to 20 minutes.
 
   <p class="note"><strong>Note:</strong> You need the <code>git</code> and <code>tar</code> executables in your <code>%PATH%</code> to run <code>winfs-injector.exe</code>. For example, copy <code>git.exe</code> and <code>tar.exe</code> to a directory in your <code>%PATH%</code>.</p>
-    <%# After adding or removing a step here be sure to change the step number
-  for step 4 referenced below in the air-gapped environment section.  %>
 
 1. Add the Windows Server container base image to the product file:
 

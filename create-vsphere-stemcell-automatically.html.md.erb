@@ -20,7 +20,7 @@ To create a Windows stemcell for vSphere, you create a base Windows VM from a vo
 
 The Windows VM with security updates serves as the base for all future stemcells produced from clones of that base VM. This enables you to build new stemcells without having to run Windows updates from scratch each time. You can also use a "snapshot" feature to maintain an updated Windows image that does not contain the BOSH dependencies.
 
-VMware recommends installing any available critical updates and
+VMware recommends installing any available updates and
 then rebuilding the stemcell from a clone of the original VM.
 
 The BOSH stemcell that you create in this topic is based on Windows Server 2019.
@@ -39,7 +39,7 @@ The stembuild CLI has two commands, construct and package,
 which you run against a Windows Server 2019 VM.
 [Step 4: Construct the BOSH Stemcell](#construct-stemcell)
 and [Step 5: Package the BOSH Stemcell](#package-stemcell)
-below explain how to run these commands.
+as follows explain how to run these commands.
 
 Before using stembuild to create a stemcell, you need to create a Windows Server 2019 VM and update the VM with the
 latest Windows updates.
@@ -52,14 +52,14 @@ latest Windows updates.
 Before you create a BOSH stemcell for Windows on vSphere, you must have:
 
 * A vSphere environment that makes sure the VM hardware used by the stemcell is compatible
-  with your deployment environment's ESXi/ESX host, and vCenter Server versions. For more information on the vSphere environment, see
+  with your deployment environment's ESXi/ESX host, and vCenter Server versions. For more information about the vSphere environment, see
   [ESXi/ESX hosts and compatible virtual machine hardware versions list (2007240)](https://kb.vmware.com/s/article/2007240) in the VMware Knowledge Base.
 
 * An ISO for a Windows Server 2019 Server Core installation, build number: 17763,
   from [Microsoft Developer Network (MSDN)](https://msdn.microsoft.com/en-us) or
   [Microsoft Volume Licensing Service Center (VLSC)](https://www.microsoft.com/Licensing/servicecenter/default.aspx).
   The Windows Server 2019 ISO must be a clean, base ISO file.
-  You can use an evaluation copy for testing, but VMware does not recommend an evaluation copy for production,
+  You can use an evaluation copy for testing, but VMware discourages an evaluation copy for production,
   because the licensing expires.
   For more information, see the [Windows Server documentation](https://docs.microsoft.com/en-us/windows-server/get-started-19/get-started-19)
   or the [Microsoft Volume Licensing Service Center](https://www.microsoft.com/Licensing/servicecenter/default.aspx) website.
@@ -142,7 +142,7 @@ To create and customize a base VM:
      available, select **Microsoft Windows Server 2016**.
   3. Click **Next**.
 
-4. On the **Customize hardware** page, configure the VM hardware using the information below and click **Next**.
+4. On the **Customize hardware** page, configure the VM hardware using the information as follows and click **Next**.
   1. For **New Hard disk**, specify 30&nbsp;GB or greater.
   2. For **New CD\DVD Drive**:
   3.  Select **Datastore ISO File**.
@@ -255,7 +255,7 @@ To configure the base VM network settings and install Windows updates:
 
 To clone the base VM:
 
-1. From the vSphere Web Client, power down the base VM.
+1. From the vSphere Web Client, power off the base VM.
 This is important because your base VM and the clone VM you create share the same IP address.
 
 1. Right-click the base VM.
@@ -331,7 +331,7 @@ For each of the following environment variables, run `echo $GOVC_VAR` to record 
         </ul>
 
     For more information, see [Authenticate into a Destination vCenter Using CA Certificates](#authenticate-using-certs)
-    below.
+    as follows.
 
     For example:
     <pre class="terminal">

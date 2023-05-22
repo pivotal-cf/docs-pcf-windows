@@ -22,7 +22,7 @@ To use SMB Volumes in your .NET App, you must have:
 ### <a id='steeltoe'></a> Using SMB Volumes in .NET Apps with Steeltoe
 
 Steeltoe is a set of libraries that help your team write cloud native apps. Steeltoe contains functionality for
-mounting SMB Volumes. Using Steeltoe requires modifying your app code. For more information, see the
+mounting SMB Volumes. Using Steeltoe requires editing your app code. For more information, see the
 [Steeltoe documentation](https://steeltoe.io/docs/).
 
 If you are using Steeltoe, add the following environment variables to your Config Server Provider:
@@ -46,7 +46,7 @@ go to [SMB Mounting](smb-volumes-apps.html#smb-mounting).
 
 ### <a id='batch'></a> Using SMB Volumes in .NET Apps with Your Batch Profile
 
-If you do not want to modify your app code to include Steeltoe, you can use mount SMB Volumes without Steeltoe.
+If you do not want to edit your app code to include Steeltoe, you can use mount SMB Volumes without Steeltoe.
 
 To mount SMB Volumes:
 
@@ -194,10 +194,10 @@ displays the note inside a text area.
     </big>
     ```
 
-1. Modify the `NoteController.cs` to have an update endpoint. This endpoint saves the data posted to the endpoint back
+1. Edit the `NoteController.cs` to have an update endpoint. This endpoint saves the data posted to the endpoint back
 into the `note.txt`. See the example code snippet in the following step.
 
-1. Modify the `NoteController.cs` to include the ControllerBase class `RedirectToAction` method, which redirects to the
+1. Edit the `NoteController.cs` to include the ControllerBase class `RedirectToAction` method, which redirects to the
 index page so the user can see what was just saved. For more information about the ControllerBase class, see
 [ControllerBase.RedirectToAction Method](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.redirecttoaction?view=aspnetcore-2.2)
 in the Microsoft documentation.
