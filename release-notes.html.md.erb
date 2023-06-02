@@ -14,6 +14,120 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 
 ## <a id='releases'></a> Releases
 
+### <a id='4.0.3'></a> 4.0.3
+
+**Release Date:** 06/02/2023
+
+* Bump envoy-nginx to version `0.16.0`
+* Bump garden-runc to version `1.30.0`
+* Bump hwc-offline-buildpack to version `3.1.31`
+* Bump winc to version `2.12.0`
+
+<table border="1" class="nice">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+      <th>Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>windows2019 stemcell</td><td>2019.61</td><td></td></tr>
+    <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
+    <tr><td>diego</td><td>2.76.0</td><td></td></tr>
+    <tr><td>envoy-nginx</td><td>0.16.0</td>
+      <td>
+        <details>
+          <summary>v0.16.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Dependency bumps:
+  - go 1.20.4
+  - github.com/fsnotify/fsnotify 1.6.0
+  - github.com/onsi/ginkgo 2.9.5
+  - github.com/onsi/gomega 1.27.6
+  - gpkg.in/yaml.v2 2.4.0
+  - updated CI testing scripts for better error handling
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/envoy-nginx-release/compare/v0.15.0...v0.16.0
+  ## Resources
+  - [Download release v0.16.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/envoy-nginx-release?version=0.16.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>garden-runc</td><td>1.30.0</td>
+      <td>
+        <details>
+          <summary>v1.30.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bump dependencies:
+  - github.com/onsi/ginkgo 2.9.5
+  - golang.org/x/sys 0.8.0
+  - Add support for including request trace IDs in garden/guardian
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.29.0...v1.30.0
+  ## Resources
+  - [Download release v1.30.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.30.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.31</td>
+      <td>
+        <details>
+          <summary>3.1.31</summary>
+          <pre style="max-width: 30em">
+  * Updating github-config (#127)
+  Packaged binaries:
+  | name | version | cf_stacks |
+  |-|-|-|
+  | hwc | 23.0.0 | windows, windows2016 |
+  Default binary versions:
+  | name | version |
+  |-|-|
+  | hwc | 23.0.0 |
+  * Uncached buildpack SHA256: 22b3e864d959aa711d10503788a01946fc7be9d29c8252a64de5dfa4c396ae90
+  * Uncached buildpack SHA256: dbe18078d9fe47acbb6485876e2c67547995976943e47b5c1637d72e9ea9bf58
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>loggregator-agent</td><td>7.2.1</td><td></td></tr>
+    <tr><td>metrics-discovery</td><td>3.2.9</td><td></td></tr>
+    <tr><td>smoke-tests</td><td>4.8.2</td><td></td></tr>
+    <tr><td>winc</td><td>2.12.0</td>
+      <td>
+        <details>
+          <summary>v2.12.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Removes the deprecated-since-2019 `winc-network` job. Please use `winc-network-hns-acls` instead.
+  - CI testing updates
+  - Dependency Bumps:
+  - github.com/hectane/go-acl ca0b05cb1adb
+  - code.cloudfoundry.org/winc 4302f985e6d0b575bc1024b4a1c5a174a8cff1c8
+  - code.cloudfoundry.org/cert-injector f66dd1e
+  - code.cloudfoundry.org/diff-exporter 925b0b8
+  - code.cloudfoundry.org/groot-windows 5225dd5
+  - code.cloudfoundry.org/winc 2d0fe6e
+  - code.cloudfoundry.org/certsplitter 906ffdf32df6e823dabb31a5f6572aca72e52be6
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/winc-release/compare/v2.11.1...v2.12.0
+  ## Resources
+  - [Download release v2.12.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/winc-release?version=2.12.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-syslog</td><td>1.1.14</td><td></td></tr>
+    <tr><td>windows-utilities</td><td>0.17.0</td><td></td></tr>
+  </tbody>
+</table>
+
+
+
 ### <a id='4.0.2'></a> 4.0.2
 
 **Release Date:** 05/25/2023
