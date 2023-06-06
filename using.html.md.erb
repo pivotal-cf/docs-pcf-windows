@@ -1,5 +1,5 @@
 ---
-title: Tips for .NET Framework Developers
+title: Developing and pushing .NET Framework Apps
 owner: Greenhouse
 ---
 
@@ -7,29 +7,26 @@ This topic describes how to push .NET Framework apps to <%= vars.windows_runtime
 
 For information about how to develop microservices for .NET Framework and .NET Core using Steeltoe, see [Steeltoe documentation](http://steeltoe.io/docs/).
 
-
 ## <a id='prerequisites'></a> Prerequisites
 
-The <%= vars.windows_runtime_abbr %> tile must be installed and configured. To install <%= vars.windows_runtime_abbr %>, see [Installing and Configuring <%= vars.windows_runtime_abbr %>](installing.html).
+The <%= vars.windows_runtime_abbr %> tile must be installed and configured.
+To install <%= vars.windows_runtime_abbr %>, see [Installing and configuring <%= vars.windows_runtime_abbr %>](installing.html).
 
 Operators must also install the Cloud Foundry Command Line Interface (cf CLI) to run the commands on this topic.
 
 For information about installing the cf CLI, see [Installing the cf CLI](../cf-cli/install-go-cli.html).
 
-## <a id='overview'></a> Overview
+After you install and configure the <%= vars.windows_runtime_abbr %> tile, developers can push .NET Framework apps to the Windows Diego Cell. Developers can push both [OWIN](http://owin.org/) and non-OWIN apps, and can push apps that are served by Hostable Web Core or self-hosted.
 
-After operators install and configure the <%= vars.windows_runtime_abbr %> tile, developers can push .NET Framework apps to the Windows Diego Cell. Developers can push both [OWIN](http://owin.org/) and non-OWIN apps, and can push apps that are served by Hostable Web Core or self-hosted.
+If you upgrade to <%= vars.windows_runtime_abbr %> and have apps that you want to migrate, see [Upgrading Windows Diego Cells](upgrade-windows.html).
 
-If you have upgraded to <%= vars.windows_runtime_abbr %> and have apps that you want to migrate, see [Upgrading Windows Diego Cells](upgrade-windows.html).
+## <a id='develop'></a> Developing .NET Framework Apps
 
-## <a id='develop'></a> Develop .NET Framework Apps
-
-### <a id='cookbook'></a> Tanzu .NET Cookbook
+### <a id='cookbook'></a> .NET on <%= vars.platform_name %> cookbook
 
 For useful tips and recipes for migrating and developing .NET Framework apps to run on <%= vars.windows_runtime_abbr %>, see the [.NET Cookbook](https://tanzu.vmware.com/developer/cookbooks/dotnet/).
 
-
-## <a id='push'></a> Push a .NET Framework App
+## <a id='push'></a> Pushing a .NET Framework App
 
 By default, <%= vars.platform_name %> serves .NET Framework apps with Hostable Web Core (HWC). HWC is a lighter version of the Internet Information Services (IIS) server that contains the core IIS functionality.
 
@@ -64,7 +61,7 @@ To push a .NET Framework app to a Windows Diego Cell:
 
 ### <a id='context-routing'></a> Context Path Routing Support for ASP.NET Apps
 
-Context path routing enables multiple apps to share the same route hostname, such as `app1.example.com/app2`. ASP.NET developers can host apps under a route path. Within Windows Diego Cells, you can have multiple routes to an app, but those routes cannot have different context paths.
+With context path routing, you can activate multiple apps to share the same route hostname. For example, `app1.example.com/app2`. If you use ASP.NET you can host apps under a route path. Within Windows Diego Cells, you can have multiple routes to an app, but those routes cannot have different context paths.
 
 Making an app accessible under another app's URL requires a pair of commands. To define a context path route, such as `app1.example.com/app2`:
 
@@ -90,14 +87,13 @@ Making an app accessible under another app's URL requires a pair of commands. To
     </ul>
     <p class="note"><strong>Note:</strong> The <code>-d</code> parameter is only needed when pushing an app to a non-default domain.</p>
 
-### <a id='graceful-shutdown'></a> Enable Graceful Shutdown for a .NET App
+### <a id='graceful-shutdown'></a> Activating a graceful shutdown for a .NET App
 
 Developers can configure .NET apps to shut down gracefully after running `cf stop`. When you run `cf stop`, the .NET app receives a `CTRL_SHUTDOWN_EVENT` and is allowed ten seconds to shut down. To enable graceful shutdown, you must include a control handler in the app.
 
 For more information, see [Graceful Shutdown](https://tanzu.vmware.com/developer/cookbooks/dotnet/aspnet/graceful-shutdown/) in the .NET Cookbook.
 
-
-## <a id='self-hosted'></a> Push a Self-Hosted App
+## <a id='self-hosted'></a> Pushing a Self-Hosted App
 
 Developers can choose to push a self-hosted app instead of using Hostable Web Core. Self-hosted apps combine server code with the app code.
 
@@ -130,7 +126,7 @@ To push a self-hosted app:
 
 Developers can push Simple Object Access Protocol (SOAP) web services to their <%= vars.platform_name %> deployment by following the procedures in the following sections.
 
-### <a id='push-soap'></a> Step 1: Deploy Your Web Service
+### <a id='push-soap'></a> Step 1: Deploying your Web Service
 
 To deploy a SOAP web service:
 
@@ -168,7 +164,7 @@ To deploy a SOAP web service:
 
 1. Confirm your service is running by finding your service's URL in the push command's output and browsing to it. In the previous example, the URL for the service is `http://webservice.example.com`.
 
-### <a id='correct-wsdl'></a> Step 2: Modify the WSDL File
+### <a id='correct-wsdl'></a> Step 2: Modifying the WSDL File
 
 Your SOAP web service is deployed on <%= vars.platform_name %>, but the service's WSDL file contains incorrect port information. The WSDL file must be modified to enable an app to consume your web service. Either you or the service developer can perform the needed modification.
 
@@ -187,9 +183,7 @@ See the following portion of an example WSDL file:
 
 The WSDL file provides the port number for the SOAP web service as `62492`. This is the port that the web service listens on in the Garden container, but external apps cannot access the service on this port. Instead, external apps must use port 80, and the Gorouter routes requests to the web service in the container.
 
-For more information about the Garden container, see [Container Mechanics](../concepts/container-security.html#mechanics) in _Container Security_.
-
-For more information about the Gorouter, see [<%= vars.app_runtime_abbr %> Routing Architecture](../concepts/cf-routing-architecture.html).
+For more information about the Gorouter, see [<%= vars.app_runtime_abbr %> routing architecture](../concepts/cf-routing-architecture.html).
 
 The URL of the web service in the WSDL file must be modified to remove `62492`. With no port number, the URL defaults to port 80. In the previous example, the modified URL is `http://webservice.example.com/WebService1.asmx`.
 
@@ -197,9 +191,9 @@ SOAP web service developers can resolve this problem in one of the following way
 
 * Modify the WSDL file by following the instructions in [Modify a Web Service's WSDL Using a SoapExtensionReflector](https://blogs.msdn.microsoft.com/kaevans/2005/11/16/modify-a-web-services-wsdl-using-a-soapextensionreflector/) from the Microsoft Developers Network.
 
-* Instruct the developers of external apps that consume the web service to follow the procedure in [Consume the SOAP Web Service](#consume).
+* Instruct the developers of external apps that consume the web service to follow the procedure in [Consuming SOAP Web Service](#consume).
 
-#### <a id='consume'></a> Consume the SOAP Web Service
+#### <a id='consume'></a> Consuming SOAP Web Service
 
 Developers of external apps that consume the SOAP web service can use a modified version of the WSDL file.
 
@@ -228,7 +222,7 @@ To use a modified version of the WSDL file:
 
 1. Edit the WSDL file to delete the container port, as described in [Modify the WSDL File](#correct-wsdl).
 
-1. In Microsoft Visual Studio, right-click your app in the **Solution Explorer** and select **Add** > **Service Reference**.
+1. In Microsoft Visual Studio, right click your app in the **Solution Explorer** and select **Add** > **Service Reference**.
 
 1. Under **Address**, enter the local path to the modified WSDL file. For example:
 
@@ -240,10 +234,14 @@ To use a modified version of the WSDL file:
 
 #### <a id='context-routing-soap'></a> Context Path Routing Support for SOAP Web Services
 
-Developers can push SOAP web services to their <%= vars.platform_name %> deployment with context path routing. For more information, see [Context Path Routing Support for ASP.NET Apps](#context-routing).
+### <a id='context-routing-soap'></a> Context path routing support for SOAP Web Services
+
+Developers can push SOAP web services to their <%= vars.platform_name %> deployment with context path routing.
+
+For more information, see [Context path routing support for ASP.NET Apps](#context-routing).
 
 
-## <a id='troubleshoot'></a> Troubleshoot App Errors
+## <a id='troubleshoot'></a> Troubleshooting App errors
 
 If a .NET app fails to start, see the following list of errors and their possible solutions:
 

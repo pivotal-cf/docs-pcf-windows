@@ -1,30 +1,27 @@
 ---
-title: Product Architecture
+title: Windows Diego Cell architecture
 owner: Windows
 ---
-
-This topic describes the architecture of Windows Diego Cells that <%= vars.windows_runtime_full %>
-deploys to run containerized .NET apps and the stemcells that it supplies to BOSH
+You can deploy the architecture of Windows Diego Cells that <%= vars.windows_runtime_full %> uses to
+to run containerized .NET apps and the stemcells that it supplies to BOSH
 as the operating system for the Windows Diego Cell VMs.
 
+You can run Windows Diego Cells in <%= vars.platform_name %> to enable developers to push .NET apps,
+to deploy the <%= vars.windows_runtime_abbr %> tile.
 
-## <a id='overview'></a>Overview
-
-Operators, who want to run Windows Diego Cells in <%= vars.platform_name %> to enable developers to push .NET apps,
-can deploy the <%= vars.windows_runtime_abbr %> tile.
-
-Deploying this tile creates a separate BOSH deployment populated with the Garden Windows release, which runs on a Windows Diego Cell built from a Windows stemcell.
+When you deploy this tile, it creates a separate BOSH deployment populated with the Garden Windows release, which runs on a Windows
+Diego Cell built from a Windows stemcell.
 
 After the Windows Diego Cell is running,
 developers can specify a Windows stack when pushing .NET apps from the command line.
+
 <%= vars.platform_name %> passes the app to the Windows Diego Cell
 in the <%= vars.windows_runtime_abbr %> BOSH deployment.
-The diagram below illustrates the process.
 
-<%= image_tag('./images/windows-overview.png') %>
+The following diagram illustrates the process:
 
 
-## <a id="cells"></a> About Windows Cells
+## <a id="cells"></a> Windows cells
 
 App instances in <%= vars.platform_name %> run inside containers. Garden is the API that creates and manages these containers. An implementation equivalent to that on Linux Diego Cells provides this infrastructure on Windows Diego Cells, utilizing native Windows Server containers.
 
@@ -43,7 +40,7 @@ For more information about Windows containers,
 see [Windows and containers](https://docs.microsoft.com/en-us/virtualization/windowscontainers/about/)
 in the Microsoft documentation.
 
-### <a id="components"></a> Components
+## <a id="components"></a> Components
 
 A Windows Diego Cell includes the following components:
 
@@ -59,7 +56,7 @@ The following diagram illustrates the architecture of a Windows Diego Cell:
 
 <%= image_tag('./images/windows-cell.png') %>
 
-### <a id="container"></a> Container Implementation
+### <a id="container"></a> Container implementation
 
 Garden on Windows uses the following runtime plugins to create and manage Windows containers for <%= vars.app_runtime_full %>:
 
@@ -70,7 +67,7 @@ Garden on Windows uses the following runtime plugins to create and manage Window
 * Rootfs image plugin `groot`: Sets up the container filesystem volume and uses the File Server Resource Manager (FSRM) API to define its disk usage quotas. For more information about the FSRM, see [File Server Resource Manager (FSRM) overview](https://docs.microsoft.com/en-us/windows-server/storage/fsrm/fsrm-overview) in the Microsoft documentation.
 
 
-## <a id="stemcells"></a> About Windows Stemcells
+### <a id="stemcells"></a> Windows stemcells
 
 A stemcell is a customized operating system image containing the filesystem for BOSH-managed VMs.
 When deployed, the operating system includes the BOSH Agent process,
