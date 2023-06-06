@@ -3,14 +3,13 @@ title: Troubleshooting Windows Diego Cells
 owner: Greenhouse
 ---
 
-This topic tells you how to troubleshoot Windows Diego Cells deployed by
-<%= vars.windows_runtime_full %> (<%= vars.windows_runtime_abbr %>).
+Learn how to troubleshoot your <%= vars.windows_runtime_full %> (<%= vars.windows_runtime_abbr %>) issues.
 
-## <a id='issues'></a> Installation Issues
+## <a id='issues'></a> Installation issues
 
-This section describes issues that may occur during the installation process.
+This section describes the issues that might occur during the installation process.
 
-### <a id='missing-certs-winfs-issues'></a> Missing Local Certificates for Windows File System Injector
+### <a id='missing-certs-winfs-issues'></a> Missing local certificates for Windows File System Injector
 
 **Symptom**
 
@@ -31,7 +30,7 @@ Local certificates are needed to communicate with Docker Hub.
 Install the necessary certificates on your local machine. On Ubuntu, you can install certificates
 with the `ca-certificates` package.
 
-### <a id='outdated-version-winfs-issues'></a> Outdated Version for Windows File System Injector
+### <a id='outdated-version-winfs-issues'></a> Outdated version for Windows File System Injector
 
 **Symptom**
 
@@ -51,7 +50,7 @@ From the [<%= vars.windows_runtime_full %>](https://network.pivotal.io/products/
 on <%= vars.product_network %>, download the recommended version of **File System Injector tool**
 for the tile.
 
-### <a id='no-os'></a> Missing Container Image
+### <a id='no-os'></a> Missing Container image
 
 **Symptom**
 
@@ -80,15 +79,15 @@ information, see [Install the Tile](./installing.html#install) in _Installing an
 2. Click the **+** icon next to the product listing to add the <%= vars.windows_runtime_abbr %>
 tile to the Installation Dashboard.
 
-## <a id='issues'></a> Upgrade Issues
+## <a id='issues'></a> Upgrade issues
 
 This section describes issues that may occur during the upgrade process.
 
-### <a id='failure-create-containers'></a> Failure to Create Containers When Upgrading with Shared Microsoft Base Image
+### <a id='failure-create-containers'></a> Failure to create Containers when upgrading with Shared Microsoft Base image
 
 **Symptom**
 
-The pre-start script for the `windowsfs` job fails, and the upgrade fails with the following output:
+The prestart script for the `windowsfs` job fails, and the upgrade fails with the following output:
 
 ```console
 Task 308031 | 13:47:04 | Preparing deployment: Preparing deployment (00:00:03)
@@ -137,7 +136,7 @@ correspond to the names of the logs emitted by Linux Diego Cells.
 
 To forward Windows logs to an external syslog server:
 
-1. Navigate to the <%= vars.platform_name %> Installation Dashboard.
+1. Go to the <%= vars.platform_name %> Installation Dashboard.
 
 1. Click the <%= vars.windows_runtime_abbr %> tile.
 
@@ -161,11 +160,11 @@ To forward Windows logs to an external syslog server:
 
 1. Click **Save**.
 
-### <a id='download'></a> Download Windows Diego Cell Logs
+### <a id='download'></a> Downloading Windows Diego Cell logs
 
 To download Windows Diego Cell logs:
 
-1. Navigate to the <%= vars.platform_name %> Installation Dashboard.
+1. Go to the <%= vars.platform_name %> Installation Dashboard.
 
 1. Click the <%= vars.windows_runtime_abbr %> tile.
 
@@ -183,7 +182,7 @@ To download Windows Diego Cell logs:
     * `/metron_agent_windows/`
     * `/rep_windows/`
 
-## <a id='compilation_vms'></a> Troubleshoot Windows Compilation VMs
+## <a id='compilation_vms'></a> Troubleshooting Windows compilation VMs
 
 BOSH automatically deletes a compilation VM after the compilation VM fails.
 In a vSphere environment, use one of the following procedures to troubleshoot your
@@ -192,7 +191,7 @@ Windows stemcell v2019.7 and later compilation VM issues:
 * [Troubleshoot a Slowly-Deleted Windows Compilation VM](#compilation-vms-slow)
 * [Troubleshoot a Quickly-Deleted Windows Compilation VM](#compilation-vms-quick)
 
-### <a name='compilation-vms-slow'></a> Troubleshoot a Slowly-Deleted Windows Compilation VM
+### <a name='compilation-vms-slow'></a> Troubleshooting a slowly deleted Windows compilation VM
 
 The easiest method to troubleshoot a Windows compilation VM is to SSH into the VM before BOSH deletes it.
 
@@ -235,7 +234,7 @@ search for the compilation VM CID in the vSphere UI and rename it. You can now t
 
 1. After troubleshooting, delete the VM manually.
 
-### <a name='compilation-vms-quick'></a> Troubleshoot a Quickly-Deleted Windows Compilation VM
+### <a name='compilation-vms-quick'></a> Troubleshooting a quickly deleted Windows compilation VM
 
 In some situations, the Windows compilation VM might be deleted very quickly,
 making it impossible to SSH into the VM before BOSH deletes it.
@@ -294,8 +293,7 @@ To troubleshoot a quickly-deleted compilation VM:
 
 1. After troubleshooting, delete the VM manually.
 
-
-## <a id='windows-authentication'></a> Windows Authentication
+## <a id='windows-authentication'></a> Windows authentication
 
 <p class="note"><strong>Note:</strong> For the basics, start with the [Microsoft troubleshooting docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/gmsa-troubleshooting#non-domain-joined-hosts-make-sure-the-host-is-configured-to-retrieve-the-gmsa-account).</p>
 
@@ -338,7 +336,7 @@ TimeCreated                     Id LevelDisplayName Message
 10/28/2022 5:57:30 PM         1001 Information      The Host Compute Service started successfully.
 ```
 
-### <a id='windows-container-credential-guard-logs'></a> Windows Container Credential Guard logs
+### <a id='windows-container-credential-guard-logs'></a> Windows Container credential guard logs
 
 In the event that Windows containers aren't starting, or Windows Authentication isn't working through an app, you can check the logs for the [CCG.exe](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#gmsa-architecture-and-improvements) process, which invokes the TAS plugin and establishes connectivity to Active Directory. Successful logs look similar to the following:
 

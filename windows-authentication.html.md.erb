@@ -3,11 +3,8 @@ title: Windows authentication for .Net apps
 owner: Windows
 ---
 
-This topic describes how to integrate Windows Diego Cells with an existing Active Directory domain to enable support for apps using Windows Authentication.
-
-## <a id='overview'></a> Overview
-
-Windows Authentication allows users accessing a Windows app on <%= vars.windows_runtime_abbr %> to transparently authenticate using their domain credentials.
+Learn how to integrate your Windows Diego Cells with an existing Active Directory domain to enable support for
+apps using Windows Authentication. With Windows Authentication, you can access a Windows app on <%= vars.windows_runtime_abbr %> to transparently authenticate using your domain credentials.
 
 ## <a id='security'></a> Security considerations
 
@@ -43,7 +40,7 @@ Before you configure the <%= vars.windows_runtime_abbr %> tile for Windows Authe
 * Every app in the <%= vars.windows_runtime_abbr %> installation will have access to the GMSA credentials. There is no way to configure it on an app-by-app basis.
 * Windows Authentication delegation from app to service is not supported.
 
-## <a id='configure-tile'></a> Configure the tile
+## <a id='configure-tile'></a> Configuring the tile
 
 Start by following the steps in the [Microsoft docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#create-a-credential-spec) to create the appropriate values, then select **Windows Authentication** and follow this procedure:
 
@@ -54,7 +51,7 @@ Start by following the steps in the [Microsoft docs](https://learn.microsoft.com
 5. In the **Standard user password** field, enter the password of the user account with access to the gMSA password. This is a user account.
 6. In the **Container credential spec** field, enter a JSON string that describes the gMSA account and domain details. For more information on Windows Authentication, see [Microsoft docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#create-a-credential-spec).
 7. Click **Save**.
-8. [Deploy the tile](installing.html#deploy).
+8. [Deploying the tile](installing.html#deploy).
 
 ## <a id='rotating'></a> Rotating the standard user
 
@@ -64,9 +61,9 @@ Follow the steps in the [Microsoft docs](https://learn.microsoft.com/en-us/virtu
 2. Add the user to the security group that guards access to the GMSA service account.
 3. Update the **Standard user name** and **Standard user password** fields with the new user information.
 4. Click **Save**.
-5. [Deploy the tile](installing.html#deploy).
+5. [Deploying the tile](installing.html#deploy).
 
 
 ## <a id='troubleshooting'></a> Troubleshooting
 
-For troubleshooting steps, see [Troubleshooting Windows Authentication](./troubleshooting.html#windows-authentication).
+For troubleshooting details, see [Troubleshooting Windows authentication](./troubleshooting.html#windows-authentication).

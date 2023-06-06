@@ -3,30 +3,27 @@ title: Windows Diego Cells in Isolation Segments
 owner: Windows
 ---
 
-This topic tells you how to run Windows Diego Cells in isolation segments, which are compartmentalized resource pools for Diego Cells.
+You can run Windows Diego Cells in isolation segments, which are compartmentalized resource pools for Diego Cells.
 
-Diego Cells in one isolation segment share routing, computing, and logging resources with other Diego Cells in the same segment, and do not use resources from other isolation segments.
-
-
-## <a id='overview'></a> Overview
+Diego Cells in one isolation segment can share routing, computing, and logging resources with other Diego Cells in the same segment, and do not use resources from other isolation segments.
 
 To run Windows Diego Cells in multiple isolation segments, you must create and
 install multiple <%= vars.windows_runtime_full %> tiles and configure each to run
 in a different isolation segment.
 
-To create multiple copies of the <%= vars.windows_runtime_abbr %> tile, see [Replicate a Tile](#replicate).
+To create multiple copies of the <%= vars.windows_runtime_abbr %> tile, see [Replicating a tile](#replicate).
 
-To associate a <%= vars.windows_runtime_abbr %> tile with an isolation segment, so that its Diego Cells run in that segment, see [Assign a Tile to an Isolation Segment](#assign-isolation).
+To associate a <%= vars.windows_runtime_abbr %> tile with an isolation segment, so that its Diego Cells run in that segment, see [Assigning a tile to an Isolation Segment](#assign-isolation).
 
 
 ## <a id='prerequisites'></a> Prerequisites
 
 To run a Windows Diego Cell in a particular isolation segment, the isolation segment must first already exist in the Cloud Controller database (CCDB) before the Windows Diego Cell can be assigned to it.
 
-To create an isolation segment in the CCDB, see [Create an Isolation Segment](../adminguide/isolation-segments.html#create-an-is) in _Managing Isolation Segments_.
+To create an isolation segment in the CCDB, see [Creating an Isolation Segment](../adminguide/isolation-segments.html#create-an-is) in _Managing Isolation Segments_.
 
 
-## <a id='replicate'></a> Replicate a Tile
+## <a id='replicate'></a> Replicating a tile
 
 To make multiple copies of the <%= vars.windows_runtime_abbr %> tile that you can assign to different isolation segments, you must use the Replicator tool.
 
@@ -60,7 +57,7 @@ To use the Replicator tool:
 1. Install and configure the Windows isolation segment, using the new `.pivotal` file and, following the procedures in _Installing and Configuring <%= vars.windows_runtime_abbr %>_, starting with the **Import a Product** step of [Install the Tile](installing.html#install).
 
 
-## <a id='assign-isolation'></a> Assign a Tile to an Isolation Segment
+## <a id='assign-isolation'></a> Assigning a tile to an Isolation Segment
 
 To assign a <%= vars.windows_runtime_abbr %> tile to an isolation segment:
 
