@@ -1,15 +1,15 @@
 ---
-title: Downloading or Creating Windows Stemcells
+title: Downloading or creating Windows stemcells in Cloud Foundry
 owner: Windows
 ---
 
-This topic describes how to download or create the stemcell that <%= vars.windows_runtime_full %>
-needs to create VMs on an infrastructure.
+You can download or create the stemcells that <%= vars.windows_runtime_full %>
+needs to create VMs on your infrastructure.
 
 <p class="note"><strong>Note:</strong> Traffic between the Gorouter and Windows stemcells is not encrypted with TLS.</p>
 
 
-## <a id="stemcell"></a> Windows Stemcells
+## <a id="stemcell"></a> Windows stemcells
 
 A BOSH stemcell is a versioned OS image wrapped with IaaS-specific packaging.
 BOSH uses a stemcell to supply the basic OS for any Windows VM it creates.
@@ -53,31 +53,31 @@ Depending on your IaaS, you can create or download a stemcell using these method
   page on <%= vars.product_network %>.
 
 
-## <a id="azure"></a> Configuring the Azure Light Stemcell
+## <a id="azure"></a> Configuring the Azure Light stemcell
 
 On Azure, the stemcell exists as an offering in the Azure Marketplace. To start using the Azure light stemcell:
 
-- [Enable the Azure Light Stemcell](#use)
-- [Download the Azure Light Stemcell](#download)
+- [Enabling the Azure Light stemcell](#use)
+- [Downloading the Azure Light stemcell](#download)
 
-### <a id="use"></a> Enable the Azure Light Stemcell
+### <a id="use"></a> Activating the Azure Light stemcell
 
 To use the Azure light stemcell, you must first accept the corresponding Microsoft license agreement
 and enable the stemcell for your non-trial Azure Subscription through the Azure Marketplace.
 
-#### <a id="enable-sub"></a> Enable Your Azure Subscriptions
+### <a id="enable-sub"></a> Activating Azure subscriptions
 
-To enable the Azure subscriptions with which you want to use your stemcell:
+To activate the Azure subscriptions that you want your stemcell to use:
 
 1. Go to the [Microsoft Azure portal](https://portal.azure.com) and log in.
 
-1. From the options on the left side of the page, click **+ Create a resource**.
+1. From the options on the page, click **+ Create a resource**.
 
 1. In the **Search the Marketplace** bar, search for **BOSH Stemcell for Windows Server 2019**.
 
 1. Select **BOSH Stemcell for Windows Server 2019** from your search results. A description of the Azure stemcell offering appears.
 
-1. Below the description, at the bottom of the page, click the blue banner that reads **Want to deploy programmatically? Get started**.
+1. In the description, at the bottom of the page, click the blue banner that reads **Want to deploy programmatically? Get started**.
 
 1. Review the Terms of Use on the "Configure Programmatic Deployment" page that appears.
 
@@ -85,7 +85,7 @@ To enable the Azure subscriptions with which you want to use your stemcell:
 
 1. Click **Save**.
 
-#### <a id="accept-license"></a> Accept the License Agreement
+### <a id="accept-license"></a> Accepting the License Agreement
 
 To accept the license agreement for your stemcell:
 
@@ -135,7 +135,7 @@ with which you want to use the stemcell, run the following command:
         </ul>
 
 
-### <a id="download"></a> Download the Azure Light Stemcell
+### <a id="download"></a> Downloading the Azure Light stemcell
 
 To download the Azure light stemcell for use in Ops Manager:
 
@@ -144,4 +144,4 @@ To download the Azure light stemcell for use in Ops Manager:
 
 1. Download the **Azure Light Stemcell for Windows 2019 Server**.
 
-For information about how to deploy and configure the <%= vars.windows_runtime_abbr %> tile, see [Installing and Configuring <%= vars.windows_runtime_abbr %>](./installing.html).
+For information about how to deploy and configure the <%= vars.windows_runtime_abbr %> tile, see [Installing and configuring <%= vars.windows_runtime_abbr %>](./installing.html).

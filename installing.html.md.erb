@@ -3,12 +3,8 @@ title: Installing and Configuring TAS for VMs [Windows]
 owner: Windows
 ---
 
-This topic describes how to install and configure the <%= vars.windows_runtime_full %> tile.
-
-
-## <a id='overview'></a> Overview
-
-The <%= vars.windows_runtime_abbr %> tile installs Windows Diego Cells in your <%= vars.platform_name %> deployment.
+The <%= vars.windows_runtime_abbr %> tile installs Windows Diego Cells in your <%=
+vars.platform_name %> deployment.
 
 The <%= vars.windows_runtime_abbr %> tile inherits settings from the <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) tile and also includes additional configuration settings.
 
@@ -22,14 +18,14 @@ To install, configure, and deploy <%= vars.windows_runtime_abbr %>:
     1. Upload the Windows stemcell to the tile. See [Upload the Stemcell](#stemcells).
     1. Deploy the tile. See [Deploy the Tile](#deploy).
 
-* In an air-gapped environment, complete the steps in
-[Install and Configure <%= vars.windows_runtime_abbr %> in an Air-Gapped Environment](#air-gapped) below.
+* In an air gap environment, complete the steps in
+[Installing and configuring <%= vars.windows_runtime_abbr %> in an Air-Gapped Environment](#air-gapped).
 
 ## <a id='prerequisites'></a> Prerequisites
 
 Before you install and configure the <%= vars.windows_runtime_abbr %> tile, ensure that you meet the requirements to use the **Windows FS Injector** tool. For more information, see [Windows FS Injector Prerequisites](#prerequisite-injector).
 
-### <a id='prerequisite-injector'></a> Windows FS Injector Prerequisites
+### <a id='prerequisite-injector'></a> Windows FS Injector prerequisites
 
 You use the **Windows FS Injector** tool to install the <%= vars.windows_runtime_abbr %> tile. The **Windows FS Injector** tool requires:
 
@@ -48,7 +44,7 @@ You use the **Windows FS Injector** tool to install the <%= vars.windows_runtime
 
   <p class="note"><strong>Note:</strong> To ensure the authenticity of Microsoft container images, Microsoft does not permit the distribution of its base images. This includes Microsoft container images consumed through Docker Hub, which are actually delivered by an Microsoft CDN endpoint.</p>
 
-## <a id='install'></a> Install the Tile
+## <a id='install'></a> Installing the <%= vars.windows_runtime_abbr %> tile
 
 To install the <%= vars.windows_runtime_abbr %> tile:
     <%# After adding or removing a step here be sure to change the step number
@@ -88,20 +84,16 @@ To install the <%= vars.windows_runtime_abbr %> tile:
 
     This step can take up to 20 minutes to complete.
 
-1. Navigate to the Ops Manager Installation Dashboard and click **Import a Product**.
+1. Go to the Ops Manager Installation Dashboard and click **Import a Product**.
 
 1. To add the <%= vars.windows_runtime_abbr %> tile to the **Import a Product** product list,
    select the importable `PASW-IMPORTABLE-PATH` file on your workstation.
 
 1. To add the <%= vars.windows_runtime_abbr %> tile to your staging area, click **+** under the **<%= vars.windows_runtime_full %>** product listing.
 
-## <a id='config'></a> Configure the Tile
+## <a id='config-azs-networks'></a> Assigning availability zones and networks
 
-The following sections describe how to configure the settings for the <%= vars.windows_runtime_abbr %> tile.
-
-### <a id='config-azs-networks'></a> Assign Availability Zones and Networks
-
-In **Assign AZ and Networks**, you assign jobs to your Availability Zones (AZs) and networks.
+Assign jobs to your Availability Zones (AZs) and networks.
 
 To configure AZs and networks:
 
@@ -118,7 +110,7 @@ To configure AZs and networks:
 
 1. Click **Save**.
 
-### <a id='config-vms'></a> Configure VMs
+### <a id='config-vms'></a> Configuring VMs
 
 In **VM Options**, you configure settings for accessing your VMs.
 
@@ -139,7 +131,9 @@ To configure VM access:
 
 1. Click **Save**.
 
-### <a id='config-smoke-tests'></a> Configure Smoke Tests
+3. Click **Save**.
+
+### <a id='config-smoke-tests'></a> Configuring Smoke Tests
 
 In **Smoke Tests**, you specify the org and space where smoke tests are run.
 
@@ -160,17 +154,13 @@ To configure smoke tests:
    * For **Space**, enter the space <%= vars.windows_runtime_abbr %> you can use when pushing an app to run smoke tests.
     * For **Apps Domain**, enter the domain <%= vars.windows_runtime_abbr %> you can use when pushing an app to run smoke tests.
 
-### <a id='config-advanced-features'></a> Configure Advanced Features
+### <a id='config-advanced-features'></a> Configuring advanced features
 
 **Advanced Features** includes new functionality that might have certain constraints.
   Although these features are fully supported,
   VMware recommends caution when using them in production environments.
 
-The following sections describe how to configure these advanced features.
-
-#### <a id='config-memory-disk'></a> Diego Cell Memory and Disk Overcommit
-
-If your apps do not use the full allocation of disk space and memory set in **Resource Config**, you might want use this feature. These fields control the amount to overcommit disk and memory resources to each host VM.
+The following sections describe how to configure the advanced features.
 
 For example, you might want to use the overcommit if your apps use a small amount of disk and memory capacity compared to the amounts set in the **Resource Config** settings for **Windows Diego Cell**.
 
@@ -190,7 +180,7 @@ To enable overcommit:
 
 #### <a id='enable-route-integrity'></a> TLS Connections from the Gorouter to Apps (Beta)
 
-You can choose the method the Gorouter uses to verify app identity. Verifying app identity using TLS or mutual TLS (mTLS) enables encryption between the Gorouter and app containers and guards against misrouting during control plane failures. This feature is disabled by default.
+You can choose the method the Gorouter uses to verify app identity. Verifying app identity using TLS or mutual TLS (mTLS) enables encryption between the Gorouter and app containers and guards against misrouting during control plane failures. This feature is deactivated by default.
 
 For more information about Gorouter route consistency modes, see [Preventing Misrouting](../concepts/http-routing.html#consistency) in _HTTP Routing_.
 
@@ -207,7 +197,7 @@ following options:
       * **The Gorouter and apps use mutual TLS to verify each other's identity**:
       Enables the Gorouter and your apps to verify each other's identity using
       TLS. Before you enable this option, be aware of the following:
-          * This option disables TCP routing because app containers accept incoming
+          * This option deactivates TCP routing because app containers accept incoming
       communication only from the Gorouter.
           * If you enable mTLS in the <%= vars.windows_runtime_abbr %> tile, you
           must also enable mTLS in the <strong>App Containers</strong> pane of the
@@ -218,7 +208,27 @@ following options:
 
 1. Click **Save**.
 
-### <a id='config-errands'></a> Configure Errands
+#### <a id='custom-cell-overlay'></a> Custom Windows Diego Cell Overlay Subnet
+
+By default, Windows Diego Cells use the `172.30.0.0/22` IP address space for container networking. If this conflicts with any internal IP addresses that your
+organization uses, you can customize this subnet. Unlike in <%= vars.windows_runtime_abbr %> deployments using Linux Diego Cells, you configure this subnet
+per Diego Cell. When you configure a custom subnet for a Windows Diego Cell, ensure the following:
+
+* The CIDR range of your custom subnet does not conflict with any resources that your apps may need to use.
+
+* The subnet is large enough to accommodate the number of apps you expect to have running on each Diego Cell.
+
+To configure a custom Windows Diego Cell overlay subnet:
+
+1. In the <%= vars.windows_runtime_abbr %> tile, select **Advanced Features**.
+
+1. For **Diego Cell Overlay Subnet**, enter the subnet you want to configure for your Diego Cell.
+
+1. Click **Save**.
+
+3. Click **Save**.
+
+### <a id='config-errands'></a> Configuring errands
 
 Errands are scripts that Ops Manager runs automatically when it installs or uninstalls a product,
 such as a new version of <%= vars.windows_runtime_abbr %>.
@@ -243,15 +253,15 @@ To configure errands:
 
 <p class="note"><strong>Note:</strong> This beta feature checks only that the client certificate is signed by the expected CA using mTLS. It does not include SAN (Subject Alternative Name) checks of the presented client certificates.</p>
 
-### <a id='config-iso-segments'></a> (Optional) Configure Isolation Segments
+### <a id='config-iso-segments'></a> Configuring Isolation Segments (Optional)
 
 To deploy your <%= vars.windows_runtime_abbr %> app workloads to an isolation segment, select **App Containers** and follow the procedure in [Assign a Tile to an Isolation Segment](./isolation.html#assign-isolation) in _Windows Diego Cells in Isolation Segments_.
 
-### <a id='config-system-logging'></a> (Optional) Configure System Logging
+### <a id='config-system-logging'></a> Configuring System Logging (Optional)
 
 To configure Windows Diego Cells to send VM logs to an external syslog server, select **System Logging** and follow the procedure in [Forwarding Logs to a Syslog Server](./troubleshooting.html#syslog) in _Troubleshooting Windows Diego Cells_.
 
-### <a id='dns-search-domains'></a> (Optional) Configure DNS Search Domains
+### <a id='dns-search-domains'></a> Configuring DNS Search Domains (Optional)
 
 To configure DNS search domains for your app containers:
 
@@ -260,7 +270,7 @@ To configure DNS search domains for your app containers:
 1. In the **DNS search domains** field, enter DNS search domains as a comma-separated list.
 1. Click **Save**.
 
-## <a id='resources'></a> Configure Tile Resources
+## <a id='resources'></a> Configuring tile resources
 
 In **Resource Config**, you must associate load balancers with the VMs in your deployment to enable traffic.
 
@@ -268,7 +278,7 @@ To configure your tile resources:
 
 1. Select **Resource Config**.
 
-1. Use the dropdowns to configure **Windows Diego Cell**. The table below shows the recommended Windows Diego Cell disk size for your IaaS:
+1. Use the drop-down menus to configure **Windows Diego Cell**. The following table shows the recommended Windows Diego Cell disk size for your IaaS:
   <table>
     <tr>
       <th>IaaS</th>
@@ -297,8 +307,7 @@ To configure your tile resources:
 
 1. Click **Save**.
 
-
-## <a id='stemcells'></a> Upload the Stemcell
+## <a id='stemcells'></a> Uploading the stemcell
 
 After configuring resources for the <%= vars.windows_runtime_abbr %> tile, you must upload the Windows stemcell to the tile.
 
@@ -317,8 +326,7 @@ For more information, see <a href="create-vsphere-stemcell-automatically.html">C
 for vSphere Using stembuild</a>.
 </p>
 
-
-## <a id='deploy'></a> Deploy the Tile
+## <a id='deploy'></a> Deploying the tile
 
 After uploading the Windows stemcell to the <%= vars.windows_runtime_abbr %> tile, you are ready to deploy the tile.
 
@@ -332,30 +340,27 @@ To deploy the <%= vars.windows_runtime_abbr %> tile:
 
 1. Click **Apply Changes**.
 
-
-## <a id='copy'></a> (Optional) Create More Tiles
+## <a id='copy'></a> (Optional) Creating more tiles
 
 To run Windows Diego Cells in multiple isolation segments, you must create and configure additional <%= vars.windows_runtime_abbr %> tiles. For more information, see [Windows Diego Cells in Isolation Segments](./isolation.html).
 
 
-## <a id='air-gapped'></a> Install and Configure <%= vars.windows_runtime_abbr %> in an Air-Gapped Environment
+## <a id='air-gapped'></a> Installing and configuring <%= vars.windows_runtime_abbr %> in an air-gapped environment
 
 To install, configure, and deploy <%= vars.windows_runtime_abbr %> in an air-gapped environment:
 
-1. Complete the steps in [Prepare a Windows Rootfs Image in a Private Registry](#prepare-registry) below.
+1. Follow the steps in [Preparing a Windows Rootfs Image in a Private Registry](#prepare-registry).
 
-1. Complete the steps in [Install the Tile](#install) above with the following exceptions:
-    * To add the Windows Server container base image to the product file,
-    replace step 4's internet-enabled `winfs-injector` command line
-    with the `winfs-injector` procedure in
-    [Add the Windows Server Container Base Image to the Product File](#add-win-image-air-gapped)
-    below.
-1. Configure required settings for the tile. See [Configure the Tile](#config) above.
-1. Configure resources for the tile. See [Configure Tile Resources](#resources) above.
-1. Upload the Windows stemcell to the tile. See [Upload the Stemcell](#stemcells) above.
-1. Deploy the tile. See [Deploy the Tile](#deploy) above.
+2. Follow the steps in [Install the Tile](#install) with the following exceptions:
+    * To add the Windows Server container base image to the product file, replace the
+      Internet-enabled `winfs-injector` command line with the `winfs-injector` procedure in [Adding the
+      Windows Server Container Base image to the product file](#add-win-image-air-gapped).
+3. Configure required settings for the tile. See [Configuring the tile](#config).
+4. Configure resources for the tile. See [Configuring tile resources](#resources).
+5. Upload the Windows stemcell to the tile. See [Uploading the stemcell](#stemcells).
+6. Deploy the tile. See [Deploying the tile](#deploy).
 
-### <a id='prepare-registry'></a> Prepare a Windows Rootfs Image in a Private Registry
+### <a id='prepare-registry'></a> Preparing a Windows rootfs image in a private registry
 
 To create a <%= vars.windows_runtime_abbr %> tile, a windows file-system container image is typically
 fetched from a Docker registry. An administrator can fetch the windows file-system image
@@ -395,7 +400,7 @@ run the following command:
     Where `IMAGE-URI` is the URI to the Windows rootfs image in your private registry.
     Your image URI should follow the pattern: `my.private.registry/cloudfoundry/windows2016fs:2019`.
 
-### <a id='add-win-image-air-gapped'></a> Add the Windows Server Container Base Image to the Product File
+### <a id='add-win-image-air-gapped'></a> Adding the Windows Server container base image to the product file
 
 To add the Windows Server container base image to the product file in an air-gapped environment,
 run the following:
