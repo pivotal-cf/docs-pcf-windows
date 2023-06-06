@@ -14,12 +14,12 @@ see [Using Blue-Green Deployment to Reduce Downtime and
 Risk](../devguide/deploy-apps/blue-green.html).
 
 
-## <a id="install-tile"></a> Step 1: Install and Deploy the <%= vars.windows_runtime_abbr %> Tile
+## <a id="install-tile"></a> Step 1: Installing and deploying the <%= vars.windows_runtime_abbr %> tile
 
 To install and deploy the <%= vars.windows_runtime_abbr %> tile, follow steps 1 and 2 of [Installing and Configuring <%= vars.windows_runtime_abbr %>](installing.html).
 
 
-## <a id="push-app"></a> Step 2: Push App to <%= vars.windows_runtime_abbr %> Diego Cells
+## <a id="push-app"></a> Step 2: Pushing App to <%= vars.windows_runtime_abbr %> Diego Cells
 
 To redeploy a running app with zero downtime using the blue-green method:
 
@@ -31,7 +31,7 @@ To redeploy a running app with zero downtime using the blue-green method:
 
 1. Choose your org and space.
 
-1. Navigate to the location of your app.
+1. Go to the location of your app.
 
 1. To find the name of the existing <%= vars.windows_runtime_abbr %> 2012 R2 app you are migrating to <%= vars.windows_runtime_abbr %> Diego, run:
 
@@ -102,7 +102,7 @@ To redeploy a running app with zero downtime using the blue-green method:
     ```console
     cf apps
     ```
-    If you experience a problem, see [Troubleshooting App Deployment and Health](../devguide/deploy-apps/troubleshoot-app-health.html).
+    If you experience a problem, see [Troubleshooting App deployment and health](../devguide/deploy-apps/troubleshoot-app-health.html).
 
 3. To unmap the original app's route, run:
 
@@ -120,7 +120,7 @@ To redeploy a running app with zero downtime using the blue-green method:
     For additional information about `cf-unmap-route`, see [cf unmap-route](http://cli.cloudfoundry.org/en-US/cf/unmap-route.html) in the Cloud Foundry CLI Reference Guide.
 
 
-## <a id="delete-app"></a> Step 3: Delete App from <%= vars.windows_runtime_abbr %> 2012 R2 Server Diego Cells
+## <a id="delete-app"></a> Step 3: Deleting App from <%= vars.windows_runtime_abbr %> 2012 R2 Server Diego Cells
 
 To delete the original app:
 
@@ -136,7 +136,7 @@ To delete the original app:
     For additional information about `cf delete` command, see [cf delete](http://cli.cloudfoundry.org/en-US/cf/delete.html) in the Cloud Foundry CLI Reference Guide.
 
 
-## <a id="uninstall-old-tile"></a> Step 4: Uninstall Old Tile (Optional)
+## <a id="uninstall-old-tile"></a> Step 4: Uninstalling the old tile (Optional)
 
 Once you migrate all of your apps and you are no longer use the <%= vars.windows_runtime_abbr %> 2012 R2 tile, a <%= vars.platform_name %> uninstall the tile.
 

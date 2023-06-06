@@ -3,7 +3,7 @@ title: Using SMB Volumes in .NET Apps
 owner: Windows
 ---
 
-This topic describes how to use Server Message Block (SMB) Volumes in a .NET app. In this example, you create an app
+This topic tells you how to use Server Message Block (SMB) Volumes in .NET app. In this example, you create an app
 that reads and writes to a `note.txt` file within an SMB Volume share.
 
 
@@ -11,13 +11,13 @@ that reads and writes to a `note.txt` file within an SMB Volume share.
 
 To use SMB Volumes in your .NET App, you must have:
 
-* Visual Studio
-* An IaaS account
-* <%= vars.windows_runtime_full %>
-* An accessible SMB Volume in an IaaS with a UNC path
-* An existing .NET Framework app
-* An SMB username
-* An SMB password
+* Visual Studio.
+* An IaaS account.
+* <%= vars.windows_runtime_full %>.
+* An accessible SMB Volume in an IaaS with a UNC path.
+* An existing .NET Framework app.
+* An SMB username.
+* An SMB password.
 
 ### <a id='steeltoe'></a> Using SMB Volumes in .NET Apps with Steeltoe
 
@@ -44,7 +44,7 @@ Steeltoe documentation.
 After you add your environment variables to your Config Server Provider,
 go to [SMB Mounting](smb-volumes-apps.html#smb-mounting).
 
-### <a id='batch'></a> Using SMB Volumes in .NET Apps with Your Batch Profile
+## <a id='batch'></a> Using SMB Volumes in .NET Apps with your Batch Profile
 
 If you do not want to edit your app code to include Steeltoe, you can use mount SMB Volumes without Steeltoe.
 
@@ -67,7 +67,7 @@ To mount SMB Volumes:
 
 1. Go to [SMB Mounting](smb-volumes-apps.html#smb-mounting).
 
-## <a id='smb-mounting'></a> SMB Mounting
+## <a id='smb-mounting'></a> SMB mounting
 
 To configure SMB mounting:
 
@@ -231,9 +231,9 @@ in the Microsoft documentation.
     ```
 
 
-## <a id='known-issue'></a> Known Issues
+## <a id='known-issue'></a> Known issues
 
-### <a id='cannont-find-path'></a> Inability to SSH into App Instance
+#### <a id='cannont-find-path'></a> Inability to SSH into App Instance
 
 Even though you have successfully created the SMB mapping, you cannot run `cf ssh` into that app instance.
 Trying to access the created mapping through SSH results in an unspecified path error.

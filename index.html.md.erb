@@ -1,12 +1,13 @@
 ---
-title: TAS for VMs [Windows] Overview
+title: TAS for VMs [Windows] overview
 owner: Windows
 ---
 
-<%= vars.windows_runtime_full %> enables operators to provision, operate, and manage Windows stemcells
+<%= vars.windows_runtime_full %> enables you to provision, operate, and manage Windows stemcells
 on <%= vars.platform_name %>.
 
-After you install the <%= vars.windows_runtime_abbr %> tile on the Ops Manager Installation Dashboard, developers can push .NET apps to Windows Diego Cells using the [Cloud Foundry Command Line Interface](../cf-cli/index.html) (cf CLI).
+After you install the <%= vars.windows_runtime_abbr %> tile on the Ops Manager Installation Dashboard,
+developers can push .NET apps to Windows Diego Cells using the [Cloud Foundry Command Line Interface](../cf-cli/index.html) (cf CLI).
 
 For the <%= vars.windows_runtime_abbr %> release notes,
 see [<%= vars.windows_runtime_full %> <%= vars.v_major_version %>
@@ -38,7 +39,7 @@ The minimum resource requirements for each Windows Diego Cell are:
 
 * [Product Architecture](architecture.html)
 
-### <a id='install'></a> Installation Guide
+### <a id='install'></a> Installation guide
 
 * [Downloading or Creating Windows Stemcells](stemcells.html)
 
@@ -50,13 +51,13 @@ The minimum resource requirements for each Windows Diego Cell are:
 
 * [Migrating Apps to <%= vars.windows_runtime_abbr %>](migrating.html)
 
-### <a id='admin'></a> Admin Guide
+### <a id='admin'></a> Admin guide
 
 * [Upgrading <%= vars.windows_runtime_abbr %> and Windows Stemcells](./upgrade-windows.html)
 
 * [Troubleshooting Windows Diego Cells](./troubleshooting.html)
 
-### <a id='dev'></a> Developer Guide
+### <a id='dev'></a> Developer guide
 
 * [Deploying .NET Apps](develop.html)
 
@@ -74,7 +75,7 @@ The following limitations affect Windows containers in <%= vars.windows_runtime_
 * [Windows Server Container Limitations](#limitations-windows)
 * [<%= vars.windows_runtime_abbr %> Limitations](#limitations-pasw)
 
-### <a id='limitations-windows'></a> Windows Server Container Limitations
+### <a id='limitations-windows'></a> Windows server ontainer imitations
 
 Windows Server Core Containers are used in <%= vars.windows_runtime_abbr %>.
 
@@ -85,7 +86,7 @@ In <%= vars.windows_runtime_abbr %>, the host and container time-zone is always 
 * Windows Server 2019 Core images support only Lucida Console font.
 No other fonts are supported, and no others can be installed.
 
-### <a id='limitations-pasw'></a> <%= vars.windows_runtime_abbr %> Limitations
+### <a id='limitations-pasw'></a> <%= vars.windows_runtime_abbr %> limitations
 
 <%= vars.windows_runtime_abbr %> has the following limitations:
 

@@ -3,9 +3,7 @@ title: Installing and Configuring TAS for VMs [Windows]
 owner: Windows
 ---
 
-This topic describes how to install and configure the <%= vars.windows_runtime_full %> tile.
-
-## <a id='overview'></a> Overview
+This topic tells you how to install and configure the <%= vars.windows_runtime_full %> tile.
 
 The <%= vars.windows_runtime_abbr %> tile installs Windows Diego Cells in your <%= vars.platform_name %> deployment.
 
@@ -21,14 +19,14 @@ To install, configure, and deploy <%= vars.windows_runtime_abbr %>:
     1. Upload the Windows stemcell to the tile. See [Upload the Stemcell](#stemcells).
     1. Deploy the tile. See [Deploy the Tile](#deploy).
 
-* In an air-gap environment, complete the steps in
+* In an air gap environment, complete the steps in
 [Install and Configure <%= vars.windows_runtime_abbr %> in an Air-Gapped Environment](#air-gapped) below.
 
 ## <a id='prerequisites'></a> Prerequisites
 
 Before you install and configure the <%= vars.windows_runtime_abbr %> tile, ensure that you meet the requirements to use the **Windows FS Injector** tool. For more information, see [Windows FS Injector Prerequisites](#prerequisite-injector).
 
-### <a id='prerequisite-injector'></a> Windows FS Injector Prerequisites
+### <a id='prerequisite-injector'></a> Windows FS Injector prerequisites
 
 Use the **Windows FS Injector** tool to install the <%= vars.windows_runtime_abbr %> tile. The **Windows FS Injector** tool requires:
 
@@ -47,7 +45,7 @@ Use the **Windows FS Injector** tool to install the <%= vars.windows_runtime_abb
 
   <p class="note"><strong>Note:</strong> To ensure the authenticity of Microsoft container images, Microsoft does not permit the distribution of its base images. This includes Microsoft container images consumed through Docker Hub, which are actually delivered by an Microsoft CDN endpoint.</p>
 
-## <a id='install'></a> Install the Tile
+## <a id='install'></a> Installing the <%= vars.windows_runtime_abbr %> tile
 
 To install the <%= vars.windows_runtime_abbr %> tile:
 
@@ -94,11 +92,11 @@ To install the <%= vars.windows_runtime_abbr %> tile:
 
 1. To add the <%= vars.windows_runtime_abbr %> tile to your staging area, click **+** under the **<%= vars.windows_runtime_full %>** product listing.
 
-## <a id='config'></a> Configure the Tile
+## <a id='config'></a> Configuring the <%= vars.windows_runtime_abbr %> tile
 
 The following sections describe how to configure the settings for the <%= vars.windows_runtime_abbr %> tile.
 
-### <a id='config-azs-networks'></a> Assign Availability Zones and Networks
+### <a id='config-azs-networks'></a> Assigning availability zones and networks
 
 In **Assign AZ and Networks**, you assign jobs to your Availability Zones (AZs) and networks.
 
@@ -118,7 +116,7 @@ To configure AZs and networks:
 
 1. Click **Save**.
 
-### <a id='config-vms'></a> Configure VMs
+### <a id='config-vms'></a> Configuring VMs
 
 In **VM Options**, you configure settings for accessing your VMs.
 
@@ -140,7 +138,7 @@ To configure VM access:
 
 3. Click **Save**.
 
-### <a id='config-smoke-tests'></a> Configure Smoke Tests
+### <a id='config-smoke-tests'></a> Configuring Smoke Tests
 
 In **Smoke Tests**, you specify the org and space where smoke tests are run.
 
@@ -166,7 +164,7 @@ To configure smoke tests:
    * For **Space**, enter the space <%= vars.windows_runtime_abbr %> you can use when pushing an app to run smoke tests.
     * For **Apps Domain**, enter the domain <%= vars.windows_runtime_abbr %> you can use when pushing an app to run smoke tests.
 
-### <a id='config-advanced-features'></a> Configure Advanced Features
+### <a id='config-advanced-features'></a> Configuring advanced features
 
 **Advanced Features** includes new capability that might have certain constraints.
   Although these features are fully supported,
@@ -176,10 +174,9 @@ For help configuring these fields, see
 [Configure Advanced Features](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/installing.html#configure-advanced-features-8)
 in _Installing and Configuring TAS for VMs [Windows]_ in the VMware documentation.
 
-
 The following sections describe how to configure the advanced features.
 
-#### <a id='config-memory-disk'></a> Diego Cell Memory and Disk Overcommit
+#### <a id='config-memory-disk'></a> Diego Cell memory and disk overcommit
 
 If your apps do not use the full allocation of disk space and memory set in **Resource Config**, you might want use this feature. These fields control the amount to overcommit disk and memory resources to each host VM.
 
@@ -253,7 +250,7 @@ To configure a custom Windows Diego Cell overlay subnet:
 
 3. Click **Save**.
 
-### <a id='config-errands'></a> Configure Errands
+### <a id='config-errands'></a> Configuring errands
 
 Errands are scripts that Ops Manager runs when it installs or uninstalls a product. For example, a new version of <%= vars.windows_runtime_abbr %>.
 There are two types of errands: _post-deploy errands_ run after the product is installed,
@@ -277,7 +274,7 @@ To configure errands:
 
 <p class="note"><strong>Note:</strong> This beta feature verifies only that the client certificate is signed by the expected CA using mTLS. It does not include SAN (Subject Alternative Name) verification of the presented client certificates.</p>
 
-### <a id='config-iso-segments'></a> Configure Isolation Segments (Optional)
+### <a id='config-iso-segments'></a> Configuring Isolation Segments (Optional)
 
 To deploy your <%= vars.windows_runtime_abbr %> app workloads to an isolation segment, select **App Containers** and follow the procedure in [Assign a Tile to an Isolation Segment](./isolation.html#assign-isolation) in _Windows Diego Cells in Isolation Segments_.
 
@@ -287,11 +284,11 @@ To configure Windows Diego Cells to allow app containers to perform Windows Auth
 
 <p class="note"><strong>Note:</strong> Use an isolation segment for Windows Authentication, as all apps in the <%= vars.windows_runtime_abbr %> installation have access to the GMSA credentials.</p>
 
-### <a id='config-system-logging'></a> Configure System Logging (Optional)
+### <a id='config-system-logging'></a> Configuring System Logging (Optional)
 
 To configure Windows Diego Cells to send VM logs to an external syslog server, select **System Logging** and follow the procedure in [Forwarding Logs to a Syslog Server](troubleshooting.html#syslog) in _Troubleshooting Windows Diego Cells_.
 
-### <a id='dns-search-domains'></a> Configure DNS Search Domains (Optional)
+### <a id='dns-search-domains'></a> Configuring DNS Search Domains (Optional)
 
 To configure DNS search domains for your app containers:
 
@@ -300,7 +297,7 @@ To configure DNS search domains for your app containers:
 1. In the **DNS search domains** field, enter DNS search domains as a comma-separated list.
 1. Click **Save**.
 
-## <a id='resources'></a> Configure Tile Resources
+## <a id='resources'></a> Configuring tile resources
 
 In **Resource Config**, you must associate load balancers with the VMs in your deployment to enable traffic.
 
@@ -338,7 +335,7 @@ To configure your tile resources:
 
 1. Click **Save**.
 
-## <a id='stemcells'></a> Upload the Stemcell
+## <a id='stemcells'></a> Uploading the stemcell
 
 After configuring resources for the <%= vars.windows_runtime_abbr %> tile, you must upload the Windows stemcell to the tile.
 
@@ -357,7 +354,7 @@ For more information, see <a href="create-vsphere-stemcell-automatically.html">C
 for vSphere Using stembuild</a>.
 </p>
 
-## <a id='deploy'></a> Deploy the Tile
+## <a id='deploy'></a> Deploying the tile
 
 After uploading the Windows stemcell to the <%= vars.windows_runtime_abbr %> tile, you are ready to deploy the tile.
 
@@ -371,7 +368,7 @@ To deploy the <%= vars.windows_runtime_abbr %> tile:
 
 1. Click **Apply Changes**.
 
-## <a id='copy'></a> (Optional) Create More Tiles
+## <a id='copy'></a> (Optional) Creating more tiles
 
 To run Windows Diego Cells in multiple isolation segments, you must create and configure additional <%= vars.windows_runtime_abbr %> tiles. For more information, see [Windows Diego Cells in Isolation Segments](./isolation.html).
 
@@ -392,7 +389,7 @@ To install, configure, and deploy <%= vars.windows_runtime_abbr %> in an air-gap
 1. Upload the Windows stemcell to the tile. See [Upload the Stemcell](#stemcells).
 1. Deploy the tile. See [Deploy the Tile](#deploy).
 
-### <a id='prepare-registry'></a> Prepare a Windows Rootfs Image in a Private Registry
+### <a id='prepare-registry'></a> Preparing a Windows Rootfs image in a private registry
 
 To create a <%= vars.windows_runtime_abbr %> tile, a windows file-system container image is typically
 fetched from a Docker registry. An administrator can fetch the windows file-system image

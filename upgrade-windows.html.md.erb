@@ -1,30 +1,30 @@
 ---
-title: Upgrading TAS for VMs [Windows] and Windows Stemcells
+title: Upgrading TAS for VMs [Windows] and Windows stemcells
 owner: Greenhouse
 ---
 
-This topic describes how to upgrade the <%= vars.windows_runtime_full %> tile
+Learn how to upgrade your <%= vars.windows_runtime_full %> tile
 and update the Windows stemcell.
 
 For information about migrating apps to <%= vars.windows_runtime_abbr %> from <%= vars.windows_runtime_abbr %> 2012 R2, see [Migrating Apps to <%= vars.windows_runtime_abbr %>](./migrating.html).
 
-## <a id='rotate'></a> Rotating Credentials
+## <a id='rotate'></a> Rotating credentials
 
 The <%= vars.app_runtime_full %> (<%= vars.app_runtime_abbr %>) tile handles all of the credentials for <%= vars.windows_runtime_abbr %>.
 
-To rotate your credentials in <%= vars.windows_runtime_abbr %>, you must re-deploy <%= vars.app_runtime_abbr %> and <%= vars.windows_runtime_abbr %>. To re-deploy <%= vars.app_runtime_abbr %> and <%= vars.windows_runtime_abbr %>:
+To rotate your credentials in <%= vars.windows_runtime_abbr %>, you must redeploy <%= vars.app_runtime_abbr %> and <%= vars.windows_runtime_abbr %>. To re-deploy <%= vars.app_runtime_abbr %> and <%= vars.windows_runtime_abbr %>:
 
-1. Navigate to the Ops Manager Installation Dashboard.
+1. Go to the Ops Manager Installation Dashboard.
 
 1. Click **Review Pending Changes**.
 
 1. Select the <%= vars.app_runtime_abbr %> and <%= vars.windows_runtime_abbr %> tiles and review the changes.
 
-   For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html).
+   For more information, see [Reviewing pending product changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html).
 
 2. Click **Apply Changes**.
 
-## <a id='upgrade-tile'></a> Upgrade <%= vars.windows_runtime_abbr %>
+## <a id='upgrade-tile'></a> Upgrading <%= vars.windows_runtime_abbr %>
 
 To upgrade <%= vars.windows_runtime_abbr %>:
 
@@ -36,15 +36,15 @@ To upgrade <%= vars.windows_runtime_abbr %>:
 
 1. If necessary, configure the product.
 
-   For more information about configuring <%= vars.windows_runtime_abbr %>, see [Installing and Configuring <%= vars.windows_runtime_abbr %>](./installing.html).
+   For more information about configuring <%= vars.windows_runtime_abbr %>, see [Installing and configuring <%= vars.windows_runtime_abbr %>](./installing.html).
 
 2. Click **Review Pending Changes**.
 
-3. Select the <%= vars.windows_runtime_abbr %> tile and review the changes. For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html).
+3. Select the <%= vars.windows_runtime_abbr %> tile and review the changes. For more information, see [Reviewing pending product changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html).
 
 4. Click **Apply Changes**.
 
-## <a id='upgrade-stemcell'></a> Upgrade the Windows Stemcell
+## <a id='upgrade-stemcell'></a> Upgrading the Windows stemcell
 
 To upgrade your Windows stemcell:
 
@@ -62,4 +62,4 @@ To upgrade your Windows stemcell:
 
 5. Click **Apply Stemcell to Products**.
 
-For more information about Windows stemcells, see [Downloading or Creating Windows Stemcells](stemcells.html).
+For more information about Windows stemcells, see [Downloading or creating Windows stemcells](stemcells.html).
