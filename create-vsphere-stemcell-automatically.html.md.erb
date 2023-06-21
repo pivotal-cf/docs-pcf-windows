@@ -3,11 +3,6 @@ title: Creating a Windows Stemcell for vSphere Using stembuild
 owner: Windows
 ---
 
-This topic describes how to create a BOSH stemcell for Windows on vSphere using stembuild.
-
-
-## <a id='windows-stemcells'></a> Overview of Windows Stemcell Creation
-
 A BOSH stemcell is a versioned operating system image.
 
 You must create a BOSH stemcell for Windows before you can deploy
@@ -30,7 +25,7 @@ For more information, see
 [Best Practices for Stembuild for Tanzu Application Service & Tanzu Kubernetes Grid Integrated Edition](https://tanzu.vmware.com/content/practitioners/best-practices-for-stembuild-for-tanzu-application-service-tanzu-kubernetes-grid-integrated-edition)
 in _VMware Tanzu Tech Tutorials_.
 
-## <a id='stembuild-overview'></a> Overview of Stembuild
+## <a id='stembuild-overview'></a> Stembuild overview
 
 Stembuild is a binary that you use to build BOSH stemcells for Windows Server 2019.
 
@@ -91,9 +86,9 @@ Before you create a BOSH stemcell for Windows on vSphere, you must have:
 Permissions marked with an `*` are generated upon creating a new user in vCenter and cannot be set within the vCenter UI.
 
 
-## <a id='create-base-vm'></a> Step 1: Create a Base VM for the BOSH Stemcell
+## <a id='create-base-vm'></a> Step 1: Create a base VM for the BOSH stemcell
 
-This section describes how to create, configure, and verify a base VM for Windows from a volume-licensed ISO.
+Learn how to create, configure, and verify a base VM for Windows from a volume-licensed ISO.
 
 ### <a name='upload-windows-iso'></a> Upload the Windows Server 2019 ISO
 
@@ -150,7 +145,7 @@ To create and customize a base VM:
 
 1. Review the configuration settings on the **Ready to complete** page and click **Finish**.
 
-### <a name='install-windows-server'></a> Install Windows Server
+### <a name='install-windows-server'></a> Installing the Windows server
 
 To install Windows Server on the base VM:
 
@@ -164,7 +159,7 @@ To install Windows Server on the base VM:
 
 1. Complete the installation process and enter a password for the Administrator user.
 
-### <a name='verify-os'></a> Verify OS
+### <a name='verify-os'></a> Verifying the operating system
 
 To verify that you are using the correct OS version, run the following PowerShell command on the base VM:
 
@@ -181,7 +176,7 @@ Major    Minor    Build    Revision
 10        0       17763    0
 </pre>
 
-### <a name='install-vmware-tools'></a> Install VMware Tools
+### <a name='install-vmware-tools'></a> Installing VMware tools
 
 To install VMware Tools on the base VM:
 
@@ -211,7 +206,7 @@ To install VMware Tools on the base VM:
 1. To complete the installation, restart the VM.
 
 
-## <a id='install-windows-updates'></a> Step 2: Configure the Base VM
+## <a id='install-windows-updates'></a> Step 2: Configuring the base VM
 
 Install all the Windows Server updates so that you have the latest, most secure,
 version of the Windows Server operating system.
@@ -250,7 +245,7 @@ To configure the base VM network settings and install Windows updates:
 
 1. After the VM restarts verify that you can ping the IP address you assigned to the base VM.
 
-## <a id='clone-vm'></a> Step 3: Clone the Base VM
+## <a id='clone-vm'></a> Step 3: Cloning the base VM
 
 To clone the base VM:
 
@@ -272,7 +267,7 @@ in the _VMware Knowledge Base_.
 
 1. To start the target VM, click **Power** > **Power On** in the **Actions** tab for your VM.
 
-## <a id='construct-stemcell'></a> Step 4: Construct the BOSH Stemcell
+## <a id='construct-stemcell'></a> Step 4: Constructing the BOSH stemcell
 
 To create your BOSH stemcell, complete the following tasks:
 
@@ -379,7 +374,7 @@ For each of the following environment variables, run `echo $GOVC_VAR` to record 
 For more information about `stembuild construct`, see [stembuild construct](https://github.com/cloudfoundry-incubator/stembuild#stembuild-construct) in the Cloud Foundry stembuild GitHub repository.
 
 
-## <a id='package-stemcell'></a> Step 5: Package the BOSH Stemcell
+## <a id='package-stemcell'></a> Step 5: Packaging the BOSH stemcell
 
 To package the BOSH stemcell:
 
@@ -393,7 +388,7 @@ To package the BOSH stemcell:
   * vCenter password
   * vCenter URL
 
-1. Shut down the VM. If you do not shut down the VM before you continue to the next step, the package command fails stating that the storage location for the VM could not be read.
+2. Stop the VM. If you do not stop the VM before you continue to the next step, the package command fails, and states that the storage location for the VM could not be read.
 
 1. To package the BOSH stemcell, run the following PowerShell command from your local host:
 
@@ -423,7 +418,7 @@ To package the BOSH stemcell:
 
 For more information about `stembuild package`, see [stembuild package](https://github.com/cloudfoundry-incubator/stembuild#stembuild-package) in the Cloud Foundry stembuild GitHub repository.
 
-## <a id='upload-stemcell'></a> Step 6: Upload the BOSH Stemcell to <%= vars.platform_name %>
+## <a id='upload-stemcell'></a> Step 6: Uploading the BOSH stemcell to <%= vars.platform_name %>
 
 To upload the BOSH stemcell to <%= vars.ops_manager %>:
 
@@ -436,7 +431,7 @@ To upload the BOSH stemcell to <%= vars.ops_manager %>:
 <br>
 For more information about `stembuild`, see [Stembuild](https://github.com/cloudfoundry-incubator/stembuild#stembuild) in the Cloud Foundry stembuild GitHub repository.
 
-## <a id='upgrade-stemcell'></a> Monthly Stemcell Upgrades
+## <a id='upgrade-stemcell'></a> Monthly stemcell upgrades
 
 After Microsoft releases operating system updates, you should upgrade your BOSH stemcell. Microsoft typically releases Windows updates on the second Tuesday of each month.
 
@@ -455,7 +450,7 @@ To upgrade your BOSH stemcell:
 1. Deploy the <%= vars.windows_runtime_abbr %> or <%= vars.k8s_runtime_abbr %> tile.
 
 
-## <a id='known-issues'></a> Known Issues
+## <a id='known-issues'></a> Known issues
 
 ### <a name='special-characters'></a> Authentication Error with Special Characters in stembuild Commands
 
@@ -550,7 +545,7 @@ For example:
 
     <p class="note"><strong>Note:</strong> Windows environment variables do not automatically override vCenter command line parameters, so you must specify the environment variables in the vCenter command as shown above.</p>
 
-### <a name='authenticate-using-certs'></a> Authenticate into a Destination vCenter Using CA Certificates
+### <a name='authenticate-using-certs'></a> Authenticating into a destination vCenter Using CA Certificates
 
 **Symptom**
 
@@ -577,4 +572,4 @@ in the destination vCenter:
 
 To use the staged CA certificates with `stembuild`, include the optional `-vcenter-ca-certs`
 flag in your `stembuild` command as shown in the example `construct` and `package`
-command lines above.
+command lines.
