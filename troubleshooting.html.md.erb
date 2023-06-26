@@ -155,7 +155,9 @@ To forward Windows logs to an external syslog server:
   1. Activate the **TLS Enabled** checkbox.
   1. For **Ca certificate**, provide the CA certificate that validates connections to an external server.
 
-1. Activate the **Enable system metrics** check box. For a list of the VM metrics that the System Metric Agent emits, see
+1. Under **ca_cert**, add the certificate to validate connections to external server if using tls.
+
+1. Select the **Enable system metrics** check box. For a list of the VM metrics that the System Metric Agent emits, see
 [VM Metrics](https://github.com/cloudfoundry/system-metrics-release/blob/main/docs/system-metrics-agent.md) in the System Metrics repository on GitHub.
 
 1. Click **Save**.
