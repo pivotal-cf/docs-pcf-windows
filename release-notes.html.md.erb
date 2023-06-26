@@ -14,6 +14,918 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 
 ## <a id='releases'></a> Releases
 
+### <a id='5.0.0'></a> 5.0.0
+
+**Release Date:** 06/26/2023
+
+* **[Feature]** Adds support for W3C Trace ID logging across Diego component requests
+* **[Bug Fix]** Timeouts in for executor's uploader have been increased to 500ms
+* **[Bug Fix]** Byte-based logging limits for LRPs and Tasks now emit only once per second
+* **[Bug Fix/Improvement]** Garden now ships with Busybox 1.36.1 as the default filesystem
+
+* Bump count-cores-indicator to version `2.0.0`
+* Bump diego to version `2.78.0`
+* Bump envoy-nginx to version `0.17.0`
+* Bump garden-runc to version `1.33.0`
+* Bump hwc-offline-buildpack to version `3.1.31`
+* Bump loggregator-agent to version `7.2.1`
+* Bump metrics-discovery to version `3.2.9`
+* Bump winc to version `2.13.0`
+* Bump windows-syslog to version `1.1.14`
+* Bump windows-utilities to version `0.20.0`
+
+<table border="1" class="nice">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+      <th>Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>windows2019 stemcell</td><td>2019.61</td><td></td></tr>
+    <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
+    <tr><td>diego</td><td>2.78.0</td>
+      <td>
+        <details>
+          <summary>v2.78.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bumped to golang 1.20.5
+  - Vizzini now defaults to cflinuxfs4
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/vizzini/spec b/jobs/vizzini/spec
+  index 40b5eb74b..6ff53c654 100644
+  --- a/jobs/vizzini/spec
+  +++ b/jobs/vizzini/spec
+  @@ -73,7 +73,7 @@ properties:
+  default_rootfs:
+  description: "Default preloaded rootfs to target for running Tasks and LRPs"
+  -    default: "preloaded:cflinuxfs3"
+  +    default: "preloaded:cflinuxfs4"
+  grace_tarball_url:
+  description: "URL for the grace test asset"
+  ```
+  ## ✨  Built with go 1.20.5
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.77.0...v2.78.0
+  ## Resources
+  - [Download release v2.78.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.78.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v2.77.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Adds support for W3C Trace ID logging across diego component requests
+  - Timeouts in for executor's uploader have been increased to 500ms
+  - Byte-based logging limits for LRPs and Tasks now emit only once per second
+  -  LRPs can now have liveness and readiness check intervals defined when the LRP is created.
+  - Dependency Bumps:
+  - code.cloudfoundry.org/archiver a23cadd462ce
+  - code.cloudfoundry.org/certsplitter a2c6caf14c29
+  - code.cloudfoundry.org/cf-tcp-router ecebe81f2c0c
+  - code.cloudfoundry.org/credhub-cli 439bdb2
+  - code.cloudfoundry.org/debugserver 70a733dc508f
+  - code.cloudfoundry.org/diego-logging-client 40495b68ac2e
+  - code.cloudfoundry.org/durationjson 7a601daf48ee
+  - code.cloudfoundry.org/eventhub 8efdeac72e14
+  - code.cloudfoundry.org/garden 8444ff5a31d7
+  - code.cloudfoundry.org/goshims v0.17.0
+  - code.cloudfoundry.org/grootfs 79fecf24
+  - code.cloudfoundry.org/guardian 98f55817772e
+  - code.cloudfoundry.org/idmapper a410520
+  - code.cloudfoundry.org/localip 2ea90d997658
+  - github.com/aws/aws-sdk-go v1.44.269
+  - github.com/awslabs/amazon-ecr-credential-helper/ecr-login 7f2db5bd753e
+  - github.com/cloudfoundry/dropsonde v1.1.0
+  - github.com/docker/docker v24.0.1+incompatible
+  - github.com/envoyproxy/go-control-plane ba92d50b6596
+  - github.com/nats-io/nats-server/v2 v2.9.17
+  - github.com/nats-io/nats.go v1.26.0
+  - github.com/onsi/ginkgo/v2 v2.9.5
+  - github.com/onsi/gomega v1.27.7
+  - github.com/tedsuo/ifrit 7862c310ad26
+  - golang.org/x/sys v0.8.0
+  - google.golang.org/grpc v1.55.0
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.76.0...v2.77.0
+  ## Resources
+  - [Download release v2.77.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.77.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v2.76.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bump to Go 1.20.4
+  - Bump dependencies
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/auctioneer/spec b/jobs/auctioneer/spec
+  index ae685ceb9..1fac48936 100644
+  --- a/jobs/auctioneer/spec
+  +++ b/jobs/auctioneer/spec
+  @@ -88,6 +88,12 @@ properties:
+  diego.auctioneer.locket.api_location:
+  description: "Hostname and port of the Locket server. When set, the auctioneer attempts to claim a lock from the Locket API."
+  default: locket.service.cf.internal:8891
+  +  diego.auctioneer.locket.client_keepalive_time:
+  +    description: "Period in seconds after which the locket gRPC client sends keepalive ping requests to the locket server it is connected to."
+  +    default: 10
+  +  diego.auctioneer.locket.client_keepalive_timeout:
+  +    description: "Timeout in seconds to receive a response to the keepalive ping. If a response is not received within this time, the locket client will reconnect to another server."
+  +    default: 22
+  locks.locket.enabled:
+  description: When set, the auctioneer attempts to claim a lock from the Locket API.
+  diff --git a/jobs/bbs/spec b/jobs/bbs/spec
+  index b6f1040c2..9204a8d4c 100644
+  --- a/jobs/bbs/spec
+  +++ b/jobs/bbs/spec
+  @@ -140,6 +140,12 @@ properties:
+  diego.bbs.locket.api_location:
+  description: "Hostname and port of the Locket server. When set, the BBS attempts to claim a lock from the Locket API and will detect Diego cells registered with the Locket API."
+  default: locket.service.cf.internal:8891
+  +  diego.bbs.locket.client_keepalive_time:
+  +    description: "Period in seconds after which the locket gRPC client sends keepalive ping requests to the locket server it is connected to."
+  +    default: 10
+  +  diego.bbs.locket.client_keepalive_timeout:
+  +    description: "Timeout in seconds to receive a response to the keepalive ping. If a response is not received within this time, the locket client will reconnect to another server."
+  +    default: 22
+  limits.open_files:
+  description: Maximum number of files (including sockets) the BBS process may have open.
+  diff --git a/jobs/rep/spec b/jobs/rep/spec
+  index df7bd7c49..1383b67c0 100644
+  --- a/jobs/rep/spec
+  +++ b/jobs/rep/spec
+  @@ -217,6 +217,12 @@ properties:
+  diego.rep.locket.api_location:
+  description: "Hostname and port of the Locket server. When set, the cell rep will establish its cell registration in the Locket API."
+  default: locket.service.cf.internal:8891
+  +  diego.rep.locket.client_keepalive_time:
+  +    description: "Period in seconds after which the locket gRPC client sends keepalive ping requests to the locket server it is connected to."
+  +    default: 10
+  +  diego.rep.locket.client_keepalive_timeout:
+  +    description: "Timeout in seconds to receive a response to the keepalive ping. If a response is not received within this time, the locket client will reconnect to another server."
+  +    default: 22
+  enable_declarative_healthcheck:
+  description: "When set, enables the rep to prefer the LRP CheckDefinition to healthcheck instances over the Monitor action. Requires Garden-Runc v1.10.0+"
+  diff --git a/jobs/rep_windows/spec b/jobs/rep_windows/spec
+  index 4fc4504bf..023d76f18 100644
+  --- a/jobs/rep_windows/spec
+  +++ b/jobs/rep_windows/spec
+  @@ -227,7 +227,13 @@ properties:
+  diego.rep.locket.api_location:
+  description: "Hostname and port of the locket server"
+  default: locket.service.cf.internal:8891
+  -
+  +  diego.rep.locket.client_keepalive_time:
+  +    description: "Period in seconds after which the locket gRPC client sends keepalive ping requests to the locket server it is connected to."
+  +    default: 10
+  +  diego.rep.locket.client_keepalive_timeout:
+  +    description: "Timeout in seconds to receive a response to the keepalive ping. If a response is not received within this time, the locket client will reconnect to another server."
+  +    default: 22
+  +
+  enable_declarative_healthcheck:
+  description: "When set, enables the rep to prefer the LRP CheckDefinition to healthcheck instances over the Monitor action."
+  default: false
+  diff --git a/jobs/vizzini/spec b/jobs/vizzini/spec
+  index fa6c8d0d0..40b5eb74b 100644
+  --- a/jobs/vizzini/spec
+  +++ b/jobs/vizzini/spec
+  @@ -47,9 +47,6 @@ properties:
+  vizzini.verbose:
+  description: Run tests in verbose mode
+  default: false
+  -  vizzini.stream:
+  -    description: Stream output from parallel test nodes. This option will lead to less coherent output but is useful when debugging
+  -    default: false
+  enable_declarative_healthcheck:
+  description: "When set, enables the declarative check tests in vizzini"
+  ```
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.75.0...v2.76.0
+  ## Resources
+  - [Download release v2.76.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.76.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v2.75.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  * Bump ginkgo to v2 and lager to v3
+  * [Bug fix] Rep does not clean up resources when deleting container fails
+  ## ✨  Built with go 1.20.3
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.73.0...v2.75.0
+  ## Resources
+  - [Download release v2.75.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.75.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v2.73.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bumps [github.com/golang-jwt/jwt/v4](https://github.com/golang-jwt/jwt) from `4.2.0` to `4.5.0`.
+  - Update diego-logging-client to SendSpikeMetrics with EmitTimer instead of EmitGauge (#714)
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/rep/spec b/jobs/rep/spec
+  index 8591fb6ba..df7bd7c49 100644
+  --- a/jobs/rep/spec
+  +++ b/jobs/rep/spec
+  @@ -182,7 +182,7 @@ properties:
+  description: "Environment variables to use when running the garden health check"
+  default: ""
+  diego.executor.post_setup_hook:
+  -    description: "Experimental: arbitrary command to run after setup action"
+  +    description: "Experimental: arbitrary command to run after setup action. WARNING: this applies to both buildpack + docker app lifecycles. Any commands specified here *MUST* exist in any docker image being run, or the app will fail to start"
+  diego.executor.post_setup_user:
+  description: "Experimental: user to run post setup hook command"
+  diego.executor.volman.driver_paths:
+  diff --git a/jobs/vizzini/spec b/jobs/vizzini/spec
+  index 57feb767a..fa6c8d0d0 100644
+  --- a/jobs/vizzini/spec
+  +++ b/jobs/vizzini/spec
+  @@ -80,11 +80,11 @@ properties:
+  grace_tarball_url:
+  description: "URL for the grace test asset"
+  -    default: "https://storage.googleapis.com/diego-assets-bucket/grace.tar.gz"
+  +    default: "https://storage.googleapis.com/diego-assets/grace.tar.gz"
+  grace_tarball_checksum:
+  description: "grace test asset sha1 checksum"
+  grace_busybox_image_url:
+  description: "grace test asset busybox container image"
+  -    default: "docker:///cfdiegodocker/grace"
+  +    default: "docker:///cloudfoundry/grace"
+  ```
+  ## ✨  Built with go 1.20.2
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.72.0...v2.73.0
+  ## Resources
+  - [Download release v2.73.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.73.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v2.72.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Envoy bump to 1.25.1
+  - Metric tags can be updated for running containers
+  - Support for configurable entrypoints in buildpackapplifecycle (cloudfoundry/buildpackapplifecycle#58)
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/auctioneer/spec b/jobs/auctioneer/spec
+  index 4fd93c8b2..ae685ceb9 100644
+  --- a/jobs/auctioneer/spec
+  +++ b/jobs/auctioneer/spec
+  @@ -88,13 +88,6 @@ properties:
+  diego.auctioneer.locket.api_location:
+  description: "Hostname and port of the Locket server. When set, the auctioneer attempts to claim a lock from the Locket API."
+  default: locket.service.cf.internal:8891
+  -  diego.auctioneer.skip_consul_lock:
+  -    default: false
+  -    description: "Set to 'true' for the auctioneer to skip acquiring a Consul lock. Requires 'diego.auctioneer.locket.api_location' to be set."
+  -
+  -  enable_consul_service_registration:
+  -    description: "Enable the auctioneer to register itself as a service with Consul, for client discovery via Consul DNS. Do not disable without arranging alternate service discovery."
+  -    default: true
+  locks.locket.enabled:
+  description: When set, the auctioneer attempts to claim a lock from the Locket API.
+  diff --git a/jobs/bbs/spec b/jobs/bbs/spec
+  index 11cd996f0..b6f1040c2 100644
+  --- a/jobs/bbs/spec
+  +++ b/jobs/bbs/spec
+  @@ -140,16 +140,6 @@ properties:
+  diego.bbs.locket.api_location:
+  description: "Hostname and port of the Locket server. When set, the BBS attempts to claim a lock from the Locket API and will detect Diego cells registered with the Locket API."
+  default: locket.service.cf.internal:8891
+  -  diego.bbs.skip_consul_lock:
+  -    default: false
+  -    description: "Set to 'true' for the BBS to skip acquiring a Consul lock. Requires 'diego.bbs.locket.api_location' to be set."
+  -  diego.bbs.detect_consul_cell_registrations:
+  -    default: true
+  -    description: "Whether the BBS should detect Diego cell registrations present in the Consul key-value store. To prevent unexpected loss of capacity, set to 'false' only when the BBS uses Locket and when all Diego cells in the cluster maintain their registrations via Locket."
+  -
+  -  enable_consul_service_registration:
+  -    description: "Enable the BBS to register itself as a service with Consul, for client discovery via Consul DNS. Do not disable without arranging alternate service discovery."
+  -    default: true
+  limits.open_files:
+  description: Maximum number of files (including sockets) the BBS process may have open.
+  diff --git a/jobs/file_server/spec b/jobs/file_server/spec
+  index 7d50581a3..dddda86c2 100644
+  --- a/jobs/file_server/spec
+  +++ b/jobs/file_server/spec
+  @@ -59,10 +59,6 @@ properties:
+  tls.key:
+  description: "PEM-encoded tls key"
+  -  enable_consul_service_registration:
+  -    description: "Enable the file-server to register itself as a service with Consul, for client discovery via Consul DNS. Do not disable without arranging alternate service discovery."
+  -    default: true
+  -
+  logging.format.timestamp:
+  description: "Format for timestamp in component logs. Valid values are 'unix-epoch' and 'rfc3339'."
+  default: "unix-epoch"
+  diff --git a/jobs/locket/spec b/jobs/locket/spec
+  index 0bbcc4c7b..640651ffb 100644
+  --- a/jobs/locket/spec
+  +++ b/jobs/locket/spec
+  @@ -66,9 +66,6 @@ properties:
+  default: false
+  diego.locket.sql.ca_cert:
+  description: "Bundle of CA certificates for the Locket to verify the SQL server SSL certificate when connecting via SSL"
+  -  enable_consul_service_registration:
+  -    description: "Enable the Locket server to register itself as a service with Consul, for client discovery via Consul DNS. Do not disable without arranging alternate service discovery."
+  -    default: true
+  logging.format.timestamp:
+  description: "Format for timestamp in component logs. Valid values are 'unix-epoch' and 'rfc3339'."
+  diff --git a/jobs/rep/spec b/jobs/rep/spec
+  index e2d40d28c..8591fb6ba 100644
+  --- a/jobs/rep/spec
+  +++ b/jobs/rep/spec
+  @@ -9,9 +9,6 @@ templates:
+  trusted_ca_certificates.json.erb: config/certs/rep/trusted_ca_certificates.json
+  instance_identity.crt.erb: config/certs/rep/instance_identity.crt
+  instance_identity.key.erb: config/certs/rep/instance_identity.key
+  -  consul_ca.crt.erb: config/certs/consul/ca.crt
+  -  consul_client.crt.erb: config/certs/consul/client.crt
+  -  consul_client.key.erb: config/certs/consul/client.key
+  rep.json.erb: config/rep.json
+  bpm.yml.erb: config/bpm.yml
+  bpm-pre-start.erb: bin/bpm-pre-start
+  @@ -106,16 +103,6 @@ properties:
+  tls.ca_cert:
+  description: "REQUIRED: PEM-encoded tls client CA certificate for asset upload/download"
+  -  diego.rep.consul.require_tls:
+  -    description: "Require mutual TLS to talk to the local consul API"
+  -    default: false
+  -  diego.rep.consul.ca_cert:
+  -    description: "PEM-encoded CA certificate"
+  -  diego.rep.consul.client_cert:
+  -    description: "PEM-encoded client certificate"
+  -  diego.rep.consul.client_key:
+  -    description: "PEM-encoded client key"
+  -
+  diego.executor.memory_capacity_mb:
+  description: "the memory capacity the executor should manage.  this should not be greater than the actual memory on the VM"
+  default: "auto"
+  @@ -228,12 +215,9 @@ properties:
+  default: "rep"
+  diego.rep.locket.api_location:
+  -    description: "Hostname and port of the Locket server. When set, the cell rep will establish its cell registration in the Locket API instead of in the Consul key-value store."
+  +    description: "Hostname and port of the Locket server. When set, the cell rep will establish its cell registration in the Locket API."
+  default: locket.service.cf.internal:8891
+  -  enable_consul_service_registration:
+  -    description: "Enable the cell rep to register itself as a service with Consul, for client discovery via Consul DNS. Do not disable without arranging alternate service discovery."
+  -    default: true
+  enable_declarative_healthcheck:
+  description: "When set, enables the rep to prefer the LRP CheckDefinition to healthcheck instances over the Monitor action. Requires Garden-Runc v1.10.0+"
+  default: false
+  diff --git a/jobs/rep_windows/spec b/jobs/rep_windows/spec
+  index 2933d2dbc..4fc4504bf 100644
+  --- a/jobs/rep_windows/spec
+  +++ b/jobs/rep_windows/spec
+  @@ -9,9 +9,6 @@ templates:
+  trusted_ca_certificates.json.erb: config/certs/rep/trusted_ca_certificates.json
+  instance_identity.crt.erb: config/certs/rep/instance_identity.crt
+  instance_identity.key.erb: config/certs/rep/instance_identity.key
+  -  consul_ca.crt.erb: config/certs/consul/ca.crt
+  -  consul_client.crt.erb: config/certs/consul/client.crt
+  -  consul_client.key.erb: config/certs/consul/client.key
+  rep.json.erb: config/rep.json
+  loggregator_ca.crt.erb: config/certs/loggregator/ca.crt
+  loggregator_client.crt.erb: config/certs/loggregator/client.crt
+  @@ -102,16 +99,6 @@ properties:
+  tls.ca_cert:
+  description: "REQUIRED: PEM-encoded tls client CA certificate for asset upload/download"
+  -  diego.rep.consul.require_tls:
+  -    description: "Require mutual TLS to talk to the local consul API"
+  -    default: false
+  -  diego.rep.consul.ca_cert:
+  -    description: "PEM-encoded CA certificate"
+  -  diego.rep.consul.client_cert:
+  -    description: "PEM-encoded client certificate"
+  -  diego.rep.consul.client_key:
+  -    description: "PEM-encoded client key"
+  -
+  diego.executor.memory_capacity_mb:
+  description: "the memory capacity the executor should manage.  this should not be greater than the actual memory on the VM"
+  default: "auto"
+  @@ -241,9 +228,6 @@ properties:
+  description: "Hostname and port of the locket server"
+  default: locket.service.cf.internal:8891
+  -  enable_consul_service_registration:
+  -    description: "Enable the cell rep to register itself as a service with Consul, for client discovery via Consul DNS. Do not disable without arranging alternate service discovery."
+  -    default: true
+  enable_declarative_healthcheck:
+  description: "When set, enables the rep to prefer the LRP CheckDefinition to healthcheck instances over the Monitor action."
+  default: false
+  diff --git a/jobs/route_emitter/spec b/jobs/route_emitter/spec
+  index 7c84cbba4..faac3b0c5 100644
+  --- a/jobs/route_emitter/spec
+  +++ b/jobs/route_emitter/spec
+  @@ -146,9 +146,6 @@ properties:
+  description: "Cert used to communicate with local metron agent over gRPC"
+  loggregator.key:
+  description: "Key used to communicate with local metron agent over gRPC"
+  -  locks.consul.enabled:
+  -    description: "Whether the route-emitter in global mode should attempt to claim its activity lock via the Consul API."
+  -    default: true
+  locks.locket.enabled:
+  description: "Whether the route-emitter in global mode should attempt to claim its activity lock via the Locket API."
+  default: true
+  diff --git a/jobs/route_emitter_windows/spec b/jobs/route_emitter_windows/spec
+  index d86340e8f..404c9f518 100644
+  --- a/jobs/route_emitter_windows/spec
+  +++ b/jobs/route_emitter_windows/spec
+  @@ -146,9 +146,6 @@ properties:
+  description: "Cert used to communicate with local metron agent over gRPC"
+  loggregator.key:
+  description: "Key used to communicate with local metron agent over gRPC"
+  -  locks.consul.enabled:
+  -    description: "Whether the route-emitter in global mode should attempt to claim its activity lock via the Consul API."
+  -    default: true
+  locks.locket.enabled:
+  description: "Whether the route-emitter in global mode should attempt to claim its activity lock via the Locket API."
+  default: true
+  diff --git a/jobs/ssh_proxy/spec b/jobs/ssh_proxy/spec
+  index a2919c5ab..cd39dbd52 100644
+  --- a/jobs/ssh_proxy/spec
+  +++ b/jobs/ssh_proxy/spec
+  @@ -119,9 +119,6 @@ properties:
+  connect_to_instance_address:
+  description: "Connect directly to container IP instead of to the host IP and external port. Suitable only for deployments in which the gorouters and TCP routers can route directly to the container IP of instances."
+  default: false
+  -  enable_consul_service_registration:
+  -    description: "Enable the ssh-proxy to register itself as a service with Consul, for client discovery via Consul DNS. Do not disable without arranging alternate service discovery."
+  -    default: true
+  logging.format.timestamp:
+  description: "Format for timestamp in component logs. Valid values are 'unix-epoch' and 'rfc3339'."
+  ```
+  ## ✨  Built with go 1.20.1
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.71.0...v2.72.0
+  ## Resources
+  - [Download release v2.72.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.72.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>envoy-nginx</td><td>0.17.0</td>
+      <td>
+        <details>
+          <summary>v0.17.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bumped golang to 1.20.5
+  ## ✨  Built with go 1.20.5
+  **Full Changelog**: https://github.com/cloudfoundry/envoy-nginx-release/compare/v0.16.0...v0.17.0
+  ## Resources
+  - [Download release v0.17.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/envoy-nginx-release?version=0.17.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v0.16.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Dependency bumps:
+  - go 1.20.4
+  - github.com/fsnotify/fsnotify 1.6.0
+  - github.com/onsi/ginkgo 2.9.5
+  - github.com/onsi/gomega 1.27.6
+  - gpkg.in/yaml.v2 2.4.0
+  - updated CI testing scripts for better error handling
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/envoy-nginx-release/compare/v0.15.0...v0.16.0
+  ## Resources
+  - [Download release v0.16.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/envoy-nginx-release?version=0.16.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v0.15.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Upgrade to go 1.20.1
+  ## ✨  Built with go 1.20.1
+  **Full Changelog**: https://github.com/cloudfoundry/envoy-nginx-release/compare/v0.14.0...v0.15.0
+  ## Resources
+  - [Download release v0.15.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry-incubator/envoy-nginx-release?version=0.15.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>garden-runc</td><td>1.33.0</td>
+      <td>
+        <details>
+          <summary>v1.33.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bumped to golang 1.20.5
+  ## ✨  Built with go 1.20.5
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.32.0...v1.33.0
+  ## Resources
+  - [Download release v1.33.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.33.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.32.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - The grootfs package no longer ships with test asset tarballs (those are only used for unit tests and don't need to be installed as part of the package).
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.31.0...v1.32.0
+  ## Resources
+  - [Download release v1.32.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.32.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.31.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Garden now ships with Busybox 1.36.1 as the default filesystem
+  - Dependency Bumps
+  - healthchecker boshrelease  v0.8.0
+  - github.com/onsi/gomega v1.27.7
+  - go.opentelemetry.io/otel v1.15.1
+  - github.com/burntsushi/toml v1.3.0
+  - github.com/docker/docker v24.0.2+incompatible
+  - github.com/urfave/cli/v2 v2.25.5
+  - github.com/cloudfoundry/dropsonde v1.1.0
+  - github.com/sirupsen/logrus v1.9.2
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/garden/spec b/jobs/garden/spec
+  index c69f4080..259bba46 100644
+  --- a/jobs/garden/spec
+  +++ b/jobs/garden/spec
+  @@ -89,7 +89,7 @@ properties:
+  garden.default_container_rootfs:
+  description: "path to the rootfs to use when a container specifies no rootfs"
+  -    default: /var/vcap/packages/busybox/busybox-1.35.0.tar
+  +    default: /var/vcap/packages/busybox/busybox-1.36.1.tar
+  garden.graph_cleanup_threshold_in_mb:
+  description: "DEPRECATED in favour of grootfs.reserved_space_for_other_jobs_in_mb."
+  ```
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.30.0...v1.31.0
+  ## Resources
+  - [Download release v1.31.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.31.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.30.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bump dependencies:
+  - github.com/onsi/ginkgo 2.9.5
+  - golang.org/x/sys 0.8.0
+  - Add support for including request trace IDs in garden/guardian
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.29.0...v1.30.0
+  ## Resources
+  - [Download release v1.30.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.30.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.29.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  ⚠️We have removed the garden-healthcheck job from garden while we investigate a way to make it less painful. From v1.22.6 through v1.28.0, garden restarts with a high container count could result in BOSH deploys failing due to a race condition between garden, bpm, monit, and garden-healthchecker. This will be re-enabled at a later time when we resolve the race condition.
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.28.0...v1.29.0
+  ## Resources
+  - [Download release v1.29.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.29.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.28.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bump to golang 1.20.4
+  - Bump dependencies
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.27.0...v1.28.0
+  ## Resources
+  - [Download release v1.28.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.28.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.27.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  * Bump ginkgo to v2 and lager to v3
+  ## ✨  Built with go 1.20.3
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.26.0...v1.27.0
+  ## Resources
+  - [Download release v1.27.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.27.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.26.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bump runc version to 1.1.4
+  - Bump containerd version to 1.6.19
+  - Fix cloudfoundry/garden-runc-release#233
+  ## ✨  Built with go 1.20.1
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.25.0...v1.26.0
+  ## Resources
+  - [Download release v1.26.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.26.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.25.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  * Bump containerd to 1.6.16 by @winkingturtle-vmw in https://github.com/cloudfoundry/garden-runc-release/pull/250
+  * Remove xfs-progs blob from release by @winkingturtle-vmw in https://github.com/cloudfoundry/garden-runc-release/pull/243
+  * Build iptables with musl and disable sharing by @winkingturtle-vmw in https://github.com/cloudfoundry/garden-runc-release/pull/251
+  * Build containerd from guardian by @winkingturtle-vmw in https://github.com/cloudfoundry/garden-runc-release/pull/253
+  * Bring back xfsprogs by @winkingturtle-vmw in https://github.com/cloudfoundry/garden-runc-release/pull/254
+  * Bump to go 1.20
+  * Update healthchecker to [0.4.0](https://github.com/cloudfoundry/healthchecker-release/releases/tag/v0.4.0)
+  * Increase startup delay default to 30 seconds [PR](https://github.com/cloudfoundry/healthchecker-release/pull/2)
+  ## ✨  Built with go 1.20.1
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.23.0...v1.25.0
+  ## Resources
+  - [Download release v1.25.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.25.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.24.0-rc.6</summary>
+          <pre style="max-width: 30em">
+  ⚠️ We recommend not using this release version.
+  🐛 This release was accidentally released with the name "1.24.0-rc.6". We will release 1.25.0 soon.
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.31</td>
+      <td>
+        <details>
+          <summary>3.1.31</summary>
+          <pre style="max-width: 30em">
+  * Updating github-config (#127)
+  Packaged binaries:
+  | name | version | cf_stacks |
+  |-|-|-|
+  | hwc | 23.0.0 | windows, windows2016 |
+  Default binary versions:
+  | name | version |
+  |-|-|
+  | hwc | 23.0.0 |
+  * Uncached buildpack SHA256: 22b3e864d959aa711d10503788a01946fc7be9d29c8252a64de5dfa4c396ae90
+  * Uncached buildpack SHA256: dbe18078d9fe47acbb6485876e2c67547995976943e47b5c1637d72e9ea9bf58
+          </pre>
+        </details>
+        <details>
+          <summary>3.1.30</summary>
+          <pre style="max-width: 30em">
+  * Update libbuildpack
+  * Bump github.com/onsi/gomega from 1.27.4 to 1.27.6
+  * Bump github.com/onsi/gomega from 1.26.0 to 1.27.4
+  Packaged binaries:
+  | name | version | cf_stacks |
+  |-|-|-|
+  | hwc | 23.0.0 | windows, windows2016 |
+  Default binary versions:
+  | name | version |
+  |-|-|
+  | hwc | 23.0.0 |
+  * Uncached buildpack SHA256: 6f4ed709322d792dfe1ac4d28dd1d488e7db2807ef372bff1bfe1cfe23672373
+  * Uncached buildpack SHA256: 470d6da338b0bdd646ddda4e7da5f5394eb535cef5923df6da4ec8e306652819
+          </pre>
+        </details>
+        <details>
+          <summary>3.1.29</summary>
+          <pre style="max-width: 30em">
+  * Add hwc 23.0.0, remove hwc 21.0.0
+  for stack(s) windows2016, windows
+  (https://www.pivotaltracker.com/story/show/184616166)
+  * Buildpack dependencies are built with go 1.20
+  (See https://github.com/cloudfoundry/binary-builder/pull/68)
+  Packaged binaries:
+  | name | version | cf_stacks |
+  |-|-|-|
+  | hwc | 23.0.0 | windows, windows2016 |
+  Default binary versions:
+  | name | version |
+  |-|-|
+  | hwc | 23.0.0 |
+  * Uncached buildpack SHA256: 2e619938370b92d1091fee37ec926e77dd602223f846063a3dc037851a368c51
+  * Uncached buildpack SHA256: 1944089ab21fb921709dc3dd28e2c9085384dbb867e4929207e41ebd03fd6733
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>loggregator-agent</td><td>7.2.1</td>
+      <td>
+        <details>
+          <summary>v7.2.1</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump to [go1.20.4](https://groups.google.com/g/golang-announce/c/MEb0UyuSMsU/m/QvrjqM4XAgAJ)
+  * Bump dependencies
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.2.0...v7.2.1
+          </pre>
+        </details>
+        <details>
+          <summary>v7.2.0</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump golang.org/x/net from 0.8.0 to 0.9.0 in /src by @dependabot in https://github.com/cloudfoundry/loggregator-agent-release/pull/283
+  * Add mtls options to aggregate drains.  by @Benjamintf1 in https://github.com/cloudfoundry/loggregator-agent-release/pull/276
+  * switch gorilla with chi by @Benjamintf1 in https://github.com/cloudfoundry/loggregator-agent-release/pull/285
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.1.3...v7.2.0
+          </pre>
+        </details>
+        <details>
+          <summary>v7.1.3</summary>
+          <pre style="max-width: 30em">
+  * Upgrade to go 1.20.2
+  * Bump dependencies
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.1.2...v7.1.3
+          </pre>
+        </details>
+        <details>
+          <summary>v7.1.2</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * update to golang 1.20.1
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.1.1...v7.1.2
+          </pre>
+        </details>
+        <details>
+          <summary>v7.1.1</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * update dependencies
+  * Add error messages for better traceability of filtered out syslog drain bindings by @chombium in https://github.com/cloudfoundry/loggregator-agent-release/pull/216
+  * Upgrade to go 1.20 by @rroberts2222 in https://github.com/cloudfoundry/loggregator-agent-release/pull/223
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.1.0...v7.1.1
+          </pre>
+        </details>
+        <details>
+          <summary>v7.1.0</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Add app-id and drain url in the error message by @chombium in https://github.com/cloudfoundry/loggregator-agent-release/pull/212
+  ## New Contributors
+  * @chombium made their first contribution in https://github.com/cloudfoundry/loggregator-agent-release/pull/212
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.0.2...v7.1.0
+          </pre>
+        </details>
+        <details>
+          <summary>v7.0.2</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Sanitize ProcID in syslog messages so messages with utf-8 in the source_type are not dropped by @Benjamintf1 in https://github.com/cloudfoundry/loggregator-agent-release/pull/200
+  * Update dependencies
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.0.1...v7.0.2
+          </pre>
+        </details>
+        <details>
+          <summary>v7.0.1</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Fix: anonymize URL in syslog drain logs and metrics by @ctlong in https://github.com/cloudfoundry/loggregator-agent-release/pull/186
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.0.0...v7.0.1
+          </pre>
+        </details>
+        <details>
+          <summary>v7.0.0</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Allow application developers to set client certs and keys, as well as server cas, to be used for authentication in syslog-tls drains by @fhambrec, @dark5un in https://github.com/cloudfoundry/loggregator-agent-release/pull/177 / https://github.com/cloudfoundry/loggregator-agent-release/pull/119. Breaking change: requires new version of capi
+  * Add drain scope and url tags to syslog egress metrics by @skaur20 in https://github.com/cloudfoundry/loggregator-agent-release/pull/123, Breaking change: might effect metrics dashboards and calculations.
+  ## New Contributors
+  * @skaur20 made their first contribution in https://github.com/cloudfoundry/loggregator-agent-release/pull/123
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v6.5.6...v7.0.0
+          </pre>
+        </details>
+        <details>
+          <summary>v6.5.11</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * bump dependencies
+  * bump to golang 1.20.5
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v6.5.10...v6.5.11
+          </pre>
+        </details>
+        <details>
+          <summary>v6.5.10</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump to [go1.20.4](https://groups.google.com/g/golang-announce/c/MEb0UyuSMsU/m/QvrjqM4XAgAJ)
+  * Bump dependencies
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v6.5.9...v6.5.10
+          </pre>
+        </details>
+        <details>
+          <summary>v6.5.9</summary>
+          <pre style="max-width: 30em">
+  * Upgrade to go 1.20.2
+  * Bump dependencies
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v6.5.8...v6.5.9
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>metrics-discovery</td><td>3.2.9</td>
+      <td>
+        <details>
+          <summary>v3.2.9</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump to [go1.20.4](https://groups.google.com/g/golang-announce/c/MEb0UyuSMsU/m/QvrjqM4XAgAJ)
+  * Bump dependencies
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.8...v3.2.9
+          </pre>
+        </details>
+        <details>
+          <summary>v3.2.8</summary>
+          <pre style="max-width: 30em">
+  * Upgrade to go1.20.2.
+  * Bump dependencies.
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.7...v3.2.8
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>smoke-tests</td><td>4.8.2</td><td></td></tr>
+    <tr><td>winc</td><td>2.13.0</td>
+      <td>
+        <details>
+          <summary>v2.13.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bumped go to 1.20.5
+  ## ✨  Built with go 1.20.5
+  **Full Changelog**: https://github.com/cloudfoundry/winc-release/compare/v2.12.0...v2.13.0
+  ## Resources
+  - [Download release v2.13.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/winc-release?version=2.13.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v2.12.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Removes the deprecated-since-2019 `winc-network` job. Please use `winc-network-hns-acls` instead.
+  - CI testing updates
+  - Dependency Bumps:
+  - github.com/hectane/go-acl ca0b05cb1adb
+  - code.cloudfoundry.org/winc 4302f985e6d0b575bc1024b4a1c5a174a8cff1c8
+  - code.cloudfoundry.org/cert-injector f66dd1e
+  - code.cloudfoundry.org/diff-exporter 925b0b8
+  - code.cloudfoundry.org/groot-windows 5225dd5
+  - code.cloudfoundry.org/winc 2d0fe6e
+  - code.cloudfoundry.org/certsplitter 906ffdf32df6e823dabb31a5f6572aca72e52be6
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/winc-release/compare/v2.11.1...v2.12.0
+  ## Resources
+  - [Download release v2.12.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/winc-release?version=2.12.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v2.11.1</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - There were no changes in this release. It was created to test the release pipeline.
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/winc-release/compare/v2.11.0...v2.11.1
+  ## Resources
+  - [Download release v2.11.1 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/winc-release?version=2.11.1).
+          </pre>
+        </details>
+        <details>
+          <summary>v2.11.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bump to go 1.20.4
+  ## ✨  Built with go 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/winc-release/compare/v2.10.0...v2.11.0
+  ## Resources
+  - [Download release v2.11.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry-incubator/winc-release?version=2.11.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-syslog</td><td>1.1.14</td>
+      <td>
+        <details>
+          <summary>v1.1.14</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * update dependencies
+  * update golang to 1.20.4
+  **Full Changelog**: https://github.com/cloudfoundry/windows-syslog-release/compare/v1.1.13...v1.1.14
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-utilities</td><td>0.20.0</td><td></td></tr>
+  </tbody>
+</table>
+
+
+
 ### <a id='4.0.0'></a> 4.0.0
 
 **Release Date:** 03/22/2023
