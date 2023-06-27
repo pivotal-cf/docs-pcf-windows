@@ -150,14 +150,16 @@ To create and customize a base VM:
 To install Windows Server on the base VM:
 
 1. After creating the VM, click **Power** > **Power On** in the **Actions** tab for your VM.
-  <%= image_tag('./images/power-on.png') %>
+
+![alt-text=""](./images/power-on.png)
+
 
 1. Select **Windows Server 2019 Standard**.
-  <%= image_tag('./images/windows-version.png') %>
+![alt-text=""](./images/windows-version.png)
 
 1. Select **Custom installation**.
 
-1. Complete the installation process and enter a password for the Administrator user.
+2. Complete the installation process and enter a password for the Administrator user.
 
 ### <a name='verify-os'></a> Verifying the operating system
 
@@ -324,8 +326,7 @@ For each of the following environment variables, run `echo $GOVC_VAR` to record 
           <li>`CUSTOM-CERTS-PATH` is the file path to custom CA certificates for the destination vCenter. The `-vcenter-ca-certs` flag is optional.</li>
         </ul>
 
-    For more information, see [Authenticate into a Destination vCenter Using CA Certificates](#authenticate-using-certs)
-    below.
+    For more information, see [Authenticate into a Destination vCenter Using CA Certificates](#authenticate-using-certs).
 
     For example:
     <pre class="terminal">
@@ -422,7 +423,7 @@ For more information about `stembuild package`, see [stembuild package](https://
 
 To upload the BOSH stemcell to <%= vars.ops_manager %>:
 
-1. In <%= vars.ops_manager %>, navigate to **Stemcell Library**.
+1. In <%= vars.ops_manager %>, go to **Stemcell Library**.
 
 1. Upload your BOSH stemcell.
 
@@ -566,7 +567,7 @@ To stage CA certificates for `stembuild` to use to access a target VM
 in the destination vCenter:
 
 1. Open your destination vCenter's homepage.
-1. Go to the bottom of the grey box on the right side of the vCenter homepage.
+1. Go to the bottom of the gray box on the right side of the vCenter homepage.
 1. Select **Download trusted root CA certificates**.
 1. Copy the downloaded CA certificates to a path accessible to `stembuild`.
 
