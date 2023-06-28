@@ -18,8 +18,6 @@ developers can specify a Windows stack when pushing .NET apps from the command l
 <%= vars.platform_name %> passes the app to the Windows Diego Cell
 in the <%= vars.windows_runtime_abbr %> BOSH deployment.
 
-The following diagram illustrates the process:
-
 
 ## <a id="cells"></a> Windows cells
 
@@ -54,17 +52,18 @@ A Windows Diego Cell includes the following components:
 
 The following diagram illustrates the architecture of a Windows Diego Cell:
 
-<%= image_tag('./images/windows-cell.png') %>
+![alt-text=""](./images/windows-cell.png)
+
 
 ### <a id="container"></a> Container implementation
 
 Garden on Windows uses the following runtime plugins to create and manage Windows containers for <%= vars.app_runtime_full %>:
 
-* Container plugin `winc`: Creates Open Container Initiative (OCI)-compliant containers, executes processes in the containers, and sets their CPU and RAM limits. For more information about OCI compliance, see the [Open Container Initiative](https://www.opencontainers.org) website.
+* Container plug-in `winc`: Creates Open Container Initiative (OCI)-compliant containers, executes processes in the containers, and sets their CPU and RAM limits. For more information about OCI compliance, see the [Open Container Initiative](https://www.opencontainers.org) website.
 
-* Network plugin `winc-network`: Creates a network compartment for the container, applies its DNS settings, and defines its inbound and outbound network access rules.
+* Network plug-in `winc-network`: Creates a network compartment for the container, applies its DNS settings, and defines its inbound and outbound network access rules.
 
-* Rootfs image plugin `groot`: Sets up the container filesystem volume and uses the File Server Resource Manager (FSRM) API to define its disk usage quotas. For more information about the FSRM, see [File Server Resource Manager (FSRM) overview](https://docs.microsoft.com/en-us/windows-server/storage/fsrm/fsrm-overview) in the Microsoft documentation.
+* Rootfs image plug-in `groot`: Sets up the container filesystem volume and uses the File Server Resource Manager (FSRM) API to define its disk usage quotas. For more information about the FSRM, see [File Server Resource Manager (FSRM) overview](https://docs.microsoft.com/en-us/windows-server/storage/fsrm/fsrm-overview) in the Microsoft documentation.
 
 
 ### <a id="stemcells"></a> Windows stemcells
