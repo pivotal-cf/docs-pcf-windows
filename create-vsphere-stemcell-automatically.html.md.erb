@@ -11,7 +11,7 @@ the following products on vSphere:
 * <%= vars.windows_runtime_full %> (<%= vars.windows_runtime_abbr %>)
 * <%= vars.k8s_runtime_full %> (<%= vars.k8s_runtime_abbr %>) with Windows workers in Kubernetes clusters
 
-To create a Windows stemcell for vSphere, you create a base Windows VM from a volume-licensed ISO and subsequently maintain that base template with all Windows-recommended security updates, but without the BOSH dependencies.
+To create a Windows stemcell for vSphere, you create a base Windows VM from a volume licensed ISO and subsequently maintain that base template with all Windows-recommended security updates, but without the BOSH dependencies.
 
 The Windows VM with security updates serves as the base for all future stemcells produced from clones of that base VM. This enables you to build new stemcells without having to run Windows updates from scratch each time. You can also use a "snapshot" feature to maintain an updated Windows image that does not contain the BOSH dependencies.
 
@@ -58,44 +58,43 @@ Before you create a BOSH stemcell for Windows on vSphere, you must have:
   because the licensing expires.
   For more information, see the [Windows Server documentation](https://docs.microsoft.com/en-us/windows-server/get-started-19/get-started-19)
   or the [Microsoft Volume Licensing Service Center](https://www.microsoft.com/Licensing/servicecenter/default.aspx) website.
-    <p class="note"><strong>Note:</strong> A clean ISO file has no custom scripts or tooling. For example, the ISO must have no logging or antivirus tools installed.</p>
+
+  A clean ISO file has no custom scripts or tooling. For example, the ISO must have no logging or antivirus tools installed.
 
 * A download of the `stembuild` command line interface (CLI) from a 2019.x release in [Stemcells
   (Windows)](https://network.pivotal.io/products/stemcells-windows-server) on <%= vars.product_network %>.
-    * To build a Windows stemcell for <%= vars.windows_runtime_abbr %>, use the vSphere `stembuild` CLI for Windows corresponding to both the operating system of your local host and the stemcell version that you want to build.
-    * To build a Windows stemcell for <%= vars.k8s_runtime_abbr %>, use a Windows stemcell and `stembuild` CLI version listed as compatible
+  * To build a Windows stemcell for <%= vars.windows_runtime_abbr %>, use the vSphere `stembuild` CLI for Windows corresponding to both the operating system of your local host and the stemcell version that you want to build.
+  * To build a Windows stemcell for <%= vars.k8s_runtime_abbr %>, use a Windows stemcell and `stembuild` CLI version listed as compatible
     in the **Product Snapshot** table in the release notes for your <%= vars.k8s_runtime_abbr %> version:
-      - **<%= vars.k8s_runtime_abbr %> v1.8**: [Release Notes](https://docs.pivotal.io/tkgi/1-8/release-notes.html)
-      - **PKS v1.7**: [Release Notes](https://docs.pivotal.io/pks/1-7/release-notes.html)
-      - **PKS v1.6**: [Release Notes](https://docs.pivotal.io/pks/1-6/release-notes.html)
-
+    * **<%= vars.k8s_runtime_abbr %> v1.8**: [Release Notes](https://docs.pivotal.io/tkgi/1-8/release-notes.html)
+    * **PKS v1.7**: [Release Notes](https://docs.pivotal.io/pks/1-7/release-notes.html)
+    * **PKS v1.6**: [Release Notes](https://docs.pivotal.io/pks/1-6/release-notes.html)
 
 * Microsoft [Local Group Policy Object Utility (LGPO)](https://www.microsoft.com/en-us/download/details.aspx?id=55319) downloaded to the same folder as your `stembuild` CLI.
 
 * The minimum vCenter user permissions required to use `stembuild` for vSphere stemcells, specifically:
-    * `VirtualMachine.GuestOperations.Modify`
-    * `VirtualMachine.GuestOperations.Execute`
-    * `VirtualMachine.GuestOperations.Query`
-    * `VirtualMachine.Config.AddRemoveDevice`
-    * `VirtualMachine.Interact.SetCDMedia`
-    * `VApp.Export`
-    * `System.Anonymous`*
-    * `System.Read`*
-    * `System.View`*
+  * `VirtualMachine.GuestOperations.Modify`
+  * `VirtualMachine.GuestOperations.Execute`
+  * `VirtualMachine.GuestOperations.Query`
+  * `VirtualMachine.Config.AddRemoveDevice`
+  * `VirtualMachine.Interact.SetCDMedia`
+  * `VApp.Export`
+  * `System.Anonymous`*
+  * `System.Read`*
+  * `System.View`*
 
 Permissions designated with an `*` are generated when you upon create a new user in vCenter and cannot be set within the vCenter UI.
 
-
 ## <a id='create-base-vm'></a> Step 1: Create a base VM for the BOSH stemcell
 
-Learn how to create, configure, and verify a base VM for Windows from a volume-licensed ISO.
+Learn how to create, configure, and verify a base VM for Windows from a volume licensed ISO.
 
 ### <a name='upload-windows-iso'></a> Upload the Windows Server 2019 ISO
 
+ <p> The instructions in this topic are based on vSphere v6.0.</p>
 To upload the Windows Server 2019 ISO to vSphere:
 
 1. Log in to the vSphere Web Client.
-  <p class="note"><strong>Note:</strong> The instructions in this topic are based on vSphere v6.0.</p>
 
 1. Click **Storage** and select a datastore.
 
@@ -122,40 +121,42 @@ To create and customize a base VM:
      2. Select a location for the VM.
   2. Click **Next**.
 
-   4. On the **Select a compute resource** page, select a compute resource to run the VM and click **Next**.
+  4. On the **Select a compute resource** page, select a compute resource to run the VM and click **Next**.
 
-1. On the **Select storage** page:
+  1. On the **Select storage** page:
   1. Select a **VM Storage Policy**.
   2. Select the destination datastore for the VM configuration files and virtual disks.
   3. Click **Next**.
 
-2. On the **Select compatibility** page, for the **Compatible with** configuration setting, select **ESXi 6.0 and later** and click **Next**.
+  2. On the **Select compatibility** page, for the **Compatible with** configuration setting, select **ESXi 6.0 and later** and click **Next**.
 
-3. On the **Select a guest OS** page:
+  3. On the **Select a guest OS** page:
   1. For **Guest OS Family**, select **Windows**.
   2. For **Guest OS Version**, select **Microsoft Windows Server 2019**. If **Microsoft Windows Server 2019** is not
      available, select **Microsoft Windows Server 2016**.
   3. Click **Next**.
 
-4. On the **Customize hardware** page, configure the VM hardware using the information as follows and click **Next**.
+  4. On the **Customize hardware** page, configure the VM hardware using the information as follows and click **Next**.
   1. For **New Hard disk**, specify 30&nbsp;GB or greater.
   1. For **New CD\DVD Drive**:
     1. Select **Datastore ISO File**.
     1. Select the Windows Server 2019 ISO file you uploaded to your datastore and click **OK**.
     1. Select the **Connect at Power On** check box.
 
-5. Review the configuration settings on the **Ready to complete** page, and click **Finish**.
+  5. Review the configuration settings on the **Ready to complete** page, and click **Finish**.
 
 ### <a name='install-windows-server'></a> Installation of the Windows server
 
 To install Windows Server on the base VM:
 
 1. After creating the VM, click **Power** > **Power On** in the **Actions** tab for your VM.
-![alt-text="Install a Windows server, click Power, then Power On in Actions tab for the VM."](./images/power-on.png)
+
+![alt-text="To install a Windows server, click Power, then Power On in Actions tab for the VM."](./images/power-on.png)
 
 1. Select **Windows Server 2019 Standard**.
 
 ![alt-text=""](./images/windows-version.png)
+
 1. Select **Custom installation**.
 
 2. Complete the installation process and enter a password for the Administrator user.
@@ -196,16 +197,14 @@ To install VMware Tools on the base VM:
     ```
 
 1. Wait for a pop-up window.
+    <p class="note">
 
-    <p class="note"><strong>Note:</strong>
-    The VMware Tools install window might display behind the command line window.
-    To avoid this, shrink or minimize the command line window while you are waiting.
-    </p>
+<span class="note__title">Note</span> The VMware Tools install window might display behind the command line window.
+    To avoid this, shrink or minimize the command line window while you are waiting.</p>
 
 1. When prompted, follow the instructions to finish the installation.
 
 1. To complete the installation, start the VM again.
-
 
 ## <a id='install-windows-updates'></a> Step 2: Configuring the base VM
 
@@ -256,7 +255,8 @@ This is important because your base VM and the clone VM you create share the sam
 1. Right-click the base VM.
 
 1. Select **Clone** > **Clone to Virtual Machine**. This clone is your target VM.
-![alt-text="The clone is your target VM"](./images/clone-vm.png)
+
+![alt-text="Clone is your target VM."](./images/clone-vm.png)
 
 1. Save the base VM. You run Windows updates on this VM for future stemcells.
 
@@ -275,10 +275,11 @@ To create your BOSH stemcell, complete the following tasks:
 1. If you are running [govc](https://github.com/vmware/govmomi/tree/master/govc), a CLI for vSphere operations,
 unset any `GOVC_` environment variables before you run `stembuild construct`.<br />
 For each of the following environment variables, run `echo $GOVC_VAR` to record its current setting, and then `export GOVC_VAR=` to temporarily unset it:
-  - `GOVC_USERNAME`
-  - `GOVC_INSECURE`
-  - `GOVC_PASSWORD`
-  - `GOVC_URL`
+
+* `GOVC_USERNAME`
+* `GOVC_INSECURE`
+* `GOVC_PASSWORD`
+* `GOVC_URL`
 
     **Explanation**: Local `GOVC` parameters that are set to configure `govc` take precedence over
     command-line parameters that `stembuild construct` passes in to `govc`, which can cause `stembuild construct` to fail.
@@ -296,7 +297,7 @@ For each of the following environment variables, run `echo $GOVC_VAR` to record 
     * vCenter password
     * vCenter URL
 
-    <p class="note"><strong>Note:</strong> The target VM must be routable from your local host. Before running the <code>construct</code> command, make sure you are logged out of the target VM.</p>
+    <p> The target VM must be routable from your local host. Before you run the <code>construct</code> command, make sure you are logged out of the target VM.</p>
 
 1. To construct the BOSH stemcell, run the following command from the folder where you downloaded the CLI:
 
@@ -340,10 +341,11 @@ For each of the following environment variables, run `echo $GOVC_VAR` to record 
     Stembuild construct has finished running and the VM has now been shutdown. Run 'stembuild package' to finish building the stemcell.
     </pre>
 
-    <p class='note'><strong>Note:</strong> Your <code>stembuild construct</code> operation can take up to an hour to complete.
+    <p class="note caution">
+<span class="note__title">Caution</span>
+Your <code>stembuild construct</code> operation can take up to an hour to complete.
     Although the WinRM connection stops during <code>construct</code> processing,
-    <code>construct</code> is still running. Do not attempt to run the <code>construct</code> command again.
-    </p>
+    <code>construct</code> is still running. Do not attempt to run the <code>construct</code> command again.</p>
 
     The following example shows the messages that appear as `stembuild construct` runs
     and completes successfully:
@@ -362,18 +364,17 @@ For each of the following environment variables, run `echo $GOVC_VAR` to record 
 
     1. Log in to the target VM.
 
-    1. Start PowerShell.
+    2. Start PowerShell.
 
-    1. Run:
+    3. Run:
 
-        ```
+        ```console
         Get-Content -Path "C:\provision\log.log" -Wait
         ```
 
-1. Restore the values of any `govc` variables you unset previously.
+2. Restore the values of any `govc` variables you unset previously.
 
 For more information about `stembuild construct`, see [stembuild construct](https://github.com/cloudfoundry-incubator/stembuild#stembuild-construct) in the Cloud Foundry stembuild GitHub repository.
-
 
 ## <a id='package-stemcell'></a> Step 5: Packaging the BOSH stemcell
 
@@ -381,14 +382,14 @@ To package the BOSH stemcell:
 
 1. Gather the vCenter Web Client **VMs and Templates** information that you recorded in the previous step:
 
-  * vCenter inventory path to the target VM in the `/YOUR-DATA-CENTER/vm/YOUR-FOLDER/YOUR-VM` format, where:
-      * `YOUR-DATA-CENTER` is the name of the data center.
-      * `vm` is a static string.
-      * `YOUR-FOLDER` is the name of the folder that contains the VM. If the target VM is not in a folder, use the `/YOUR-DATA-CENTER/vm/MY-VM` format instead.
-      * `YOUR-VM` is the name of the target VM.
-  * vCenter username
-  * vCenter password
-  * vCenter URL
+* vCenter inventory path to the target VM in the `/YOUR-DATA-CENTER/vm/YOUR-FOLDER/YOUR-VM` format, where:
+  * `YOUR-DATA-CENTER` is the name of the data center.
+  * `vm` is a static string.
+  * `YOUR-FOLDER` is the name of the folder that contains the VM. If the target VM is not in a folder, use the `/YOUR-DATA-CENTER/vm/MY-VM` format instead.
+  * `YOUR-VM` is the name of the target VM.
+* vCenter username
+* vCenter password
+* vCenter URL
 
 2. Stop the VM. If you do not stop the VM before you continue to the next step, the package command fails, and states that the storage location for the VM could not be read.
 
@@ -416,7 +417,8 @@ To package the BOSH stemcell:
           <li>`CUSTOM-CERTS-PATH` is the file path to custom CA certificates for the destination vCenter. The `-vcenter-ca-certs` flag is optional.For more information, see [Authenticate into a Destination vCenter Using CA Certificates](#authenticate-using-certs) below.</li>
         </ul>
 
-    <p class='note'><strong>Note:</strong> This command creates a stemcell on your local host in the folder where you ran the command and can take up to 30 minutes to complete.</p>
+    <p> This command creates a stemcell on your local host in the folder where you ran the command and can take up to 30-minutes
+    to complete.</p>
 
 For more information about `stembuild package`, see [stembuild package](https://github.com/cloudfoundry-incubator/stembuild#stembuild-package) in the Cloud Foundry stembuild GitHub repository.
 
@@ -450,7 +452,6 @@ To upgrade your BOSH stemcell:
 5. Replace the existing stemcell in the <%= vars.ops_manager %> stemcell library with this new stemcell.
 
 6. Deploy the <%= vars.windows_runtime_abbr %> or <%= vars.k8s_runtime_abbr %> tile.
-
 
 ## <a id='known-issues'></a> Known issues
 
@@ -545,7 +546,7 @@ For example:
           <li>`CUSTOM-CERTS-PATH` is the file path to custom CA certificates for the destination vCenter. The `-vcenter-ca-certs` flag is optional. For more information, see [Authenticate into a Destination vCenter Using CA Certificates](#authenticate-using-certs).</li>
         </ul>
 
-    <p class="note"><strong>Note:</strong> Windows environment variables do not automatically override vCenter command line parameters, so you must specify the environment variables in the vCenter command.</p>
+    <p> Windows environment variables do not automatically override vCenter command line parameters, so you must specify the environment variables in the vCenter command.</p>
 
 ### <a name='authenticate-using-certs'></a> Authenticating into a destination vCenter Using CA Certificates
 

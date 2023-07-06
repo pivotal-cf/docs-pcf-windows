@@ -3,7 +3,7 @@ title: Installing and Configuring TAS for VMs [Windows]
 owner: Windows
 ---
 
-This topic tells you how to install and configure the <%= vars.windows_runtime_full %> tile.
+You can install and configure the <%= vars.windows_runtime_full %> tile.
 
 The <%= vars.windows_runtime_abbr %> tile installs Windows Diego Cells in your <%= vars.platform_name %> deployment.
 
@@ -20,7 +20,7 @@ To install, configure, and deploy <%= vars.windows_runtime_abbr %>:
     1. Deploy the tile. See [Deploy the Tile](#deploy).
 
 * In an air gap environment, complete the steps in
-[Install and Configure <%= vars.windows_runtime_abbr %> in an Air-Gapped Environment](#air-gapped) below.
+[Install and Configure <%= vars.windows_runtime_abbr %> in an Air-Gapped Environment](#air-gapped).
 
 ## <a id='prerequisites'></a> Prerequisites
 
@@ -43,7 +43,8 @@ Use the **Windows FS Injector** tool to install the <%= vars.windows_runtime_abb
   * https://msecnd.net, or any domain within the Microsoft Windows Azure Content Delivery Network
   For more information about the Windows Azure Content Delivery Network, see [Introducing the Windows Azure Content Delivery Network](https://azure.microsoft.com/en-us/blog/introducing-the-windows-azure-content-delivery-network/) in the Microsoft Azure documentation.
 
-  <p class="note"><strong>Note:</strong> To ensure the authenticity of Microsoft container images, Microsoft does not permit the distribution of its base images. This includes Microsoft container images consumed through Docker Hub, which are actually delivered by an Microsoft CDN endpoint.</p>
+  <p> To ensure the authenticity of Microsoft container images, Microsoft does not permit the distribution of
+  its base images. This includes Microsoft container images consumed through Docker Hub, which are actually delivered by an Microsoft CDN endpoint.</p>
 
 ## <a id='install'></a> Installing the <%= vars.windows_runtime_abbr %> tile
 
@@ -56,7 +57,11 @@ To install the <%= vars.windows_runtime_abbr %> tile:
 
 1. Download the **Windows FS Injector** tool for your workstation OS. The Injector tool, `winfs-injector`, is an executable binary that adds the Windows Server container base image into the product file. This step requires internet access and can take up to 20 minutes.
 
-  <p class="note"><strong>Note:</strong> You need the <code>git</code> and <code>tar</code> executables in your <code>%PATH%</code> to run <code>winfs-injector.exe</code>. For example, copy <code>git.exe</code> and <code>tar.exe</code> to a directory in your <code>%PATH%</code>.</p>
+  <p class="note important">
+  <span class="note__title">Important</span> You need the <code>git</code> and <code>tar</code> executables in your <code>%PATH%</code> to run <code>winfs-injector.exe</code>.
+  For example, copy <code>git.exe</code> and <code>tar.exe</code> to a directory in your <code>%PATH%</code>.
+  </p>
+
 
 1. Add the Windows Server container base image to the product file:
 
@@ -79,16 +84,17 @@ To install the <%= vars.windows_runtime_abbr %> tile:
 
     This step takes up to 20 minutes to complete.
 
-<p class="note"><strong>Note:</strong> If you have the `BOSH_ALL_PROXY` environment variable set, this can cause the <code>winfs-injector</code> to fail, with an error like the following:
+<p> If you have the `BOSH_ALL_PROXY` environment variable set, this can cause the <code>winfs-injector</code> to fail, with an error like
+the following:
 <br><code>
 -- Failed downloading 'golang-1-windows/789a42163ee8b705cfcd8a62e590d5cbf01322c773497d6c53247cf6a4e39965' (sha1=sha256:55db4fe9804edfff5f01c5cee0d2541333a71f40c905135912c9c22783e038c1)
 </code><br>
-    If this happens, un-set the `BOSH_ALL_PROXY` environment variable, and then try again.</p>
+    If this happens, reset the `BOSH_ALL_PROXY` environment variable, and then try again.</p>
 
 1. Go to the Ops Manager Installation Dashboard and click **Import a Product**.
 
 1. To add the <%= vars.windows_runtime_abbr %> tile to the **Import a Product** product list,
-   select the importable `PASW-IMPORTABLE-PATH` file on your workstation.
+   select the importable `PASW-IMPORTABLE-PATH` file on your computer.
 
 1. To add the <%= vars.windows_runtime_abbr %> tile to your staging area, click **+** under the **<%= vars.windows_runtime_full %>** product listing.
 
@@ -110,9 +116,11 @@ To configure AZs and networks:
 
 1. Select all AZs under **Balance other jobs**. Ops Manager balances instances of jobs with more than one instance across the AZs that you specify.
 
-  <p class='note'><strong>Note:</strong> For production deployments, VMware recommends at least three AZs for a highly available installation.</p>
+  <p class="note important">
+  <span class="note__title">Important</span> For production deployments, VMware recommends at least three AZs for a highly available installation.
+  </p>
 
-1. From the **Network** drop down menu, choose the runtime network that you created when you configured the BOSH Director tile.
+1. From the **Network** drop-down menu, choose the runtime network that you created when you configured the BOSH Director tile.
 
 1. Click **Save**.
 
@@ -182,7 +190,8 @@ If your apps do not use the full allocation of disk space and memory set in **Re
 
 For example, you might want to use the overcommit if your apps use a small amount of disk and memory capacity compared to the amounts set in the **Resource Config** settings for **Windows Diego Cell**.
 
-<p class="note"><strong>Note:</strong> Due to the risk of app failure and the deployment specific nature of disk and memory use, VMware has no recommendation for how much, if any, memory or disk space to overcommit.</p>
+Due to the risk of app failure and the deployment specific nature of disk and memory use, VMware has no
+recommendation for how much, if any, memory or disk space to overcommit.
 
 To enable overcommit:
 
@@ -194,7 +203,7 @@ To enable overcommit:
 
 4. Click **Save**.
 
-<p class="note"><strong>Note:</strong> Entries made to each of these two fields set the total amount of resources allocated, not the overage.</p>
+<p> Entries made to each of these two fields set the total amount of resources allocated, not the overage.</p>
 
 #### <a id='enable-route-integrity'></a> Gorouter app identity verification (beta)
 
@@ -246,7 +255,9 @@ To configure a custom Windows Diego Cell overlay subnet:
 
 2. For **Diego Cell overlay subnet**, enter the subnet you want to configure for your Diego Cell.
 
-  WARNING: Setting the subnet too small will limit  the number of containers that can run on each Windows Diego Cell.
+      <p class="note caution">
+      <span class="note__title">Caution</span>
+      Setting the subnet too small will limit the number of containers that can run on each Windows Diego Cell.</p>
 
 3. Click **Save**.
 
@@ -272,7 +283,7 @@ To configure errands:
 
 1. Click **Save**.
 
-<p class="note"><strong>Note:</strong> This beta feature verifies only that the client certificate is signed by the expected CA using mTLS. It does not include SAN (Subject Alternative Name) verification of the presented client certificates.</p>
+<p> This beta feature verifies only that the client certificate is signed by the expected CA using mTLS. It does not include SAN (Subject Alternative Name) verification of the presented client certificates.</p>
 
 ### <a id='config-iso-segments'></a> Configuring Isolation Segments (Optional)
 
@@ -282,7 +293,7 @@ To deploy your <%= vars.windows_runtime_abbr %> app workloads to an isolation se
 
 To configure Windows Diego Cells to allow app containers to perform Windows Authentication, select **Windows Authentication** and follow the procedure in [Configuring the tile for Windows Authentication](./windows-authentication.html#configure-tile) in _Windows Authentication for .Net apps_.
 
-<p class="note"><strong>Note:</strong> Use an isolation segment for Windows Authentication, as all apps in the <%= vars.windows_runtime_abbr %> installation have access to the GMSA credentials.</p>
+<p> Use an isolation segment for Windows Authentication, as all apps in the <%= vars.windows_runtime_abbr %> installation have access to the GMSA credentials.</p>
 
 ### <a id='config-system-logging'></a> Configuring System Logging (Optional)
 
@@ -305,7 +316,7 @@ To configure your tile resources:
 
 1. Select **Resource Config**.
 
-1. Use the drop down menus to configure **Windows Diego Cell**. The following table shows the recommended Windows Diego Cell disk size for your IaaS:
+1. Use the drop-down menus to configure **Windows Diego Cell**. The following table shows the recommended Windows Diego Cell disk size for your IaaS:
 
   <table>
     <tr>
@@ -329,7 +340,8 @@ To configure your tile resources:
       <td>100&nbsp;GB</td>
     </tr>
   </table>
-  <p class="note"><strong>Note:</strong> Windows stemcells in the v2019.x line support ephemeral disks.</p>
+
+  <p> Windows stemcells in the v2019.x line support ephemeral disks.</p>
 
 1. Provision your **Master Compilation Job** with at least 100&nbsp;GB of disk space.
 
@@ -337,7 +349,7 @@ To configure your tile resources:
 
 ## <a id='stemcells'></a> Uploading the stemcell
 
-After configuring resources for the <%= vars.windows_runtime_abbr %> tile, you must upload the Windows stemcell to the tile.
+After you configure resources for the <%= vars.windows_runtime_abbr %> tile, you must upload the Windows stemcell to the tile.
 
 To upload the stemcell:
 
@@ -345,10 +357,11 @@ To upload the stemcell:
 
 1. Retrieve the stemcell that you downloaded or created in [Downloading or Creating a Windows Stemcell](./stemcells.html).
 
-1. Follow the procedure in [Importing and Managing Stemcells](https://docs.pivotal.io/ops-manager/2-10/opsguide/managing-stemcells.html) to upload the Windows stemcell to <%= vars.windows_runtime_abbr %>.
+1. Follow the procedure in [Importing and Managing Stemcells](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/opsguide-managing-stemcells.html) to upload the Windows stemcell to <%= vars.windows_runtime_abbr %>.
 
-<p class='note'><strong>Note:</strong> If you use vSphere, you must create your own stemcell.
+<p> If you use vSphere, you must create your own stemcell.
 The default root disk size of Windows stemcells v2019.x line is 30&nbsp;GB.
+
 VMware recommends setting the root disk size of your Windows stemcell for vSphere to 30&nbsp;GB.
 For more information, see <a href="create-vsphere-stemcell-automatically.html">Creating a Windows Stemcell
 for vSphere Using stembuild</a>.
@@ -364,7 +377,7 @@ To deploy the <%= vars.windows_runtime_abbr %> tile:
 
 1. Click **Review Pending Changes**.
 
-1. Select the <%= vars.windows_runtime_abbr %> tile and review the changes. For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html).
+1. Select the <%= vars.windows_runtime_abbr %> tile and review the changes. For more information, see [Reviewing Pending Product Changes](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-review-pending-changes.html).
 
 1. Click **Apply Changes**.
 
@@ -391,7 +404,7 @@ To install, configure, and deploy <%= vars.windows_runtime_abbr %> in an air-gap
 
 ### <a id='prepare-registry'></a> Preparing a Windows Rootfs image in a private registry
 
-To create a <%= vars.windows_runtime_abbr %> tile, a windows file-system container image is typically
+To create a <%= vars.windows_runtime_abbr %> tile, a windows file system container image is typically
 fetched from a Docker registry. An administrator can fetch the windows file-system image
 from either [cloudfoundry/windows2016fs](https://hub.docker.com/r/cloudfoundry/windows2016fs)
 the publicly hosted DockerHub repository, or a privately hosted container image registry.
@@ -406,7 +419,7 @@ For information about configuring your Docker daemon, see
 [Allow push of nondistributable artifacts](https://docs.docker.com/engine/reference/commandline/dockerd/#allow-push-of-nondistributable-artifacts)
 in the Docker documentation.
 1. Open a command line on the Windows machine.
-1. To download the windows file-system container image, run:
+1. To download the windows file system container image, run:
 
     ```console
     docker pull cloudfoundry/windows2016fs:2019
@@ -414,7 +427,7 @@ in the Docker documentation.
 
 1. To tag the Windows container image, run:
 
-    ```
+    ```console
     docker tag cloudfoundry/windows2016fs:2019  REGISTRY-ROOT/cloudfoundry/windows2016fs:2019
     ```
 
@@ -428,13 +441,13 @@ run:
     ```
 
     Where `IMAGE-URI` is the URI to the Windows rootfs image in your private registry.
-    Your image URI should follow the pattern:
+    Your image URI follows the pattern:
 
      `my.private.registry/cloudfoundry/windows2016fs:2019`.
 
 ### <a id='add-win-image-air-gapped'></a> Add the Windows Server Container Base Image to the Product File
 
-To add the Windows Server container base image to the product file in an air-gap environment,
+To add the Windows Server container base image to the product file in an air gap environment,
 run:
 
 ```console

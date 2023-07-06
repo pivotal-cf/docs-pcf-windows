@@ -3,7 +3,7 @@ title: Developing and pushing .NET Framework Apps
 owner: Greenhouse
 ---
 
-This topic describes how to push .NET Framework apps to <%= vars.windows_runtime_full %> Diego Cells.
+You can push .NET Framework apps to <%= vars.windows_runtime_full %> Diego Cells.
 
 For information about how to develop microservices for .NET Framework and .NET Core using Steeltoe, see the [Steeltoe documentation](http://steeltoe.io/docs/).
 
@@ -53,8 +53,9 @@ To push a .NET Framework app to a Windows Diego Cell:
         ```
 
         Where `APP-NAME` is the name of your app.
-        <p class="note"><strong>Note:</strong> The <code>-s windows</code> command instructs <%= vars.platform_name %> to run the app in the Windows Diego Cell.</p>
-        <p class="note"><strong>Note:</strong> If you are not pushing your app from its directory, use the <code>-p</code> command and specify the path to the directory that contains the app.</p>
+        <p> The <code>-s windows</code> command instructs <%= vars.platform_name %> to run the app in the Windows Diego Cell.</p>
+
+        <p> If you are not pushing your app from its directory, use the <code>-p</code> command and specify the path to the directory that contains the app.</p>
 
 1. Wait for your app to stage and start. If you see an error message,
    see [Troubleshoot App Errors](#troubleshoot).
@@ -63,11 +64,11 @@ To push a .NET Framework app to a Windows Diego Cell:
 
 With context path routing, you can activate multiple apps to share the same route hostname. For example, `app1.example.com/app2`. If you use ASP.NET you can host apps under a route path. Within Windows Diego Cells, you can have multiple routes to an app, but those routes cannot have different context paths.
 
-Making an app accessible under another app's URL requires a pair of commands.
+To make an app accessible under another app's URL requires a pair of commands.
 
 To define a context path route, such as `app1.example.com/app2`:
 
-1. Push the top-level app by running:
+1. Push the top level app by running:
 
     ```
     cf push TOP-LEVEL-APP-NAME
@@ -86,7 +87,9 @@ To define a context path route, such as `app1.example.com/app2`:
       <li><code>LOWER-LEVEL-APP-NAME</code> is the name of your lower-level app.</li>
       <li><code>APP-DOMAIN</code> is your app&#39;s public domain name. For example, <code>example.com</code>.</li>
     </ul>
-    <p class="note"><strong>Note:</strong> The <code>-d</code> parameter is only needed when pushing an app to a non-default domain. You can use the routes property in the manifest instead.</p>
+
+    <p> The <code>-d</code> parameter is only needed when you push an app to a non-default domain. You can use the routes property in
+    the manifest instead.</p>
 
 ### <a id='graceful-shutdown'></a> Activating a graceful shutdown for a .NET App
 
@@ -158,8 +161,12 @@ To deploy a SOAP web service:
     usage: 1G x 1 instances
     urls: webservice.example.com
     </pre>
-    <p class="note"><strong>Note:</strong> The push command must include the <code>-s</code> flag to specify the stack, which instructs <%= vars.platform_name %> to run the app in the Windows Diego Cell.</p>
-    <p class="note"><strong>Note:</strong> The <code>-p</code> and <code>-u </code> parameters are optional parameters. The <code>-p</code> parameter is needed only when pushing your service from a directory that does not contain the published web service. The <code>-u</code> parameter is needed only when deactivating the health check when you do not have a route serving <code>/</code>.</p>
+    <p> The push command must include the <code>-s</code> flag to specify the stack, which instructs <%= vars.platform_name %> to run the
+    app in the Windows Diego Cell.</p>
+
+    <p> The <code>-p</code> and <code>-u </code> parameters are optional parameters. The <code>-p</code> parameter is needed
+    only when you push your service from a directory that does not contain the published web service. The <code>-u</code> parameter is
+    needed only when you deactivate the health check when you do not have a route serving <code>/</code>.</p>
 
 1. Confirm your service is running by finding your service's URL in the push command's output and browsing to it. In the previous example, the URL for the service is `http://webservice.example.com`.
 
@@ -221,7 +228,7 @@ To use a modified version of the WSDL file:
 
 1. Edit the WSDL file to delete the container port, as described in [Modify the WSDL File](#correct-wsdl).
 
-1. In Microsoft Visual Studio, right click your app in the **Solution Explorer** and select **Add** > **Service Reference**.
+1. In Microsoft Visual Studio, right-click your app in the **Solution Explorer** and select **Add** > **Service Reference**.
 
 1. In **Address**, enter the local path to the modified WSDL file.
 

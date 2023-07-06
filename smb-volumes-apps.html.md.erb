@@ -3,7 +3,7 @@ title: Using SMB Volumes in .NET Apps
 owner: Windows
 ---
 
-This topic tells you how to use Server Message Block (SMB) Volumes in .NET app. In this example, you create an app
+You can use Server Message Block (SMB) Volumes in .NET app. In the following example, you create an app
 that reads and writes to a `note.txt` file within an SMB Volume share.
 
 
@@ -22,7 +22,9 @@ To use SMB Volumes in your .NET App, you must have:
 ### <a id='steeltoe'></a> Using SMB Volumes in .NET Apps with Steeltoe
 
 Steeltoe is a set of libraries that help your team write cloud native apps. Steeltoe contains functionality for
-mounting SMB Volumes. Using Steeltoe requires editing your app code. For more information, see the
+mounting SMB Volumes. Using Steeltoe requires editing your app code.
+
+For more information, see the
 [Steeltoe documentation](https://steeltoe.io/docs/).
 
 If you are using Steeltoe, add the following environment variables to your Config Server Provider:
@@ -74,8 +76,10 @@ To configure SMB mounting:
 1. Using the cf CLI or Apps Manager, add `SMB_PATH`, `SMB_USERNAME`, and `SMB_PASSWORD`
    as environment variables to your local computer or the computer you are using
    to deploy your app.
-    <p class='note'><strong>Note:</strong> If you are using SMB Volumes with your batch profile and have already added these environment variables, ignore this step.</p>
-    <p class="note"><strong>Note:</strong> If Visual Studio does not detect these new environment variables, start Visual Studio again.</p>
+
+    <p> If you are using SMB Volumes with your batch profile and have already added these environment variables, ignore this step.</p>
+
+    <p> If Visual Studio does not detect these new environment variables, start Visual Studio again.</p>
 
 1. In Visual Studio, create a new file in your solution named `SMBConfiguration.cs`.
    This file is the single representation of your SMB Volume configuration and
@@ -110,6 +114,7 @@ To configure SMB mounting:
 
 1. In Visual studio, create a new MVC Controller named `NoteController`.
    This file creates a controller endpoint that reads the example note file.
+
    For more information about creating a controller,
    see [Add a controller to an ASP.NET Core MVC app](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-controller?view=aspnetcore-2.2&tabs=visual-studio)
    in the Microsoft Documentation.
@@ -161,7 +166,9 @@ To configure SMB mounting:
 
 1. In Visual Studio, create a subdirectory in **Views** named `Note`.
 
-1. In Visual Studio, create a new View named `Index`. For more information about Views, see
+1. In Visual Studio, create a new View named `Index`.
+
+For more information about Views, see
 [Views in ASP.NET Core MVC](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/overview?view=aspnetcore-2.2) and
 [Add a view to an ASP.NET Core MVC app](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-view?view=aspnetcore-2.2&tabs=visual-studio)
 in the Microsoft documentation.

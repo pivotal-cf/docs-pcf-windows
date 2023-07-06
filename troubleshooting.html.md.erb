@@ -54,7 +54,7 @@ for the tile.
 
 **Symptom**
 
-You click the **+** icon in <%= vars.platform_name %> to add the <%= vars.windows_runtime_abbr %>
+You clicked the **+** icon in <%= vars.platform_name %> to add the <%= vars.windows_runtime_abbr %>
 tile to the Installation Dashboard and see the following error:
 
 ![alt-text="Error message: Has an invalid release (windows 2016fs) specified for job type Windows Diego Cell."](./images/error-invalid-release-uninjected-tile.png)
@@ -66,7 +66,7 @@ image.
 
 **Solution**
 
-1. Delete the product file listing from <%= vars.platform_name %> by clicking its trash can icon
+1. Delete the product file listing from <%= vars.platform_name %> by clicking the Trash can icon
   under **Import a Product**.
 
 1. Follow the <%= vars.windows_runtime_abbr %> installation instructions to run the
@@ -101,7 +101,7 @@ L Error: Action Failed get_task: Task 59ba76d1-14c5-4d7b-681c-08b9ec4bd64d resul
 Task 308031 | 13:47:56 | Error: Action Failed get_task: Task 59ba76d1-14c5-4d7b-681c-08b9ec4bd64d result: 1 of 10 pre-start scripts failed. Failed Jobs: windows1803fs. Successful Jobs: set_kms_host, groot, loggregator_agent_windows, bosh-dns-windows, rep_windows, winc-network-1803, set_password, enable_ssh, enable_rdp.
 ```
 
-Otherwise, the post-start script for the `rep_windows` job fails, and the upgrade fails with the
+Otherwise, the post start script for the `rep_windows` job fails, and the upgrade fails with the
 following output:
 
 ```console
@@ -147,7 +147,8 @@ To forward Windows logs to an external syslog server:
 1. Under **Syslog server address**, enter the hostname or IP address of your syslog server.
 
 1. Under **Syslog server port**, enter the port of your syslog server. The default port is `514`.
-  <p class="note"><strong>Note:</strong> The host must be reachable from the <%= vars.app_runtime_abbr %> network. Ensure that your syslog server listens on external interfaces.</p>
+  <p> The host must be reachable from the <%= vars.app_runtime_abbr %> network. Ensure that your syslog server listens on
+  external interfaces.</p>
 
 1. Under **Transport protocol**, select the transport protocol for forwarding logs.
 
@@ -297,7 +298,7 @@ To troubleshoot a deleted compilation VM:
 
 ## <a id='windows-authentication'></a> Windows authentication
 
-<p class="note"><strong>Note:</strong> For the basics, start with the [Microsoft troubleshooting docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/gmsa-troubleshooting#non-domain-joined-hosts-make-sure-the-host-is-configured-to-retrieve-the-gmsa-account).</p>
+<p> For the basics, start with the [Microsoft troubleshooting docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/gmsa-troubleshooting#non-domain-joined-hosts-make-sure-the-host-is-configured-to-retrieve-the-gmsa-account).</p>
 
 The Windows Authentication feature uses the Windows event log system. To access a log from the Windows Diego Cell, `ssh` onto the cell, then enter `powershell`. To get the events in an event log, use the command [`Get-WinEvent`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-winevent):
 
@@ -359,7 +360,7 @@ Where `GMSA$` is the name of your GMSA service account.
 
 For a list of possible `Microsoft-Windows-Containers-CCG` events, see the [Microsoft Troubleshooting docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/gmsa-troubleshooting#events-and-descriptions).
 
-<p class="note"><strong>Note:</strong> You might need to follow <a href="https://github.com/microsoft/Windows-Containers/issues/221#issuecomment-1320336855">additional steps</a> to have events show up in the <code>Microsoft-Windows-Containers-CCG</code> log. If you have additional questions, you can contact Support.</p>
+<p> You might need to follow <a href="https://github.com/microsoft/Windows-Containers/issues/221#issuecomment-1320336855">additional steps</a> to have events show up in the <code>Microsoft-Windows-Containers-CCG</code> log. If you have additional questions, you can contact Support.</p>
 
 ### <a id='connectivity'></a> Testing connectivity to Active Directory
 
