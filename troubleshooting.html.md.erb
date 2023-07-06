@@ -298,7 +298,8 @@ To troubleshoot a deleted compilation VM:
 
 ## <a id='windows-authentication'></a> Windows authentication
 
-<p> For the basics, start with the [Microsoft troubleshooting docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/gmsa-troubleshooting#non-domain-joined-hosts-make-sure-the-host-is-configured-to-retrieve-the-gmsa-account).</p>
+<p> For the basics, start with the [Microsoft troubleshooting
+docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/gmsa-troubleshooting#non-domain-joined-hosts-make-sure-the-host-is-configured-to-retrieve-the-gmsa-account.html).</p>
 
 The Windows Authentication feature uses the Windows event log system. To access a log from the Windows Diego Cell, `ssh` onto the cell, then enter `powershell`. To get the events in an event log, use the command [`Get-WinEvent`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-winevent):
 
