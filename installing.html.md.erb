@@ -18,7 +18,7 @@ To install, configure, and deploy <%= vars.windows_runtime_abbr %>:
     1. Upload the Windows stemcell to the tile. See [Upload the Stemcell](#stemcells).
     1. Deploy the tile. See [Deploy the Tile](#deploy).
 
-* In an air gap environment, complete the steps in
+* In an air-gap environment, complete the steps in
 [Installing and configuring <%= vars.windows_runtime_abbr %> in an Air-Gapped Environment](#air-gapped).
 
 ## <a id='prerequisites'></a> Prerequisites
@@ -42,7 +42,8 @@ You use the **Windows FS Injector** tool to install the <%= vars.windows_runtime
   * https://msecnd.net, or any domain within the Microsoft Windows Azure Content Delivery Network
   For more information about the Windows Azure Content Delivery Network, see [Introducing the Windows Azure Content Delivery Network](https://azure.microsoft.com/en-us/blog/introducing-the-windows-azure-content-delivery-network/) in the Microsoft Azure documentation.
 
-  <p class="note"><strong>Note:</strong> To ensure the authenticity of Microsoft container images, Microsoft does not permit the distribution of its base images. This includes Microsoft container images consumed through Docker Hub, which are actually delivered by an Microsoft CDN endpoint.</p>
+  <p> To ensure the authenticity of Microsoft container images, Microsoft does not permit the distribution of its base images. This includes Microsoft
+  container images consumed through Docker Hub, which are actually delivered by an Microsoft CDN endpoint.</p>
 
 ## <a id='install'></a> Installing the <%= vars.windows_runtime_abbr %> tile
 
@@ -104,9 +105,9 @@ To configure AZs and networks:
 1. Select the first AZ under **Place singleton jobs**. Ops Manager runs any job with a single instance in this AZ.
 
 1. Select all AZs under **Balance other jobs**. Ops Manager balances instances of jobs with more than one instance across the AZs that you specify.
-  <p class='note'><strong>Note:</strong> For production deployments, VMware recommends at least three AZs for a highly available installation.</p>
+  <p> For production deployments, VMware recommends at least three AZs for a highly available installation.</p>
 
-1. From the **Network** dropdown, choose the runtime network that you created when configuring the BOSH Director tile.
+1. From the **Network** drop-down menu, choose the runtime network that you created when configuring the BOSH Director tile.
 
 1. Click **Save**.
 
@@ -162,7 +163,8 @@ The following sections describe how to configure the advanced features.
 
 For example, you might want to use the overcommit if your apps use a small amount of disk and memory capacity compared to the amounts set in the **Resource Config** settings for **Windows Diego Cell**.
 
-<p class="note"><strong>Note:</strong> Due to the risk of app failure and the deployment-specific nature of disk and memory use, VMware has no recommendation for how much, if any, memory or disk space to overcommit.</p>
+<p>Due to the risk of app failure and the deployment specific nature of disk and memory use, VMware has no recommendation for how much, if any, memory or
+disk space to overcommit.</p>
 
 To enable overcommit:
 
@@ -206,26 +208,6 @@ following options:
 
 1. Click **Save**.
 
-#### <a id='custom-cell-overlay'></a> Custom Windows Diego Cell Overlay Subnet
-
-By default, Windows Diego Cells use the `172.30.0.0/22` IP address space for container networking. If this conflicts with any internal IP addresses that your
-organization uses, you can customize this subnet. Unlike in <%= vars.windows_runtime_abbr %> deployments using Linux Diego Cells, you configure this subnet
-per Diego Cell. When you configure a custom subnet for a Windows Diego Cell, ensure the following:
-
-* The CIDR range of your custom subnet does not conflict with any resources that your apps may need to use.
-
-* The subnet is large enough to accommodate the number of apps you expect to have running on each Diego Cell.
-
-To configure a custom Windows Diego Cell overlay subnet:
-
-1. In the <%= vars.windows_runtime_abbr %> tile, select **Advanced Features**.
-
-1. For **Diego Cell Overlay Subnet**, enter the subnet you want to configure for your Diego Cell.
-
-1. Click **Save**.
-
-3. Click **Save**.
-
 ### <a id='config-errands'></a> Configuring errands
 
 Errands are scripts that Ops Manager runs automatically when it installs or uninstalls a product,
@@ -237,7 +219,7 @@ By default, Ops Manager runs all errands.
 
 In **Errands**, you can change these run rules. For each errand, you can select **On** to run it each time Ops Manager installs or uninstalls a product, or **Off** to never run it.
 
-For more information about how Ops Manager manages errands, see [Managing Errands in Ops Manager](https://docs.pivotal.io/ops-manager/2-10/install/managing_errands.html).
+For more information about how Ops Manager manages errands, see [Managing Errands in Ops Manager](https://docs.pivotal.io/ops-manager/3.0/install/managing_errands.html).
 
 To configure errands:
 
@@ -249,7 +231,10 @@ To configure errands:
 
 1. Click **Save**.
 
-<p class="note"><strong>Note:</strong> This beta feature checks only that the client certificate is signed by the expected CA using mTLS. It does not include SAN (Subject Alternative Name) checks of the presented client certificates.</p>
+<p class="note important">
+<span class="note__title">Important</span> This beta feature checks only that the client certificate is signed by the expected CA using mTLS. It does not
+include SAN (Subject Alternative Name) checks of the presented client certificates.
+</p>
 
 ### <a id='config-iso-segments'></a> Configuring Isolation Segments (Optional)
 
@@ -317,7 +302,7 @@ To upload the stemcell:
 
 1. Follow the procedure in [Importing and Managing Stemcells](https://docs.pivotal.io/ops-manager/2-10/opsguide/managing-stemcells.html) to upload the Windows stemcell to <%= vars.windows_runtime_abbr %>.
 
-<p class='note'><strong>Note:</strong> If you use vSphere, you must create your own stemcell.
+<p>If you use vSphere, you must create your own stemcell.
 The default root disk size of Windows stemcells v2019.x line is 30&nbsp;GB.
 VMware recommends setting the root disk size of your Windows stemcell for vSphere to 30&nbsp;GB.
 For more information, see <a href="create-vsphere-stemcell-automatically.html">Creating a Windows Stemcell
@@ -326,7 +311,7 @@ for vSphere Using stembuild</a>.
 
 ## <a id='deploy'></a> Deploying the tile
 
-After uploading the Windows stemcell to the <%= vars.windows_runtime_abbr %> tile, you are ready to deploy the tile.
+After you upload the Windows stemcell to the <%= vars.windows_runtime_abbr %> tile, you are ready to deploy the tile.
 
 To deploy the <%= vars.windows_runtime_abbr %> tile:
 
