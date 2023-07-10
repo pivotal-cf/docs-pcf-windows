@@ -32,14 +32,15 @@ You use the **Windows FS Injector** tool to install the <%= vars.windows_runtime
 * The `git` and `tar` executables must be in your `%PATH%`. If `git` and `tar` are not in your `%PATH%`, either add your `git` and `tar` executable locations to your existing `%PATH%` configuration, or copy the `git.exe` and `tar.exe` executables to a directory in your `%PATH%`.
 
 * Your installation environment must allow the **Windows FS Injector** tool access to all of the following URLs:
-  * https://network.pivotal.io, for downloading the tile and injector
-  * https://s3.amazonaws.com/
-  * https://registry.hub.docker.com/
-  * https://production.cloudflare.docker.com
-  * https://go.microsoft.com/
-  * https://winlayers.cdn.mscr.io
-  * https://mcr.microsoft.com
-  * https://msecnd.net, or any domain within the Microsoft Windows Azure Content Delivery Network
+  * [Downloading tile and injector](https://network.pivotal.io)
+  * [AWS](https://s3.amazonaws.com/)
+  * [Registry Hub](https://registry.hub.docker.com/)
+  * [Cloudflare](https://production.cloudflare.docker.com)
+  * [Microsoft Windows](https://go.microsoft.com/)
+  * [Winlayers](https://winlayers.cdn.mscr.io)
+  * [MCR Microsoft](https://mcr.microsoft.com)
+  * [Microsoft Windows Azure Content Delivery Network](https://msecnd.net)
+
   For more information about the Windows Azure Content Delivery Network, see [Introducing the Windows Azure Content Delivery Network](https://azure.microsoft.com/en-us/blog/introducing-the-windows-azure-content-delivery-network/) in the Microsoft Azure documentation.
 
   <p class="note"><strong>Note:</strong> To ensure the authenticity of Microsoft container images, Microsoft does not permit the distribution of its base images. This includes Microsoft container images consumed through Docker Hub, which are actually delivered by an Microsoft CDN endpoint.</p>
@@ -48,25 +49,25 @@ You use the **Windows FS Injector** tool to install the <%= vars.windows_runtime
 
 To install the <%= vars.windows_runtime_abbr %> tile:
     <%# After adding or removing a step here be sure to change the step number
-  for step 4 referenced below in the air-gapped environment section.  %>
+  for step 4 referenced in the air-gapped environment section.  %>
 
 1. Go to the [<%= vars.windows_runtime_full %>](https://network.pivotal.io/products/pas-windows)
    page on <%= vars.product_network %>.
     <%# After adding or removing a step here be sure to change the step number
-  for step 4 referenced below in the air-gapped environment section.  %>
+  for step 4 referenced in the air-gapped environment section.  %>
 
 1. Download the **<%= vars.windows_runtime_full %>** product file.
     <%# After adding or removing a step here be sure to change the step number
-  for step 4 referenced below in the air-gapped environment section.  %>
+  for step 4 referenced in the air-gapped environment section.  %>
 
 1. Download the **Windows FS Injector** tool for your workstation OS. The Injector tool, `winfs-injector`, is an executable binary that adds the Windows Server container base image into the product file. This step requires internet access and can take up to 20 minutes.
-  <p class="note"><strong>Note:</strong> You need the <code>git</code> and <code>tar</code> executables in your <code>%PATH%</code> to run <code>winfs-injector.exe</code>. For example, copy <code>git.exe</code> and <code>tar.exe</code> to a directory in your <code>%PATH%</code>.</p>
+  <p> You need the <code>git</code> and <code>tar</code> executables in your <code>%PATH%</code> to run <code>winfs-injector.exe</code>. For example, copy <code>git.exe</code> and <code>tar.exe</code> to a directory in your <code>%PATH%</code>.</p>
     <%# After adding or removing a step here be sure to change the step number
-  for step 4 referenced below in the air-gapped environment section.  %>
+  for step 4 referenced in the air-gapped environment section.  %>
 
 1. Add the Windows Server container base image to the product file:
 
-    ```
+    ```console
     winfs-injector ^
       --input-tile PASW-DOWNLOAD-PATH ^
       --output-tile PASW-IMPORTABLE-PATH
@@ -82,7 +83,7 @@ To install the <%= vars.windows_runtime_abbr %> tile:
     --output-tile c:\temp\pas-windows-2.9.0-build.1-INJECTED.pivotal
     </pre>
 
-    This step can take up to 20 minutes to complete.
+    This step can take up to 20-minutes to complete.
 
 1. Go to the Ops Manager Installation Dashboard and click **Import a Product**.
 
@@ -104,7 +105,8 @@ To configure AZs and networks:
 1. Select the first AZ under **Place singleton jobs**. Ops Manager runs any job with a single instance in this AZ.
 
 1. Select all AZs under **Balance other jobs**. Ops Manager balances instances of jobs with more than one instance across the AZs that you specify.
-  <p class='note'><strong>Note:</strong> For production deployments, VMware recommends at least three AZs for a highly available installation.</p>
+
+<p> For production deployments, VMware recommends at least three AZs for a highly available installation.</p>
 
 1. From the **Network** dropdown, choose the runtime network that you created when configuring the BOSH Director tile.
 
@@ -208,26 +210,6 @@ following options:
 
 1. Click **Save**.
 
-#### <a id='custom-cell-overlay'></a> Custom Windows Diego Cell Overlay Subnet
-
-By default, Windows Diego Cells use the `172.30.0.0/22` IP address space for container networking. If this conflicts with any internal IP addresses that your
-organization uses, you can customize this subnet. Unlike in <%= vars.windows_runtime_abbr %> deployments using Linux Diego Cells, you configure this subnet
-per Diego Cell. When you configure a custom subnet for a Windows Diego Cell, ensure the following:
-
-* The CIDR range of your custom subnet does not conflict with any resources that your apps may need to use.
-
-* The subnet is large enough to accommodate the number of apps you expect to have running on each Diego Cell.
-
-To configure a custom Windows Diego Cell overlay subnet:
-
-1. In the <%= vars.windows_runtime_abbr %> tile, select **Advanced Features**.
-
-1. For **Diego Cell Overlay Subnet**, enter the subnet you want to configure for your Diego Cell.
-
-1. Click **Save**.
-
-3. Click **Save**.
-
 ### <a id='config-errands'></a> Configuring errands
 
 Errands are scripts that Ops Manager runs automatically when it installs or uninstalls a product,
@@ -239,8 +221,7 @@ By default, Ops Manager runs all errands.
 
 In **Errands**, you can change these run rules. For each errand, you can select **On** to run it each time Ops Manager installs or uninstalls a product, or **Off** to never run it.
 
-For more information about how Ops Manager manages errands, see [Managing Errands in Ops Manager](https://docs.pivotal.io/ops-manager/2-10/install/managing_errands.html).
-
+For more information about how Ops Manager manages errands, see [Managing Errands in Ops Manager](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-managing_errands.html)
 To configure errands:
 
 1. Select **Errands**.
@@ -250,8 +231,10 @@ To configure errands:
 1. To ensure that a smoke test is run against your <%= vars.windows_runtime_abbr %> installation, set the **Smoke Test Errand** to **On**.
 
 1. Click **Save**.
-
-<p class="note"><strong>Note:</strong> This beta feature checks only that the client certificate is signed by the expected CA using mTLS. It does not include SAN (Subject Alternative Name) checks of the presented client certificates.</p>
+<p class="note important">
+<span class="note__title">Important</span> This beta feature checks only that the client certificate is signed by the expected CA using mTLS. It does not include
+SAN (Subject Alternative Name) checks of the presented client certificates.
+</p>
 
 ### <a id='config-iso-segments'></a> Configuring Isolation Segments (Optional)
 
@@ -317,14 +300,14 @@ To upload the stemcell:
 
 1. Retrieve the stemcell that you downloaded or created in [Downloading or Creating a Windows Stemcell](./stemcells.html).
 
-1. Follow the procedure in [Importing and Managing Stemcells](https://docs.pivotal.io/ops-manager/2-10/opsguide/managing-stemcells.html) to upload the Windows stemcell to <%= vars.windows_runtime_abbr %>.
+1. Follow the procedure in [Importing and Managing Stemcells](https://docs.pivotal.io/ops-manager/3.0/opsguide/managing-stemcells.html) to upload the Windows stemcell to <%= vars.windows_runtime_abbr %>.
 
-<p class='note'><strong>Note:</strong> If you use vSphere, you must create your own stemcell.
+<p> If you use vSphere, you must create your own stemcell.
 The default root disk size of Windows stemcells v2019.x line is 30&nbsp;GB.
 VMware recommends setting the root disk size of your Windows stemcell for vSphere to 30&nbsp;GB.
+
 For more information, see <a href="create-vsphere-stemcell-automatically.html">Creating a Windows Stemcell
-for vSphere Using stembuild</a>.
-</p>
+for vSphere Using stembuild</a>.</p>
 
 ## <a id='deploy'></a> Deploying the tile
 
@@ -336,7 +319,8 @@ To deploy the <%= vars.windows_runtime_abbr %> tile:
 
 1. Click **Review Pending Changes**.
 
-1. Select the <%= vars.windows_runtime_abbr %> tile and review the changes. For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html).
+1. Select the <%= vars.windows_runtime_abbr %> tile and review the changes. For more information,
+see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html).
 
 1. Click **Apply Changes**.
 
@@ -379,12 +363,12 @@ in the Docker documentation.
 1. Open a command line on the Windows machine.
 1. To download the windows file-system container image, run the following command:
 
-    ```
+    ```console
     docker pull cloudfoundry/windows2016fs:2019
     ```
 1. To tag the Windows container image, run the following command:
 
-    ```
+    ```console
     docker tag cloudfoundry/windows2016fs:2019  REGISTRY-ROOT/cloudfoundry/windows2016fs:2019
     ```
 
@@ -393,7 +377,7 @@ in the Docker documentation.
 1. To upload the Windows Container image to your accessible private registry,
 run the following command:
 
-    ```
+    ```console
     docker push IMAGE-URI
     ```
 
@@ -405,7 +389,7 @@ run the following command:
 To add the Windows Server container base image to the product file in an air-gapped environment,
 run the following:
 
-```
+```console
 winfs-injector ^
   --input-tile PASW-DOWNLOAD-PATH ^
   --output-tile PASW-IMPORTABLE-PATH ^
@@ -418,6 +402,7 @@ Where:
 * `PASW-IMPORTABLE-PATH` is the desired output path for the importable product file.
 * `PASW-REGISTRY-URI` is the uri to the container registry hosting your cloudfoundry/windows2016fs image.
 <br>
+
 For example:
 <pre class="terminal">
 C:\Users\admin> winfs-injector ^
