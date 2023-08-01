@@ -20,7 +20,7 @@ Apps using Windows Authentication can use the `--no-route` flag for the  `cf pus
 
 Before you configure the <%= vars.windows_runtime_abbr %> tile for Windows Authentication, make sure that you meet the following requirements:
 
-* Your Active Directory instance must be configured with a GMSA and a regular user that has been granted access to the GMSA credentials. See the [Microsoft docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts) for specifics.
+* Your Active Directory instance must be configured with a GMSA and a regular user that has been granted access to the GMSA credentials. See the [Microsoft documentation](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts) for specifics.
 * Your Windows Diego cells must have the appropriate [firewall rules](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/gmsa-troubleshooting#check-the-firewall-configuration) to access the Active Directory instance.
 * [Application Security Groups](../concepts/asg.html) must be configured to allow traffic from app containers to the Active Directory instance.
 * [TCP Routing](../operating/configure-pas.html#networking) must be enabled and configured.
@@ -48,20 +48,20 @@ an isolation segment so that its Diego Cells run in that segment, see <a href=".
 
 ## <a id='configure-tile'></a> Configuring the tile
 
-Start the configuration by following the steps in the [Microsoft docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#create-a-credential-spec) to create the appropriate values, then select **Windows Authentication** and use this procedure:
+Start the configuration by following the steps in the [Microsoft documentation](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#create-a-credential-spec) to create the appropriate values, then select **Windows Authentication** and use this procedure:
 
 1. Under **Windows Authentication**, select **Configure**.
 2. In the **For security reasons, apps using Windows Authentication must use TCP routing.**, field, enter `X` to acknowledge this requirement. See [Security considerations](#security) for the details.
 3. In the **Active Directory FQDN** field, enter the domain of the Active Directory instance that app containers use for authentication.
 4. In the **Standard user name** field, enter the name of the user account with access to the gMSA password. This is a user account.
 5. In the **Standard user password** field, enter the password of the user account with access to the gMSA password. This is a user account.
-6. In the **Container credential spec** field, enter a JSON string that describes the gMSA account and domain details. For more information on Windows Authentication, see [Microsoft docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#create-a-credential-spec).
+6. In the **Container credential spec** field, enter a JSON string that describes the gMSA account and domain details. For more information on Windows Authentication, see [Microsoft documentation](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#create-a-credential-spec).
 7. Click **Save**.
 8. [Deploying the tile](installing.html#deploy).
 
 ## <a id='rotating'></a> Rotating the standard user
 
-Follow the steps in the [Microsoft docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#use-case-for-creating-gmsa-account-for-non-domain-joined-container-hosts), but do not create a new service account or security group.
+Follow the steps in the [Microsoft documentation](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#use-case-for-creating-gmsa-account-for-non-domain-joined-container-hosts), but do not create a new service account or security group.
 
 1. Create a new user account.
 2. Add the user to the security group that guards access to the GMSA service account.

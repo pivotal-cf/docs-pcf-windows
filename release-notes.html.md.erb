@@ -191,7 +191,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 * **[Feature]** Adds support for W3C Trace ID logging across Diego component requests
 * **[Bug Fix]** Timeouts in for executor's uploader have been increased to 500ms
 * **[Bug Fix]** Byte-based logging limits for LRPs and Tasks now emit only once per second
-* **[Bug Fix/Improvement]** Garden now ships with Busybox 1.36.1 as the default filesystem
+* **[Bug Fix/Improvement]** Garden now ships with Busybox 1.36.1 as the default file system
 
 * Bump count-cores-indicator to version `2.0.0`
 * Bump diego to version `2.78.0`
@@ -710,7 +710,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
           <summary>v1.31.0</summary>
           <pre style="max-width: 30em">
   ## Changes
-  - Garden now ships with Busybox 1.36.1 as the default filesystem
+  - Garden now ships with Busybox 1.36.1 as the default file system
   - Dependency Bumps
   - healthchecker boshrelease  v0.8.0
   - github.com/onsi/gomega v1.27.7
@@ -1174,12 +1174,11 @@ This option to enable the feature has now been removed, and you must apply app l
 If you were using this feature to limit your overall app log
 throughput, then you might see an increase in log load after you upgrade.
 
-To
-mitigate this, either:
+To mitigate this, either:
 
-* Scale up your logging system before you upgrade to TASW v4.0 to compensate for the increased log load.
-* Upgrade to TAS/TASW v3.0 first to set app-level log rate limits while retaining the global log rate limit. For more details, see [App Log Rate Limits](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/app-log-rate-limits.html).
+* Scale up your logging system before you upgrade to TAS for VMs [Windows] v4.0 to compensate for the increased log load.
+* Upgrade to TAS for VMs/TAS for VMs [Windows] v3.0 first to set app-level log rate limits while retaining the global log rate limit. For more details, see [App Log Rate Limits](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/app-log-rate-limits.html).
 
-## <a id='known-issues'></a> Known Issues
+## <a id='known-issues'></a> Known issues
 
 There are no known issues for <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %>.

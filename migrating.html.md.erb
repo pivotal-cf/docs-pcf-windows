@@ -1,5 +1,5 @@
 ---
-title: Migrating Apps to TAS for VMs [Windows]
+title: Migrating apps to TAS for VMs [Windows]
 owner: Windows
 ---
 
@@ -121,7 +121,7 @@ To deploy a running app again with zero downtime using the blue-green method:
         <ul>
           <li>`APP-NAME` is the name of the existing version of your app you want to replace with `APP-NAME-green`.</li>
           <li>`DOMAIN` is your domain name, for example, `example.com`.</li>
-          <li>`HOSTNAME` is the name of your app's subdomain. For example, if `example.com` is your domain and the existing app is currently accessed using the URL `http://my-app.example.com`, then specify `my-app` as the `HOSTNAME`.</li>
+          <li>`HOSTNAME` is the name of your app's subdomain. For example, if `example.com` is your domain and the existing app is accessed using the URL `http://my-app.example.com`, then specify `my-app` as the `HOSTNAME`.</li>
         </ul>
 
     For additional information about `cf-unmap-route`, see [cf unmap-route](http://cli.cloudfoundry.org/en-US/cf/unmap-route.html) in the Cloud Foundry CLI Reference Guide.

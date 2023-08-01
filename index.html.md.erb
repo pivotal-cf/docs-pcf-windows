@@ -22,7 +22,7 @@ To install the <%= vars.windows_runtime_abbr %> tile, you must have:
   <%= vars.v_major_version %> deployed to vSphere, Amazon Web Services (AWS),
   Google Cloud Platform (GCP), or Azure.
 
-* A Windows stemcell. For information about obtaining or creating a Windows stemcell, see [Downloading or Creating Windows Stemcells](./stemcells.html).
+* A Windows stemcell. For information about obtaining or creating a Windows stemcell, see [Downloading or creating Windows stemcells](./stemcells.html).
 
 The minimum resource requirements for each Windows Diego Cell are:
 
@@ -37,45 +37,45 @@ The minimum resource requirements for each Windows Diego Cell are:
 
 ### <a id='understand'></a> About <%= vars.windows_runtime_abbr %>
 
-* [Product Architecture](architecture.html)
+* [Product architecture](architecture.html)
 
 ### <a id='install'></a> Installation guide
 
-* [Downloading or Creating Windows Stemcells](stemcells.html).
+* [Downloading or creating Windows stemcells](stemcells.html).
 
-* [Creating a Windows Stemcell for vSphere Using stembuild](create-vsphere-stemcell-automatically.html).
+* [Creating a Windows stemcell for vSphere using stembuild](create-vsphere-stemcell-automatically.html).
 
-* [Installing and Configuring <%= vars.windows_runtime_abbr %>](installing.html).
+* [Installing and configuring <%= vars.windows_runtime_abbr %>](installing.html).
 
-* [Windows Diego Cells in Isolation Segments](isolation.html).
+* [Windows Diego cells in Isolation Segments](isolation.html).
 
-* [Migrating Apps to <%= vars.windows_runtime_abbr %>](migrating.html).
+* [Migrating apps to <%= vars.windows_runtime_abbr %>](migrating.html).
 
 ### <a id='admin'></a> Admin guide
 
-* [Upgrading <%= vars.windows_runtime_abbr %> and Windows Stemcells](./upgrade-windows.html).
+* [Upgrading <%= vars.windows_runtime_abbr %> and Windows stemcells](./upgrade-windows.html).
 
 * [Troubleshooting Windows Diego Cells](./troubleshooting.html).
 
 ### <a id='dev'></a> Developer guide
 
-* [Deploying .NET Apps](develop.html).
+* [Deploying .NET apps](develop.html).
 
-* [Using SMB Volumes in .NET Apps](smb-volumes-apps.html).
+* [Using SMB volumes in .NET apps](smb-volumes-apps.html).
 
 * [Changing Windows Stacks](../devguide/deploy-apps/windows-stacks.html).
 
-* [Tips for .NET Developers](using.html).
+* [Tips for .NET developers](using.html).
 
 
 ## <a id='limitations'></a> Limitations
 
 The following limitations affect Windows containers in <%= vars.windows_runtime_abbr %>:
 
-* [Windows Server Container Limitations](#limitations-windows)
-* [<%= vars.windows_runtime_abbr %> Limitations](#limitations-pasw)
+* [Windows Server container limitations](#limitations-windows)
+* [<%= vars.windows_runtime_abbr %> limitations](#limitations-pasw)
 
-### <a id='limitations-windows'></a> Windows server ontainer imitations
+### <a id='limitations-windows'></a> Windows server container limitations
 
 Windows Server Core Containers are used in <%= vars.windows_runtime_abbr %>.
 
@@ -96,7 +96,7 @@ No other fonts are supported, and no others can be installed.
 
 * Container-to-container networking is not available for Windows-hosted apps.
 
-* OpenStack is currently not supported for <%= vars.windows_runtime_abbr %>.
+* OpenStack is not supported for <%= vars.windows_runtime_abbr %>.
   Contact your VMware representative for information about OpenStack deployments.
 
 * SMB is supported, but Volume Services is not supported.

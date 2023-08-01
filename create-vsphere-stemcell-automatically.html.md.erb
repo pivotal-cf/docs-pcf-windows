@@ -1,5 +1,5 @@
 ---
-title: Creating a Windows Stemcell for vSphere using stembuild
+title: Creating a Windows stemcell for vSphere using stembuild
 owner: Windows
 ---
 
@@ -19,7 +19,7 @@ VMware recommends installing any available updates and
 then rebuilding the stemcell from a clone of the original VM.
 
 The BOSH stemcell that you create in this topic is based on Windows Server 2019.
-If you already have a BOSH stemcell for Windows on vSphere, see [Monthly Stemcell Upgrades](#upgrade-stemcell).
+If you already have a BOSH stemcell for Windows on vSphere, see [Monthly stemcell upgrades](#upgrade-stemcell).
 
 For more information, see
 [Best Practices for Stembuild for Tanzu Application Service & Tanzu Kubernetes Grid Integrated Edition](https://tanzu.vmware.com/content/practitioners/best-practices-for-stembuild-for-tanzu-application-service-tanzu-kubernetes-grid-integrated-edition)
@@ -32,15 +32,15 @@ Stembuild is a binary that you use to build BOSH stemcells for Windows Server 20
 Stembuild creates a BOSH stemcell from a base Windows image.
 The stembuild CLI has two commands, construct and package,
 which you run against a Windows Server 2019 VM.
-[Step 4: Construct the BOSH Stemcell](#construct-stemcell)
-and [Step 5: Package the BOSH Stemcell](#package-stemcell)
+[Step 4: Construct the BOSH stemcell](#construct-stemcell)
+and [Step 5: Package the BOSH stemcell](#package-stemcell)
 as follows explain how to run these commands.
 
 Before using stembuild to create a stemcell, you need to create a Windows Server 2019 VM and update the VM with the
 latest Windows updates.
-[Step 1: Create a Base VM for the BOSH Stemcell](#create-base-vm),
-[Step 2: Configure the Base VM](#install-windows-updates), and
-[Step 3: Clone the Base VM](#clone-vm) explain how to prepare the Windows Server 2019 VM.
+[Step 1: Create a base VM for the BOSH stemcell](#create-base-vm),
+[Step 2: Configure the base VM](#install-windows-updates), and
+[Step 3: Clone the base VM](#clone-vm) explain how to prepare the Windows Server 2019 VM.
 
 ## <a id='prerequisites'></a> Prerequisites
 
@@ -91,7 +91,11 @@ Learn how to create, configure, and verify a base VM for Windows from a volume l
 
 ### <a name='upload-windows-iso'></a> Upload the Windows Server 2019 ISO
 
- <p> The instructions in this topic are based on vSphere v6.0.</p>
+<p class="note">
+<span class="note__title">Note</span>
+The instructions in this topic are based on vSphere v6.0.
+</p>
+
 To upload the Windows Server 2019 ISO to vSphere:
 
 1. Log in to the vSphere Web Client.
@@ -104,7 +108,7 @@ To upload the Windows Server 2019 ISO to vSphere:
 
 You can use the `scp` utility instead of the vSphere Web Client to copy the file directly to the datastore server.
 
-### <a name='create-customize-vm'></a> Create and Customize a Base VM
+### <a name='create-customize-vm'></a> Create and customize a base VM
 
 To create and customize a base VM:
 
@@ -145,7 +149,7 @@ To create and customize a base VM:
 
   5. Review the configuration settings on the **Ready to complete** page, and click **Finish**.
 
-### <a name='install-windows-server'></a> Installation of the Windows server
+### <a name='install-windows-server'></a> Installation of Windows Server
 
 To install Windows Server on the base VM:
 
@@ -245,7 +249,7 @@ To configure the base VM network settings and install Windows updates:
 
 1. After the VM restarts verify that you can ping the IP address you assigned to the base VM.
 
-## <a id='clone-vm'></a> Step 3: Clone the Base VM
+## <a id='clone-vm'></a> Step 3: Clone the base VM
 
 To clone the base VM:
 
@@ -256,7 +260,7 @@ This is important because your base VM and the clone VM you create share the sam
 
 1. Select **Clone** > **Clone to Virtual Machine**. This clone is your target VM.
 
-![alt-text="Clone is your target VM."](./images/clone-vm.png)
+![alt-text=""](./images/clone-vm.png)
 
 1. Save the base VM. You run Windows updates on this VM for future stemcells.
 
@@ -326,7 +330,7 @@ For each of the following environment variables, run `echo $GOVC_VAR` to record 
           <li>`CUSTOM-CERTS-PATH` is the file path to custom CA certificates for the destination vCenter. The `-vcenter-ca-certs` flag is optional.</li>
         </ul>
 
-    For more information, see [Authenticate into a Destination vCenter Using CA Certificates](#authenticate-using-certs)
+    For more information, see [Authenticate into a destination vCenter using CA certificates](#authenticate-using-certs)
     as follows.
 
     For example:
@@ -414,7 +418,7 @@ To package the BOSH stemcell:
           <li>`PATCH-VERSION` is the patch version for the stemcell being built.</li>
           <li>`PATCH-VERSION` can be specified as an unquoted version name, for example `2019.12.3`, or as a quoted patch number, for example `“3”`.</li>
           <li>`INVENTORY-PATH` is the vCenter inventory path to the target VM.</li>
-          <li>`CUSTOM-CERTS-PATH` is the file path to custom CA certificates for the destination vCenter. The `-vcenter-ca-certs` flag is optional.For more information, see [Authenticate into a Destination vCenter Using CA Certificates](#authenticate-using-certs) below.</li>
+          <li>`CUSTOM-CERTS-PATH` is the file path to custom CA certificates for the destination vCenter. The `-vcenter-ca-certs` flag is optional.For more information, see [Authenticate into a destination vCenter using CA certificates](#authenticate-using-certs) below.</li>
         </ul>
 
     <p> This command creates a stemcell on your local host in the folder where you ran the command and can take up to 30-minutes
@@ -441,13 +445,13 @@ After Microsoft Corporation releases operating system updates, you can upgrade y
 
 To upgrade your BOSH stemcell:
 
-1. [Install Windows Updates](#install-windows-updates) on the base VM.
+1. [Install Windows updates](#install-windows-updates) on the base VM.
 
-2. [Clone the Base VM](#clone-vm).
+2. [Clone the base VM](#clone-vm).
 
-3. [Construct the BOSH Stemcell](#construct-stemcell).
+3. [Construct the BOSH stemcell](#construct-stemcell).
 
-4. [Package the BOSH Stemcell](#package-stemcell).
+4. [Package the BOSH stemcell](#package-stemcell).
 
 5. Replace the existing stemcell in the <%= vars.ops_manager %> stemcell library with this new stemcell.
 
@@ -455,7 +459,7 @@ To upgrade your BOSH stemcell:
 
 ## <a id='known-issues'></a> Known issues
 
-### <a name='special-characters'></a> Authentication Error with Special Characters in stembuild Commands
+### <a name='special-characters'></a> Authentication error with special characters in stembuild commands
 
 **Symptom**
 
@@ -521,7 +525,7 @@ For example:
           <li>`PATCH-VERSION` is the patch version for the stemcell being built.</li>
           <li>`PATCH-VERSION` can be specified as an unquoted version name, for example `2019.12.3`, or as a quoted patch number, for example `“3”`.</li>
           <li>`INVENTORY-PATH` is the vCenter inventory path to the target VM.</li>
-          <li>`CUSTOM-CERTS-PATH` is the file path to custom CA certificates for the destination vCenter. The `-vcenter-ca-certs` flag is optional. For more information, see [Authenticate into a Destination vCenter Using CA Certificates](#authenticate-using-certs).</li>
+          <li>`CUSTOM-CERTS-PATH` is the file path to custom CA certificates for the destination vCenter. The `-vcenter-ca-certs` flag is optional. For more information, see [Authenticate into a destination vCenter using CA certificates](#authenticate-using-certs).</li>
         </ul>
 
 * For **Windows**:
@@ -543,12 +547,12 @@ For example:
           <li>`STEMBUILD-BINARY` is the `stembuild` file for the version of your local host operating system and the version of the stemcell that you want to build. For example, `stembuild-windows-2019-2`.</li>
           <li>`VCENTER-URL` is the URL of your vCenter.</li>
           <li>`PATCH-VERSION` is the patch version for the stemcell being built. `PATCH-VERSION` can be specified as an unquoted version name, for example `2019.12.3`, or as a quoted patch number, for example `“3”`.</li>
-          <li>`CUSTOM-CERTS-PATH` is the file path to custom CA certificates for the destination vCenter. The `-vcenter-ca-certs` flag is optional. For more information, see [Authenticate into a Destination vCenter Using CA Certificates](#authenticate-using-certs).</li>
+          <li>`CUSTOM-CERTS-PATH` is the file path to custom CA certificates for the destination vCenter. The `-vcenter-ca-certs` flag is optional. For more information, see [Authenticate into a destination vCenter using CA certificates](#authenticate-using-certs).</li>
         </ul>
 
     <p> Windows environment variables do not automatically override vCenter command line parameters, so you must specify the environment variables in the vCenter command.</p>
 
-### <a name='authenticate-using-certs'></a> Authenticating into a destination vCenter Using CA Certificates
+### <a name='authenticate-using-certs'></a> Authenticate into a destination vCenter using CA certificates
 
 **Symptom**
 
