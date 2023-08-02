@@ -70,23 +70,23 @@ The minimum resource requirements for each Windows Diego Cell are:
 
 ## <a id='limitations'></a> Limitations
 
-The following limitations affect Windows containers in <%= vars.windows_runtime_abbr %>:
+Here are the limitations that affect Windows containers in <%= vars.windows_runtime_abbr %>:
 
 * [Windows Server container limitations](#limitations-windows)
-* [<%= vars.windows_runtime_abbr %> limitations](#limitations-pasw)
+* [<%= vars.windows_runtime_abbr %> limitations](#limitations-tasw)
 
 ### <a id='limitations-windows'></a> Windows server container limitations
 
 Windows Server Core Containers are used in <%= vars.windows_runtime_abbr %>.
 
-The following are known Windows Server Container limitations:
+These are known Windows Server container limitations:
 
 * Windows Server Core containers support the host VM's timezone only.
 In <%= vars.windows_runtime_abbr %>, the host and container time-zone is always UTC.
 * Windows Server 2019 Core images support only Lucida Console font.
 No other fonts are supported, and no others can be installed.
 
-### <a id='limitations-pasw'></a> <%= vars.windows_runtime_abbr %> limitations
+### <a id='limitations-tasw'></a> <%= vars.windows_runtime_abbr %> limitations
 
 <%= vars.windows_runtime_abbr %> has the following limitations:
 

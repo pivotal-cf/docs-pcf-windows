@@ -53,16 +53,15 @@ To push a .NET Framework app to a Windows Diego Cell:
         ```
 
         Where `APP-NAME` is the name of your app.
-        <p> The <code>-s windows</code> command instructs <%= vars.platform_name %> to run the app in the Windows Diego Cell.</p>
 
-        <p> If you are not pushing your app from its directory, use the <code>-p</code> command and specify the path to the directory that contains the app.</p>
+        The <code>-s windows</code> command instructs <%= vars.platform_name %> to run the app in the Windows Diego Cell.
+        If you are not pushing your app from its directory, use the <code>-p</code> command and specify the path to the directory that contains the app.
 
-1. Wait for your app to stage and start. If you see an error message,
-   see [Troubleshoot App Errors](#troubleshoot).
+1. Wait for your app to stage and start. If you see an error message, see [Troubleshoot app errors](#troubleshoot).
 
-### <a id='context-routing'></a> Context Path Routing Support for ASP.NET Apps
+### <a id='context-routing'></a> Context path routing support for ASP.NET spps
 
-With context path routing, you can activate multiple apps to share the same route hostname. For example, `app1.example.com/app2`. If you use ASP.NET you can host apps under a route path. Within Windows Diego Cells, you can have multiple routes to an app, but those routes cannot have different context paths.
+With context path routing, you can activate multiple apps to share the same route host name. For example, `app1.example.com/app2`. If you use ASP.NET you can host apps under a route path. Within Windows Diego Cells, you can have multiple routes to an app, but those routes cannot have different context paths.
 
 To make an app accessible under another app's URL requires a pair of commands.
 
@@ -88,7 +87,9 @@ To define a context path route, such as `app1.example.com/app2`:
       <li><code>APP-DOMAIN</code> is your app&#39;s public domain name. For example, <code>example.com</code>.</li>
     </ul>
 
-    <p> The <code>-d</code> parameter is only needed when you push an app to a non-default domain. You can use the routes property in
+    <<p class="note important">
+    <span class="note__title">Important</span>
+    The <code>-d</code> parameter is needed only when you push an app to a non-default domain. You can use the routes property in
     the manifest instead.</p>
 
 ### <a id='graceful-shutdown'></a> Activating a graceful shutdown for a .NET App
@@ -120,7 +121,7 @@ To push a self-hosted app:
     Where:
     <ul>
       <li><code>APP-NAME</code> is the name of your app.</li>
-      <li><code>PATH-TO-BINARY</code> is the path to your executable.</li>
+      <li><code>PATH-TO-BINARY</code> is the path to your executable file.</li>
     </ul>
 
 1. Wait for your app to stage and start. If you see an error message,
@@ -138,7 +139,7 @@ To deploy a SOAP web service:
 
 1. Publish the service to your local file system.
 
-1. Open a command line to the directory containing the published web service.
+1. Open a command line shell and go to the directory containing the published web service.
 
 1. Push your service by running:
 
@@ -161,20 +162,19 @@ To deploy a SOAP web service:
     usage: 1G x 1 instances
     urls: webservice.example.com
     </pre>
-    <p> The push command must include the <code>-s</code> flag to specify the stack, which instructs <%= vars.platform_name %> to run the
-    app in the Windows Diego Cell.</p>
 
-    <p> The <code>-p</code> and <code>-u </code> parameters are optional parameters. The <code>-p</code> parameter is needed
-    only when you push your service from a directory that does not contain the published web service. The <code>-u</code> parameter is
-    needed only when you deactivate the health check when you do not have a route serving <code>/</code>.</p>
+    The push command must include the <code>-s</code> flag to specify the stack, which instructs <%= vars.platform_name %> to run the
+    app in the Windows Diego Cell.
 
-1. Confirm your service is running by finding your service's URL in the push command's output and browsing to it. In the previous example, the URL for the service is `http://webservice.example.com`.
+    The `-p` and `-u` parameters are optional. The `-p` parameter is needed
+    only when you push your service from a directory that does not contain the published web service. The `-u` parameter is
+    needed only when you deactivate the health check when you do not have a route serving `/`.
 
-### <a id='correct-wsdl'></a> Step 2: Modifying the WSDL File
+2. Confirm your service is running by finding your service URL in the push command output and browsing to it. In the previous example, the URL for the service is `http://webservice.example.com`.
 
-Your SOAP web service is now deployed on <%= vars.platform_name %>, but the service WSDL file contains incorrect port information. The WSDL file must be modified to allow an app to consume your web service. Either you or the service developer can perform the needed modification.
+### <a id='correct-wsdl'></a> Step 2: Edit the WSDL File
 
-See the following portion of an example WSDL file:
+Your SOAP web service is now deployed on <%= vars.platform_name %>, but the service WSDL file contains incorrect port information. The WSDL file must be edited to allow an app to consume your web service. Either you or the service developer can perform the needed modification, as shown in this example:
 
 ```xml
 - <wsdl:service name="WebService1">
@@ -195,7 +195,7 @@ The URL of the web service in the WSDL file must be modified to remove `62492`. 
 
 SOAP web service developers can resolve this problem in one of two ways:
 
-* Modify the WSDL file by following the instructions in the [Microsoft documentation](https://blogs.msdn.microsoft.com/kaevans/2005/11/16/modify-a-web-services-wsdl-using-a-soapextensionreflector/) from the Microsoft Developers Network.
+* Edit the WSDL file by following the instructions in the [Microsoft documentation](https://blogs.msdn.microsoft.com/kaevans/2005/11/16/modify-a-web-services-wsdl-using-a-soapextensionreflector/) from the Microsoft Developers Network.
 
 * Instruct the developers of external apps that consume the web service to follow the procedure in [Consuming SOAP Web Service](#consume).
 
@@ -226,7 +226,7 @@ To use a modified version of the WSDL file:
 
 1. Download the WSDL file to your local machine.
 
-1. Edit the WSDL file to delete the container port, as described in [Modify the WSDL File](#correct-wsdl).
+1. Edit the WSDL file to delete the container port, as described in [Edit the WSDL File](#correct-wsdl).
 
 1. In Microsoft Visual Studio, right-click your app in the **Solution Explorer** and select **Add** > **Service Reference**.
 
@@ -251,10 +251,10 @@ For more information, see [Context Path Routing Support for ASP.NET Apps](#conte
 
 ## <a id='troubleshoot'></a> Troubleshooting App errors
 
-If a .NET app fails to start, see the following list of errors and their possible solutions:
+If a .NET app does not start, review this list of errors and possible solutions:
 
 * `NoCompatibleCell`: Your <%= vars.platform_name %> deployment cannot connect to your Windows Diego Cell. For more information about troubleshooting your Windows Diego Cell configuration, see [Troubleshooting Windows Diego Cells](troubleshooting.html).
 
-* `Start unsuccessful`: Your app might be configured wrong  or lacks the required DLL files and dependencies.
-    * Ensure that your app directory contains either a valid `.exe` binary or a valid `Web.config` file.
-    * Ensure that you are pushing from a directory containing your app dependencies. If it does not, specify the app dependency directory with the `-p` flag.
+* `Start unsuccessful`: Your app might be configured wrong  or lacks the required DLL files and dependencies. Verify that:
+    * Your app directory contains either a valid `.exe` binary or a valid `Web.config` file.
+    * You are pushing from a directory containing your app dependencies. If it does not, specify the app dependency directory with the `-p` flag.

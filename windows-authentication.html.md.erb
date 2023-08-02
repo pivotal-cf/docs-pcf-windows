@@ -18,7 +18,7 @@ Apps using Windows Authentication can use the `--no-route` flag for the  `cf pus
 
 ## <a id='prerequisites'></a> Prerequisites
 
-Before you configure the <%= vars.windows_runtime_abbr %> tile for Windows Authentication, make sure that you meet the following requirements:
+Before you configure the <%= vars.windows_runtime_abbr %> tile for Windows Authentication, you must meet the following requirements:
 
 * Your Active Directory instance must be configured with a GMSA and a regular user that has been granted access to the GMSA credentials. See the [Microsoft documentation](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts) for specifics.
 * Your Windows Diego cells must have the appropriate [firewall rules](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/gmsa-troubleshooting#check-the-firewall-configuration) to access the Active Directory instance.
@@ -28,7 +28,7 @@ Before you configure the <%= vars.windows_runtime_abbr %> tile for Windows Authe
 <p class="note caution">
 <span class="note__title">Caution</span>
 Using Windows Authentication through GoRouter is strongly discouraged because
-it results in authentication sessions for one user being returned to a different user. Apps using Windows Authentication
+it causes authentication sessions for one user being returned to a different user. Apps using Windows Authentication
 must <strong>only</strong> be accessed through TCP routes.
 </p>
 
@@ -36,7 +36,9 @@ must <strong>only</strong> be accessed through TCP routes.
 * Depending on your IaaS, you might need to configure BOSH DNS handlers so that your app containers can resolve domain resources through the Active Directory instance. See the <a class="external-link" href="https://docs.pivotal.io/ops-manager/install"><strong>Ops Manager Documentation</strong></a> for IaaS-specific instructions.
 * Apps intending to use Windows Authentication must use the HWC buildpack.
 
-<p> Use an isolation segment for Windows Authentication, as all apps in
+<p class="note">
+<span class="note__title">Note</span>
+Use an isolation segment for Windows Authentication, because all apps in
 the <%= vars.windows_runtime_abbr %> installation have access to GMSA credentials. To associate a <%= vars.windows_runtime_abbr %> tile with
 an isolation segment so that its Diego Cells run in that segment, see <a href="./isolation.html">Windows Diego Cells in Isolation Segments</a>.</p>
 
@@ -51,11 +53,11 @@ an isolation segment so that its Diego Cells run in that segment, see <a href=".
 Start the configuration by following the steps in the [Microsoft documentation](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#create-a-credential-spec) to create the appropriate values, then select **Windows Authentication** and use this procedure:
 
 1. Under **Windows Authentication**, select **Configure**.
-2. In the **For security reasons, apps using Windows Authentication must use TCP routing.**, field, enter `X` to acknowledge this requirement. See [Security considerations](#security) for the details.
-3. In the **Active Directory FQDN** field, enter the domain of the Active Directory instance that app containers use for authentication.
-4. In the **Standard user name** field, enter the name of the user account with access to the gMSA password. This is a user account.
-5. In the **Standard user password** field, enter the password of the user account with access to the gMSA password. This is a user account.
-6. In the **Container credential spec** field, enter a JSON string that describes the gMSA account and domain details. For more information on Windows Authentication, see [Microsoft documentation](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#create-a-credential-spec).
+2. In the **For security reasons, apps using Windows Authentication must use TCP routing** text box, enter `X` to acknowledge this requirement. See [Security considerations](#security) for the details.
+3. In **Active Directory FQDN**, enter the domain of the Active Directory instance that app containers use for authentication.
+4. In **Standard user name**, enter the name of the user account with access to the gMSA password. This is a user account.
+5. In **Standard user password**, enter the password of the user account with access to the gMSA password. This is a user account.
+6. In **Container credential spec**, enter a JSON string that describes the gMSA account and domain details. For more information on Windows Authentication, see [Microsoft documentation](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#create-a-credential-spec).
 7. Click **Save**.
 8. [Deploying the tile](installing.html#deploy).
 
@@ -65,7 +67,7 @@ Follow the steps in the [Microsoft documentation](https://learn.microsoft.com/en
 
 1. Create a new user account.
 2. Add the user to the security group that guards access to the GMSA service account.
-3. Update the **Standard user name** and **Standard user password** fields with the new user information.
+3. Update the **Standard user name** and **Standard user password** text boxes with the new user information.
 4. Click **Save**.
 5. [Deploying the tile](installing.html#deploy).
 

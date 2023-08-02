@@ -6,18 +6,20 @@ owner: Windows
 You can run apps on <%= vars.windows_runtime_full %>
 2012 R2 stemcells to run on <%= vars.windows_runtime_abbr %> stemcells, which run Windows Server 2019.
 
-<p> <%= vars.windows_runtime_abbr %> 2012 R2 has reached its end of availability (EoA) and is no longer available.</p>
+<p class="note caution">
+<span class="note__title">Caution</span>
+<%= vars.windows_runtime_abbr %> 2012 R2 has reached its end of availability (EoA) and is no longer available.
+</p>
 
 VMware recommends the blue-green deployment method for high availability.
 
 For more information about blue-green deployments,
-see [Using Blue-Green Deployment to Reduce Downtime and
-Risk](../devguide/deploy-apps/blue-green.html).
+see [Using blue-green deployment to reduce downtime and risk](../devguide/deploy-apps/blue-green.html).
 
 
 ## <a id="install-tile"></a> Step 1: Installing and deploying the <%= vars.windows_runtime_abbr %> tile
 
-To install and deploy the <%= vars.windows_runtime_abbr %> tile, follow steps 1 and 2 of [Installing and Configuring <%= vars.windows_runtime_abbr %>](installing.html).
+To install and deploy the <%= vars.windows_runtime_abbr %> tile, follow steps 1 and 2 of [Installing and configuring <%= vars.windows_runtime_abbr %>](installing.html).
 
 
 ## <a id="push-app"></a> Step 2: Pushing App to <%= vars.windows_runtime_abbr %> Diego Cells
@@ -41,7 +43,7 @@ To deploy a running app again with zero downtime using the blue-green method:
     ```
 
 1. Create a name for the replacement <%= vars.windows_runtime_abbr %> app.
-   VMware recommends you append `-green` to your existing app name, using the following format:
+   VMware recommends you append `-green` to your existing app name, as shown here:
 
     ```console
     APP-NAME-green
@@ -69,14 +71,18 @@ To deploy a running app again with zero downtime using the blue-green method:
     -n my-app --no-start --no-route
     </pre>
 
-    <p> The <code>--no-start</code> and <code>--no-route</code> parameters included in this <code>cf push</code> command are required for
+    <p class="note important">
+    <span class="note__title">Important</span>
+    The <code>--no-start</code> and <code>--no-route</code> parameters included in this <code>cf push</code> command are required for
     the this procedure. The <code>--no-start</code> parameter is used to create the instance VMs and not start the app, and the
     <code>--no-route</code> parameter is used to prevent the push command from automatically mapping a route to the app, but no longer
-    unbinds all existing routes associated with the app.
+    unbinds all existing routes associated with the app.</p>
 
     For more information about <code>cf push</code>, see <a href="http://cli.cloudfoundry.org/en-US/cf/push.html">cf push</a> in the Cloud Foundry CLI Reference Guide.</p>
 
-    <p> The <code>windows</code> stack is a renaming of the old <code>windows2016</code> stack. These stacks are identical and differ
+    <p class="note important">
+    <span class="note__title">Important</span>
+    The <code>windows</code> stack is a renaming of the old <code>windows2016</code> stack. These stacks are identical and differ
     in name only. If the <code>windows</code> stack is available, specify <code>-s windows</code>. Otherwise, specify <code>-s windows2016</code>. In <%= vars.windows_runtime_abbr %> v2.5 and later, the <code>windows2016</code> stack is deprecated. For more information, see <a href="https://docs.pivotal.io/pivotalcf/2-5/pcf-release-notes/windows-rn.html#-deprecation-of-the-windows2016-stack">Deprecation of the windows2016 Stack</a> in <em><%= vars.windows_runtime_full %> v2.5 Release Notes</em>.</p>
 
 1. To configure the router so all incoming requests go to both `APP-NAME` and `APP-NAME-green`, run:
@@ -92,8 +98,7 @@ To deploy a running app again with zero downtime using the blue-green method:
           <li>`HOSTNAME` is the name of your app's subdomain. For example, if `example.com` is your domain and you want the URL to your app to be `http://my-app.example.com`, then specify `my-app` as the `HOSTNAME`.</li>
         </ul>
 
-    <p> When you use the <code>cf map-route</code> command, you must specify domain name after you specify the app name.</p>
-
+    When you use the <code>cf map-route</code> command, you must specify domain name after you specify the app name.
     For additional information, see [cf map-route](http://cli.cloudfoundry.org/en-US/cf/map-route.html) in the Cloud Foundry CLI Reference Guide.
 
 1. To start the green app, run:
@@ -139,12 +144,14 @@ To delete the original app:
 
     Where `APP-NAME` is the name of the app that you have replaced with `APP-NAME-green`.
 
-    <p> Running the command with the <code>-r</code> flag no longer deletes routes when the route is mapped to more than one app.</p>
+    <p class="note important">
+    <span class="note__title">Important</span>
+    Running the command with the <code>-r</code> flag no longer deletes routes when the route is mapped to more than one app.</p>
 
     For additional information about `cf delete` command, see [cf delete](http://cli.cloudfoundry.org/en-US/cf/delete.html) in the Cloud Foundry CLI Reference Guide.
 
 
-## <a id="uninstall-old-tile"></a> Step 4: Uninstalling the old tile (Optional)
+## <a id="uninstall-old-tile"></a> Step 4: Uninstalling the old tile (optional)
 
 Once you migrate all of your apps and you are no longer use the <%= vars.windows_runtime_abbr %> 2012 R2 tile, a <%= vars.platform_name %> uninstall the tile.
 
@@ -154,8 +161,9 @@ To uninstall the tile:
 
 1. Click **Review Pending Changes**.
 
-1. Select the <%= vars.windows_runtime_abbr %> tile and review the changes. For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html).
+1. Click the <%= vars.windows_runtime_abbr %> tile and review the changes. For more information, see [Reviewing pending product changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html).
 
 1. Click **Apply Changes**.
-  <p> After you delete a product, the product tile is removed from the installation and the Installation Dashboard. However,
-  the product appears in the <strong>Available Products</strong> view.</p>
+
+After you delete a product, the product tile is removed from the installation and the Installation Dashboard. However,
+the product appears in the <strong>Available Products</strong> view.

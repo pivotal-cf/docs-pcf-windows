@@ -29,10 +29,10 @@ To make multiple copies of the <%= vars.windows_runtime_abbr %> tile that you ca
 
 To use the Replicator tool:
 
-1. Download the Replicator tool from the [<%= vars.windows_runtime_full %>](https://network.pivotal.io/products/pas-windows)
+1. Download the Replicator tool from the [<%= vars.windows_runtime_full %>](https://network.tanzu.vmware.com/products/pas-windows/)
    page on <%= vars.product_network %>.
 
-1. Go to the directory where you downloaded the Replicator tool.
+1. Go to the folder into which you downloaded the Replicator tool.
 
 1. Replicate the tile by running:
 
@@ -54,14 +54,14 @@ To use the Replicator tool:
     -output c:\temp\TileCopy.pivotal
     </pre>
 
-1. Install and configure the Windows isolation segment, using the new `.pivotal` file and, following the procedures in _Installing and Configuring <%= vars.windows_runtime_abbr %>_, starting with the **Import a Product** step of [Install the Tile](installing.html#install).
+1. Install and configure the Windows isolation segment, using the new `.pivotal` file and, follow the procedures in _Installing and configuring <%= vars.windows_runtime_abbr %>_, starting with **Import a Product** in [Install the Tile](installing.html#install).
 
 
 ## <a id='assign-isolation'></a> Assigning a tile to an Isolation Segment
 
 To assign a <%= vars.windows_runtime_abbr %> tile to an isolation segment:
 
-1. Select **App Containers**.
+1. Click **App Containers**.
 
 1. Under **Segment name**, enter a name that is unique across your TAS for VMs
 [Windows] deployment. This is the placement tag for your Diego Cells.

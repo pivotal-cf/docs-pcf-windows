@@ -51,7 +51,7 @@ A Windows Diego Cell includes the following components:
 
 * BOSH Agent: Executes instructions from the BOSH Director. For more information, see [Agent](https://bosh.io/docs/bosh-components/#agent) in _Components of BOSH_ in the BOSH documentation.
 
-* Diego Rep: Runs and manages [Tasks and long running Processes](../concepts/diego/diego-auction.html#processes). For more information, see [Tasks and long-running processes](../concepts/diego/diego-auction.html#processes) in _How Diego Balances App Processes_.
+* Diego Rep: For more information, see [Tasks and long-running processes](../concepts/diego/diego-auction.html#processes) in _How Diego Balances App Processes_.
 
 The following diagram illustrates the architecture of a Windows Diego Cell:
 
@@ -59,7 +59,7 @@ The following diagram illustrates the architecture of a Windows Diego Cell:
 
 ### <a id="container"></a> Container implementation
 
-Garden on Windows uses the following runtime plug-ins to create and manage Windows containers for <%= vars.app_runtime_full %>:
+Garden on Windows uses these runtime plug-ins to create and manage Windows containers for <%= vars.app_runtime_full %>:
 
 * Container plug-in `winc`: Creates Open Container Initiative (OCI)-compliant containers, executes processes in the containers, and sets their CPU and RAM limits. For more information about OCI compliance, see the [Open Container Initiative](https://www.opencontainers.org) website.
 

@@ -4,27 +4,29 @@ owner: Windows
 ---
 
 You can download or create the stemcells that <%= vars.windows_runtime_full %>
-needs to create VMs on your infrastructure.
+needs for creating VMs on your infrastructure.
 
-<p> The traffic is not encrypted with TLS between Gorouter and Windows stemcells. </p>
+<p class="note important">
+<span class="note__title">Important</span>
+Traffic is not encrypted with TLS between Gorouter and Windows stemcells.</p>
 
 
 ## <a id="stemcell"></a> Windows stemcells
 
 A BOSH stemcell is a versioned OS image wrapped with IaaS specific packaging.
 BOSH uses a stemcell to supply the basic OS for any Windows VM it creates.
-A typical BOSH stemcell for Windows contains the following:
+A typical BOSH stemcell for Windows contains:
 
-* A bare minimum Windows OS skeleton.
-* A BOSH Agent.
-* OS Configuration files and common utilities.
+* A bare minimum Windows OS skeleton
+* A BOSH agent
+* OS configuration files and common utilities
 
-For more information about stemcells, see [What is a Stemcell?](https://bosh.io/docs/stemcell/)
+For more information about stemcells, see [What is a stemcell?](https://bosh.io/docs/stemcell/)
 in the Cloud Foundry BOSH documentation.
 
 ### <a id="compatibility"></a> Windows Stemcell Compatibility Matrix
 
-Refer to the compatibility matrix below before deploying and installing the <%= vars.windows_runtime_abbr %> tile:
+Refer to the compatibility matrix before deploying and installing the <%= vars.windows_runtime_abbr %> tile:
 
 | <%= vars.windows_runtime_abbr %> Version        | WindowsFS Version     | Stemcell 2019.43 and earlier | Stemcell 2019.44 for Azure and Stembuild vSphere | Stemcell v2019.44 for other IAASes | Stemcell 2019.45         |
 |----------------------|------------------------|---------------------|-----------------------------------------|--------------------------|--------------------------|
@@ -90,20 +92,19 @@ To activate the Azure subscriptions that you want your stemcell to use:
 
 To accept the license agreement for your stemcell:
 
-1. Log in to to Azure with the Azure CLI, using the following command:
+1. Log in to to Azure with the Azure CLI, using this command:
 
     ```console
     az login
     ```
 
-1. To list the available Windows stemcells and find latest Windows stemcell `urn`,
-run the following Azure CLI command:
+1. To list the available Windows stemcells and find latest Windows stemcell `urn`, run this Azure CLI command:
 
 	```console
 	az vm image list --all --publisher pivotal --sku 2019
 	```
 
-    For example:
+  For example:
 
 	<pre class="terminal">
 	az vm image list --all --publisher pivotal --sku 2019
@@ -122,7 +123,7 @@ run the following Azure CLI command:
 	In the previous example, `pivotal:bosh-windows-server-2019:2019:2019.8.028001` is the
     latest Windows stemcell `urn`.
 
-1. To accept the terms for the selected Windows stemcell for each Azure subscription you want to use for the stemcell, run the following command:
+1. To accept the terms for the selected Windows stemcell for each Azure subscription you want to use for the stemcell, run this command:
 
     ```console
     az vm image accept-terms --subscription SUBSCRIPTION_ID --urn URN-ID

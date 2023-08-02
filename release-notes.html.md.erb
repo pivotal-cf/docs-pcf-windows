@@ -299,7 +299,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   +++ b/jobs/auctioneer/spec
   @@ -88,6 +88,12 @@ properties:
   diego.auctioneer.locket.api_location:
-  description: "Hostname and port of the Locket server. When set, the auctioneer attempts to claim a lock from the Locket API."
+  description: "Host name and port of the Locket server. When set, the auctioneer attempts to claim a lock from the Locket API."
   default: locket.service.cf.internal:8891
   +  diego.auctioneer.locket.client_keepalive_time:
   +    description: "Period in seconds after which the locket gRPC client sends keepalive ping requests to the locket server it is connected to."
@@ -315,7 +315,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   +++ b/jobs/bbs/spec
   @@ -140,6 +140,12 @@ properties:
   diego.bbs.locket.api_location:
-  description: "Hostname and port of the Locket server. When set, the BBS attempts to claim a lock from the Locket API and will detect Diego cells registered with the Locket API."
+  description: "Host name and port of the Locket server. When set, the BBS attempts to claim a lock from the Locket API and will detect Diego cells registered with the Locket API."
   default: locket.service.cf.internal:8891
   +  diego.bbs.locket.client_keepalive_time:
   +    description: "Period in seconds after which the locket gRPC client sends keepalive ping requests to the locket server it is connected to."
@@ -331,7 +331,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   +++ b/jobs/rep/spec
   @@ -217,6 +217,12 @@ properties:
   diego.rep.locket.api_location:
-  description: "Hostname and port of the Locket server. When set, the cell rep will establish its cell registration in the Locket API."
+  description: "Host name and port of the Locket server. When set, the cell rep will establish its cell registration in the Locket API."
   default: locket.service.cf.internal:8891
   +  diego.rep.locket.client_keepalive_time:
   +    description: "Period in seconds after which the locket gRPC client sends keepalive ping requests to the locket server it is connected to."
@@ -347,7 +347,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   +++ b/jobs/rep_windows/spec
   @@ -227,7 +227,13 @@ properties:
   diego.rep.locket.api_location:
-  description: "Hostname and port of the locket server"
+  description: "Host name and port of the locket server"
   default: locket.service.cf.internal:8891
   -
   +  diego.rep.locket.client_keepalive_time:
@@ -450,7 +450,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   +++ b/jobs/auctioneer/spec
   @@ -88,13 +88,6 @@ properties:
   diego.auctioneer.locket.api_location:
-  description: "Hostname and port of the Locket server. When set, the auctioneer attempts to claim a lock from the Locket API."
+  description: "Host name and port of the Locket server. When set, the auctioneer attempts to claim a lock from the Locket API."
   default: locket.service.cf.internal:8891
   -  diego.auctioneer.skip_consul_lock:
   -    default: false
@@ -467,7 +467,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   +++ b/jobs/bbs/spec
   @@ -140,16 +140,6 @@ properties:
   diego.bbs.locket.api_location:
-  description: "Hostname and port of the Locket server. When set, the BBS attempts to claim a lock from the Locket API and will detect Diego cells registered with the Locket API."
+  description: "Host name and port of the Locket server. When set, the BBS attempts to claim a lock from the Locket API and will detect Diego cells registered with the Locket API."
   default: locket.service.cf.internal:8891
   -  diego.bbs.skip_consul_lock:
   -    default: false
@@ -541,8 +541,8 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   @@ -228,12 +215,9 @@ properties:
   default: "rep"
   diego.rep.locket.api_location:
-  -    description: "Hostname and port of the Locket server. When set, the cell rep will establish its cell registration in the Locket API instead of in the Consul key-value store."
-  +    description: "Hostname and port of the Locket server. When set, the cell rep will establish its cell registration in the Locket API."
+  -    description: "Host name and port of the Locket server. When set, the cell rep will establish its cell registration in the Locket API instead of in the Consul key-value store."
+  +    description: "Host name and port of the Locket server. When set, the cell rep will establish its cell registration in the Locket API."
   default: locket.service.cf.internal:8891
   -  enable_consul_service_registration:
   -    description: "Enable the cell rep to register itself as a service with Consul, for client discovery via Consul DNS. Do not disable without arranging alternate service discovery."
@@ -581,7 +581,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   description: "the memory capacity the executor should manage.  this should not be greater than the actual memory on the VM"
   default: "auto"
   @@ -241,9 +228,6 @@ properties:
-  description: "Hostname and port of the locket server"
+  description: "Host name and port of the locket server"
   default: locket.service.cf.internal:8891
   -  enable_consul_service_registration:
   -    description: "Enable the cell rep to register itself as a service with Consul, for client discovery via Consul DNS. Do not disable without arranging alternate service discovery."
@@ -937,7 +937,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
           <summary>v7.1.0</summary>
           <pre style="max-width: 30em">
   ## What's Changed
-  * Add app-id and drain url in the error message by @chombium in https://github.com/cloudfoundry/loggregator-agent-release/pull/212
+  * Add app-id and drain URL in the error message by @chombium in https://github.com/cloudfoundry/loggregator-agent-release/pull/212
   ## New Contributors
   * @chombium made their first contribution in https://github.com/cloudfoundry/loggregator-agent-release/pull/212
   **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.0.2...v7.1.0
@@ -965,7 +965,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
           <pre style="max-width: 30em">
   ## What's Changed
   * Allow application developers to set client certs and keys, as well as server cas, to be used for authentication in syslog-tls drains by @fhambrec, @dark5un in https://github.com/cloudfoundry/loggregator-agent-release/pull/177 / https://github.com/cloudfoundry/loggregator-agent-release/pull/119. Breaking change: requires new version of capi
-  * Add drain scope and url tags to syslog egress metrics by @skaur20 in https://github.com/cloudfoundry/loggregator-agent-release/pull/123, Breaking change: might effect metrics dashboards and calculations.
+  * Add drain scope and URL tags to syslog egress metrics by @skaur20 in https://github.com/cloudfoundry/loggregator-agent-release/pull/123, Breaking change: might effect metrics dashboards and calculations.
   ## New Contributors
   * @skaur20 made their first contribution in https://github.com/cloudfoundry/loggregator-agent-release/pull/123
   **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v6.5.6...v7.0.0
@@ -1161,14 +1161,15 @@ The <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> tile is availab
 
 You can now log in to your .NET Framework applications using your existing Active Directory Domain. For setup details, see [Windows Authentication for .Net apps](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/windows-authentication.html)
 
-## <a id='breaking-changes'></a> Breaking Changes
+## <a id='breaking-changes'></a> Breaking changes
 
 <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> includes the following breaking change:
 
-### Option to Enable (Deprecated) Global Log Rate Limit is Removed
+### Option to enable (deprecated) Global Log Rate Limit is removed
 
 This feature was in beta until IST v3.0, when it was deprecated. For details, see [VMware Tanzu Application Service for Windows v3.0 Release Notes](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/release-notes.html#global-log-rate-limit-is-deprecated-14)
-following the introduction of app log rate limits. For more information, see [App Log Rate Feature](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/runtime-rn.html#app-log-rate-limits-for-orgs-spaces-and-individual-apps-14).
+after the introduction of app log rate limits.
+For more information, see [App Log Rate Feature](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/runtime-rn.html#app-log-rate-limits-for-orgs-spaces-and-individual-apps-14).
 This option to enable the feature has now been removed, and you must apply app log rate limits instead.
 
 If you were using this feature to limit your overall app log

@@ -3,7 +3,7 @@ title: Using SMB Volumes in .NET Apps
 owner: Windows
 ---
 
-You can use Server Message Block (SMB) Volumes in .NET app. In the following example, you create an app
+You can use Server Message Block (SMB) Volumes in the .NET app. In the example presented here, you create an app
 that reads and writes to a `note.txt` file within an SMB Volume share.
 
 
@@ -16,10 +16,10 @@ To use SMB Volumes in your .NET App, you must have:
 * <%= vars.windows_runtime_full %>.
 * An accessible SMB Volume in an IaaS with a UNC path.
 * An existing .NET Framework app.
-* An SMB username.
+* An SMB user name.
 * An SMB password.
 
-### <a id='steeltoe'></a> Using SMB Volumes in .NET Apps with Steeltoe
+### <a id='steeltoe'></a> Using SMB volumes in .NET apps with Steeltoe
 
 Steeltoe is a set of libraries that help your team write cloud native apps. Steeltoe contains functionality for
 mounting SMB Volumes. Using Steeltoe requires editing your app code.
@@ -36,7 +36,7 @@ If you are using Steeltoe, add the following environment variables to your Confi
 Where:
 
 * `SMB_PATH` is the UNC path to your SMB.
-* `SMB_USERNAME` is your IaaS account username.
+* `SMB_USERNAME` is your IaaS account user name.
 * `SMB_PASSWORD` is your IaaS account password.
 
 For more information about adding environment variables to your Config Server Provider, see
@@ -61,7 +61,7 @@ To mount SMB Volumes:
     * `SMB_USERNAME`
     * `SMB_PASSWORD`
 
-1. Add the following command to your `.profile.bat` file:
+1. Add this command to your `.profile.bat` file:
 
     ```console
     net use z: %SMB_PATH% %SMB_PASSWORD% /USER:%SMB_USERNAME%
@@ -75,13 +75,13 @@ To configure SMB mounting:
 
 1. Using the cf CLI or Apps Manager, add `SMB_PATH`, `SMB_USERNAME`, and `SMB_PASSWORD`
    as environment variables to your local computer or the computer you are using
-   to deploy your app.
+   to deploy your app. If Visual Studio does not detect these new environment variables, start Visual Studio again.
 
-    <p> If you are using SMB Volumes with your batch profile and have already added these environment variables, ignore this step.</p>
+    <p class="note important">
+    <span class="note__title">Important</span>
+    If you are using SMB Volumes with your batch profile and have already added these environment variables, ignore this step.</p>
 
-    <p> If Visual Studio does not detect these new environment variables, start Visual Studio again.</p>
-
-1. In Visual Studio, create a new file in your solution named `SMBConfiguration.cs`.
+2. In Visual Studio, create a new file in your solution named `SMBConfiguration.cs`.
    This file is the single representation of your SMB Volume configuration and
    reads the connection data from the environment variables you established previously.
    Include the following in your `SMBConfiguration.cs` file:
@@ -112,20 +112,20 @@ To configure SMB mounting:
     }
     ```
 
-1. In Visual studio, create a new MVC Controller named `NoteController`.
+3. In Visual studio, create a new MVC Controller named `NoteController`.
    This file creates a controller endpoint that reads the example note file.
 
    For more information about creating a controller,
    see the [Microsoft documentation](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-controller?view=aspnetcore-2.2&tabs=visual-studio).
 
-1. Use your package manager to add `Steeltoe.Common` and `Steeltoe.Common.Net` to your app.
+4. Use your package manager to add `Steeltoe.Common` and `Steeltoe.Common.Net` to your app.
    If you are not using Steeltoe, ignore this step.
 
-1. Edit `NoteController.cs` to read from a file named `note.txt`.
+5. Edit `NoteController.cs` to read from a file named `note.txt`.
    This `note.txt` does not exist yet but is created by the `FileMode.OpenOrCreate` method.
    See the following example code snippet, which reads the contents of the note file and
    stashes the `note.txt` content in the Viewbag.
-   If you are not using Steeltoe, ignore the reference to `Steeltoe.Common.Net` in the following code snippet.
+   If you are not using Steeltoe, ignore the reference to `Steeltoe.Common.Net`.
 
     ```console
     // NoteController.cs
@@ -163,15 +163,15 @@ To configure SMB mounting:
     }
     ```
 
-1. In Visual Studio, create a subdirectory in **Views** named `Note`.
+2. In Visual Studio, create a sub-folder in **Views** named `Note`.
 
-1. In Visual Studio, create a new View named `Index`.
+3. In Visual Studio, create a new View named `Index`.
 
 For more information about Views, see
 [Views in ASP.NET Core MVC](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/overview?view=aspnetcore-2.2) and
 [Add a view to an ASP.NET Core MVC app](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-view?view=aspnetcore-2.2&tabs=visual-studio) in the Microsoft documentation.
 
-1. In Visual Studio, create an `Index.cshtml` file that contains the following:
+1. In Visual Studio, create an `Index.cshtml` file that contains:
 
     ```console
     // Index.cshtml
@@ -179,9 +179,9 @@ For more information about Views, see
     @ViewBag.Note
     ```
 
-    If you were to run the app now, you would see an empty page with no errors.
+    If you run the app now, you see an empty page with no errors.
 
-1. Modify the `Index.cshtml` file to contain a form. This form posts to a yet-to-be-created update endpoint and also
+2. Edit the `Index.cshtml` file to contain a form. This form posts to a yet-to-be-created update endpoint and also
 displays the note inside a text area.
 
     ```
@@ -200,13 +200,11 @@ displays the note inside a text area.
     ```
 
 1. Edit the `NoteController.cs` to have an update endpoint. This endpoint saves the data posted to the endpoint back
-into the `note.txt`. See the example code snippet in the following step.
+into the `note.txt`. See the example code snippet in this procedure.
 
 1. Edit the `NoteController.cs` to include the ControllerBase class `RedirectToAction` method, which redirects to the
 index page so the user can see what was just saved. For more information about the ControllerBase class, see
 the [Microsoft documentation](https://docs.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.redirecttoaction?view=aspnetcore-2.2).
-
-    See the following example code snippet:
 
     ```console
     // NoteController.cs
@@ -237,7 +235,7 @@ the [Microsoft documentation](https://docs.microsoft.com/en-us/dotnet/api/micros
 
 ## <a id='known-issue'></a> Known issues
 
-#### <a id='cannont-find-path'></a> Inability to SSH into App Instance
+#### <a id='cannont-find-path'></a> Inability to SSH into app instance
 
-Even though you have successfully created the SMB mapping, you cannot run `cf ssh` into that app instance.
-Trying to access the created mapping through SSH results in an unspecified path error.
+Even though you have created the SMB mapping, you cannot run `cf ssh` into that app instance.
+Trying to access the created mapping through SSH causes an unspecified path error.
