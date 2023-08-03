@@ -55,7 +55,7 @@ To install the <%= vars.windows_runtime_abbr %> tile:
 
 2. Download the **<%= vars.windows_runtime_full %>** product file.
 
-3. Download the **Windows FS Injector** tool for your workstation OS. The Injector tool, `winfs-injector`, is an executable binary that adds the Windows Server container base image into the product file. This step requires internet access and can take up to 20 minutes.
+3. Download the **Windows FS Injector** tool for your workstation OS. The Injector tool, `winfs-injector`, is an executable binary that adds the Windows Server container base image into the product file. This step requires ISnternet access and can take up to 20 minutes.
 
   <p class="note important">
   <span class="note__title">Important</span> You need the <code>git</code> and <code>tar</code> executable files in your <code>%PATH%</code> to run <code>winfs-injector.exe</code>.
@@ -150,10 +150,10 @@ To configure VM access:
 In **Smoke Tests**, you specify the org and space where smoke tests are run.
 
 In the org and space that you specify, the Smoke Test errand pushes an app to the org.
-The app runs basic functionality tests against your <%= vars.windows_runtime_abbr %> deployment
+The app runs basic function tests against your <%= vars.windows_runtime_abbr %> deployment
 after an installation or update.
 
-The Smoke Test errand is turned on by default. You can turn off the Smoke Test errand in the **Errands** pane. For more information on settings for errands, see [Configure errands](#config-errands).
+The Smoke Test errand is turned on by default. You can turn off the Smoke Test errand in the **Errands** pane. For more information about settings for errands, see [Configure errands](#config-errands).
 
 For help configuring the smoke tests, see
 [Configure smoke tests](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/installing.html#configure-smoke-tests-7)
@@ -182,11 +182,11 @@ The following sections describe how to configure the Advanced Features.
 
 #### <a id='config-memory-disk'></a> Diego Cell memory and disk overcommit
 
-If your apps do not use the full allocation of disk space and memory set in **Resource Config**, you might want use this feature. These settings control the amount to overcommit disk and memory resources to each host VM.
+Use the overcommit settings if your apps do not use the full allocation of disk space and memory set in **Resource Config**. These settings control the amount to overcommit disk and memory resources to each host VM.
 
-For example, you might want to use the overcommit if your apps use a small amount of disk and memory capacity compared to the amounts set in the **Resource Config** settings for **Windows Diego Cell**.
+For example, you can use the overcommit if your apps use a small amount of disk and memory capacity compared to the amounts set in the **Resource Config** settings for **Windows Diego Cell**.
 
-Due to the risk of app failure and the deployment specific nature of disk and memory use, VMware has no
+Because of the risk of app failure and the deployment specific nature of disk and memory use, VMware has no
 recommendation for how much, if any, memory or disk space to overcommit.
 
 To enable overcommit:
@@ -201,7 +201,7 @@ To enable overcommit:
 
 #### <a id='enable-route-integrity'></a> Gorouter app identity verification (beta)
 
-You can choose the method the Gorouter uses to verify app identity. Verifying app identity using TLS or mutual TLS (mTLS) activates encryption between the Gorouter and app containers, and guards against mis routing during control plane failures. This feature is deactivated by default.
+You can choose the method the Gorouter uses to verify app identity. Verifying app identity using TLS or mutual TLS (mTLS) activates encryption between the Gorouter and application containers, and guards against misrouting during control plane failures. This feature is deactivated by default.
 
 For more information about Gorouter route consistency modes, see [Preventing misrouting](../concepts/http-routing.html#consistency) in _HTTP Routing_.
 
@@ -215,7 +215,7 @@ To configure app identity verification:
   * **The Gorouter and apps use mutual TLS to verify each other's identity**
   * **Disallow app identity verification and mutual TLS**: Deactivates app identity verification and mutual TLS. Activates the Gorouter and your apps to verify each other's identity using TLS.
     Before you turn on this option, consider:
-    * This option deactivates TCP routing because app containers accept incoming communication only from the Gorouter.
+    * This option deactivates TCP routing because application containers accept incoming communication only from the Gorouter.
     * If you activate mTLS in the <%= vars.windows_runtime_abbr %> tile, you must also activate mTLS in the <strong>App Containers</strong> pane of the <%= vars.app_runtime_abbr %> tile.
     * You need v2.3 or later of both <%= vars.app_runtime_abbr %> and Isolation Segment. The Gorouter and Diego Cell components in <%= vars.platform_old %> v2.2 and earlier do not support mTLS handshakes.
 
@@ -240,7 +240,7 @@ To configure a custom Windows Diego Cell overlay subnet:
 
       <p class="note caution">
       <span class="note__title">Caution</span>
-      Setting the subnet too small will limit the number of containers that can run on each Windows Diego Cell.</p>
+      Setting the subnet too small limits the number of containers that can run on each Windows Diego Cell.</p>
 
 3. Click **Save**.
 
@@ -258,7 +258,7 @@ For more information about how Ops Manager manages errands, see [Managing errand
 
 To configure errands:
 
-1. Select **Errands**.
+1. Click **Errands**.
 
 2. To receive the most up-to-date HWC buildpack, set the **Install HWC Buildpack Errand** to **On**.
 
@@ -272,9 +272,9 @@ This beta feature verifies only that the client certificate is signed by the exp
 
 To deploy your <%= vars.windows_runtime_abbr %> app workloads to an isolation segment, click **App Containers** and follow the procedure in [Assign a tile to an isolation segment](./isolation.html#assign-isolation) in _Windows Diego Cells in isolation segments_.
 
-### <a id='config-windows-authentication'></a> Configure Windows authentication (optional)
+### <a id='config-windows-auth'></a> Configure Windows authentication (optional)
 
-To configure Windows Diego Cells to allow app containers to perform Windows authentication, click **Windows Authentication** and follow the procedure in [Configuring the tile for Windows authentication](./windows-authentication.html#configure-tile) in _Windows authentication for .Net apps_.
+To configure Windows Diego Cells to allow application containers to perform Windows authentication, click **Windows Authentication** and follow the procedure in [Configuring the tile for Windows authentication](./windows-authentication.html#configure-tile) in _Windows authentication for .Net apps_.
 
 Use an isolation segment for Windows Authentication, so that all apps in the <%= vars.windows_runtime_abbr %> installation have access to the GMSA credentials.
 
@@ -284,7 +284,7 @@ To configure Windows Diego Cells to send VM logs to an external syslog server, c
 
 ### <a id='dns-search-domains'></a> Configuring DNS search domains (optional)
 
-To configure DNS search domains for your app containers:
+To configure DNS search domains for your application containers:
 
 1. Click the <%= vars.app_runtime_full %> tile in the **Installation dashboard**.
 1. Click **Networking** to open the **Networking** pane.
@@ -380,7 +380,7 @@ To install, configure, and deploy <%= vars.windows_runtime_abbr %> in an air-gap
 
 1. Follow the steps in [Install the tile](#install) with the following exceptions:
     * To add the Windows Server container base image to the product file,
-    replace step 4's internet-enabled `winfs-injector` command line
+    replace the Internet-enabled `winfs-injector` command line earlier in this procedure
     with the `winfs-injector` procedure in
     [Add the Windows Server container base image to the product file](#add-win-image-air-gapped).
 2. Configure required settings for the tile. See [Configure the tile](#config).
@@ -391,11 +391,11 @@ To install, configure, and deploy <%= vars.windows_runtime_abbr %> in an air-gap
 ### <a id='prepare-registry'></a> Preparing a Windows rootfs image in a private registry
 
 To create a <%= vars.windows_runtime_abbr %> tile, a windows file system container image is typically
-fetched from a Docker registry. An administrator can fetch the windows file-system image
+fetched from a Docker registry. An administrator can fetch the windows file system image
 from either [cloudfoundry/windows2016fs](https://hub.docker.com/r/cloudfoundry/windows2016fs)
 the publicly hosted Docker Hub repository, or a privately hosted container image registry.
 
-To prepare a windows file-system container image in a private registry:
+To prepare a windows file system container image in a private registry:
 
 1. Create an accessible Windows Server 2019 machine in your environment.
 1. Install Docker on this Windows Server 2019 machine.
@@ -458,5 +458,5 @@ C:\Users\admin> winfs-injector ^
 </pre>
 
 For information about troubleshooting `winfs-injector`,
-see [Missing local certificates for Windows FS Injector](./troubleshooting.html#missing-certs-winfs-issues)
+see [Missing local certificates for Windows FS Injector](./troubleshooting.html#missing-certs-winfs)
 in _Troubleshooting Windows Diego Cells_.

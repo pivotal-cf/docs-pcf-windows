@@ -21,53 +21,50 @@ To use SMB Volumes in your .NET App, you must have:
 
 ### <a id='steeltoe'></a> Using SMB volumes in .NET apps with Steeltoe
 
-Steeltoe is a set of libraries that help your team write cloud native apps. Steeltoe contains functionality for
-mounting SMB Volumes. Using Steeltoe requires editing your app code.
+Steeltoe is a set of libraries that help your team write cloud-native apps. Steeltoe contains functions for
+mounting SMB Volumes. You must edit your app code to use Steeltoe.
 
-For more information, see the
-[Steeltoe documentation](https://steeltoe.io/docs/).
+For more information, see the [Steeltoe documentation](https://steeltoe.io/docs/).
 
 If you are using Steeltoe, add the following environment variables to your Config Server Provider:
 
-* `SMB_PATH`
-* `SMB_USERNAME`
-* `SMB_PASSWORD`
-
-Where:
-
-* `SMB_PATH` is the UNC path to your SMB.
-* `SMB_USERNAME` is your IaaS account user name.
-* `SMB_PASSWORD` is your IaaS account password.
+* `SMB_PATH` - the UNC path to your SMB
+* `SMB_USERNAME` - your IaaS account user name
+* `SMB_PASSWORD` - your IaaS account password
 
 For more information about adding environment variables to your Config Server Provider, see
 [Config Server Provider](https://steeltoe.io/docs/2-configuration/config-server-provider) in the
 Steeltoe documentation.
 
 After you add your environment variables to your Config Server Provider,
-go to [SMB Mounting](smb-volumes-apps.html#smb-mounting).
+go to [SMB mounting](smb-volumes-apps.html#smb-mounting).
 
-## <a id='batch'></a> Using SMB Volumes in .NET Apps with your Batch Profile
+## <a id='batch'></a> Using SMB volumes in .NET apps with your batch profile
 
-If you do not want to edit your app code to include Steeltoe, you can use mount SMB Volumes without Steeltoe.
+If you do not want to edit your app code to include Steeltoe, you can use mount SMB volumes without Steeltoe.
 
 To mount SMB Volumes:
 
-1. Retrieve the UNC of your existing SMB share. The UNC is your machine's fully-qualified domain name (FQDN).
+1. Retrieve the UNC of your existing SMB share. The UNC is the fully-qualified domain name (FQDN) of your machine.
 
-1. Create a `.profile.bat` file in your .NET app's root directory.
+2. Create a `.profile.bat` file in the root directory of your .NET app.
 
-1. Use Apps Manager or the Cloud Foundry Command Line Interface (cf CLI) to set the following environment variables:
+3. Use Apps Manager or the Cloud Foundry Command Line Interface (cf CLI) to set these environment variables:
     * `SMB_PATH`
     * `SMB_USERNAME`
     * `SMB_PASSWORD`
 
-1. Add this command to your `.profile.bat` file:
+4. Add this command to your `.profile.bat` file:
 
     ```console
     net use z: %SMB_PATH% %SMB_PASSWORD% /USER:%SMB_USERNAME%
     ```
 
-1. Go to [SMB Mounting](smb-volumes-apps.html#smb-mounting).
+    Where:
+
+   * `SMB_PATH` is the UNC path to your SMB.
+   * `SMB_USERNAME` is your IaaS account user name.
+   * `SMB_PASSWORD` is your IaaS account password.
 
 ## <a id='smb-mounting'></a> SMB mounting
 
@@ -122,7 +119,7 @@ To configure SMB mounting:
    If you are not using Steeltoe, ignore this step.
 
 5. Edit `NoteController.cs` to read from a file named `note.txt`.
-   This `note.txt` does not exist yet but is created by the `FileMode.OpenOrCreate` method.
+   This `note.txt` is created by the `FileMode.OpenOrCreate` method.
    See the following example code snippet, which reads the contents of the note file and
    stashes the `note.txt` content in the Viewbag.
    If you are not using Steeltoe, ignore the reference to `Steeltoe.Common.Net`.
@@ -163,9 +160,9 @@ To configure SMB mounting:
     }
     ```
 
-2. In Visual Studio, create a sub-folder in **Views** named `Note`.
+6. In Visual Studio, create a folder named `Note` in the **Views** folder.
 
-3. In Visual Studio, create a new View named `Index`.
+7. In Visual Studio, create a new View named `Index`.
 
 For more information about Views, see
 [Views in ASP.NET Core MVC](https://docs.microsoft.com/en-us/aspnet/core/mvc/views/overview?view=aspnetcore-2.2) and
@@ -235,7 +232,9 @@ the [Microsoft documentation](https://docs.microsoft.com/en-us/dotnet/api/micros
 
 ## <a id='known-issue'></a> Known issues
 
-#### <a id='cannont-find-path'></a> Inability to SSH into app instance
+Here is a list of the known issues.
 
-Even though you have created the SMB mapping, you cannot run `cf ssh` into that app instance.
+### <a id='cannont-find-path'></a> Inability to SSH into app instance
+
+Even though you created the SMB mapping, you cannot run `cf ssh` into that app instance.
 Trying to access the created mapping through SSH causes an unspecified path error.

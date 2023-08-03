@@ -22,7 +22,7 @@ see [Using blue-green deployment to reduce downtime and risk](../devguide/deploy
 To install and deploy the <%= vars.windows_runtime_abbr %> tile, follow steps 1 and 2 of [Installing and configuring <%= vars.windows_runtime_abbr %>](installing.html).
 
 
-## <a id="push-app"></a> Step 2: Pushing App to <%= vars.windows_runtime_abbr %> Diego Cells
+## <a id="push-app"></a> Step 2: Pushing an app to <%= vars.windows_runtime_abbr %> Diego Cells
 
 To deploy a running app again with zero downtime using the blue-green method:
 
@@ -73,9 +73,9 @@ To deploy a running app again with zero downtime using the blue-green method:
 
     <p class="note important">
     <span class="note__title">Important</span>
-    The <code>--no-start</code> and <code>--no-route</code> parameters included in this <code>cf push</code> command are required for
-    the this procedure. The <code>--no-start</code> parameter is used to create the instance VMs and not start the app, and the
-    <code>--no-route</code> parameter is used to prevent the push command from automatically mapping a route to the app, but no longer
+    The <code>--no-start</code> and <code>--no-route</code> parameters in this <code>cf push</code> command are required for
+    this procedure. The <code>--no-start</code> parameter is used to create the instance VMs and not start the app, and the
+    <code>--no-route</code> parameter prevents <code>cf push</code> from automatically mapping a route to the app, but no longer
     unbinds all existing routes associated with the app.</p>
 
     For more information about <code>cf push</code>, see <a href="http://cli.cloudfoundry.org/en-US/cf/push.html">cf push</a> in the Cloud Foundry CLI Reference Guide.</p>
@@ -114,7 +114,7 @@ To deploy a running app again with zero downtime using the blue-green method:
     ```console
     cf apps
     ```
-    If you experience a problem, see [Troubleshooting App deployment and health](../devguide/deploy-apps/troubleshoot-app-health.html).
+    If you experience a problem, see [Troubleshooting app deployment and health](../devguide/deploy-apps/troubleshoot-app-health.html).
 
 3. To unmap the original app's route, run:
 
@@ -132,7 +132,7 @@ To deploy a running app again with zero downtime using the blue-green method:
     For additional information about `cf-unmap-route`, see [cf unmap-route](http://cli.cloudfoundry.org/en-US/cf/unmap-route.html) in the Cloud Foundry CLI Reference Guide.
 
 
-## <a id="delete-app"></a> Step 3: Deleting App from <%= vars.windows_runtime_abbr %> 2012 R2 Server Diego Cells
+## <a id="delete-app"></a> Step 3: Deleting an app from <%= vars.windows_runtime_abbr %> 2012 R2 Server Diego Cells
 
 To delete the original app:
 
@@ -142,7 +142,7 @@ To delete the original app:
     cf delete APP-NAME
     ```
 
-    Where `APP-NAME` is the name of the app that you have replaced with `APP-NAME-green`.
+    Where `APP-NAME` is the name of the app that you replaced with `APP-NAME-green`.
 
     <p class="note important">
     <span class="note__title">Important</span>
@@ -153,7 +153,7 @@ To delete the original app:
 
 ## <a id="uninstall-old-tile"></a> Step 4: Uninstalling the old tile (optional)
 
-Once you migrate all of your apps and you are no longer use the <%= vars.windows_runtime_abbr %> 2012 R2 tile, a <%= vars.platform_name %> uninstall the tile.
+After you migrate all your apps and you are no longer using the <%= vars.windows_runtime_abbr %> 2012 R2 tile, a <%= vars.platform_name %> uninstalls the tile.
 
 To uninstall the tile:
 
@@ -166,4 +166,4 @@ To uninstall the tile:
 1. Click **Apply Changes**.
 
 After you delete a product, the product tile is removed from the installation and the Installation Dashboard. However,
-the product appears in the <strong>Available Products</strong> view.
+the product appears in the **Available Products** view.

@@ -3,7 +3,7 @@ title: TAS for VMs [Windows] overview
 owner: Windows
 ---
 
-<%= vars.windows_runtime_full %> enables you to provision, operate, and manage Windows stemcells
+<%= vars.windows_runtime_full %> help you provision, operate, and manage Windows stemcells
 on <%= vars.platform_name %>.
 
 After you install the <%= vars.windows_runtime_abbr %> tile on the Ops Manager Installation Dashboard,
@@ -47,7 +47,7 @@ The minimum resource requirements for each Windows Diego Cell are:
 
 * [Installing and configuring <%= vars.windows_runtime_abbr %>](installing.html).
 
-* [Windows Diego cells in Isolation Segments](isolation.html).
+* [Windows Diego Cells in isolation segments](isolation.html).
 
 * [Migrating apps to <%= vars.windows_runtime_abbr %>](migrating.html).
 
@@ -81,8 +81,8 @@ Windows Server Core Containers are used in <%= vars.windows_runtime_abbr %>.
 
 These are known Windows Server container limitations:
 
-* Windows Server Core containers support the host VM's timezone only.
-In <%= vars.windows_runtime_abbr %>, the host and container time-zone is always UTC.
+* Windows Server Core containers support the host VM's time zone only.
+In <%= vars.windows_runtime_abbr %>, the host and container time zone is always UTC.
 * Windows Server 2019 Core images support only Lucida Console font.
 No other fonts are supported, and no others can be installed.
 
