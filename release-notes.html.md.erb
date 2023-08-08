@@ -16,20 +16,12 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 
 ### <a id='5.0.0'></a> 5.0.0
 
-**Release Date:** 07/24/2023
+**Release Date:** 08/08/2023
 
-* **[Feature Improvement]** TAS/IST/TASW 5.0 UI text overhaul
-* **[Feature Improvement]** Use routing_info for desired_lrps when there are missing actual_lrps.
-* **[Feature]** Add distributed tracing to Diego component logs.
-* **[Bug Fix]** Prevents cachedownloader from erroneously deleting old entries.
-* **[Bug Fix]** Resolves a race condition in BBS when the replacement for a suspect LRP has started.
-* Bump diego to version `2.80.0`
-* Bump envoy-nginx to version `0.18.0`
-* Bump garden-runc to version `1.34.0`
-* Bump loggregator-agent to version `7.2.2`
-* Bump metrics-discovery to version `3.2.12`
-* Bump smoke-tests to version `4.8.3`
-* Bump windows-syslog to version `1.1.15`
+* Bump envoy-nginx to version `0.19.0`
+* Bump loggregator-agent to version `7.4.0`
+* Bump winc to version `2.14.0`
+* Bump windows-syslog to version `1.1.16`
 
 <table border="1" class="nice">
   <thead>
@@ -42,138 +34,95 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   <tbody>
     <tr><td>windows2019 stemcell</td><td>2019.63</td><td></td></tr>
     <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
-    <tr><td>diego</td><td>2.80.0</td>
+    <tr><td>diego</td><td>2.80.0</td><td></td></tr>
+    <tr><td>envoy-nginx</td><td>0.19.0</td>
       <td>
         <details>
-          <summary>v2.80.0</summary>
+          <summary>v0.19.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - No code changes - testing new CI credentials
+  ## ✨  Built with go 1.20.6
+  **Full Changelog**: https://github.com/cloudfoundry/envoy-nginx-release/compare/v0.18.0...v0.19.0
+  ## Resources
+  - [Download release v0.19.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/envoy-nginx-release?version=0.19.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>garden-runc</td><td>1.34.0</td><td></td></tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.31</td><td></td></tr>
+    <tr><td>loggregator-agent</td><td>7.4.0</td>
+      <td>
+        <details>
+          <summary>v7.4.0</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump to go 1.20.7
+  * Bump dependencies
+  * Adds experimental `otel-collector` and `otel-collector-windows` jobs. See the following [RFC](https://github.com/cloudfoundry/community/blob/3ec376e4345787bc0e9e25e7965c5083b63db822/toc/rfc/rfc-0018-aggregate-metric-egress-with-opentelemetry-collector.md) for more information.
+  ### Forwarder Agent log format change
+  Previously when the `logging.format.timestamp` property was set to `rfc3339` it would be ignored for ingress client logs emitted by the Forwarder Agent. This release applies the correct timestamp format when `rfc3339` is selected, which may affect you if you depend on the format of the logs.
+  Old log line format:
+  ```
+  [INGRESS CLIENT] -> 127.0.0.1:3459: 2023/08/04 21:59:31 Error while flushing: EOF
+  ```
+  New log line format:
+  ```
+  2023-08-04T22:23:53.099290367Z [INGRESS CLIENT] -> 127.0.0.1:3459: Error while flushing: EOF
+  ```
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.3.0...v7.4.0
+          </pre>
+        </details>
+        <details>
+          <summary>v7.3.0</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Make keepalives for api polling configurable by @fhambrec in https://github.com/cloudfoundry/loggregator-agent-release/pull/336
+  * flatten aggregate drain array by @Benjamintf1 in https://github.com/cloudfoundry/loggregator-agent-release/pull/346
+  * Update syslog binding params by @Benjamintf1 in https://github.com/cloudfoundry/loggregator-agent-release/pull/339
+  ## New Contributors
+  * @fhambrec made their first contribution in https://github.com/cloudfoundry/loggregator-agent-release/pull/336
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.2.3...v7.3.0
+          </pre>
+        </details>
+        <details>
+          <summary>v7.2.3</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump dependencies
+  * Update packaged Golang version to v1.20.6
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.2.2...v7.2.3
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>metrics-discovery</td><td>3.2.12</td><td></td></tr>
+    <tr><td>smoke-tests</td><td>4.8.3</td><td></td></tr>
+    <tr><td>winc</td><td>2.14.0</td>
+      <td>
+        <details>
+          <summary>v2.14.0</summary>
           <pre style="max-width: 30em">
   ## Changes
   - Bumped to golang 1.20.6
+  - Added an endpoint to the sample WindowsAuth app included for testing SQL Server endpoints.
   ## ✨  Built with go 1.20.6
-  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.79.0...v2.80.0
+  **Full Changelog**: https://github.com/cloudfoundry/winc-release/compare/v2.13.0...v2.14.0
   ## Resources
-  - [Download release v2.80.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.80.0).
-          </pre>
-        </details>
-        <details>
-          <summary>v2.79.0</summary>
-          <pre style="max-width: 30em">
-  ## Changes
-  - [Feature Improvement]: Use routing_info for desired_lrp's when there are missing actual_lrp's https://github.com/cloudfoundry/route-emitter/pull/26. Thank you for this contribution @klapkov!
-  - [Feature]: Support distributed tracing https://github.com/cloudfoundry/route-emitter/pull/24. Thank you @mariash for this contribution!
-  - [Bug Fix]: Fix bug with cachedownloader in PR https://github.com/cloudfoundry/cacheddownloader/pull/26.  Fixes issue https://github.com/cloudfoundry/diego-release/issues/773. Thank you @vlast3k for this contribution!
-  - [Bug Fix]: Resolves a race condition in BBS when the replacement for a suspect LRP has started.
-  ## ✨  Built with go 1.20.5
-  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.78.0...v2.79.0
-  ## Resources
-  - [Download release v2.79.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.79.0).
+  - [Download release v2.14.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/winc-release?version=2.14.0).
           </pre>
         </details>
       </td>
     </tr>
-    <tr><td>envoy-nginx</td><td>0.18.0</td>
+    <tr><td>windows-syslog</td><td>1.1.16</td>
       <td>
         <details>
-          <summary>v0.18.0</summary>
-          <pre style="max-width: 30em">
-  ## Changes
-  - Bumped golang to 1.20.6
-  ## ✨  Built with go 1.20.6
-  **Full Changelog**: https://github.com/cloudfoundry/envoy-nginx-release/compare/v0.17.0...v0.18.0
-  ## Resources
-  - [Download release v0.18.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/envoy-nginx-release?version=0.18.0).
-          </pre>
-        </details>
-      </td>
-    </tr>
-    <tr><td>garden-runc</td><td>1.34.0</td>
-      <td>
-        <details>
-          <summary>v1.34.0</summary>
-          <pre style="max-width: 30em">
-  ## Changes
-  - Bumped golang to 1.20.6
-  - Refactors, enhancements, and fixes to CI scripts and garden-integration-tests
-  ## ✨  Built with go 1.20.6
-  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.33.0...v1.34.0
-  ## Resources
-  - [Download release v1.34.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.34.0).
-          </pre>
-        </details>
-      </td>
-    </tr>
-    <tr><td>hwc-offline-buildpack</td><td>3.1.31</td><td></td></tr>
-    <tr><td>loggregator-agent</td><td>7.2.2</td>
-      <td>
-        <details>
-          <summary>v7.2.2</summary>
+          <summary>v1.1.16</summary>
           <pre style="max-width: 30em">
   ## What's Changed
-  * Add CODEOWNERS file in preparation for branch protection rules by @geofffranks in https://github.com/cloudfoundry/loggregator-agent-release/pull/313
-  * Bump dependencies
-  * Bump to golang 1.20.5
-  ## New Contributors
-  * @geofffranks made their first contribution in https://github.com/cloudfoundry/loggregator-agent-release/pull/313
-  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.2.1...v7.2.2
-          </pre>
-        </details>
-      </td>
-    </tr>
-    <tr><td>metrics-discovery</td><td>3.2.12</td>
-      <td>
-        <details>
-          <summary>v3.2.12</summary>
-          <pre style="max-width: 30em">
-  ## What's Changed
-  * Bump dependencies
-  * Bump Go to v1.20.6
-  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.11...v3.2.12
-          </pre>
-        </details>
-        <details>
-          <summary>v3.2.11</summary>
-          <pre style="max-width: 30em">
-  ## What's Changed
-  * bump dependencies by @mkocher in https://github.com/cloudfoundry/metrics-discovery-release/pull/151
-  ## New Contributors
-  * @mkocher made their first contribution in https://github.com/cloudfoundry/metrics-discovery-release/pull/151
-  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.10...v3.2.11
-          </pre>
-        </details>
-        <details>
-          <summary>v3.2.10</summary>
-          <pre style="max-width: 30em">
-  ## What's Changed
-  * Add CODEOWNERS file in preparation for branch protection rules by @geofffranks in https://github.com/cloudfoundry/metrics-discovery-release/pull/144
-  * Bump dependencies
-  * Bump to golang 1.20.5
-  ## New Contributors
-  * @geofffranks made their first contribution in https://github.com/cloudfoundry/metrics-discovery-release/pull/144
-  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.9...v3.2.10
-          </pre>
-        </details>
-      </td>
-    </tr>
-    <tr><td>smoke-tests</td><td>4.8.3</td>
-      <td>
-        <details>
-          <summary>4.8.3</summary>
-          <pre style="max-width: 30em">
-  Create bosh final release 4.8.3
-          </pre>
-        </details>
-      </td>
-    </tr>
-    <tr><td>winc</td><td>2.13.0</td><td></td></tr>
-    <tr><td>windows-syslog</td><td>1.1.15</td>
-      <td>
-        <details>
-          <summary>v1.1.15</summary>
-          <pre style="max-width: 30em">
-  ## What's Changed
-  * Dependency bumps
-  * Update packaged Golang version to v1.20.5
-  **Full Changelog**: https://github.com/cloudfoundry/windows-syslog-release/compare/v1.1.14...v1.1.15
+  * Update packaged Golang version to v1.20.6
+  **Full Changelog**: https://github.com/cloudfoundry/windows-syslog-release/compare/v1.1.15...v1.1.16
           </pre>
         </details>
       </td>
