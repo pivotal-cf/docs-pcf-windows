@@ -15,8 +15,7 @@ To install, configure, and deploy <%= vars.windows_runtime_abbr %>:
 
 * In an environment with Internet access:
     1. Complete the prerequisites. See [Prerequisites](#prerequisites).
-    1. Download and install the <%= vars.windows_runtime_abbr %> tile. See [Install the
-       Tile](#install).
+    1. Download and install the <%= vars.windows_runtime_abbr %> tile. See [Install the Tile](#install).
     1. Configure required settings for the tile. See [Configure the Tile](#config).
     1. Configure resources for the tile. See [Configure Tile Resources](#resources).
     1. Upload the Windows stemcell to the tile. See [Upload the Stemcell](#stemcells).
@@ -28,8 +27,7 @@ To install, configure, and deploy <%= vars.windows_runtime_abbr %>:
 ## <a id='prerequisites'></a> Prerequisites
 
 Before you install and configure the <%= vars.windows_runtime_abbr %> tile, ensure that you meet the
-requirements to use the **Windows FS Injector** tool. For more information, see [Windows FS injector
-prerequisites](#prerequisite-injector).
+requirements to use the **Windows FS Injector** tool. For more information, see [Windows FS injector prerequisites](#prerequisite-injector).
 
 ### <a id='prerequisite-injector'></a> Windows FS Injector prerequisites
 
@@ -226,8 +224,7 @@ You can choose the method the Gorouter uses to verify app identity. Verifying ap
 or mutual TLS (mTLS) enables encryption between the Gorouter and app containers and guards against
 misrouting during control plane failures. This feature is disabled by default.
 
-For more information about Gorouter route consistency modes, see [Preventing
-Misrouting](../concepts/http-routing.html#consistency) in _HTTP Routing_.
+For more information about Gorouter route consistency modes, see [Preventing Misrouting](../concepts/http-routing.html#consistency) in _HTTP Routing_.
 
 To configure app identity verification:
 
@@ -309,15 +306,12 @@ To configure errands:
 
 ### <a id='config-iso-segments'></a> Configuring Isolation Segments (Optional)
 
-To deploy your <%= vars.windows_runtime_abbr %> app workloads to an isolation segment, select **App
-Containers** and follow the procedure in [Assign a Tile to an Isolation
-Segment](./isolation.html#assign-isolation) in _Windows Diego Cells in Isolation Segments_.
+To deploy your <%= vars.windows_runtime_abbr %> app workloads to an isolation segment, select **App Containers** and follow the procedure in [Assign a Tile to an Isolation Segment](./isolation.html#assign-isolation) in _Windows Diego Cells in Isolation Segments_.
 
 ### <a id='config-windows-authentication'></a> (Optional) Configure Windows Authentication
 
 To configure Windows Diego Cells to allow app containers to perform Windows Authentication, select
-**Windows Authentication** and follow the procedure in [Configuring the tile for Windows
-Authentication](./windows-authentication.html#configure-tile) in _Windows Authentication for .NET
+**Windows Authentication** and follow the procedure in [Configuring the tile for Windows Authentication](./windows-authentication.html#configure-tile) in _Windows Authentication for .NET
 apps_.
 
 <p class="note"><strong>Note:</strong> VMware strongly recommends using an isolation segment for Windows Authentication, as all apps in the <%= vars.windows_runtime_abbr %> installation have have access to the GMSA credentials.</p>
@@ -325,8 +319,7 @@ apps_.
 ### <a id='config-system-logging'></a> Configuring System Logging (Optional)
 
 To configure Windows Diego Cells to send VM logs to an external syslog server, select **System
-Logging** and follow the procedure in [Forwarding Logs to a Syslog
-Server](troubleshooting.html#syslog) in _Troubleshooting Windows Diego Cells_.
+Logging** and follow the procedure in [Forwarding Logs to a Syslog Server](troubleshooting.html#syslog) in _Troubleshooting Windows Diego Cells_.
 
 ### <a id='dns-search-domains'></a> Configuring DNS Search Domains (Optional)
 
@@ -385,12 +378,9 @@ To upload the stemcell:
 
 1. In the <%= vars.windows_runtime_abbr %> tile, select **Stemcell Library**.
 
-1. Retrieve the stemcell that you downloaded or created in [Downloading or Creating a Windows
-   Stemcell](./stemcells.html).
+1. Retrieve the stemcell that you downloaded or created in [Downloading or Creating a Windows Stemcell](./stemcells.html).
 
-1. Follow the procedure in [Importing and managing
-   stemcells](https://docs.pivotal.io/ops-manager/2-10/opsguide/managing-stemcells.html) to upload
-   the Windows stemcell to <%= vars.windows_runtime_abbr %>.
+1. Follow the procedure in [Importing and Managing Stemcells](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/opsguide-managing-stemcells.html) to upload the Windows stemcell to <%= vars.windows_runtime_abbr %>.
 
 <p class='note'><strong>Note:</strong> If you use vSphere, you must create your own stemcell.
 The default root disk size of Windows stemcells v2019.x line is 30&nbsp;GB.
@@ -411,16 +401,14 @@ To deploy the <%= vars.windows_runtime_abbr %> tile:
 1. Click **Review Pending Changes**.
 
 1. Select the <%= vars.windows_runtime_abbr %> tile and review the changes. For more information,
-   see [Reviewing Pending Product
-   Changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html).
+   see [Reviewing Pending Product Changes](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-review-pending-changes.html).
 
 1. Click **Apply Changes**.
 
 ## <a id='copy'></a> (Optional) Creating more tiles
 
 To run Windows Diego Cells in multiple isolation segments, you must create and configure additional
-<%= vars.windows_runtime_abbr %> tiles. For more information, see [Windows Diego Cells in Isolation
-Segments](./isolation.html).
+<%= vars.windows_runtime_abbr %> tiles. For more information, see [Windows Diego Cells in Isolation Segments](./isolation.html).
 
 
 ## <a id='air-gapped'></a> Installing and configuring <%= vars.windows_runtime_abbr %> in an air-gapped environment
@@ -431,8 +419,7 @@ To install, configure, and deploy <%= vars.windows_runtime_abbr %> in an air-gap
 
 2. Follow the steps in [Install the Tile](#install) with the following exceptions:
     * To add the Windows Server container base image to the product file, replace the
-      Internet-enabled `winfs-injector` command line with the `winfs-injector` procedure in [Adding the
-      Windows Server Container Base image to the product file](#add-win-image-air-gapped).
+      Internet-enabled `winfs-injector` command line with the `winfs-injector` procedure in [Adding the Windows Server Container Base image to the product file](#add-win-image-air-gapped).
 3. Configure required settings for the tile. See [Configuring the tile](#config).
 4. Configure resources for the tile. See [Configuring tile resources](#resources).
 5. Upload the Windows stemcell to the tile. See [Uploading the stemcell](#stemcells).
@@ -451,8 +438,7 @@ To prepare a windows file-system container image in a private registry:
 1. Install Docker on this Windows Server 2019 machine.
 1. Configure this Windows machine’s Docker daemon to allow non-redistributable artifacts to be
 pushed to your private registry. For information about configuring your Docker daemon, see the
-[Docker
-documentation](https://docs.docker.com/engine/reference/commandline/dockerd/#allow-push-of-nondistributable-artifacts).
+[Docker documentation](https://docs.docker.com/engine/reference/commandline/dockerd/#allow-push-of-nondistributable-artifacts).
 1. Open a shell on the Windows machine.
 2. To download the windows file-system container image, run the following command:
 
@@ -506,6 +492,4 @@ C:\Users\admin> winfs-injector ^
 --registry https<span>:</span>//my.registry.com
 </pre>
 
-For information about troubleshooting `winfs-injector`, see [Missing Local Certificates for Windows
-File System Injector](./troubleshooting.html#missing-certs-winfs-issues) in _Troubleshooting Windows
-Diego Cells_.
+For information about troubleshooting `winfs-injector`, see [Missing Local Certificates for Windows File System Injector](./troubleshooting.html#missing-certs-winfs-issues) in _Troubleshooting Windows Diego Cells_.
