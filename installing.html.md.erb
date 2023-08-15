@@ -32,14 +32,14 @@ You use the **Windows FS Injector** tool to install the <%= vars.windows_runtime
 * The `git` and `tar` executables must be in your `%PATH%`. If `git` and `tar` are not in your `%PATH%`, either add your `git` and `tar` executable locations to your existing `%PATH%` configuration, or copy the `git.exe` and `tar.exe` executables to a directory in your `%PATH%`.
 
 * Your installation environment must allow the **Windows FS Injector** tool access to all of the following URLs:
-  * [Downloading tile and injector](https://network.pivotal.io)
-  * [AWS](https://s3.amazonaws.com/)
-  * [Registry Hub](https://registry.hub.docker.com/)
-  * [Cloudflare](https://production.cloudflare.docker.com)
-  * [Microsoft Windows](https://go.microsoft.com/)
-  * [Winlayers](https://winlayers.cdn.mscr.io)
-  * [MCR Microsoft](https://mcr.microsoft.com)
-  * [Microsoft Windows Azure Content Delivery Network](https://msecnd.net)
+  * https://network.pivotal.io
+  * https://s3.amazonaws.com/
+  * https://registry.hub.docker.com/
+  * https://production.cloudflare.docker.com
+  * https://go.microsoft.com/
+  * https://winlayers.cdn.mscr.io
+  * https://mcr.microsoft.com
+  * https://msecnd.net
 
   For more information about the Windows Azure Content Delivery Network, see [Introducing the Windows Azure Content Delivery Network](https://azure.microsoft.com/en-us/blog/introducing-the-windows-azure-content-delivery-network/) in the Microsoft Azure documentation.
 
@@ -300,7 +300,7 @@ To upload the stemcell:
 
 1. Retrieve the stemcell that you downloaded or created in [Downloading or Creating a Windows Stemcell](./stemcells.html).
 
-1. Follow the procedure in [Importing and Managing Stemcells](https://docs.pivotal.io/ops-manager/3.0/opsguide/managing-stemcells.html) to upload the Windows stemcell to <%= vars.windows_runtime_abbr %>.
+1. Follow the procedure in [Importing and Managing Stemcells](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/opsguide-managing-stemcells.html) to upload the Windows stemcell to <%= vars.windows_runtime_abbr %>.
 
 <p> If you use vSphere, you must create your own stemcell.
 The default root disk size of Windows stemcells v2019.x line is 30&nbsp;GB.
