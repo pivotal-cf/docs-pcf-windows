@@ -89,7 +89,7 @@ To install the <%= vars.windows_runtime_abbr %> tile:
 
     This step can take up to 20 minutes to complete.
 
-1. Navigate to the Ops Manager Installation Dashboard and click **Import a Product**.
+1. Navigate to VMware Tanzu Operations Manager Installation Dashboard and click **Import a Product**.
 
 1. To add the <%= vars.windows_runtime_abbr %> tile to the **Import a Product** product list,
    select the importable `PASW-IMPORTABLE-PATH` file on your workstation.
@@ -109,9 +109,9 @@ To configure AZs and networks:
 
 1. Select **Assign AZs and Networks** or **Assign Networks**. The name of the pane varies depending on your IaaS.
 
-1. Select the first AZ under **Place singleton jobs**. Ops Manager runs any job with a single instance in this AZ.
+1. Select the first AZ under **Place singleton jobs**. Tanzu Operations Manager runs any job with a single instance in this AZ.
 
-1. Select all AZs under **Balance other jobs**. Ops Manager balances instances of jobs with more than one instance across the AZs that you specify.
+1. Select all AZs under **Balance other jobs**. Tanzu Operations Manager balances instances of jobs with more than one instance across the AZs that you specify.
   <p class='note'><strong>Note:</strong> For production deployments, VMware recommends at least three AZs for a highly available installation.</p>
 
 1. From the **Network** dropdown, choose the runtime network that you created when configuring the BOSH Director tile.
@@ -236,16 +236,16 @@ To configure a custom Windows Diego Cell overlay subnet:
 
 ### <a id='config-errands'></a> Configuring errands
 
-Errands are scripts that Ops Manager runs automatically when it installs or uninstalls a product,
+Errands are scripts that Tanzu Operations Manager runs automatically when it installs or uninstalls a product,
 such as a new version of <%= vars.windows_runtime_abbr %>.
 There are two types of errands: _post-deploy errands_ run after the product is installed,
 and _pre-delete errands_ run before the product in uninstalled.
 
-By default, Ops Manager runs all errands.
+By default, Tanzu Operations Manager runs all errands.
 
-In **Errands**, you can change these run rules. For each errand, you can select **On** to run it each time Ops Manager installs or uninstalls a product, or **Off** to never run it.
+In **Errands**, you can change these run rules. For each errand, you can select **On** to run it each time Tanzu Operations Manager installs or uninstalls a product, or **Off** to never run it.
 
-For more information about how Ops Manager manages errands, see [Managing Errands in Ops Manager](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-managing_errands.html).
+For more information about how Tanzu Operations Manager manages errands, see [Managing Errands in Tanzu Operations Manager](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-managing_errands.html).
 
 To configure errands:
 
@@ -338,7 +338,7 @@ After uploading the Windows stemcell to the <%= vars.windows_runtime_abbr %> til
 
 To deploy the <%= vars.windows_runtime_abbr %> tile:
 
-1. Go to the Ops Manager Installation Dashboard.
+1. Go to the Tanzu Operations Manager Installation Dashboard.
 
 1. Click **Review Pending Changes**.
 
