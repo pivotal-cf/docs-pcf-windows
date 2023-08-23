@@ -70,7 +70,6 @@ To redeploy a running app with zero downtime using the blue-green method:
     <p class="note"><strong>Note:</strong> The <code>--no-start</code> and <code>--no-route</code> parameters included in this <code>cf push</code> command are required for the this procedure. <code>--no-start</code> is used to create the instance VMs and not start the app, and <code>--no-route</code> is used to prevent the push command from automatically mapping a route to the app.
     For more information about <code>cf push</code>, see <a href="http://cli.cloudfoundry.org/en-US/cf/push.html">cf push</a> in the Cloud Foundry CLI Reference Guide.</p>
 
-    <p class="note"><strong>Note:</strong> The <code>windows</code> stack is a renaming of the old <code>windows2016</code> stack. These stacks are identical and differ in name only. If the <code>windows</code> stack is available, specify <code>-s windows</code>. Otherwise, specify <code>-s windows2016</code>. In <%= vars.windows_runtime_abbr %> v2.5 and later, the <code>windows2016</code> stack is deprecated. For more information, see <a href="https://docs.pivotal.io/pivotalcf/2-5/pcf-release-notes/windows-rn.html#-deprecation-of-the-windows2016-stack">Deprecation of the windows2016 Stack</a> in <em><%= vars.windows_runtime_full %> v2.5 Release Notes</em>.</p>
 
 1. To configure the router so all incoming requests go to both `APP-NAME` and `APP-NAME-green`, run:
 
@@ -144,7 +143,7 @@ To uninstall the tile:
 
 1. Click **Review Pending Changes**.
 
-1. Select the <%= vars.windows_runtime_abbr %> tile and review the changes. For more information, see [Reviewing Pending Product Changes](https://docs.pivotal.io/ops-manager/2-10/install/review-pending-changes.html).
+1. Click the <%= vars.windows_runtime_abbr %> tile and review the changes. For more information, see [Reviewing pending product changes](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-review-pending-changes.html).
 
 1. Click **Apply Changes**.
   <p class="note"><strong>Note:</strong> After you delete a product, the product tile is removed from the installation and the Installation Dashboard. However, the product appears in the Available Products view.</p>

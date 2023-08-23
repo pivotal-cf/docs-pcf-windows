@@ -62,13 +62,9 @@ Before you create a BOSH stemcell for Windows on vSphere, you must have:
 
 * A download of the `stembuild` command line interface (CLI) from a 2019.x release in [Stemcells
   (Windows)](https://network.pivotal.io/products/stemcells-windows-server) on <%= vars.product_network %>.
-    * To build a Windows stemcell for <%= vars.windows_runtime_abbr %>, use the vSphere `stembuild` CLI for Windows corresponding to both the operating system of your local host and the stemcell version that you want to build.
-    * To build a Windows stemcell for <%= vars.k8s_runtime_abbr %>, use a Windows stemcell and `stembuild` CLI version listed as compatible
-    in the **Product Snapshot** table in the release notes for your <%= vars.k8s_runtime_abbr %> version:
-      - **<%= vars.k8s_runtime_abbr %> v1.8**: [Release Notes](https://docs.pivotal.io/tkgi/1-8/release-notes.html)
-      - **PKS v1.7**: [Release Notes](https://docs.pivotal.io/pks/1-7/release-notes.html)
-      - **PKS v1.6**: [Release Notes](https://docs.pivotal.io/pks/1-6/release-notes.html)
-
+  * To build a Windows stemcell for <%= vars.windows_runtime_abbr %>, use the vSphere `stembuild` CLI for Windows corresponding to both the operating system of your local host and the stemcell version that you want to build.
+  * To build a Windows stemcell for <%= vars.k8s_runtime_abbr %>, use a Windows stemcell and `stembuild` CLI version listed as compatible
+    in the **Product Snapshot** table in the release notes for your <%= vars.k8s_runtime_abbr %> version: [Release Notes](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/index.html)
 
 * Microsoft [Local Group Policy Object Utility (LGPO)](https://www.microsoft.com/en-us/download/details.aspx?id=55319) downloaded to the same folder as your `stembuild` CLI.
 
