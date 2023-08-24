@@ -282,14 +282,14 @@ Use an isolation segment for Windows Authentication, so that all apps in the <%=
 
 Click **System Logging**:
 
-1. (Optional) To configure Windows Diego Cells to send VM logs to an external syslog server follow the procedure in [Forwarding logs to a syslog
+1. (Optional) To configure Windows Diego Cells to send VM logs to an external syslog server, follow the procedure in [Forwarding logs to a syslog
 server](troubleshooting.html#syslog) in _Troubleshooting Windows Diego Cells_.
 
 1. (Optional) For **OpenTelemetry Collector Metric Exporters (beta)**, the default value is empty, which disables the beta OpenTelemetry Aggregate Metric Egress
 support. To configure <%= vars.windows_runtime_abbr %> to send metrics over the OpenTelemetry protocol, enter valid OpenTelemetry Collector Exporter YAML
-configuration in this field. Refer to the [OpenTelemetry Collector documentation](https://opentelemetry.io/docs/collector/configuration/#exporters) for examples
+configuration in this field. See the [OpenTelemetry Collector documentation](https://opentelemetry.io/docs/collector/configuration/#exporters) for examples
 of how to configure exporters. Currently <%= vars.windows_runtime_abbr %> provides support for a limited number of OpenTelemetry Collector Exporters, including the
-OTLP exporter. Note that this feature is in beta and may still change in significant ways.
+OTLP exporter. This feature is in beta and may still change in significant ways.
 
 ### <a id='dns-search-domains'></a> Configuring DNS search domains (optional)
 
