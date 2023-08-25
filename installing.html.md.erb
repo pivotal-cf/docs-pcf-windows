@@ -291,6 +291,9 @@ configuration in this field. See the [OpenTelemetry Collector documentation](htt
 of how to configure exporters. Currently <%= vars.windows_runtime_abbr %> provides support for a limited number of OpenTelemetry Collector Exporters, including the
 OTLP exporter. This feature is in beta and may still change in significant ways.
 
+  <p class='note warning'><strong>Caution:</strong> If configuring a metric exporter that listens on a port, take care to ensure that the port is not claimed by
+  a <%= vars.windows_runtime_abbr %> component on any of the VMs in your deployment.</p>
+
 ### <a id='dns-search-domains'></a> Configuring DNS search domains (optional)
 
 To configure DNS search domains for your application containers:
