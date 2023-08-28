@@ -57,11 +57,11 @@ To install the <%= vars.windows_runtime_abbr %> tile:
 
 3. Download the **Windows FS Injector** tool for your workstation OS. The Injector tool, `winfs-injector`, is an executable binary that adds the Windows Server container base image into the product file. This step requires ISnternet access and can take up to 20 minutes.
 
-  <p class="note important">
-  <span class="note__title">Important</span> You need the <code>git</code> and <code>tar</code> executable files in your <code>%PATH%</code> to run <code>winfs-injector.exe</code>.
+  <p class="note caution">
+  <span class="note__title">Caution</span>
+  You need the <code>git</code> and <code>tar</code> executable files in your <code>%PATH%</code> to run <code>winfs-injector.exe</code>.
   For example, copy <code>git.exe</code> and <code>tar.exe</code> to a directory in your <code>%PATH%</code>.
   </p>
-
 
 1. Add the Windows Server container base image to the product file:
 
@@ -291,8 +291,13 @@ configuration in this field. See the [OpenTelemetry Collector documentation](htt
 of how to configure exporters. Currently <%= vars.windows_runtime_abbr %> provides support for a limited number of OpenTelemetry Collector Exporters, including the
 OTLP exporter. This feature is in beta and may still change in significant ways.
 
-  <p class='note warning'><strong>Caution:</strong> If configuring a metric exporter that listens on a port, take care to ensure that the port is not claimed by
-  a <%= vars.windows_runtime_abbr %> component on any of the VMs in your deployment.</p>
+<p class='note warning'><strong>Caution:</strong> If you configure a metric exporter that listens on a port, take care to ensure that the port is not claimed by
+a <%= vars.windows_runtime_abbr %> component on any of the VMs in your deployment.</p>
+
+<p class="note">
+<span class="note__title">Note</span>
+Windows stemcells in the v2019.x line support ephemeral disks.
+</p>
 
 ### <a id='dns-search-domains'></a> Configuring DNS search domains (optional)
 
