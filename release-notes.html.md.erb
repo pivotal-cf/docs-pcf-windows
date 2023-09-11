@@ -14,6 +14,261 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 
 ## <a id='releases'></a> Releases
 
+### <a id='5.0.0'></a> 5.0.0
+
+**Release Date:** 09/11/2023
+
+* **[Feature]** (Beta) Operators can export metrics off TAS using OpenTelemetry
+* **[Feature]** App readiness healthchecks are now supported to remove/add apps to routing pools without restarting, based on a configurable healthcheck.
+* **[Breaking Change]** metrics-agent and metrics-discovery-registrar disabled by default
+* Bump diego to version `2.81.0`
+* Bump garden-runc to version `1.37.0`
+* Bump hwc-offline-buildpack to version `3.1.32`
+* Bump loggregator-agent to version `7.6.1`
+* Bump metrics-discovery to version `3.2.14`
+* Bump winc to version `2.15.0`
+* Bump windows-syslog to version `1.1.17`
+
+<table border="1" class="nice">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+      <th>Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>windows2019 stemcell</td><td>2019.64</td><td></td></tr>
+    <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
+    <tr><td>diego</td><td>2.81.0</td>
+      <td>
+        <details>
+          <summary>v2.81.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Healthchecks for process startup have been renamed from "readiness" to "startup" to better indicate that it is the initial liveness check to ensure the process has started. After completing, it is superceded by the liveness check, which has had no changes.
+  - Adds support for "readiness" checks on processes. The purpose of readiness checks are to determine whether a process is capable of serving traffic or not. This is contrasted now with liveness checks which determine if the process is in a state that requires it to be restarted. Readiness checks can be used to pull a process out of service when they fail, while not restarting the process. Once readiness is passing again, the process will be re-added into the service pool. Removal/addition of processes to the service pool is done via route-emitter.
+  - `cfdot actual-lrps` now behaves in a more expected behavior regarding the display of `host_tls_proxy_port`. It should always be preset, even if the value is `0`.
+  - Bumped to golang 1.20.7.
+  ## ✨  Built with go 1.20.7
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.80.0...v2.81.0
+  ## Resources
+  - [Download release v2.81.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.81.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>envoy-nginx</td><td>0.19.0</td><td></td></tr>
+    <tr><td>garden-runc</td><td>1.37.0</td>
+      <td>
+        <details>
+          <summary>v1.37.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - 🐛Fixed a bug with garden-windows where process directories were being leaked in the garden depot. This adds a `garden.cleanup_process_dirs_on_wait` property to mimic cleanup logic from garden-linux. This property is defaulted to true on garden-windows, to keep the desired behavior for CF/Diego. If garden-windows is ever used with Concourse, users will want to set this to false.
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/garden-windows/spec b/jobs/garden-windows/spec
+  index ef1ce54e..004e4e7f 100644
+  --- a/jobs/garden-windows/spec
+  +++ b/jobs/garden-windows/spec
+  @@ -69,6 +69,12 @@ properties:
+  description: "path to the rootfs to use when a container specifies no rootfs"
+  default: ""
+  +  # Since garden-windows is not currently used in Concourse, we are setting this to 'true' to make life easier for diego/cf users.
+  +  # https://github.com/cloudfoundry/garden-runc-release/releases/tag/v1.5.0
+  +  garden.cleanup_process_dirs_on_wait:
+  +    description: A boolean stating whether or not to cleanup process state after waiting for it. If set a process can be waited for only once.
+  +    default: true
+  +
+  logging.format.timestamp:
+  description: "Format for timestamp in component logs. Valid values are 'unix-epoch' and 'rfc3339'."
+  default: "unix-epoch"
+  diff --git a/jobs/garden/spec b/jobs/garden/spec
+  index 259bba46..3bffb2f7 100644
+  --- a/jobs/garden/spec
+  +++ b/jobs/garden/spec
+  @@ -201,6 +201,8 @@ properties:
+  description: A boolean stating whether or not to run garden-server as a non-root user
+  default: false
+  +  # We believe this defaults to false to help concourse: https://github.com/cloudfoundry/garden-runc-release/releases/tag/v1.5.0
+  +  # For diego/cf, this should be set to true
+  garden.cleanup_process_dirs_on_wait:
+  description: A boolean stating whether or not to cleanup process state after waiting for it. If set a process can be waited for only once.
+  default: false
+  ```
+  ## ✨  Built with go 1.20.7
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.36.0...v1.37.0
+  ## Resources
+  - [Download release v1.37.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.37.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.36.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - [Pin opencontainer/runc to version v1.1.7](https://github.com/cloudfoundry/guardian/commit/f2b3d5ec72dee482f63068124cd6b3592dd6d74b)
+  - Resolves a compilation issue with `xenial` stemcells
+  - Dependency bumps
+  ## ✨  Built with go 1.20.7
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.35.0...v1.36.0
+  ## Resources
+  - [Download release v1.36.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.36.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.35.0</summary>
+          <pre style="max-width: 30em">
+  # ⚠️ We recommend skipping to [1.36.0](https://github.com/cloudfoundry/garden-runc-release/releases/tag/v1.35.0)
+  Especially if you're still running `xenial` stemcells, in which this release version will fail to compile.
+  ## Changes
+  - [Bug Fix] Re-implemented HTTP health checks of the `gdn` process in the `garden` job.
+  - These were disabled in [1.29.0](https://github.com/cloudfoundry/garden-runc-release/releases/tag/v1.29.0) due to issues during deployment.
+  - Bumped golang to 1.20.7
+  ## ✨  Built with go 1.20.7
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.34.0...v1.35.0
+  ## Resources
+  - [Download release v1.35.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.35.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.32</td>
+      <td>
+        <details>
+          <summary>3.1.32</summary>
+          <pre style="max-width: 30em">
+  * Add hwc 26.0.0, remove hwc 23.0.0 (#136)
+  for stack(s) windows2016, windows
+  (https://www.pivotaltracker.com/story/show/185693627)
+  Packaged binaries:
+  | name | version | cf_stacks |
+  |-|-|-|
+  | hwc | 26.0.0 | windows, windows2016 |
+  Default binary versions:
+  | name | version |
+  |-|-|
+  | hwc | 26.0.0 |
+  * Uncached buildpack SHA256: e48a64f378fe3ebf4ca159e62ff31c621e2297ca651821e0ad8ad17366596494
+  * Uncached buildpack SHA256: 85bf9307601c6bd24112547551c03f9b1ba833348c54ba60dcf6d936ec58bd11
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>loggregator-agent</td><td>7.6.1</td>
+      <td>
+        <details>
+          <summary>v7.6.1</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  ### Experimental OTel Collector changes
+  * Prevent prometheus exporter from claiming BBS API port. For more context, see here: https://github.com/cloudfoundry/diego-release/issues/812
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.6.0...v7.6.1
+          </pre>
+        </details>
+        <details>
+          <summary>v7.6.0</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  ### Experimental OTel Collector changes
+  * ⚠️ Do not forward Timers ⚠️
+  * Set the `service_version` for OTel Collector telemetry to v0.1.0
+  * Add the prometheus exporter
+  * Bump collector to v0.83.0
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.5.0...v7.6.0
+          </pre>
+        </details>
+        <details>
+          <summary>v7.5.0</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump dependencies
+  #### Experimental OTel Collector changes
+  * Bump to OTel Collector v0.82.0
+  * ⚠️ Remove all the exporters except for `otlp` and `file` ⚠️
+  * ⚠️ Change default for the OTel Collector port for gRPC ingress to `9100` ⚠️
+  * Reserve `cf-internal` prefix for internal metric exporters for the future
+  * Configure Prom Scraper to scrape OTel Collector metrics
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.4.0...v7.5.0
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>metrics-discovery</td><td>3.2.14</td>
+      <td>
+        <details>
+          <summary>v3.2.14</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * add disable property to metrics-agent & metrics-discovery-registrar by @mkocher in https://github.com/cloudfoundry/metrics-discovery-release/pull/169
+  * Bump dependencies
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.13...v3.2.14
+          </pre>
+        </details>
+        <details>
+          <summary>v3.2.13</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Fix metrics-agent on windows
+  * Bump to [go1.20.7](https://groups.google.com/g/golang-announce/c/X0b6CsSAaYI/m/Efv5DbZ9AwAJ)
+  * Bump dependencies
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.12...v3.2.13
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>smoke-tests</td><td>4.8.3</td><td></td></tr>
+    <tr><td>winc</td><td>2.15.0</td>
+      <td>
+        <details>
+          <summary>v2.15.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Adds support for customizing the timestamp format used in the `groot` job's logging via the `groot.log_format` property.
+  - Bumped to golang 1.20.7
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/groot/spec b/jobs/groot/spec
+  index ec4aac2..a73f967 100644
+  --- a/jobs/groot/spec
+  +++ b/jobs/groot/spec
+  @@ -31,6 +31,10 @@ properties:
+  description: "Can be debug, info, error or fatal"
+  default: "info"
+  +  groot.log_format:
+  +    description: "Can be rfc3339 or epoch"
+  +    default: "epoch"
+  +
+  groot.refresh_base_layer:
+  description: "EXPERIMENTAL: Delete size file in order to pull fresh base layer."
+  default: false
+  ```
+  ## ✨  Built with go 1.20.7
+  **Full Changelog**: https://github.com/cloudfoundry/winc-release/compare/v2.14.0...v2.15.0
+  ## Resources
+  - [Download release v2.15.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/winc-release?version=2.15.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-syslog</td><td>1.1.17</td>
+      <td>
+        <details>
+          <summary>v1.1.17</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump Go to v1.20.7
+  **Full Changelog**: https://github.com/cloudfoundry/windows-syslog-release/compare/v1.1.16...v1.1.17
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-utilities</td><td>0.20.0</td><td></td></tr>
+  </tbody>
+</table>
+
+
+
 ### <a id='5.0.0-rc.3'></a> 5.0.0-rc.3
 
 **Release Date:** 08/18/2023
