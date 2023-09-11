@@ -14,6 +14,184 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 
 ## <a id='releases'></a> Releases
 
+### <a id='4.0.8'></a> 4.0.8
+
+**Release Date:** 09/11/2023
+
+* Bump diego to version `2.81.0`
+* Bump hwc-offline-buildpack to version `3.1.32`
+* Bump loggregator-agent to version `7.6.1`
+* Bump metrics-discovery to version `3.2.14`
+* Bump winc to version `2.15.0`
+* Bump windows-syslog to version `1.1.17`
+
+<table border="1" class="nice">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+      <th>Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>windows2019 stemcell</td><td>2019.64</td><td></td></tr>
+    <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
+    <tr><td>diego</td><td>2.81.0</td>
+      <td>
+        <details>
+          <summary>v2.81.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Healthchecks for process startup have been renamed from "readiness" to "startup" to better indicate that it is the initial liveness check to ensure the process has started. After completing, it is superceded by the liveness check, which has had no changes.
+  - Adds support for "readiness" checks on processes. The purpose of readiness checks are to determine whether a process is capable of serving traffic or not. This is contrasted now with liveness checks which determine if the process is in a state that requires it to be restarted. Readiness checks can be used to pull a process out of service when they fail, while not restarting the process. Once readiness is passing again, the process will be re-added into the service pool. Removal/addition of processes to the service pool is done via route-emitter.
+  - `cfdot actual-lrps` now behaves in a more expected behavior regarding the display of `host_tls_proxy_port`. It should always be preset, even if the value is `0`.
+  - Bumped to golang 1.20.7.
+  ## ✨  Built with go 1.20.7
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.80.0...v2.81.0
+  ## Resources
+  - [Download release v2.81.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.81.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>envoy-nginx</td><td>0.19.0</td><td></td></tr>
+    <tr><td>garden-runc</td><td>1.37.0</td><td></td></tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.32</td>
+      <td>
+        <details>
+          <summary>3.1.32</summary>
+          <pre style="max-width: 30em">
+  * Add hwc 26.0.0, remove hwc 23.0.0 (#136)
+  for stack(s) windows2016, windows
+  (https://www.pivotaltracker.com/story/show/185693627)
+  Packaged binaries:
+  | name | version | cf_stacks |
+  |-|-|-|
+  | hwc | 26.0.0 | windows, windows2016 |
+  Default binary versions:
+  | name | version |
+  |-|-|
+  | hwc | 26.0.0 |
+  * Uncached buildpack SHA256: e48a64f378fe3ebf4ca159e62ff31c621e2297ca651821e0ad8ad17366596494
+  * Uncached buildpack SHA256: 85bf9307601c6bd24112547551c03f9b1ba833348c54ba60dcf6d936ec58bd11
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>loggregator-agent</td><td>7.6.1</td>
+      <td>
+        <details>
+          <summary>v7.6.1</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  ### Experimental OTel Collector changes
+  * Prevent prometheus exporter from claiming BBS API port. For more context, see here: https://github.com/cloudfoundry/diego-release/issues/812
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.6.0...v7.6.1
+          </pre>
+        </details>
+        <details>
+          <summary>v7.6.0</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  ### Experimental OTel Collector changes
+  * ⚠️ Do not forward Timers ⚠️
+  * Set the `service_version` for OTel Collector telemetry to v0.1.0
+  * Add the prometheus exporter
+  * Bump collector to v0.83.0
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.5.0...v7.6.0
+          </pre>
+        </details>
+        <details>
+          <summary>v7.5.0</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump dependencies
+  #### Experimental OTel Collector changes
+  * Bump to OTel Collector v0.82.0
+  * ⚠️ Remove all the exporters except for `otlp` and `file` ⚠️
+  * ⚠️ Change default for the OTel Collector port for gRPC ingress to `9100` ⚠️
+  * Reserve `cf-internal` prefix for internal metric exporters for the future
+  * Configure Prom Scraper to scrape OTel Collector metrics
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.4.0...v7.5.0
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>metrics-discovery</td><td>3.2.14</td>
+      <td>
+        <details>
+          <summary>v3.2.14</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * add disable property to metrics-agent & metrics-discovery-registrar by @mkocher in https://github.com/cloudfoundry/metrics-discovery-release/pull/169
+  * Bump dependencies
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.13...v3.2.14
+          </pre>
+        </details>
+        <details>
+          <summary>v3.2.13</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Fix metrics-agent on windows
+  * Bump to [go1.20.7](https://groups.google.com/g/golang-announce/c/X0b6CsSAaYI/m/Efv5DbZ9AwAJ)
+  * Bump dependencies
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.12...v3.2.13
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>smoke-tests</td><td>4.8.3</td><td></td></tr>
+    <tr><td>winc</td><td>2.15.0</td>
+      <td>
+        <details>
+          <summary>v2.15.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Adds support for customizing the timestamp format used in the `groot` job's logging via the `groot.log_format` property.
+  - Bumped to golang 1.20.7
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/groot/spec b/jobs/groot/spec
+  index ec4aac2..a73f967 100644
+  --- a/jobs/groot/spec
+  +++ b/jobs/groot/spec
+  @@ -31,6 +31,10 @@ properties:
+  description: "Can be debug, info, error or fatal"
+  default: "info"
+  +  groot.log_format:
+  +    description: "Can be rfc3339 or epoch"
+  +    default: "epoch"
+  +
+  groot.refresh_base_layer:
+  description: "EXPERIMENTAL: Delete size file in order to pull fresh base layer."
+  default: false
+  ```
+  ## ✨  Built with go 1.20.7
+  **Full Changelog**: https://github.com/cloudfoundry/winc-release/compare/v2.14.0...v2.15.0
+  ## Resources
+  - [Download release v2.15.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/winc-release?version=2.15.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-syslog</td><td>1.1.17</td>
+      <td>
+        <details>
+          <summary>v1.1.17</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump Go to v1.20.7
+  **Full Changelog**: https://github.com/cloudfoundry/windows-syslog-release/compare/v1.1.16...v1.1.17
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-utilities</td><td>0.17.0</td><td></td></tr>
+  </tbody>
+</table>
+
+
+
 ### <a id='4.0.7'></a> 4.0.7
 
 **Release Date:** 08/22/2023
