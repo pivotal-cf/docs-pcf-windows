@@ -190,8 +190,8 @@ BOSH automatically deletes a compilation VM after the compilation VM fails.
 In a vSphere environment, use one of the following procedures to troubleshoot your
 Windows stemcell v2019.7 and later compilation VM issues:
 
-* [Troubleshoot a Slowly-Deleted Windows Compilation VM](#compilation-vms-slow)
-* [Troubleshoot a Quickly-Deleted Windows Compilation VM](#compilation-vms-quick)
+* [Troubleshoot a slowly-deleted Windows compilation VM](#compilation-vms-slow)
+* [Troubleshoot a quickly-Deleted Windows compilation VM](#compilation-vms-quick)
 
 ### <a name='compilation-vms-slow'></a> Troubleshooting a slowly deleted Windows compilation VM
 
@@ -200,16 +200,18 @@ The easiest method to troubleshoot a Windows compilation VM is to SSH into the V
 To troubleshoot a compilation VM from an `ssh` session:
 
 1. Open the vSphere UI.
-
 1. Open two different BOSH CLI terminal sessions.
 1. Open <%= vars.ops_manager %>.
-1. Enable the two following settings in <%= vars.ops_manager %>:
+
+    ![alt=""](images/troubleshooting-windows-compVM.png)
+
+2. Enable the two following settings in <%= vars.ops_manager %>:
     * Select **Keep Unreachable Director VMs** from
     **BOSH Director** tile > **Director config**.
     * Select **Access VMs with BOSH SSH** from
     **<%= vars.windows_runtime_abbr %>** tile > **VM options**.
-1. Click **Apply Changes** against the <%= vars.windows_runtime_abbr %> tile.
-1. From the first BOSH CLI terminal, monitor the BOSH task:
+3. Click **Apply Changes** against the <%= vars.windows_runtime_abbr %> tile.
+4. From the first BOSH CLI terminal, monitor the BOSH task:
 
     ```console
     watch -n 5 "bosh -d TAS-WINDOWS-DEPLOYMENT is --details | grep compilation"
@@ -217,9 +219,9 @@ To troubleshoot a compilation VM from an `ssh` session:
 
     Where `TAS-WINDOWS-DEPLOYMENT` is the name of your <%= vars.windows_runtime_abbr %> deployment.
 
-1. Wait until the compilation VM CID is up.
+5. Wait until the compilation VM CID is up.
 
-1. From the second BOSH CLI terminal, SSH to the Windows compilation VM:
+6. From the second BOSH CLI terminal, SSH to the Windows compilation VM:
 
     ```console
     bosh -d TAS-WINDOWS-DEPLOYMENT ssh COMPILATION-NAME
@@ -231,7 +233,7 @@ To troubleshoot a compilation VM from an `ssh` session:
           <li>`COMPILATION-NAME` is the name of your Windows compilation VM.</li>
         </ul>
 
-1. To prevent BOSH from deleting the compilation VM after the compilation VM fails,
+7. To prevent BOSH from deleting the compilation VM after the compilation VM fails,
 search for the compilation VM CID in the vSphere UI and rename it. You can now troubleshoot within this session.
 
 1. After troubleshooting, delete the VM manually.
