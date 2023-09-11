@@ -7,15 +7,15 @@ Learn how to troubleshoot your <%= vars.windows_runtime_full %> (<%= vars.window
 
 ## <a id='issues'></a> Installation issues
 
-This section describes the issues that might occur during the installation process.
+This section describes the issues that might occur during installation.
 
-### <a id='missing-certs-winfs-issues'></a> Missing local certificates for Windows File System Injector
+### <a id='missing-certs-winfs'></a> Missing local certificates for Windows FS Injector
 
 **Symptom**
 
-You run the `winfs-injector` and see the following error about certificates:
+You run the `winfs-injector` and see this certificate error:
 
-```console
+```
 Get https://auth.docker.io/token?service=registry.docker.io&
 scope=repository:cloudfoundry/windows2016fs:pull: x509:
 failed to load system roots and no roots provided
@@ -27,16 +27,16 @@ Local certificates are needed to communicate with Docker Hub.
 
 **Solution**
 
-Install the necessary certificates on your local machine. On Ubuntu, you can install certificates
+Complete the installation of the necessary certificates on your local machine. On Ubuntu, you can install certificates
 with the `ca-certificates` package.
 
-### <a id='outdated-version-winfs-issues'></a> Outdated version for Windows File System Injector
+### <a id='outdated-version-winfs-issues'></a> Outdated version for Windows FS Injector
 
 **Symptom**
 
-You run the `winfs-injector` and see the following error about a missing file or directory:
+You run the `winfs-injector` and see this missing file or directory error:
 
-```console
+```
 open ...windows2016fs-release/VERSION: no such file or directory
 ```
 
@@ -46,33 +46,30 @@ You are using an outdated version of the `winfs-injector`.
 
 **Solution**
 
-From the [<%= vars.windows_runtime_full %>](https://network.pivotal.io/products/pas-windows) page
-on <%= vars.product_network %>, download the recommended version of **File System Injector tool**
+From the [<%= vars.windows_runtime_full %>](https://network.tanzu.vmware.com/products/pas-windows/) page
+on <%= vars.product_network %>, download the recommended version of **Windows FS Injector**
 for the tile.
 
-### <a id='no-os'></a> Missing Container image
+### <a id='no-os'></a> Missing container image
 
 **Symptom**
 
-You click the **+** icon in <%= vars.platform_name %> to add the <%= vars.windows_runtime_abbr %>
-tile to the Installation Dashboard and see the following error:
+You clicked the **+** icon in <%= vars.platform_name %> to add the <%= vars.windows_runtime_abbr %>
+tile to the Installation Dashboard and see this error:
 
 ![alt-text="Error message: Has an invalid release (windows 2016fs) specified for job type Windows Diego Cell."](./images/error-invalid-release-uninjected-tile.png)
 
 **Explanation**
 
-The product file that you are trying to upload does not contain the Windows Server container base
-image.
+The product file that you are trying to upload does not contain the Windows Server container base image.
 
 **Solution**
 
-1. Delete the product file listing from <%= vars.platform_name %> by clicking its trash can icon
+1. Delete the product file listing from <%= vars.platform_name %> by clicking the Trash can icon
   under **Import a Product**.
 
 1. Follow the <%= vars.windows_runtime_abbr %> installation instructions to run the
-`winfs-injector` tool locally on the product file. This step adds the Windows Server container base image to the product file, requires Internet access, and can take up to 20 minutes. For more
-information, see [Install the Tile](./installing.html#install) in _Installing and Configuring
-<%= vars.windows_runtime_abbr %>_.
+`winfs-injector` tool locally on the product file. This step adds the Windows Server container base image to the product file, requires Internet access, and can take up to 20 minutes. For more information, see [Install the tile](./installing.html#install) in _Installing and Configuring <%= vars.windows_runtime_abbr %>_.
 
 1. Click **Import a Product** to upload the injected product file.
 
@@ -81,13 +78,13 @@ tile to the Installation Dashboard.
 
 ## <a id='issues'></a> Upgrade issues
 
-This section describes issues that may occur during the upgrade process.
+This section describes issues that might occur during upgrade.
 
 ### <a id='failure-create-containers'></a> Failure to create Containers when upgrading with Shared Microsoft Base image
 
 **Symptom**
 
-The prestart script for the `windowsfs` job fails, and the upgrade fails with the following output:
+The prestart script for the `windowsfs` job fails, and the upgrade fails:
 
 ```console
 Task 308031 | 13:47:04 | Preparing deployment: Preparing deployment (00:00:03)
@@ -101,8 +98,7 @@ L Error: Action Failed get_task: Task 59ba76d1-14c5-4d7b-681c-08b9ec4bd64d resul
 Task 308031 | 13:47:56 | Error: Action Failed get_task: Task 59ba76d1-14c5-4d7b-681c-08b9ec4bd64d result: 1 of 10 pre-start scripts failed. Failed Jobs: windows1803fs. Successful Jobs: set_kms_host, groot, loggregator_agent_windows, bosh-dns-windows, rep_windows, winc-network-1803, set_password, enable_ssh, enable_rdp.
 ```
 
-Otherwise, the post-start script for the `rep_windows` job fails, and the upgrade fails with the
-following output:
+Otherwise, the post-start script for the `rep_windows` job fails, and the upgrade fails:
 
 ```console
 Task 8192 | 21:12:30 | Updating instance windows2019-cell: windows2019-cell/bd6d70b9-ed1f-412f-9d49-8045627f4ab3 (0) (canary) (00:17:24)
@@ -112,24 +108,22 @@ Task 8192 | 21:29:55 | Error: Action Failed get_task: Task a9555020-1a3b-40c7-67
 
 **Explanation**
 
-When upgrading between versions of Windows rootfs that have a shared Microsoft base layer,
-<%= vars.windows_runtime_abbr %> may fail to create containers.
+When you upgrade between versions of Windows rootfs that have a shared Microsoft base layer,
+<%= vars.windows_runtime_abbr %> might fail to create containers.
 
 **Solution**
 
 For available workarounds, see
-[Failure to create containers when upgrading with shared Microsoft base
-image](https://community.pivotal.io/s/article/knowledge-base-failure-to-create-containers-when-upgrading-with-shared-microsoft-base-image) in the Knowledge Base.
+[Failure to create containers when upgrading with shared Microsoft base image](https://community.pivotal.io/s/article/knowledge-base-failure-to-create-containers-when-upgrading-with-shared-microsoft-base-image) in the Knowledge Base.
 
-### <a id='syslog'></a> Forwarding Logs to a Syslog Server
+### <a id='syslog'></a> Forwarding logs to a syslog server
 
 You can use Windows Diego Cell logs to troubleshoot Windows Diego Cells. Windows Diego Cells
-generate the following types of logs:
+generate several types of logs:
 
 * **BOSH job logs**, such as `rep_windows` and `consul_agent_windows`. These logs stream to the
 syslog server configured in the **System Logging** pane of the <%= vars.windows_runtime_abbr %>
-tile, along with other <%= vars.platform_name %> component logs. The names of these BOSH job logs
-correspond to the names of the logs emitted by Linux Diego Cells.
+tile. The names of these BOSH job logs correspond to the names of the logs emitted by Linux Diego Cells.
 
 * **Windows event logs**. These logs stream to the syslog server configured in the
 **System Logging** pane of the <%= vars.windows_runtime_abbr %> tile.
@@ -138,24 +132,25 @@ To forward Windows logs to an external syslog server:
 
 1. Go to the <%= vars.platform_name %> Installation Dashboard.
 
-1. Click the <%= vars.windows_runtime_abbr %> tile.
+2. Click the <%= vars.windows_runtime_abbr %> tile.
 
-1. Select **System Logging**.
+3. Click **System Logging**.
 
-1. Under **VM log forwarding**, select **Configure**.
+4. For **VM log forwarding**, select **Configure**.
 
-1. Under **Syslog server address**, enter the hostname or IP address of your syslog server.
+5. In **Syslog server address**, enter the host name or IP address of your syslog server.
 
-1. Under **Syslog server port**, enter the port of your syslog server. The default port is `514`.
-  <p class="note"><strong>Note:</strong> The host must be reachable from the <%= vars.app_runtime_abbr %> network. Ensure that your syslog server listens on external interfaces.</p>
+6. Under **Syslog server port**, enter the port of your syslog server. The default port is `514`.
+  The host must be reachable from the <%= vars.app_runtime_abbr %> network. Ensure that your syslog server listens on
+  external interfaces.
 
 1. Under **Transport protocol**, select the transport protocol for forwarding logs.
 
-1. If you are using a TCP protocol and want to allow TLS communication:
+2. If you are using a TCP protocol and want to allow TLS communication:
   1. Activate the **Send logs over TLS** check box.
-  1. For **CA certificate**, provide the CA certificate that validates connections to an external server. The certificate used to send logs to your syslog server over TLS.
+  2. For **CA certificate**, provide the CA certificate that validates connections to an external server. The certificate used to send logs to your syslog server over TLS.
 
-1. Under **ca_cert**, add the certificate to validate connections to external server if using tls.
+3. Under **ca_cert**, add the certificate to validate connections to external server if using tls.
 
 1. Select the **Enable system metrics** check box. For a list of the VM metrics that the System Metric Agent emits, see
 [System Metrics Agent](https://github.com/cloudfoundry/system-metrics-release/blob/main/docs/system-metrics-agent.md) in the System Metrics repository on GitHub.
@@ -172,13 +167,13 @@ To download Windows Diego Cell logs:
 
 1. Click the **Status** tab.
 
-1. Under the **Logs** column, click the download icon for the Windows Diego Cell for which you want to retrieve logs.
+1. In the **Logs** column, click the Download icon for the Windows Diego Cell for which you want to retrieve logs.
 
 1. Click the **Logs** tab.
 
 1. When the logs are ready, click the filename to download them.
 
-1. Unzip the file to examine the contents. Each component on the Diego Cell has its own logs directory:
+1. Unzip the file and examine the contents. Each component on the Diego Cell has its own log folder:
     * `/consul_agent_windows/`
     * `/garden-windows/`
     * `/metron_agent_windows/`
@@ -186,16 +181,16 @@ To download Windows Diego Cell logs:
 
 ## <a id='compilation_vms'></a> Troubleshooting Windows compilation VMs
 
-BOSH automatically deletes a compilation VM after the compilation VM fails.
-In a vSphere environment, use one of the following procedures to troubleshoot your
-Windows stemcell v2019.7 and later compilation VM issues:
+BOSH deletes a compilation VM after the compilation VM fails.
+In a vSphere environment, use one of these procedures to troubleshoot your
+Windows stemcell v2019.7 and any compilation VM issues that follow:
 
 * [Troubleshoot a slowly-deleted Windows compilation VM](#compilation-vms-slow)
-* [Troubleshoot a quickly-Deleted Windows compilation VM](#compilation-vms-quick)
+* [Troubleshoot a quickly-deleted Windows compilation VM](#compilation-vms-quick)
 
 ### <a name='compilation-vms-slow'></a> Troubleshooting a slowly deleted Windows compilation VM
 
-The easiest method to troubleshoot a Windows compilation VM is to SSH into the VM before BOSH deletes it.
+The easiest method to troubleshoot a Windows compilation VM is to use SSH into the VM before BOSH deletes it.
 
 To troubleshoot a compilation VM from an `ssh` session:
 
@@ -221,7 +216,7 @@ To troubleshoot a compilation VM from an `ssh` session:
 
 5. Wait until the compilation VM CID is up.
 
-6. From the second BOSH CLI terminal, SSH to the Windows compilation VM:
+1. From the second BOSH CLI terminal, SSH to the Windows compilation VM:
 
     ```console
     bosh -d TAS-WINDOWS-DEPLOYMENT ssh COMPILATION-NAME
@@ -233,17 +228,17 @@ To troubleshoot a compilation VM from an `ssh` session:
           <li>`COMPILATION-NAME` is the name of your Windows compilation VM.</li>
         </ul>
 
-7. To prevent BOSH from deleting the compilation VM after the compilation VM fails,
+1. To prevent BOSH from deleting the compilation VM after the compilation VM fails,
 search for the compilation VM CID in the vSphere UI and rename it. You can now troubleshoot within this session.
 
 1. After troubleshooting, delete the VM manually.
 
 ### <a name='compilation-vms-quick'></a> Troubleshooting a quickly deleted Windows compilation VM
 
-In some situations, the Windows compilation VM might be deleted very quickly,
+In some situations, the Windows compilation VM might be deleted,
 making it impossible to SSH into the VM before BOSH deletes it.
 
-To troubleshoot a quickly-deleted compilation VM:
+To troubleshoot a deleted compilation VM:
 
 1. Download an Ubuntu desktop image from [Ubuntu Releases Xenial](http://releases.ubuntu.com/xenial/).
 
@@ -253,14 +248,12 @@ To troubleshoot a quickly-deleted compilation VM:
 
 1. Open a BOSH CLI terminal session.
 1. Open <%= vars.ops_manager %>.
-1. Enable the two following settings in <%= vars.ops_manager %>:
-    * Select **Keep Unreachable Director VMs** from
-    **BOSH Director** tile > **Director config**.
-    * Select **Access VMs with BOSH SSH** from
-    **<%= vars.windows_runtime_abbr %>** tile > **VM options**.
+1. For these settings in <%= vars.ops_manager %>:
+    * Select **Keep Unreachable Director VMs** from **BOSH Director** tile, then click **Director config**.
+    * Select **Access VMs with BOSH SSH** from <%= vars.windows_runtime_abbr %> tile, then click **VM options**.
 1. Click **Apply Changes** in <%= vars.ops_manager %>.
 
-1. From the BOSH CLI terminal, monitor the BOSH task:
+1. From the BOSH CLI terminal window, monitor the BOSH task:
 
     ```console
     watch -n 5 "bosh -d TAS-WINDOWS-DEPLOYMENT is --details | grep compilation"
@@ -268,24 +261,24 @@ To troubleshoot a quickly-deleted compilation VM:
 
     Where `TAS-WINDOWS-DEPLOYMENT` is the name of your <%= vars.windows_runtime_abbr %> deployment.
 
-1. Wait until the compilation VM CID is up.
+1. Wait until the compilation VM CID is done.
 
 1. From the vSphere UI:
     1. Locate the compilation VM CID in the vSphere UI.
     1. To prevent BOSH from deleting the compilation VM after the compilation VM fails,
     rename the compilation VM.
-    1. On the Windows compilation VM, go to **Edit settings** > **add a device CD/DVD drive** >
-    **browse Datastore ISO file**, and select the Ubuntu desktop iso -> select **Connect at Power ON**.
-    1. Go to **Edit settings** -> **VM options** tab -> **Boot Options**.
-    1. Increase the **Boot Delay** to `10000 milliseconds`.
-    1. Select **Force BIOS Setup**.
-    1. Select **Start/Restart** to restart the VM.
+    1. On the Windows compilation VM, go to **Edit settings**, then click **add a device CD/DVD drive**. Click
+    **browse Datastore ISO file**, select the Ubuntu desktop iso, then click **Connect at Power ON**.
+    2. Go to **Edit settings** -> **VM options** tab -> **Boot Options**.
+    3. Increase the **Boot Delay** to `10000 milliseconds`.
+    4. Click **Force BIOS Setup**.
+    5. Click **Start/Restart** to start the VM again.
 
-1. On the BIOS setup screen, boot with the CD-ROM Drive.
+2. On the BIOS setup screen, boot with the CD-ROM Drive.
 
-1. After Ubuntu desktop starts, select **try Ubuntu** and launch a terminal.
+3. After Ubuntu desktop starts, click **try Ubuntu** and launch a terminal window.
 
-1. In the terminal, run:
+4. In the terminal window, run:
 
     ```console
     sudo fdisk -l
@@ -293,18 +286,17 @@ To troubleshoot a quickly-deleted compilation VM:
     sudo mount /dev/sda1 /mnt/windows
     ```
 
-1. You can now troubleshoot within this session by exploring the contents of the windows VM's file system within `/mnt/windows`.
+5. You can now troubleshoot within this session by exploring the contents of the windows VM's file system within `/mnt/windows`.
 
-1. After troubleshooting, delete the VM manually.
+6. After troubleshooting, delete the VM manually.
 
 ## <a id='windows-authentication'></a> Windows authentication
 
-<p> For the basics, start with the [Microsoft troubleshooting
-docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/gmsa-troubleshooting#non-domain-joined-hosts-make-sure-the-host-is-configured-to-retrieve-the-gmsa-account.html).</p>
+For the basics, start with the [Microsoft documentation](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/gmsa-troubleshooting#non-domain-joined-hosts-make-sure-the-host-is-configured-to-retrieve-the-gmsa-account.html).
 
 The Windows Authentication feature uses the Windows event log system. To access a log from the Windows Diego Cell, `ssh` onto the cell, then enter `powershell`. To get the events in an event log, use the command [`Get-WinEvent`](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.diagnostics/get-winevent):
 
-```console
+```ssh
 > bosh ssh -d TAS-WINDOWS-DEPLOYMENT windows_diego_cell/INDEX
 > powershell
 PS> Get-WinEvent -LogName LOG-NAME
@@ -312,9 +304,9 @@ PS> Get-WinEvent -LogName LOG-NAME
 
 Where `TAS-WINDOWS-DEPLOYMENT` is the name of your <%= vars.windows_runtime_abbr %> deployment, `INDEX` is the VM you want to access, and `LOG-NAME` is the name of the log for which you want to view events.
 
-### <a id='tas-gmsa-plugin-logs'></a> TAS gMSA plugin logs
+### <a id='tas-gmsa-plugin-logs'></a> TAS for VMs gMSA plug-in logs
 
-TAS [gMSA plugin](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#gmsa-architecture-and-improvements) logs are in the event log `Cloudfoundry-CCG-Plugin`. They will tell you if the plugin is successfully invoked, and if the input to the plugin is correct. Successful logs look similar to the following example:
+TAS for VMs [gMSA plugin](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#gmsa-architecture-and-improvements) logs are in the event log `Cloudfoundry-CCG-Plugin`. They tell you if the plug-in has run successfully, and if the input to the plug-in is correct. Success logs look like this:
 
 ```console
 PS>  Get-WinEvent -LogName Cloudfoundry-CCG-Plugin
@@ -329,7 +321,9 @@ TimeCreated                     Id LevelDisplayName Message
 
 ### <a id='windows-compute-service-logs'></a> Windows compute service logs
 
-If Windows containers aren't starting, you can check the logs for the Host Compute Service, which is the Windows component that administers Windows containers. Successful logs may look like:
+If Windows containers do not start, you can check the logs for the Host Compute Service, which is the Windows component that administers Windows containers.
+
+Success logs look like this:
 
 ```console
 PS> Get-WinEvent -LogName Microsoft-Windows-Hyper-V-Compute-Admin
@@ -341,9 +335,9 @@ TimeCreated                     Id LevelDisplayName Message
 10/28/2022 5:57:30 PM         1001 Information      The Host Compute Service started successfully.
 ```
 
-### <a id='windows-container-credential-guard-logs'></a> Windows Container credential guard logs
+### <a id='windows-container-cred-guard-logs'></a> Windows container credential guard logs
 
-In the event that Windows containers aren't starting, or Windows Authentication isn't working through an app, you can check the logs for the [CCG.exe](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#gmsa-architecture-and-improvements) process, which invokes the TAS plugin and establishes connectivity to Active Directory. Successful logs look similar to the following:
+In the event that Windows containers do not start, or Windows Authentication does not work through an app, you can check the logs for the [CCG.exe](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts#gmsa-architecture-and-improvements) process. This runs the TAS for VMs plug-in and establishes connectivity to the Active Directory. Successful logs look like this example:
 
 ```console
 PS>  Get-WinEvent -LogName Microsoft-Windows-Containers-CCG/Admin
@@ -358,15 +352,17 @@ TimeCreated                     Id LevelDisplayName Message
 
 Where `GMSA$` is the name of your GMSA service account.
 
-For a list of possible `Microsoft-Windows-Containers-CCG` events, see the [Microsoft Troubleshooting docs](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/gmsa-troubleshooting#events-and-descriptions).
+For a list of possible `Microsoft-Windows-Containers-CCG` events, see the [Microsoft Troubleshooting documentation](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/gmsa-troubleshooting#events-and-descriptions).
 
-<p class="note"><strong>Note:</strong> You may need to follow <a href="https://github.com/microsoft/Windows-Containers/issues/221#issuecomment-1320336855">additional steps</a> to have events show up in the <code>Microsoft-Windows-Containers-CCG</code> log. If you have additional questions, you can contact Support.</p>
+<p class="note">
+<span class="note__title">Note</span>
+You might need to follow <a href="https://github.com/microsoft/Windows-Containers/issues/221#issuecomment-1320336855">additional steps</a> to have events show up in the <code>Microsoft-Windows-Containers-CCG</code> log. If you have additional questions, you can contact Support.</p>
 
 ### <a id='connectivity'></a> Testing connectivity to Active Directory
 
-Both the Windows Diego Cell and the app container must have network connectivity to the Active Directory instance. Ensure that [firewall rules](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/gmsa-troubleshooting#check-the-firewall-configuration) are set up appropriately. If you have connectivity from the Windows Diego Cell but not from the app container, make sure that there are no [App Security Groups](../concepts/asg.html) preventing access from app containers.
+Both the Windows Diego Cell and the application container must have network connectivity to the Active Directory instance. The [Firewall rules](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/gmsa-troubleshooting#check-the-firewall-configuration) must be set up correctly. If you have connectivity from the Windows Diego Cell but not from the application container, verify that there are no [App Security Groups](../concepts/asg.html) preventing access from application containers.
 
-From inside an app container, the following commands should complete successfully if the network connectivity is set up properly:
+From inside an application container, if the network connectivity is set up correctly, these commands must be successful:
 
 ```console
 nslookup AD.DOMAIN          # Make sure DNS is properly set
@@ -376,4 +372,4 @@ nltest /sc_query:AD.DOMAIN  # Make sure the secure channel to the Domain Control
 
 Where `AD.DOMAIN` is the fully-qualified domain name of the Active Directory instance.
 
-If the environment variable `COMPUTERNAME` is not set to `GMSA$` and `USERDNSDOMAIN` is not set to `AD.DOMAIN`, check your tile setup.
+If the environment variable `COMPUTERNAME` is not set to `GMSA$` and the `USERDNSDOMAIN` variable is not set to `AD.DOMAIN`, verify your tile setup.
