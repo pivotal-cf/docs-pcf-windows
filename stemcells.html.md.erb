@@ -22,23 +22,11 @@ A typical BOSH stemcell for Windows contains the following:
 For more information about stemcells, see [What is a Stemcell?](https://bosh.io/docs/stemcell/)
 in the Cloud Foundry BOSH documentation.
 
-### <a id="compatibility"></a> Windows Stemcell Compatibility Matrix
+### <a id="compatibility"></a> Windows stemcell compatibility
 
-Refer to the compatibility matrix below before deploying and installing the <%= vars.windows_runtime_abbr %> tile:
+Check the compatibility details before deploying and installing the <%= vars.windows_runtime_abbr %> tile. See [Stemcells (Windows)](https://network.tanzu.vmware.com/products/stemcells-windows-server) on VMware Tanzu Network.
 
-| <%= vars.windows_runtime_abbr %> Version        | WindowsFS Version     | Stemcell 2019.43 and earlier | Stemcell 2019.44 for Azure and Stembuild vSphere | Stemcell v2019.44 for other IAASes | Stemcell 2019.45         |
-|----------------------|------------------------|---------------------|-----------------------------------------|--------------------------|--------------------------|
-| v2.7.35 and earlier  | v2.31.0 and earlier    | Compatible          | Not compatible                          | Compatible               | Not compatible           |
-| v2.7.37 and later    | v2.33.2                | Compatible          | Compatible                              | Compatible               | Not compatible           |
-| v2.10.19 and earlier | v2.31.9 and earlier    | Compatible          | Not compatible                          | Compatible               | Not compatible           |
-| v2.10.21 and later   | v2.33.2                | Compatible          | Compatible                              | Compatible               | Not compatible           |
-| v2.11.8 and earlier  | v2.31.0 and earlier    | Compatible          | Not compatible                          | Compatible               | Not compatible           |
-| v2.11.10 and later   | v2.33.2                | Compatible          | Compatible                              | Compatible               | Not compatible           |
-| v2.12.3 and earlier  | v2.31.0 and earlier    | Compatible          | Not compatible                          | Compatible               | Not compatible           |
-| v2.12.4 and later    | v2.33.2                | Compatible          | Compatible                              | Compatible               | Not compatible           |
-
-<br>
-Depending on your IaaS, you can create or download a stemcell using these methods:
+Depending on your IaaS, you can create or download a stemcell using the following methods:
 
 * **Azure**: To activate and download the Azure Windows Stemcell, see [Configuring the Azure Light Stemcell](#azure).
 
