@@ -42,14 +42,14 @@ You use the **Windows FS Injector** tool to install the <%= vars.windows_runtime
   * https://msecnd.net, or any domain within the Microsoft Windows Azure Content Delivery Network
   For more information about the Windows Azure Content Delivery Network, see [Introducing the Windows Azure Content Delivery Network](https://azure.microsoft.com/en-us/blog/introducing-the-windows-azure-content-delivery-network/) in the Microsoft Azure documentation.
 
-  <p> To ensure the authenticity of Microsoft container images, Microsoft does not permit the distribution of its base images. This includes Microsoft
-  container images consumed through Docker Hub, which are actually delivered by an Microsoft CDN endpoint.</p>
+  <p class="note">
+  <span class="note__title">Note</span>
+  To ensure the authenticity of Microsoft container images, Microsoft does not permit the distribution of its base images. This includes Microsoft container images consumed through Docker Hub, which are actually delivered by an Microsoft CDN endpoint.</p>
 
 ## <a id='install'></a> Installing the <%= vars.windows_runtime_abbr %> tile
 
 To install the <%= vars.windows_runtime_abbr %> tile:
-    <%# After adding or removing a step here be sure to change the step number
-  for step 4 referenced below in the air-gapped environment section.  %>
+<%# After adding or removing a step here be sure to change the step number for step 4 in the air-gapped environment section. %>
 
 1. Go to the [<%= vars.windows_runtime_full %>](https://network.pivotal.io/products/pas-windows)
    page on <%= vars.product_network %>.
@@ -60,10 +60,14 @@ To install the <%= vars.windows_runtime_abbr %> tile:
     <%# After adding or removing a step here be sure to change the step number
   for step 4 referenced below in the air-gapped environment section.  %>
 
-1. Download the **Windows FS Injector** tool for your workstation OS. The Injector tool, `winfs-injector`, is an executable binary that adds the Windows Server container base image into the product file. This step requires internet access and can take up to 20 minutes.
-  <p class="note"><strong>Note:</strong> You need the <code>git</code> and <code>tar</code> executables in your <code>%PATH%</code> to run <code>winfs-injector.exe</code>. For example, copy <code>git.exe</code> and <code>tar.exe</code> to a directory in your <code>%PATH%</code>.</p>
-    <%# After adding or removing a step here be sure to change the step number
-  for step 4 referenced below in the air-gapped environment section.  %>
+1. Download the **Windows FS Injector** tool for your workstation OS. The Injector tool,
+   `winfs-injector`, is an executable binary file that adds the Windows Server container base image
+   into the product file. This step requires Internet access and can take up to 20 minutes.
+
+  <p class="note important">
+  <span class="note__title">Important</span>'
+  You need the <code>git</code> and <code>tar</code> executable files in your <code>%PATH%</code> to run <code>winfs-injector.exe</code>. For example, copy <code>git.exe</code> and <code>tar.exe</code> to a directory in your <code>%PATH%</code>.</p>
+    <%# After adding or removing a step here be sure to change the step number for step 4 in the air-gapped environment section.  %>
 
 1. Add the Windows Server container base image to the product file:
 
@@ -85,7 +89,7 @@ To install the <%= vars.windows_runtime_abbr %> tile:
 
     This step can take up to 20 minutes to complete.
 
-1. Go to the Ops Manager Installation Dashboard and click **Import a Product**.
+1. Go to VMware Tanzu Operations Manager Installation Dashboard and click **Import a Product**.
 
 1. To add the <%= vars.windows_runtime_abbr %> tile to the **Import a Product** product list,
    select the importable `PASW-IMPORTABLE-PATH` file on your workstation.
@@ -163,8 +167,9 @@ The following sections describe how to configure the advanced features.
 
 For example, you might want to use the overcommit if your apps use a small amount of disk and memory capacity compared to the amounts set in the **Resource Config** settings for **Windows Diego Cell**.
 
-<p>Due to the risk of app failure and the deployment specific nature of disk and memory use, VMware has no recommendation for how much, if any, memory or
-disk space to overcommit.</p>
+<p class="note">
+<span class="note__title">Note</span>
+Due to the risk of app failure and the deployment-specific nature of disk and memory use, VMware has no recommendation for how much, if any, memory or disk space to overcommit.</p>
 
 To enable overcommit:
 
@@ -176,7 +181,9 @@ To enable overcommit:
 
 1. Click **Save**.
 
-<p class="note"><strong>Note:</strong> Entries made to each of these two fields set the total amount of resources allocated, not the overage.</p>
+<p class="note important">
+<span class="note__title">Important</span>
+Entries made to each of these two fields set the total amount of resources allocated, not the overage.</p>
 
 #### <a id='enable-route-integrity'></a> TLS Connections from the Gorouter to Apps (Beta)
 
@@ -232,9 +239,8 @@ To configure errands:
 1. Click **Save**.
 
 <p class="note important">
-<span class="note__title">Important</span> This beta feature checks only that the client certificate is signed by the expected CA using mTLS. It does not
-include SAN (Subject Alternative Name) checks of the presented client certificates.
-</p>
+<span class="note__title">Important</span>
+This beta feature checks only that the client certificate is signed by the expected CA using mTLS. It does not include SAN (Subject Alternative Name) checks of the presented client certificates.</p>
 
 ### <a id='config-iso-segments'></a> Configuring Isolation Segments (Optional)
 
@@ -284,7 +290,10 @@ To configure your tile resources:
       <td>100&nbsp;GB</td>
     </tr>
   </table>
-  <p class="note"><strong>Note:</strong> Windows stemcells in the v2019.x line support ephemeral disks.</p>
+
+    <p class="note">
+    <span class="note__title">Note</span>
+    Windows stemcells in the v2019.x line support ephemeral disks.</p>
 
 1. Provision your **Master Compilation Job** with at least 100&nbsp;GB of disk space.
 
@@ -302,7 +311,9 @@ To upload the stemcell:
 
 1. Follow the procedure in [Importing and Managing Stemcells](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/2.10/vmware-tanzu-ops-manager/opsguide-managing-stemcells.html) to upload the Windows stemcell to <%= vars.windows_runtime_abbr %>.
 
-<p>If you use vSphere, you must create your own stemcell.
+<p class="note">
+<span class="note__title">Note</span>
+If you use vSphere, you must create your own stemcell.
 The default root disk size of Windows stemcells v2019.x line is 30&nbsp;GB.
 VMware recommends setting the root disk size of your Windows stemcell for vSphere to 30&nbsp;GB.
 For more information, see <a href="create-vsphere-stemcell-automatically.html">Creating a Windows Stemcell

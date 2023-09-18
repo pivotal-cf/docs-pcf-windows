@@ -6,7 +6,9 @@ owner: Windows
 This topic describes the process of migrating apps running on <%= vars.windows_runtime_full %>
 2012 R2 stemcells to run on <%= vars.windows_runtime_abbr %> stemcells, which run Windows Server 2019.
 
-<p class="note"><strong>Note</strong>: <%= vars.windows_runtime_abbr %> 2012 R2 has reached its end of availability (EoA) and is no longer generally available.</p>
+<p class="note important">
+<span class="note__title">Important</span>
+<%= vars.windows_runtime_abbr %> 2012 R2 has reached its end of availability (EoA) and is no longer generally available.</p>
 
 VMware recommends you use the blue-green deployment method for high availability.
 For more information about blue-green deployments,
@@ -67,7 +69,9 @@ To redeploy a running app with zero downtime using the blue-green method:
     -n my-app --no-start --no-route
     </pre>
 
-    <p class="note"><strong>Note:</strong> The <code>--no-start</code> and <code>--no-route</code> parameters included in this <code>cf push</code> command are required for the this procedure. <code>--no-start</code> is used to create the instance VMs and not start the app, and <code>--no-route</code> is used to prevent the push command from automatically mapping a route to the app.
+    class="note important">
+    <span class="note__title">Important</span>
+    The <code>--no-start</code> and <code>--no-route</code> parameters included in this <code>cf push</code> command are required for the this procedure. <code>--no-start</code> is used to create the instance VMs and not start the app, and <code>--no-route</code> is used to prevent the push command from automatically mapping a route to the app.
     For more information about <code>cf push</code>, see <a href="http://cli.cloudfoundry.org/en-US/cf/push.html">cf push</a> in the Cloud Foundry CLI Reference Guide.</p>
 
 
@@ -84,8 +88,11 @@ To redeploy a running app with zero downtime using the blue-green method:
           <li>`HOSTNAME` is the name of your app's subdomain. For example, if `example.com` is your domain and you want the URL to your app to be `http://my-app.example.com`, then specify `my-app` as the `HOSTNAME`.</li>
         </ul>
 
-    <p class="note"><strong>Note:</strong> When using the <code>cf map-route</code> command, you must specify domain name after specifying app name.</p>
-    For additional information about `cf map-route`, see [cf map-route](http://cli.cloudfoundry.org/en-US/cf/map-route.html) in the Cloud Foundry CLI Reference Guide.
+    class="note important">
+    <span class="note__title">Important</span>
+    When using the <code>cf map-route</code> command, you must specify domain name after specifying app name.
+
+    For additional information about `cf map-route`, see [cf map-route](http://cli.cloudfoundry.org/en-US/cf/map-route.html) in the Cloud Foundry CLI Reference Guide.</p>
 
 1. To start the green app, run:
 
@@ -129,8 +136,10 @@ To delete the original app:
 
     Where `APP-NAME` is the name of the app that you have replaced with `APP-NAME-green`.
 
-    <p class="note"><strong>Note:</strong> To also delete any mapped routes, run the command with the <code>-r</code> flag.</p>
-    For additional information about `cf delete`, see [cf delete](http://cli.cloudfoundry.org/en-US/cf/delete.html) in the Cloud Foundry CLI Reference Guide.
+    <p class="note">
+    <span class="note__title">Note</span>
+    To also delete any mapped routes, run the command with the <code>-r</code> flag.
+    For additional information about `cf delete`, see [cf delete](http://cli.cloudfoundry.org/en-US/cf/delete.html) in the Cloud Foundry CLI Reference Guide.</p>
 
 
 ## <a id="uninstall-old-tile"></a> Step 4: Uninstalling the old tile (Optional)
@@ -146,4 +155,4 @@ To uninstall the tile:
 1. Click the <%= vars.windows_runtime_abbr %> tile and review the changes. For more information, see [Reviewing pending product changes](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/install-review-pending-changes.html).
 
 1. Click **Apply Changes**.
-  <p class="note"><strong>Note:</strong> After you delete a product, the product tile is removed from the installation and the Installation Dashboard. However, the product appears in the Available Products view.</p>
+   After you delete a product, the product tile is removed from the installation and the Installation Dashboard. However, the product appears in the Available Products view.
