@@ -25,13 +25,17 @@ Before you configure the <%= vars.windows_runtime_abbr %> tile for Windows Authe
 * [Application Security Groups](../concepts/asg.html) must be configured to allow traffic from app containers to the Active Directory instance.
 * [TCP Routing](../operating/configure-pas.html#networking) must be enabled and configured.
 
-<p class="note caution"><strong>Caution:</strong> Using Windows Authentication via the GoRouter is strongly discouraged because it will result in authentication sessions for one user being returned to a different user. Apps using Windows Authentication should <strong>only</strong> be accessed via TCP routes.</p>
+<p class="note caution">
+<span class="note__title">Caution</span>
+Using Windows Authentication through the GoRouter is strongly discouraged because it will result in authentication sessions for one user being returned to a different user. Apps using Windows Authentication should <strong>only</strong> be accessed via TCP routes.</p>
 
 * The **The Gorouter and apps use mutual TLS to verify each other’s identity** setting described in [Advanced Features](installing.html#config-advanced-features) must not be selected, as this deactivates TCP routing.
 * Depending on your IaaS, you might need to configure BOSH DNS handlers so that your application containers can resolve domain resources through the Active Directory instance. See the <a class="external-link" href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/index.html"><strong>VMware Tanzu Operations Manager Documentation</strong></a> for IaaS-specific instructions.
 * Apps intending to use Windows Authentication must use the HWC buildpack.
 
-<p class="note"><strong>Note:</strong> We strongly recommend using an isolation segment for Windows Authentication, as all apps in the <%= vars.windows_runtime_abbr %> installation will have access to the GMSA credentials. To associate a <%= vars.windows_runtime_abbr %> tile with an isolation segment so that its Diego Cells run in that segment, see <a href="./isolation.html">Windows Diego Cells in Isolation Segments</a>.</p>
+<p class="note important">
+<span class="note__title">Important</span>
+VMware strongly recommends using an isolation segment for Windows Authentication because all apps in the <%= vars.windows_runtime_abbr %> installation will have access to the GMSA credentials. To associate a <%= vars.windows_runtime_abbr %> tile with an isolation segment so that its Diego Cells run in that segment, see <a href="./isolation.html">Windows Diego Cells in Isolation Segments</a>.</p>
 
 
 ## <a id='limitations'></a> Limitations

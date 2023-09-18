@@ -50,13 +50,14 @@ You use the **Windows FS Injector** tool to install the <%= vars.windows_runtime
   * https://msecnd.net, or any domain within the Microsoft Windows Azure Content Delivery Network
   For more information about the Windows Azure Content Delivery Network, see [Introducing the Windows Azure Content Delivery Network](https://azure.microsoft.com/en-us/blog/introducing-the-windows-azure-content-delivery-network/) in the Microsoft Azure documentation.
 
-  <p class="note"><strong>Note:</strong> To ensure the authenticity of Microsoft container images, Microsoft does not permit the distribution of its base images. This includes Microsoft container images consumed through Docker Hub, which are actually delivered by an Microsoft CDN endpoint.</p>
+  <p class="note">
+  <span class="note__title">Note</span>
+  To ensure the authenticity of Microsoft container images, Microsoft does not permit the distribution of its base images. This includes Microsoft container images consumed through Docker Hub, which are actually delivered by an Microsoft CDN endpoint.</p>
 
 ## <a id='install'></a> Installing the <%= vars.windows_runtime_abbr %> tile
 
-To install the <%= vars.windows_runtime_abbr %> tile: <%# After adding or removing a step here be
-    sure to change the step number for step 4 in the air-gapped environment section.
-    %>
+To install the <%= vars.windows_runtime_abbr %> tile:
+<%# After adding or removing a step here be sure to change the step number for step 4 in the air-gapped environment section. %>
 
 1. Go to the [<%= vars.windows_runtime_full %>](https://network.pivotal.io/products/pas-windows)
    page on <%= vars.product_network %>. <%# After adding or removing a step here be sure to change
@@ -70,7 +71,9 @@ To install the <%= vars.windows_runtime_abbr %> tile: <%# After adding or removi
    `winfs-injector`, is an executable binary file that adds the Windows Server container base image
    into the product file. This step requires Internet access and can take up to 20 minutes.
 
-  <p class="note"><strong>Note:</strong> You need the <code>git</code> and <code>tar</code> executable files in your <code>%PATH%</code> to run <code>winfs-injector.exe</code>. For example, copy <code>git.exe</code> and <code>tar.exe</code> to a directory in your <code>%PATH%</code>.</p>
+  <p class="note important">
+  <span class="note__title">Important</span>'
+  You need the <code>git</code> and <code>tar</code> executable files in your <code>%PATH%</code> to run <code>winfs-injector.exe</code>. For example, copy <code>git.exe</code> and <code>tar.exe</code> to a directory in your <code>%PATH%</code>.</p>
     <%# After adding or removing a step here be sure to change the step number for step 4 in the air-gapped environment section.  %>
 
 1. Add the Windows Server container base image to the product file:
@@ -94,10 +97,12 @@ To install the <%= vars.windows_runtime_abbr %> tile: <%# After adding or removi
 
     This step takes up to 20 minutes to complete.
 
-<p class="note"><strong>Note:</strong> If you have the `BOSH_ALL_PROXY` environment variable set, this can cause the <code>winfs-injector</code> to fail, with an error like the following:
-<br><code>
--- Failed downloading 'golang-1-windows/789a42163ee8b705cfcd8a62e590d5cbf01322c773497d6c53247cf6a4e39965' (sha1=sha256:55db4fe9804edfff5f01c5cee0d2541333a71f40c905135912c9c22783e038c1)
-</code><br>
+    <p class="note important">
+    <span class="note__title">Important</span>
+    If you have the `BOSH_ALL_PROXY` environment variable set, this can cause the <code>winfs-injector</code> to fail, with an error like the following:
+    <br><code>
+    -- Failed downloading 'golang-1-windows/789a42163ee8b705cfcd8a62e590d5cbf01322c773497d6c53247cf6a4e39965' (sha1=sha256:55db4fe9804edfff5f01c5cee0d2541333a71f40c905135912c9c22783e038c1)
+    </code><br>
     If this happens, un-set the `BOSH_ALL_PROXY` environment variable, and then try again.</p>
 
 1. Go to the VMware Tanzu Operations Manager Installation Dashboard and click **Import a Product**.
@@ -201,7 +206,9 @@ host VM.
 For example, you can to use the overcommit if your apps use a small amount of disk and memory
 capacity compared to the amounts set in the **Resource Config** settings for **Windows Diego Cell**.
 
-<p class="note"><strong>Note:</strong> Due to the risk of app failure and the deployment-specific nature of disk and memory use, VMware has no recommendation for how much, if any, memory or disk space to overcommit.</p>
+<p class="note">
+<span class="note__title">Note</span>
+Due to the risk of app failure and the deployment-specific nature of disk and memory use, VMware has no recommendation for how much, if any, memory or disk space to overcommit.</p>
 
 To enable overcommit:
 
@@ -213,7 +220,9 @@ To enable overcommit:
 
 4. Click **Save**.
 
-<p class="note"><strong>Note:</strong> Entries made to each of these two settings set the total amount of resources allocated, not the overage.</p>
+<p class="note important">
+<span class="note__title">Important</span>
+Entries made to each of these two settings set the total amount of resources allocated, not the overage.</p>
 
 #### <a id='enable-route-integrity'></a> Gorouter app identity verification (beta)
 
@@ -297,7 +306,9 @@ To configure errands:
 
 1. Click **Save**.
 
-<p class="note"><strong>Note:</strong> This beta feature checks only that the client certificate is signed by the CA using mTLS. It does not include SAN (Subject Alternative Name) checks of the presented client certificates.</p>
+<p class="note important">
+<span class="note__title">Important</span>
+This beta feature checks only that the client certificate is signed by the CA using mTLS. It does not include SAN (Subject Alternative Name) checks of the presented client certificates.</p>
 
 ### <a id='config-iso-segments'></a> Configuring Isolation Segments (Optional)
 
@@ -309,7 +320,9 @@ To configure Windows Diego Cells to allow app containers to perform Windows Auth
 **Windows Authentication** and follow the procedure in [Configuring the tile for Windows Authentication](./windows-authentication.html#configure-tile) in _Windows Authentication for .NET
 apps_.
 
-<p class="note"><strong>Note:</strong> VMware strongly recommends using an isolation segment for Windows Authentication, as all apps in the <%= vars.windows_runtime_abbr %> installation have have access to the GMSA credentials.</p>
+<p class="note important">
+<span class="note__title">Important</span>
+VMware strongly recommends using an isolation segment for Windows Authentication, as all apps in the <%= vars.windows_runtime_abbr %> installation have have access to the GMSA credentials.</p>
 
 ### <a id='config-system-logging'></a> Configuring System Logging (Optional)
 
@@ -358,7 +371,10 @@ To configure your tile resources:
       <td>100&nbsp;GB</td>
     </tr>
   </table>
-  <p class="note"><strong>Note:</strong> Windows stemcells in the v2019.x line support ephemeral disks.</p>
+
+    <p class="note">
+    <span class="note__title">Note</span>
+    Windows stemcells in the v2019.x line support ephemeral disks.</p>
 
 1. Provision your **Master Compilation Job** with at least 100&nbsp;GB of disk space.
 
@@ -377,12 +393,13 @@ To upload the stemcell:
 
 1. Follow the procedure in [Importing and Managing Stemcells](https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/opsguide-managing-stemcells.html) to upload the Windows stemcell to <%= vars.windows_runtime_abbr %>.
 
-<p class='note'><strong>Note:</strong> If you use vSphere, you must create your own stemcell.
+<p class="note">
+<span class="note__title">Note</span>
+If you use vSphere, you must create your own stemcell.
 The default root disk size of Windows stemcells v2019.x line is 30&nbsp;GB.
 VMware recommends setting the root disk size of your Windows stemcell for vSphere to 30&nbsp;GB.
 For more information, see <a href="create-vsphere-stemcell-automatically.html">Creating a Windows Stemcell
-for vSphere Using stembuild</a>.
-</p>
+for vSphere Using stembuild</a>.</p>
 
 ## <a id='deploy'></a> Deploying the tile
 

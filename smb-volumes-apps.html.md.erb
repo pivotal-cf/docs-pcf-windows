@@ -74,11 +74,13 @@ To configure SMB mounting:
 
 1. Using the cf CLI or Apps Manager, add `SMB_PATH`, `SMB_USERNAME`, and `SMB_PASSWORD`
    as environment variables to your local computer or the computer you are using
-   to deploy your app.
-    <p class='note'><strong>Note:</strong> If you are using SMB Volumes with your batch profile and have already added these environment variables, ignore this step.</p>
-    <p class="note"><strong>Note:</strong> If Visual Studio does not detect these new environment variables, restart Visual Studio.</p>
+   to deploy your app. If Visual Studio does not detect these new environment variables, restart Visual Studio.
 
-1. In Visual Studio, create a new file in your solution named `SMBConfiguration.cs`.
+    <p class="note important">
+    <span class="note__title">Important</span>
+    If you are using SMB Volumes with your batch profile and have already added these environment variables, you can skip this step.</p>
+
+2. In Visual Studio, create a new file in your solution named `SMBConfiguration.cs`.
    This file is the single representation of your SMB Volume configuration and
    reads the connection data from the environment variables you established previously.
    Include the following in your `SMBConfiguration.cs` file:
@@ -109,16 +111,16 @@ To configure SMB mounting:
     }
     ```
 
-1. In Visual studio, create a new MVC Controller named `NoteController`.
+3. In Visual studio, create a new MVC Controller named `NoteController`.
    This file creates a controller endpoint that reads the example note file.
    For more information about creating a controller,
    see [Add a controller to an ASP.NET Core MVC app](https://docs.microsoft.com/en-us/aspnet/core/tutorials/first-mvc-app/adding-controller?view=aspnetcore-2.2&tabs=visual-studio)
    in the Microsoft Documentation.
 
-1. Use your package manager to add `Steeltoe.Common` and `Steeltoe.Common.Net` to your app.
+4. Use your package manager to add `Steeltoe.Common` and `Steeltoe.Common.Net` to your app.
    If you are not using Steeltoe, ignore this step.
 
-1. Edit `NoteController.cs` to read from a file named `note.txt`.
+5. Edit `NoteController.cs` to read from a file named `note.txt`.
    This `note.txt` does not exist yet but will be created by the `FileMode.OpenOrCreate` method.
    See the following example code snippet, which reads the contents of the note file and
    stashes the `note.txt` content in the Viewbag.
