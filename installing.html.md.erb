@@ -116,7 +116,8 @@ To configure AZs and networks:
 1. Select all AZs under **Balance other jobs**. Tanzu Operations Manager balances instances of jobs with more than one instance across the AZs that you specify.
 
   <p class="note important">
-  <span class="note__title">Important</span> For production deployments, VMware recommends at least three AZs for a highly available installation.
+  <span class="note__title">Important</span>
+  For production deployments, VMware recommends at least three AZs for a highly available installation.
   </p>
 
 1. From the **Network** drop-down menu, choose the runtime network that you created when you configured the BOSH Director tile.
@@ -292,12 +293,12 @@ of how to configure exporters. Currently <%= vars.windows_runtime_abbr %> provid
 OTLP exporter. This feature is in beta and may still change in significant ways.
 
 <p class="note caution">
-<span class="note__title">Caution</span>If you configure a metric exporter that listens on a port, ensure that the port is not claimed by a <%= vars.windows_runtime_abbr %> component on any of the VMs in your deployment.</p>
+<span class="note__title">Caution</span>
+If you configure a metric exporter that listens on a port, ensure that the port is not claimed by a <%= vars.windows_runtime_abbr %> component on any of the VMs in your deployment.</p>
 
 <p class="note">
 <span class="note__title">Note</span>
-Windows stemcells in the v2019.x line support ephemeral disks.
-</p>
+Windows stemcells in the v2019.x line support ephemeral disks.</p>
 
 ### <a id='dns-search-domains'></a> Configuring DNS search domains (optional)
 
@@ -343,8 +344,7 @@ To configure your tile resources:
 
 <p class="note">
 <span class="note__title">Note</span>
-Windows stemcells in the v2019.x line support ephemeral disks.
-</p>
+Windows stemcells in the v2019.x line support ephemeral disks.</p>
 
 1. Provision your **Master Compilation Job** with at least 100&nbsp;GB of disk space.
 

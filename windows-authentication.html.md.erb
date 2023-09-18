@@ -29,8 +29,7 @@ Before you configure the <%= vars.windows_runtime_abbr %> tile for Windows Authe
 <span class="note__title">Caution</span>
 Using Windows Authentication through Gorouter is discouraged because
 it causes authentication sessions for one user being returned to a different user. Apps using Windows Authentication
-must <strong>only</strong> be accessed through TCP routes.
-</p>
+must <strong>only</strong> be accessed through TCP routes.</p>
 
 * The **The Gorouter and apps use mutual TLS to verify each other’s identity** setting described in [Advanced Features](installing.html#config-advanced-features) must not be selected, as this deactivates TCP routing.
 * Depending on your IaaS, you might need to configure BOSH DNS handlers so that your application containers can resolve domain resources through the Active Directory instance. See the <a class="external-link" href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/index.html"><strong>VMware Tanzu Operations Manager Documentation</strong></a> for IaaS-specific instructions.
@@ -39,8 +38,7 @@ must <strong>only</strong> be accessed through TCP routes.
 <p class="note">
 <span class="note__title">Note</span>
 Use an isolation segment for Windows Authentication, because all apps in
-the <%= vars.windows_runtime_abbr %> installation have access to GMSA credentials. To associate a <%= vars.windows_runtime_abbr %> tile with
-an isolation segment so that its Diego Cells run in that segment, see <a href="./isolation.html">Windows Diego Cells in Isolation Segments</a>.</p>
+the <%= vars.windows_runtime_abbr %> installation have access to GMSA credentials. To associate a <%= vars.windows_runtime_abbr %> tile with an isolation segment so that its Diego Cells run in that segment, see <a href="./isolation.html">Windows Diego Cells in Isolation Segments</a>.</p>
 
 ## <a id='limitations'></a> Limitations
 
