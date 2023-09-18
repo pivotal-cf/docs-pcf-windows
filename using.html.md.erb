@@ -49,11 +49,15 @@ To push a .NET Framework app to a Windows Diego Cell:
         cf push APP-NAME -s windows -b hwc_buildpack
         ```
         Where `APP-NAME` is the name of your app.
-        <p class="note"><strong>Note:</strong> The <code>-s windows</code> option instructs <%= vars.platform_name %> to run the app in the Windows Diego Cell.</p>
-        <p class="note"><strong>Note:</strong> If you are not pushing your app from its directory, use the <code>-p</code> option and specify the path to the directory that contains the app.</p>
 
-1. Wait for your app to stage and start. If you see an error message,
-   see [Troubleshoot App Errors](#troubleshoot) below.
+        <p class="note">
+        <span class="note__title">Note</span>
+        The <code>-s windows</code> option instructs <%= vars.platform_name %> to run the app in the Windows Diego Cell.
+
+        If you are not pushing your app from its directory, use the <code>-p</code> option and specify the path to the directory that contains the app.</p>
+
+2. Wait for your app to stage and start. If you see an error message,
+   see [Troubleshoot App Errors](#troubleshoot).
 
 ### <a id='context-routing'></a> Context Path Routing Support for ASP.NET Apps
 
@@ -80,7 +84,10 @@ Making an app accessible under another app's URL requires a pair of commands. To
       <li><code>LOWER-LEVEL-APP-NAME</code> is the name of your lower-level app.</li>
       <li><code>APP-DOMAIN</code> is your app&#39;s public domain name. For example, <code>example.com</code>.</li>
     </ul>
-    <p class="note"><strong>Note:</strong> The <code>-d</code> parameter is only needed when pushing an app to a non-default domain.</p>
+
+    <p class="note">
+    <span class="note__title">Note</span>
+    The <code>-d</code> parameter is only needed when pushing an app to a non-default domain.</p>
 
 ### <a id='graceful-shutdown'></a> Activating a graceful shutdown for a .NET App
 
@@ -152,10 +159,16 @@ To deploy a SOAP web service:
     usage: 1G x 1 instances
     urls: webservice.example.com
     </pre>
-    <p class="note"><strong>Note:</strong> The push command must include the <code>-s</code> flag to specify the stack, which instructs <%= vars.platform_name %> to run the app in the Windows Diego Cell.</p>
-    <p class="note"><strong>Note:</strong> The <code>-p</code> and <code>-u </code> parameters are optional parameters. The <code>-p</code> parameter is needed only when pushing your service from a directory that does not contain the published web service. The <code>-u</code> parameter is needed only when disabling the health check when you do not have a route serving <code>/</code>.</p>
 
-1. Confirm your service is running by finding your service's URL in the push command's output and browsing to it. In the example above, the URL for the service would be `http://webservice.example.com`.
+    <p class="note important">
+    <span class="note__title">Important</span>
+    The push command must include the <code>-s</code> flag to specify the stack, which instructs <%= vars.platform_name %> to run the app in the Windows Diego Cell.
+    
+    The <code>-p</code> and <code>-u </code> parameters are optional parameters. The <code>-p</code> parameter is needed only when pushing your service from a directory that does not contain the published web service.
+
+    The <code>-u</code> parameter is needed only when disabling the health check when you do not have a route serving <code>/</code>.</p>
+
+2. Confirm that your service is running by finding your service URL in the push command output and browsing to it. In the previous example, the URL for the service is `http://webservice.example.com`.
 
 ### <a id='correct-wsdl'></a> Step 2: Modifying the WSDL File
 
