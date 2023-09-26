@@ -18,6 +18,91 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 
 ## <a id='releases'></a> Releases
 
+### <a id='2.11.38'></a> 2.11.38
+
+**Release Date:** 09/26/2023
+
+* **[Security Fix]** Bump smoke-tests to address Go CVE-2023-39533
+* Bump loggregator-agent to version `6.5.14`
+* Bump metrics-discovery to version `3.2.16`
+* Bump smoke-tests to version `4.8.4`
+
+<table border="1" class="nice">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+      <th>Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>windows2019 stemcell</td><td>2019.65</td><td></td></tr>
+    <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
+    <tr><td>diego</td><td>2.81.0</td><td></td></tr>
+    <tr><td>envoy-nginx</td><td>0.19.0</td><td></td></tr>
+    <tr><td>event-log</td><td>0.9.0</td><td></td></tr>
+    <tr><td>garden-runc</td><td>1.37.0</td><td></td></tr>
+    <tr><td>windows-syslog</td><td>1.1.17</td><td></td></tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.32</td><td></td></tr>
+    <tr><td>loggregator-agent</td><td>6.5.14</td>
+      <td>
+        <details>
+          <summary>v6.5.14</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump to [go1.20.8](https://groups.google.com/g/golang-announce/c/Fm51GRLNRvM/m/F5bwBlXMAQAJ)
+  * Bump dependencies
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v6.5.13...v6.5.14
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>metrics-discovery</td><td>3.2.16</td>
+      <td>
+        <details>
+          <summary>v3.2.16</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Add check for disable flag for metrics agent ingress_port
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.15...v3.2.16
+          </pre>
+        </details>
+        <details>
+          <summary>v3.2.15</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump to [go1.20.8](https://groups.google.com/g/golang-announce/c/Fm51GRLNRvM/m/F5bwBlXMAQAJ)
+  * Bump dependencies
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.14...v3.2.15
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>smoke-tests</td><td>4.8.4</td>
+      <td>
+        <details>
+          <summary>4.8.4</summary>
+          <pre style="max-width: 30em">
+  Create bosh final release 4.8.4
+  ## What's Changed
+  * feat: CI to autobump golang by @pabloarodas in https://github.com/pivotal/smoke-tests/pull/106
+  * Upgrade Golang by @pvaramballypivot in https://github.com/pivotal/smoke-tests/pull/111
+  * test: skip jobs to test automerge by @pabloarodas in https://github.com/pivotal/smoke-tests/pull/113
+  * Upgrade Golang by @pvaramballypivot in https://github.com/pivotal/smoke-tests/pull/114
+  * Upgrade Golang by @pvaramballypivot in https://github.com/pivotal/smoke-tests/pull/116
+  * Bump cf-cli to 8.7.3 by @xtremerui in https://github.com/pivotal/smoke-tests/pull/117
+  **Full Changelog**: https://github.com/pivotal/smoke-tests/compare/4.8.3...4.8.4
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>winc</td><td>2.15.0</td><td></td></tr>
+    <tr><td>windows-utilities</td><td>0.14.0</td><td></td></tr>
+  </tbody>
+</table>
+
+
+
 ### <a id='2.11.37'></a> 2.11.37
 
 **Release Date:** 09/11/2023
