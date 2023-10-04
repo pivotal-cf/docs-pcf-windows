@@ -69,7 +69,7 @@ To redeploy a running app with zero downtime using the blue-green method:
     -n my-app --no-start --no-route
     </pre>
 
-    class="note important">
+    <p class="note important">
     <span class="note__title">Important</span>
     The <code>--no-start</code> and <code>--no-route</code> parameters included in this <code>cf push</code> command are required for the this procedure. <code>--no-start</code> is used to create the instance VMs and not start the app, and <code>--no-route</code> is used to prevent the push command from automatically mapping a route to the app.
     For more information about <code>cf push</code>, see <a href="http://cli.cloudfoundry.org/en-US/cf/push.html">cf push</a> in the Cloud Foundry CLI Reference Guide.</p>
@@ -88,7 +88,7 @@ To redeploy a running app with zero downtime using the blue-green method:
           <li>`HOSTNAME` is the name of your app's subdomain. For example, if `example.com` is your domain and you want the URL to your app to be `http://my-app.example.com`, then specify `my-app` as the `HOSTNAME`.</li>
         </ul>
 
-    class="note important">
+    <p class="note important">
     <span class="note__title">Important</span>
     When using the <code>cf map-route</code> command, you must specify domain name after specifying app name.
 
