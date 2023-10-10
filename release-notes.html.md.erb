@@ -1631,6 +1631,18 @@ To mitigate this, either:
 * Scale up your logging system before you upgrade to TAS for VMs [Windows] v4.0 to compensate for the increased log load.
 * Upgrade to TAS for VMs/TAS for VMs [Windows] v3.0 first to set app-level log rate limits while retaining the global log rate limit. For more details, see [App Log Rate Limits](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/app-log-rate-limits.html).
 
+### Logging timestamp format changed for some TAS for VMs [Windows] jobs
+
+Existing automation that parses logs from TASW components may break if they are still
+expecting timestamps formatted as epoch time. Specifically, logs from groot and
+garden_windows have been converted to RFC 3339 timestamps.
+
+
+If it was necessary to adjust log parsing in your system for TAS/TASW 4.0 to account for the change in
+timestamp format, update log parsing in the same manner for TAS/TASW 5.0, but for the TASW groot and
+garden_windows jobs.
+
+
 ## <a id='known-issues'></a> Known issues
 
 There are no known issues for <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %>.
