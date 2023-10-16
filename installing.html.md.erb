@@ -288,7 +288,7 @@ server](troubleshooting.html#syslog) in _Troubleshooting Windows Diego Cells_.
 
 1. (Optional) For **OpenTelemetry Collector Metric Exporters (beta)**, the default value is empty, which disables the beta OpenTelemetry Aggregate Metric Egress
 support. To configure <%= vars.windows_runtime_abbr %> to send metrics over the OpenTelemetry protocol, enter valid OpenTelemetry Collector Exporter YAML
-configuration in this field. See the [OpenTelemetry Collector documentation](https://opentelemetry.io/docs/collector/configuration/#exporters) for examples
+configuration in this field. Refer to [Configuring the OpenTelemetry Collector](../loggregator/opentelemetry.html) for examples
 of how to configure exporters. Currently <%= vars.windows_runtime_abbr %> provides support for a limited number of OpenTelemetry Collector Exporters, including the
 OTLP exporter. This feature is in beta and may still change in significant ways.
 
