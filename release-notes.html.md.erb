@@ -1586,35 +1586,16 @@ The <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> tile is availab
 
 <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> includes the following major feature:
 
-### Integrated Windows Authentication
-
-You can now log in to your .NET Framework applications using your existing Active Directory Domain. For setup details, see [Windows Authentication for .Net apps](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/windows-authentication.html)
 
 ## <a id='breaking-changes'></a> Breaking changes
 
 <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> includes the following breaking changes:
-
-### Option to enable (deprecated) Global Log Rate Limit is removed
-
-This feature was in beta until IST v3.0, when it was deprecated. For details, see [VMware Tanzu Application Service for Windows v3.0 Release Notes](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/release-notes.html#global-log-rate-limit-is-deprecated-14)
-after the introduction of app log rate limits.
-For more information, see [App Log Rate Feature](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/runtime-rn.html#app-log-rate-limits-for-orgs-spaces-and-individual-apps-14).
-This option to enable the feature has now been removed, and you must apply app log rate limits instead.
-
-If you were using this feature to limit your overall app log
-throughput, then you might see an increase in log load after you upgrade.
-
-To mitigate this, either:
-
-* Scale up your logging system before you upgrade to TAS for VMs [Windows] v4.0 to compensate for the increased log load.
-* Upgrade to TAS for VMs/TAS for VMs [Windows] v3.0 first to set app-level log rate limits while retaining the global log rate limit. For more details, see [App Log Rate Limits](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/app-log-rate-limits.html).
 
 ### Logging timestamp format changed for some TAS for VMs [Windows] jobs
 
 Existing automation that parses logs from TASW components may break if they are still
 expecting timestamps formatted as epoch time. Specifically, logs from groot and
 garden_windows have been converted to RFC 3339 timestamps.
-
 
 If it was necessary to adjust log parsing in your system for TAS/TASW 4.0 to account for the change in
 timestamp format, update log parsing in the same manner for TAS/TASW 5.0, but for the TASW groot and
