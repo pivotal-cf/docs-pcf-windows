@@ -150,8 +150,8 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
           <summary>v2.81.0</summary>
           <pre style="max-width: 30em">
   ## Changes
-  - Healthchecks for process startup have been renamed from "readiness" to "startup" to better indicate that it is the initial liveness check to ensure the process has started. After completing, it is superceded by the liveness check, which has had no changes.
-  - Adds support for "readiness" checks on processes. The purpose of readiness checks are to determine whether a process is capable of serving traffic or not. This is contrasted now with liveness checks which determine if the process is in a state that requires it to be restarted. Readiness checks can be used to pull a process out of service when they fail, while not restarting the process. Once readiness is passing again, the process will be re-added into the service pool. Removal/addition of processes to the service pool is done via route-emitter.
+  - Healthchecks for process startup have been renamed from "readiness" to "startup" to better indicate that it is the initial liveness check to ensure the process has started. After completing, it is superseded by the liveness check, which has had no changes.
+  - Adds support for "readiness" checks on processes. The purpose of readiness checks are to determine whether a process is capable of serving traffic or not. This is contrasted now with liveness checks which determine if the process is in a state that requires it to be restarted. Readiness checks can be used to pull a process out of service when it fails, while not restarting the process. After the readiness is passing again, the process will be re-added into the service pool. Removal/addition of processes to the service pool is done through route-emitter.
   - `cfdot actual-lrps` now behaves in a more expected behavior regarding the display of `host_tls_proxy_port`. It should always be preset, even if the value is `0`.
   - Bumped to golang 1.20.7.
   ## ✨  Built with go 1.20.7
@@ -169,7 +169,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
           <summary>v1.37.0</summary>
           <pre style="max-width: 30em">
   ## Changes
-  - 🐛Fixed a bug with garden-windows where process directories were being leaked in the garden depot. This adds a `garden.cleanup_process_dirs_on_wait` property to mimic cleanup logic from garden-linux. This property is defaulted to true on garden-windows, to keep the desired behavior for CF/Diego. If garden-windows is ever used with Concourse, users will want to set this to false.
+  - 🐛Fixed a bug with garden-windows where process directories were being leaked in the garden depot. This adds a `garden.cleanup_process_dirs_on_wait` property to mimic cleanup logic from garden-linux. This property is defaulted to true on garden-windows, to keep the desired behavior for CF/Diego. If garden-windows is ever used with Concourse, users should set this to false.
   ## Bosh Job Spec changes:
   ```diff
   diff --git a/jobs/garden-windows/spec b/jobs/garden-windows/spec
@@ -182,7 +182,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   +  # Since garden-windows is not currently used in Concourse, we are setting this to 'true' to make life easier for diego/cf users.
   +  # https://github.com/cloudfoundry/garden-runc-release/releases/tag/v1.5.0
   +  garden.cleanup_process_dirs_on_wait:
-  +    description: A boolean stating whether or not to cleanup process state after waiting for it. If set a process can be waited for only once.
+  +    description: A boolean stating whether or not to clean up process state after waiting for it. If set, only one wait is possible for a given process.
   +    default: true
   +
   logging.format.timestamp:
@@ -198,7 +198,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   +  # We believe this defaults to false to help concourse: https://github.com/cloudfoundry/garden-runc-release/releases/tag/v1.5.0
   +  # For diego/cf, this should be set to true
   garden.cleanup_process_dirs_on_wait:
-  description: A boolean stating whether or not to cleanup process state after waiting for it. If set a process can be waited for only once.
+  description: A boolean stating whether or not to clean up process state after waiting for it. If set, only one wait is possible for a given process.
   default: false
   ```
   ## ✨  Built with go 1.20.7
@@ -266,7 +266,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
           <pre style="max-width: 30em">
   ## What's Changed
   ### Experimental OTel Collector changes
-  * Prevent prometheus exporter from claiming BBS API port. For more context, see here: https://github.com/cloudfoundry/diego-release/issues/812
+  * Prevent prometheus exporter from claiming BBS API port. For more context, see https://github.com/cloudfoundry/diego-release/issues/812
   **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.6.0...v7.6.1
           </pre>
         </details>
@@ -304,7 +304,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
           <summary>v3.2.14</summary>
           <pre style="max-width: 30em">
   ## What's Changed
-  * add disable property to metrics-agent & metrics-discovery-registrar by @mkocher in https://github.com/cloudfoundry/metrics-discovery-release/pull/169
+  * Add disable property to metrics-agent and metrics-discovery-registrar by @mkocher in https://github.com/cloudfoundry/metrics-discovery-release/pull/169
   * Bump dependencies
   **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.13...v3.2.14
           </pre>
@@ -328,7 +328,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
           <summary>v2.15.0</summary>
           <pre style="max-width: 30em">
   ## Changes
-  - Adds support for customizing the timestamp format used in the `groot` job's logging via the `groot.log_format` property.
+  - Adds support for customizing the timestamp format used in the `groot` job's logging using the `groot.log_format` property.
   - Bumped to golang 1.20.7
   ## Bosh Job Spec changes:
   ```diff
@@ -359,7 +359,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
       <td>
         <details>
           <summary>v1.1.17</summary>
-          <pre style="max-width: 30em">
+          <pre style="max-width: 30em">      
   ## What's Changed
   * Bump Go to v1.20.7
   **Full Changelog**: https://github.com/cloudfoundry/windows-syslog-release/compare/v1.1.16...v1.1.17
@@ -439,7 +439,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
           <pre style="max-width: 30em">
   ## What's Changed
   * Make keepalives for api polling configurable by @fhambrec in https://github.com/cloudfoundry/loggregator-agent-release/pull/336
-  * flatten aggregate drain array by @Benjamintf1 in https://github.com/cloudfoundry/loggregator-agent-release/pull/346
+  * Flatten aggregate drain array by @Benjamintf1 in https://github.com/cloudfoundry/loggregator-agent-release/pull/346
   * Update syslog binding params by @Benjamintf1 in https://github.com/cloudfoundry/loggregator-agent-release/pull/339
   ## New Contributors
   * @fhambrec made their first contribution in https://github.com/cloudfoundry/loggregator-agent-release/pull/336
@@ -615,7 +615,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
           <summary>v3.2.11</summary>
           <pre style="max-width: 30em">
   ## What's Changed
-  * bump dependencies by @mkocher in https://github.com/cloudfoundry/metrics-discovery-release/pull/151
+  * Bump dependencies by @mkocher in https://github.com/cloudfoundry/metrics-discovery-release/pull/151
   ## New Contributors
   * @mkocher made their first contribution in https://github.com/cloudfoundry/metrics-discovery-release/pull/151
   **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.10...v3.2.11
@@ -671,7 +671,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 **Release Date:** 06/26/2023
 
 * **[Feature]** Adds support for W3C Trace ID logging across Diego component requests
-* **[Bug Fix]** Timeouts in for executor's uploader have been increased to 500ms
+* **[Bug Fix]** Timeouts in for executor's uploader have been increased to 500 ms
 * **[Bug Fix]** Byte-based logging limits for LRPs and Tasks now emit only once per second
 * **[Bug Fix/Improvement]** Garden now ships with Busybox 1.36.1 as the default file system
 
@@ -731,7 +731,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
           <pre style="max-width: 30em">
   ## Changes
   - Adds support for W3C Trace ID logging across diego component requests
-  - Timeouts in for executor's uploader have been increased to 500ms
+  - Timeouts in for executor's uploader have been increased to 500 ms
   - Byte-based logging limits for LRPs and Tasks now emit only once per second
   -  LRPs can now have liveness and readiness check intervals defined when the LRP is created.
   - Dependency Bumps:
@@ -939,7 +939,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   -    description: "Set to 'true' for the auctioneer to skip acquiring a Consul lock. Requires 'diego.auctioneer.locket.api_location' to be set."
   -
   -  enable_consul_service_registration:
-  -    description: "Enable the auctioneer to register itself as a service with Consul, for client discovery via Consul DNS. Do not disable without arranging alternate service discovery."
+  -    description: "Enable the auctioneer to register itself as a service with Consul, for client discovery using Consul DNS. Do not disable without arranging alternate service discovery."
   -    default: true
   locks.locket.enabled:
   description: When set, the auctioneer attempts to claim a lock from the Locket API.
@@ -956,10 +956,10 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   -    description: "Set to 'true' for the BBS to skip acquiring a Consul lock. Requires 'diego.bbs.locket.api_location' to be set."
   -  diego.bbs.detect_consul_cell_registrations:
   -    default: true
-  -    description: "Whether the BBS should detect Diego Cell registrations present in the Consul key-value store. To prevent unexpected loss of capacity, set to 'false' only when the BBS uses Locket and when all Diego Cells in the cluster maintain their registrations via Locket."
+  -    description: "Whether the BBS should detect Diego Cell registrations present in the Consul key-value store. To prevent unexpected loss of capacity, set to 'false' only when the BBS uses Locket and when all Diego Cells in the cluster maintain their registrations using Locket."
   -
   -  enable_consul_service_registration:
-  -    description: "Enable the BBS to register itself as a service with Consul, for client discovery via Consul DNS. Do not disable without arranging alternate service discovery."
+  -    description: "Enable the BBS to register itself as a service with Consul, for client discovery using Consul DNS. Do not disable without arranging alternate service discovery."
   -    default: true
   limits.open_files:
   description: Maximum number of files (including sockets) the BBS process may have open.
@@ -971,7 +971,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   tls.key:
   description: "PEM-encoded tls key"
   -  enable_consul_service_registration:
-  -    description: "Enable the file-server to register itself as a service with Consul, for client discovery via Consul DNS. Do not disable without arranging alternate service discovery."
+  -    description: "Enable the file server to register itself as a service with Consul, for client discovery using Consul DNS. Do not disable without arranging alternate service discovery."
   -    default: true
   -
   logging.format.timestamp:
@@ -984,9 +984,9 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   @@ -66,9 +66,6 @@ properties:
   default: false
   diego.locket.sql.ca_cert:
-  description: "Bundle of CA certificates for the Locket to verify the SQL server SSL certificate when connecting via SSL"
+  description: "Bundle of CA certificates for the Locket to verify the SQL server SSL certificate when connecting through SSL"
   -  enable_consul_service_registration:
-  -    description: "Enable the Locket server to register itself as a service with Consul, for client discovery via Consul DNS. Do not disable without arranging alternate service discovery."
+  -    description: "Enable the Locket server to register itself as a service with Consul, for client discovery using Consul DNS. Do not disable without arranging alternate service discovery."
   -    default: true
   logging.format.timestamp:
   description: "Format for timestamp in component logs. Valid values are 'unix-epoch' and 'rfc3339'."
@@ -1006,7 +1006,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   bpm-pre-start.erb: bin/bpm-pre-start
   @@ -106,16 +103,6 @@ properties:
   tls.ca_cert:
-  description: "REQUIRED: PEM-encoded tls client CA certificate for asset upload/download"
+  description: "REQUIRED: PEM-encoded TLS client CA certificate for asset upload/download"
   -  diego.rep.consul.require_tls:
   -    description: "Require mutual TLS to talk to the local consul API"
   -    default: false
@@ -1018,16 +1018,15 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   -    description: "PEM-encoded client key"
   -
   diego.executor.memory_capacity_mb:
-  description: "the memory capacity the executor should manage.  this should not be greater than the actual memory on the VM"
+  description: "The memory capacity the executor should manage. This should not be greater than the actual memory on the VM."
   default: "auto"
   @@ -228,12 +215,9 @@ properties:
   default: "rep"
   diego.rep.locket.api_location:
   -    description: "Host name and port of the Locket server. When set, the cell rep will establish its cell registration in the Locket API instead of in the Consul key-value store."
-  +    description: "Host name and port of the Locket server. When set, the cell rep will establish its cell registration in the Locket API."
   default: locket.service.cf.internal:8891
   -  enable_consul_service_registration:
-  -    description: "Enable the cell rep to register itself as a service with Consul, for client discovery via Consul DNS. Do not disable without arranging alternate service discovery."
+  -    description: "Enable the cell rep to register itself as a service with Consul, for client discovery using Consul DNS. Do not disable without arranging alternate service discovery."
   -    default: true
   enable_declarative_healthcheck:
   description: "When set, enables the rep to prefer the LRP CheckDefinition to healthcheck instances over the Monitor action. Requires Garden-Runc v1.10.0+"
@@ -1060,13 +1059,13 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   -    description: "PEM-encoded client key"
   -
   diego.executor.memory_capacity_mb:
-  description: "the memory capacity the executor should manage.  this should not be greater than the actual memory on the VM"
+  description: "The memory capacity the executor should manage. This should not be greater than the actual memory on the VM."
   default: "auto"
   @@ -241,9 +228,6 @@ properties:
   description: "Host name and port of the locket server"
   default: locket.service.cf.internal:8891
   -  enable_consul_service_registration:
-  -    description: "Enable the cell rep to register itself as a service with Consul, for client discovery via Consul DNS. Do not disable without arranging alternate service discovery."
+  -    description: "Enable the cell rep to register itself as a service with Consul, for client discovery using Consul DNS. Do not disable without arranging alternate service discovery."
   -    default: true
   enable_declarative_healthcheck:
   description: "When set, enables the rep to prefer the LRP CheckDefinition to healthcheck instances over the Monitor action."
@@ -1080,10 +1079,10 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   loggregator.key:
   description: "Key used to communicate with local metron agent over gRPC"
   -  locks.consul.enabled:
-  -    description: "Whether the route-emitter in global mode should attempt to claim its activity lock via the Consul API."
+  -    description: "Whether the route-emitter in global mode should attempt to claim its activity lock using the Consul API."
   -    default: true
   locks.locket.enabled:
-  description: "Whether the route-emitter in global mode should attempt to claim its activity lock via the Locket API."
+  description: "Whether the route-emitter in global mode should attempt to claim its activity lock using the Locket API."
   default: true
   diff --git a/jobs/route_emitter_windows/spec b/jobs/route_emitter_windows/spec
   index d86340e8f..404c9f518 100644
@@ -1094,10 +1093,10 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   loggregator.key:
   description: "Key used to communicate with local metron agent over gRPC"
   -  locks.consul.enabled:
-  -    description: "Whether the route-emitter in global mode should attempt to claim its activity lock via the Consul API."
+  -    description: "Whether the route-emitter in global mode should attempt to claim its activity lock using the Consul API."
   -    default: true
   locks.locket.enabled:
-  description: "Whether the route-emitter in global mode should attempt to claim its activity lock via the Locket API."
+  description: "Whether the route-emitter in global mode should attempt to claim its activity lock using the Locket API."
   default: true
   diff --git a/jobs/ssh_proxy/spec b/jobs/ssh_proxy/spec
   index a2919c5ab..cd39dbd52 100644
@@ -1108,7 +1107,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   description: "Connect directly to container IP instead of to the host IP and external port. Suitable only for deployments in which the gorouters and TCP routers can route directly to the container IP of instances."
   default: false
   -  enable_consul_service_registration:
-  -    description: "Enable the ssh-proxy to register itself as a service with Consul, for client discovery via Consul DNS. Do not disable without arranging alternate service discovery."
+  -    description: "Enable the ssh-proxy to register itself as a service with Consul, for client discovery using Consul DNS. Do not disable without arranging alternate service discovery."
   -    default: true
   logging.format.timestamp:
   description: "Format for timestamp in component logs. Valid values are 'unix-epoch' and 'rfc3339'."
@@ -1210,11 +1209,11 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   +++ b/jobs/garden/spec
   @@ -89,7 +89,7 @@ properties:
   garden.default_container_rootfs:
-  description: "path to the rootfs to use when a container specifies no rootfs"
+  description: "Path to the rootfs to use when a container specifies no rootfs"
   -    default: /var/vcap/packages/busybox/busybox-1.35.0.tar
   +    default: /var/vcap/packages/busybox/busybox-1.36.1.tar
   garden.graph_cleanup_threshold_in_mb:
-  description: "DEPRECATED in favour of grootfs.reserved_space_for_other_jobs_in_mb."
+  description: "DEPRECATED in favor of grootfs.reserved_space_for_other_jobs_in_mb."
   ```
   ## ✨  Built with go 1.20.4
   **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.30.0...v1.31.0
@@ -1349,11 +1348,8 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
         <details>
           <summary>3.1.29</summary>
           <pre style="max-width: 30em">
-  * Add hwc 23.0.0, remove hwc 21.0.0
-  for stack(s) windows2016, windows
-  (https://www.pivotaltracker.com/story/show/184616166)
-  * Buildpack dependencies are built with go 1.20
-  (See https://github.com/cloudfoundry/binary-builder/pull/68)
+  * Add hwc 23.0.0, remove hwc 21.0.0 for stack(s) windows2016, windows (https://www.pivotaltracker.com/story/show/184616166)
+  * Buildpack dependencies are built with go 1.20. See https://github.com/cloudfoundry/binary-builder/pull/68.
   Packaged binaries:
   | name | version | cf_stacks |
   |-|-|-|
@@ -1579,7 +1575,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 </table>
 
 
-## <a id='upgrade'></a> How to Upgrade
+## <a id='upgrade'></a> How to upgrade
 
 The <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> tile is available with the release of <%= vars.app_runtime_full %>
 (<%= vars.app_runtime_abbr %>) <%= vars.v_major_version %>. To use the <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> tile, you must install
@@ -1596,7 +1592,7 @@ You can now log in to your .NET Framework applications using your existing Activ
 
 ## <a id='breaking-changes'></a> Breaking changes
 
-<%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> includes the following breaking change:
+<%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> includes the following breaking changes:
 
 ### Option to enable (deprecated) Global Log Rate Limit is removed
 
