@@ -14,6 +14,234 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 
 ## <a id='releases'></a> Releases
 
+### <a id='3.0.19'></a> 3.0.19
+
+**Release Date:** 10/25/2023
+
+* **[Bug Fix]** Prevent retired app instances from receiving traffic by ensuring rep emits events to cleanup routes when `cf restart-app-instance` is invoked.
+* Bump diego to version `2.83.0`
+* Bump envoy-nginx to version `0.21.0`
+* Bump garden-runc to version `1.41.0`
+* Bump loggregator-agent to version `6.5.15`
+* Bump metrics-discovery to version `3.2.18`
+* Bump winc to version `2.16.0`
+* Bump windows-syslog to version `1.1.18`
+
+<table border="1" class="nice">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+      <th>Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>windows2019 stemcell</td><td>2019.66</td><td></td></tr>
+    <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
+    <tr><td>diego</td><td>2.83.0</td>
+      <td>
+        <details>
+          <summary>v2.83.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - **[Bug Fix]** Prevent retired app instances from receiving traffic by ensuring rep emits events to cleanup routes when RetireActualLRP is called. (https://github.com/cloudfoundry/bbs/pull/72) (Fixes #820)
+  - Thanks @vlast3k!
+  - Cleans up stderr output from rep's `setup_mounted_data_dirs` script (#689)
+  -  Thanks @romain-dartigues!
+  - Docs updates for the container metrics changes from 2.82.0 (https://github.com/cloudfoundry/diego-release/pull/813)
+  - Thanks @geigerj0!
+  - Bump Golang to 1.21.3
+  - Bump Envoy to 1.25.9
+  - Bump Package Dependencies
+  - CI Enhancments
+  ## ✨  Built with go 1.21.3
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.82.0...v2.83.0
+  ## Resources
+  - [Download release v2.83.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.83.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v2.82.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Diego now supports reading container networking metrics from garden, and publishing them along with other app container metrics. (https://github.com/cloudfoundry/diego-logging-client/pull/82, https://github.com/cloudfoundry/executor/pull/83)
+  - Requires [garden-runc-release v1.38.0](https://github.com/cloudfoundry/garden-runc-release/releases/tag/v1.38.0) and [cf-networking-release v3.33.0](https://github.com/cloudfoundry/cf-networking-release/releases/tag/v3.33.0).
+  - Thanks @geigerj0 and @jvecsei1!
+  - Removed usage of the `code.cloudfoundry.org/systemcerts` package in favor of golang's builtin functionality.
+  - Bumped to golang 1.21.0
+  ## ✨  Built with go 1.21.0
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.81.0...v2.82.0
+  ## Resources
+  - [Download release v2.82.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.82.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>envoy-nginx</td><td>0.21.0</td>
+      <td>
+        <details>
+          <summary>v0.21.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bumped to golang 1.21.3
+  ## ✨  Built with go 1.21.3
+  **Full Changelog**: https://github.com/cloudfoundry/envoy-nginx-release/compare/v0.20.0...v0.21.0
+  ## Resources
+  - [Download release 0.21.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/envoy-nginx-release?version=0.21.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v0.20.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bump golang to 1.21.1
+  ## ✨  Built with go 1.21.1
+  **Full Changelog**: https://github.com/cloudfoundry/envoy-nginx-release/compare/v0.19.0...v0.20.0
+  ## Resources
+  - [Download release v0.20.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/envoy-nginx-release?version=0.20.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>garden-runc</td><td>1.41.0</td>
+      <td>
+        <details>
+          <summary>v1.41.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bump go to 1.21.3
+  ## ✨  Built with go 1.21.3
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.40.0...v1.41.0
+  ## Resources
+  - [Download release v1.41.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.41.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.40.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bump Golang to 1.21.1
+  ## ✨  Built with go 1.21.1
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.39.0...v1.40.0
+  ## Resources
+  - [Download release v1.40.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.40.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.39.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Garden on Linux now supports propagating extended attributes from root filesystem images + when adding filesystem data to an existing container.
+  - Bumped to golang 1.21.1
+  ## ✨  Built with go 1.21.1
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.38.0...v1.39.0
+  ## Resources
+  - [Download release v1.39.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.39.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.38.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Garden now supports advertising container networking metrics on Linux containers via the `garden.enable_container_network_metrics` property.
+  - Requires [cf-networking-release v3.33.0](https://github.com/cloudfoundry/cf-networking-release/releases/tag/v3.33.0) or newer, and [diego v2.82.0](https://github.com/cloudfoundry/diego-release/releases/tag/v2.82.0) or newer.
+  - Thanks @JVecsei1 and @geigerj0!!
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/garden/spec b/jobs/garden/spec
+  index 3bffb2f7..125909ed 100644
+  --- a/jobs/garden/spec
+  +++ b/jobs/garden/spec
+  @@ -119,6 +119,10 @@ properties:
+  description: "Additional hosts file entries to be used in containers."
+  default: []
+  +  garden.enable_container_network_metrics:
+  +    description: "Enable container network metrics. This feature is only available on Linux."
+  +    default: false
+  +
+  garden.insecure_docker_registry_list:
+  description: "DEPRECATED in favour of grootfs property."
+  default: []
+  ```
+  ## ✨  Built with go 1.20.7
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.37.0...v1.38.0
+  ## Resources
+  - [Download release v1.38.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.38.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.32</td><td></td></tr>
+    <tr><td>loggregator-agent</td><td>6.5.15</td>
+      <td>
+        <details>
+          <summary>v6.5.15</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump dependencies
+  * Bump golang to v1.20.10
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v6.5.14...v6.5.15
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>metrics-discovery</td><td>3.2.18</td>
+      <td>
+        <details>
+          <summary>v3.2.18</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump golang to v1.20.10
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.17...v3.2.18
+          </pre>
+        </details>
+        <details>
+          <summary>v3.2.17</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Don't configure prom scraper to scrape when metrics-discovery-registrar or metrics-agent are disabled.
+  * Bump dependencies
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.16...v3.2.17
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>smoke-tests</td><td>4.8.4</td><td></td></tr>
+    <tr><td>winc</td><td>2.16.0</td>
+      <td>
+        <details>
+          <summary>v2.16.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bumped to golang 1.21.3
+  - CI Enhancements
+  - Dependency Bumps
+  ## ✨  Built with go 1.21.3
+  **Full Changelog**: https://github.com/cloudfoundry/winc-release/compare/v2.15.0...v2.16.0
+  ## Resources
+  - [Download release v2.16.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/winc-release?version=2.16.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-syslog</td><td>1.1.18</td>
+      <td>
+        <details>
+          <summary>v1.1.18</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Update golang packages to use go1.20.8
+  **Full Changelog**: https://github.com/cloudfoundry/windows-syslog-release/compare/v1.1.17...v1.1.18
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-utilities</td><td>0.17.0</td><td></td></tr>
+  </tbody>
+</table>
+
+
+
 ### <a id='3.0.18'></a> 3.0.18
 
 **Release Date:** 10/12/2023
