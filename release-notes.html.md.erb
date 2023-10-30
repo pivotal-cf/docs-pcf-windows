@@ -1291,10 +1291,12 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
         <details>
           <summary>v2.76.0</summary>
           <pre style="max-width: 30em">
+
   ## Changes
   - Bump to Go 1.20.4
   - Bump dependencies
   ## Bosh Job Spec changes:
+
   ```diff
   diff --git a/jobs/auctioneer/spec b/jobs/auctioneer/spec
   index ae685ceb9..1fac48936 100644
@@ -1377,6 +1379,7 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
   enable_declarative_healthcheck:
   description: "When set, enables the declarative check tests in vizzini"
   ```
+
   ## ✨  Built with go 1.20.4
   **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.75.0...v2.76.0
   ## Resources
