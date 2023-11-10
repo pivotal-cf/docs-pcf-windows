@@ -14,6 +14,220 @@ Before you install the tile, refer to the [Windows Stemcell Compatibility Matrix
 
 ## <a id='releases'></a> Releases
 
+### <a id='2.13.27'></a> 2.13.27
+
+**Release Date:** 11/10/2023
+
+* Bump diego to version `2.84.0`
+* Bump envoy-nginx to version `0.22.0`
+* Bump garden-runc to version `1.44.0`
+* Bump windows-syslog to version `1.2.0`
+* Bump metrics-discovery to version `3.2.20`
+* Bump winc to version `2.18.0`
+
+<table border="1" class="nice">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+      <th>Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>windows2019 stemcell</td><td>2019.66</td><td></td></tr>
+    <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
+    <tr><td>diego</td><td>2.84.0</td>
+      <td>
+        <details>
+          <summary>v2.84.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bumps envoy to [v1.28.0](https://github.com/envoyproxy/envoy/releases/tag/v1.28.0)
+  - BBS DesiredLRPHandler now sends Stop/Update LRP requests to rep in parallel - Thanks @vlast3k!
+  - Log rate limit metrics are no longer generated for tasks - Thanks @mkocher!
+  - App Logs will now emit messages for when they run pre-start scripts and when they invoke the startup command, to make troubleshooting just that much easier - Thanks @Gerg!
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/vizzini/spec b/jobs/vizzini/spec
+  index 6ff53c654..a3bbc5fb2 100644
+  --- a/jobs/vizzini/spec
+  +++ b/jobs/vizzini/spec
+  @@ -1,7 +1,7 @@
+  ---
+  name: vizzini
+  packages:
+  -  - golang-1-linux
+  +  - golang-1.21-linux
+  - vizzini
+  templates:
+  ```
+  ## ✨  Built with go 1.21.3
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.83.0...v2.84.0
+  ## Resources
+  - [Download release v2.84.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.84.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>envoy-nginx</td><td>0.22.0</td>
+      <td>
+        <details>
+          <summary>v0.22.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bump go to 1.21.4
+  ## ✨  Built with go 1.21.4
+  **Full Changelog**: https://github.com/cloudfoundry/envoy-nginx-release/compare/v0.21.0...v0.22.0
+  ## Resources
+  - [Download release 0.22.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry-incubator/envoy-nginx-release?version=0.22.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>event-log</td><td>0.9.0</td><td></td></tr>
+    <tr><td>garden-runc</td><td>1.44.0</td>
+      <td>
+        <details>
+          <summary>v1.44.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Change user for grootfs test
+  - Bump golang to 1.21.4
+  ## ✨  Built with go 1.21.4
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.43.0...v1.44.0
+  ## Resources
+  - [Download release v1.44.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.44.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.43.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - The `garden-healthchecker` process was found to be too aggressive when evaluating and acting upon failed healthchecks. It has been removed.
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/garden/spec b/jobs/garden/spec
+  index 125909ed..0d2a8fb4 100644
+  --- a/jobs/garden/spec
+  +++ b/jobs/garden/spec
+  @@ -23,7 +23,6 @@ templates:
+  bin/containerd_utils.erb:                 bin/containerd_utils
+  bin/pre-start:                            bin/pre-start
+  bin/post-start:                           bin/post-start
+  -  config/healthchecker.yml.erb:             config/healthchecker.yml
+  packages:
+  - guardian
+  @@ -309,7 +308,3 @@ properties:
+  logging.format.timestamp:
+  description: "Format for timestamp in component logs. Valid values are 'unix-epoch' and 'rfc3339'."
+  default: "unix-epoch"
+  -
+  -  healthchecker.failure_counter_file:
+  -    description: "File used by the healthchecker to monitor consecutive failures."
+  -    default: /var/vcap/data/garden/counters/consecutive_healthchecker_failures.count
+  ```
+  ## ✨  Built with go 1.21.3
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.42.0...v1.43.0
+  ## Resources
+  - [Download release v1.43.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.43.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.42.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bump golang dependencies
+  - Bump ruby testing dependencies
+  ## ✨  Built with go 1.21.3
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.41.0...v1.42.0
+  ## Resources
+  - [Download release v1.42.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.42.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-syslog</td><td>1.2.0</td>
+      <td>
+        <details>
+          <summary>v1.2.0</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  ### Features
+  * Add a new, optional, structured data param key, `environment`, to `instance@47450`. This is useful for cases where log lines should be tagged with an operator provided string but need to vary from the director name (https://github.com/cloudfoundry/windows-syslog-release/pull/42)
+  ### Maintenance
+  * Bump blackbox dependencies
+  * README: Address, port and transport all need to be provided (https://github.com/cloudfoundry/windows-syslog-release/pull/43)
+  **Full Changelog**: https://github.com/cloudfoundry/windows-syslog-release/compare/v1.1.19...v1.2.0
+          </pre>
+        </details>
+        <details>
+          <summary>v1.1.19</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump included golang package to go1.20.10
+  **Full Changelog**: https://github.com/cloudfoundry/windows-syslog-release/compare/v1.1.18...v1.1.19
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.32</td><td></td></tr>
+    <tr><td>loggregator-agent</td><td>6.5.15</td><td></td></tr>
+    <tr><td>metrics-discovery</td><td>3.2.20</td>
+      <td>
+        <details>
+          <summary>v3.2.20</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump to [go1.20.11](https://groups.google.com/g/golang-announce/c/4tU8LZfBFkY/m/d-jSKR_jBwAJ)
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.19...v3.2.20
+          </pre>
+        </details>
+        <details>
+          <summary>v3.2.19</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump dependencies
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.18...v3.2.19
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>smoke-tests</td><td>4.8.4</td><td></td></tr>
+    <tr><td>winc</td><td>2.18.0</td>
+      <td>
+        <details>
+          <summary>v2.18.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Resolves an bug in `cert-injector` introduced in [v2.17.0](https://github.com/cloudfoundry/winc-release/releases/tag/v2.18.0) where the `windows2019fs` job's `pre-start` script would fail when the `rootfs-windows.trusted_certs` property was set.
+  ## ✨  Built with go 1.21.3
+  **Full Changelog**: https://github.com/cloudfoundry/winc-release/compare/v2.17.0...v2.18.0
+  ## Resources
+  - [Download release v2.18.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/winc-release?version=2.18.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v2.17.0</summary>
+          <pre style="max-width: 30em">
+  ❗❗❗ **DO NOT USE THIS VERSION** PLEASE USE 2.18.0 INSTEAD❗❗❗
+  ❗❗❗ **THIS VERSION OF WINC-RELEASE HAS A KNOWN ISSUE CAUSING PRE-START FAILURES ON THE WINDOWS2019FS JOB WHEN `windows-rootfs.trusted_certs` is set** ❗❗❗
+  ## Changes
+  - 🐞 Bug fix: prevent ccg-plugin pre-start script from running when `ccg.enabled` is set to false.
+  - Bump dependencies
+  ## ✨  Built with go 1.21.3
+  **Full Changelog**: https://github.com/cloudfoundry/winc-release/compare/v2.16.0...v2.17.0
+  ## Resources
+  - [Download release v2.17.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/winc-release?version=2.17.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-utilities</td><td>0.14.0</td><td></td></tr>
+  </tbody>
+</table>
+
+
+
 ### <a id='2.13.26'></a> 2.13.26
 
 **Release Date:** 10/25/2023
