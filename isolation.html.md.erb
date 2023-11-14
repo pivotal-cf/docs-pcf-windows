@@ -13,14 +13,14 @@ in a different isolation segment.
 
 To create multiple copies of the <%= vars.windows_runtime_abbr %> tile, see [Replicating a tile](#replicate).
 
-To associate a <%= vars.windows_runtime_abbr %> tile with an isolation segment, so that its Diego Cells run in that segment, see [Assigning a tile to an Isolation Segment](#assign-isolation).
+To associate a <%= vars.windows_runtime_abbr %> tile with an isolation segment, so that its Diego Cells run in that segment, see [Assigning a tile to an isolation segment](#assign-isolation).
 
 
 ## <a id='prerequisites'></a> Prerequisites
 
 To run a Windows Diego Cell in a particular isolation segment, the isolation segment must already exist in the Cloud Controller database (CCDB) before the Windows Diego Cell can be assigned to it.
 
-To create an isolation segment in the CCDB, see [Creating an Isolation Segment](../adminguide/isolation-segments.html#create-an-is) in _Managing Isolation Segments_.
+To create an isolation segment in the CCDB, see [Creating an isolation segment](../adminguide/isolation-segments.html#create-an-is) in _Managing isolation segments_.
 
 
 ## <a id='replicate'></a> Replicating a tile
@@ -57,7 +57,7 @@ To use the Replicator tool:
 1. Install and configure the Windows isolation segment, using the new `.pivotal` file and, follow the procedures in _Installing and configuring <%= vars.windows_runtime_abbr %>_, starting with **Import a Product** in [Install the tile](installing.html#install).
 
 
-## <a id='assign-isolation'></a> Assigning a tile to an Isolation Segment
+## <a id='assign-isolation'></a> Assigning a tile to an isolation segment
 
 To assign a <%= vars.windows_runtime_abbr %> tile to an isolation segment:
 
