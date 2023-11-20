@@ -12,7 +12,7 @@ Do not use HTTP routing through the Gorouter for apps that use Windows Authentic
 
 To avoid this risk, use TCP routing. The TCP router does not maintain connections to application containers in the same way, the Gorouter does, because user authentication sessions are not shared among multiple users.
 
-To activate TCP routing, see [Configure networking](../operating/configure-pas.html#networking) for the <%= vars.app_runtime_abbr %> tile.
+To activate TCP routing, see [Configure networking](../operating/config-networking.html#networking) for the <%= vars.app_runtime_abbr %> tile.
 
 Apps using Windows Authentication can use the `--no-route` flag for the  `cf push` command, or specify a `routes` section in the app manifest with only a TCP route. The `--no-route` flag no longer unbinds all existing routes associated with the app.
 
@@ -23,7 +23,7 @@ Before you configure the <%= vars.windows_runtime_abbr %> tile for Windows Authe
 * Your Active Directory instance must be configured with a GMSA and a regular user that has been granted access to the GMSA credentials. See the [Microsoft documentation](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts) for specifics.
 * Your Windows Diego Cells must have the appropriate [firewall rules](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/gmsa-troubleshooting#check-the-firewall-configuration) to access the Active Directory instance.
 * [Application Security Groups](../concepts/asg.html) must be configured to allow traffic from application containers to the Active Directory instance.
-* [TCP routing](../operating/configure-pas.html#networking) must be enabled and configured.
+* [TCP routing](../operating/config-networking.html#networking) must be enabled and configured.
 
 <p class="note caution">
 <span class="note__title">Caution</span>
