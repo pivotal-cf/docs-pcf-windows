@@ -14,6 +14,90 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 
 ## <a id='releases'></a> Releases
 
+### <a id='5.0.3'></a> 5.0.3
+
+**Release Date:** 11/29/2023
+
+* **[Bug Fix]** Correct property definition for compatibility with wider range of Ops Manager versions
+* **[Bug Fix]** Suppress syslog-agent warnings for invalid syslog drains
+* Bump loggregator-agent to version `7.7.2`
+* Bump winc to version `2.19.0`
+* Bump windows-syslog to version `1.2.1`
+
+<table border="1" class="nice">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+      <th>Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>windows2019 stemcell</td><td>2019.67</td><td></td></tr>
+    <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
+    <tr><td>diego</td><td>2.85.0</td><td></td></tr>
+    <tr><td>envoy-nginx</td><td>0.22.0</td><td></td></tr>
+    <tr><td>garden-runc</td><td>1.44.0</td><td></td></tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.32</td><td></td></tr>
+    <tr><td>loggregator-agent</td><td>7.7.2</td>
+      <td>
+        <details>
+          <summary>v7.7.2</summary>
+          <pre style="max-width: 30em">
+  * Bump dependencies.
+  ### Experimental OTel Collector changes
+  * Bump otel-collector to v0.89.0. See the [opentelemetry-collector](https://github.com/open-telemetry/opentelemetry-collector/releases/tag/v0.89.0) and [opentelemetry-collector-contrib](https://github.com/open-telemetry/opentelemetry-collector-contrib/releases/tag/v0.89.0) release notes for more details.
+          </pre>
+        </details>
+        <details>
+          <summary>v7.7.1</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Added `warn_on_invalid_drains` property to Windows Syslog Agent to allow warnings for invalid drains to be suppressed.
+  * Bump to [go1.20.11](https://groups.google.com/g/golang-announce/c/4tU8LZfBFkY/m/d-jSKR_jBwAJ)
+  * Bump dependencies.
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v7.7.0...v7.7.1
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>metrics-discovery</td><td>3.2.20</td><td></td></tr>
+    <tr><td>smoke-tests</td><td>4.8.4</td><td></td></tr>
+    <tr><td>winc</td><td>2.19.0</td>
+      <td>
+        <details>
+          <summary>v2.19.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bump cert-injector, certsplitter, diff-exporter, groot-windows, and winc
+  - Bumped to golang 1.21.4
+  ## ✨  Built with go 1.21.4
+  **Full Changelog**: https://github.com/cloudfoundry/winc-release/compare/v2.18.0...v2.19.0
+  ## Resources
+  - [Download release v2.19.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/winc-release?version=2.19.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-syslog</td><td>1.2.1</td>
+      <td>
+        <details>
+          <summary>v1.2.1</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  ### Fixes
+  * Bump included golang package to go1.20.11
+  **Full Changelog**: https://github.com/cloudfoundry/windows-syslog-release/compare/v1.2.0...v1.2.1
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-utilities</td><td>0.20.0</td><td></td></tr>
+  </tbody>
+</table>
+
+
+
 ### <a id='5.0.2'></a> 5.0.2
 
 **Release Date:** 11/10/2023
