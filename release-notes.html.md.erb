@@ -14,6 +14,125 @@ Before you install the tile, refer to the [Windows Stemcell Compatibility Matrix
 
 ## <a id='releases'></a> Releases
 
+### <a id='2.13.29'></a> 2.13.29
+
+**Release Date:** 12/08/2023
+
+* Bump garden-runc to version `1.45.0`
+* Bump windows-syslog to version `1.2.2`
+* Bump hwc-offline-buildpack to version `3.1.33`
+* Bump loggregator-agent to version `6.5.16`
+* Bump metrics-discovery to version `3.2.21`
+
+<table border="1" class="nice">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+      <th>Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>windows2019 stemcell</td><td>2019.67</td><td></td></tr>
+    <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
+    <tr><td>diego</td><td>2.85.0</td><td></td></tr>
+    <tr><td>envoy-nginx</td><td>0.22.0</td><td></td></tr>
+    <tr><td>event-log</td><td>0.9.0</td><td></td></tr>
+    <tr><td>garden-runc</td><td>1.45.0</td>
+      <td>
+        <details>
+          <summary>v1.45.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Resolved an issue where container networking statistics could not be retrieved for apps running in containers that did not have a `bash` executable. Thanks @JVecsei1!
+  - Removed the garden-healthchecker package after it had been removed from the boshrelease in v1.43.0
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/garden/spec b/jobs/garden/spec
+  index 0d2a8fb4..c84b5c43 100644
+  --- a/jobs/garden/spec
+  +++ b/jobs/garden/spec
+  @@ -39,7 +39,6 @@ packages:
+  - netplugin-shim
+  - dontpanic
+  - tini
+  -  - garden-runc-healthchecker
+  provides:
+  - name: iptables
+  ```
+  ## ✨  Built with go 1.21.4
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.44.0...v1.45.0
+  ## Resources
+  - [Download release 1.45.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.45.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-syslog</td><td>1.2.2</td>
+      <td>
+        <details>
+          <summary>v1.2.2</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump packaged Golang to go1.20.12
+  **Full Changelog**: https://github.com/cloudfoundry/windows-syslog-release/compare/v1.2.1...v1.2.2
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.33</td>
+      <td>
+        <details>
+          <summary>3.1.33</summary>
+          <pre style="max-width: 30em">
+  * Updating github-config (#148)
+  | name | version | cf_stacks |
+  |-|-|-|
+  | hwc | 26.0.0 | windows, windows2016 |
+  Default binary versions:
+  | name | version |
+  |-|-|
+  | hwc | 26.0.0 |
+  * Uncached buildpack SHA256: b7c8e7043cbaafa1488abc114ddbd259882e7c1caf3c87dc7aeeae4f86f7de2c
+  * Uncached buildpack SHA256: c5b44a86786cfc5e8f3027c4f321fc4a0d07ba45b0628c304b24cae7bffa2479
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>loggregator-agent</td><td>6.5.16</td>
+      <td>
+        <details>
+          <summary>v6.5.16</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump dependencies
+  * Bump packaged Golang to go1.20.12
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v6.5.15...v6.5.16
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>metrics-discovery</td><td>3.2.21</td>
+      <td>
+        <details>
+          <summary>v3.2.21</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump dependencies
+  * Bump packaged Golang to go1.20.12
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.20...v3.2.21
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>smoke-tests</td><td>4.8.4</td><td></td></tr>
+    <tr><td>winc</td><td>2.19.0</td><td></td></tr>
+    <tr><td>windows-utilities</td><td>0.14.0</td><td></td></tr>
+  </tbody>
+</table>
+
+
+
 ### <a id='2.13.28'></a> 2.13.28
 
 **Release Date:** 11/29/2023
