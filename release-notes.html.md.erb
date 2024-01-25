@@ -14,6 +14,269 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 
 ## <a id='releases'></a> Releases
 
+### <a id='6.0.0-build.15'></a> 6.0.0-build.15
+
+**Release Date:** 01/25/2024
+
+* Bump diego to version `2.88.0`
+* Bump envoy-nginx to version `0.23.0`
+* Bump garden-runc to version `1.47.0`
+* Bump hwc-offline-buildpack to version `3.1.34`
+* Bump otel-collector to version `0.3.1`
+* Bump smoke-tests to version `4.8.5`
+* Bump winc to version `2.20.0`
+* Bump windowsfs-release to version ``
+
+<table border="1" class="nice">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+      <th>Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>windows2019 stemcell</td><td>2019.69</td><td></td></tr>
+    <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
+    <tr><td>diego</td><td>2.88.0</td>
+      <td>
+        <details>
+          <summary>v2.88.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  -Bumps golang.org/x/crypto/ssh to v0.17.0 to address CVE-2023-48795.
+  ## ✨  Built with go 1.21.5
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.87.0...v2.88.0
+  ## Resources
+  - [Download release 2.88.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.88.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v2.87.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  Reverted max_containers changes https://github.com/cloudfoundry/diego-release/pull/873
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/rep/spec b/jobs/rep/spec
+  index 5c0ec9576..1383b67c0 100644
+  --- a/jobs/rep/spec
+  +++ b/jobs/rep/spec
+  @@ -30,11 +30,6 @@ packages:
+  - proxy
+  - certsplitter
+  -consumes:
+  -- name: max_containers
+  -  type: max_containers
+  -  optional: true
+  -
+  properties:
+  bpm.enabled:
+  description: "use the BOSH Process Manager to manage the cell rep process."
+  ```
+  ## ✨  Built with go 1.21.5
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.86.0...v2.87.0
+  ## Resources
+  - [Download release 2.87.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.87.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v2.86.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - BBS [Run migration and save migration version in single transaction](https://github.com/cloudfoundry/bbs/pull/76)
+  - Rep [Make max_containers configurable](https://github.com/cloudfoundry/diego-release/pull/868)
+  - Executor [Ignore EntryNotFound and AlreadyClosed errors when cleaning up cache](https://github.com/cloudfoundry/executor/pull/89)
+  - Route-emitter [Add AZ to registry message](https://github.com/cloudfoundry/route-emitter/pull/29)
+  - Rep [Send AZ in StartActualLRP/EvacuateRunningActualLRP requests to BBS](https://github.com/cloudfoundry/rep/pull/48)
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/rep/spec b/jobs/rep/spec
+  index 1383b67c0..5c0ec9576 100644
+  --- a/jobs/rep/spec
+  +++ b/jobs/rep/spec
+  @@ -30,6 +30,11 @@ packages:
+  - proxy
+  - certsplitter
+  +consumes:
+  +- name: max_containers
+  +  type: max_containers
+  +  optional: true
+  +
+  properties:
+  bpm.enabled:
+  description: "use the BOSH Process Manager to manage the cell rep process."
+  ```
+  ## ✨  Built with go 1.21.5
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.85.0...v2.86.0
+  ## Resources
+  - [Download release 2.86.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.86.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>envoy-nginx</td><td>0.23.0</td>
+      <td>
+        <details>
+          <summary>v0.23.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - bump to go 1.21.5
+  ## ✨  Built with go 1.21.5
+  **Full Changelog**: https://github.com/cloudfoundry/envoy-nginx-release/compare/v0.22.0...v0.23.0
+  ## Resources
+  - [Download release 0.23.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry-incubator/envoy-nginx-release?version=0.23.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>garden-runc</td><td>1.47.0</td>
+      <td>
+        <details>
+          <summary>v1.47.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - [Revert "Add max_containers bosh link](https://github.com/cloudfoundry/garden-runc-release/pull/327)
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/garden/spec b/jobs/garden/spec
+  index abf22f8a..c84b5c43 100644
+  --- a/jobs/garden/spec
+  +++ b/jobs/garden/spec
+  @@ -45,11 +45,6 @@ provides:
+  type: iptables
+  properties:
+  - garden.iptables_bin_dir
+  -
+  -- name: max_containers
+  -  type: max_containers
+  -  properties:
+  -  - garden.max_containers
+  properties:
+  garden.listen_network:
+  ```
+  ## ✨  Built with go 1.21.5
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.46.0...v1.47.0
+  ## Resources
+  - [Download release 1.47.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.47.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v1.46.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - https://github.com/cloudfoundry/garden-runc-release/pull/314 - Add `max_containers` property. It is provided in a link so it is used in rep as well. Now you can increase containers past 250! Thanks @klapkov!
+  - https://github.com/cloudfoundry/garden-runc-release/pull/323 - Lots of refactoring by @winkingturtle-vmw, including the ability to run the test suite in parallel! Thank you!
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/garden/spec b/jobs/garden/spec
+  index c84b5c43..abf22f8a 100644
+  --- a/jobs/garden/spec
+  +++ b/jobs/garden/spec
+  @@ -45,6 +45,11 @@ provides:
+  type: iptables
+  properties:
+  - garden.iptables_bin_dir
+  +
+  +- name: max_containers
+  +  type: max_containers
+  +  properties:
+  +  - garden.max_containers
+  properties:
+  garden.listen_network:
+  diff --git a/jobs/gats/spec b/jobs/gats/spec
+  index 4f59d675..916a35eb 100644
+  --- a/jobs/gats/spec
+  +++ b/jobs/gats/spec
+  @@ -19,6 +19,9 @@ properties:
+  garden_port:
+  description: Port Garden is listening on
+  default: 7777
+  +  garden_test_rootfs:
+  +    description: Test rootfs to use
+  +    default: 'docker:///cloudfoundry/garden-rootfs'
+  containerd_for_processes:
+  description: Run GATS with CONTAINERD_FOR_PROCESSES_ENABLED
+  default: false
+  @@ -28,6 +31,9 @@ properties:
+  cpu_throttling:
+  description: Run GATS with CPU_THROTTLING_ENABLED
+  default: false
+  +  limits_test_uri:
+  +    description: Limists Test rootfs to use
+  +    default: 'docker:///busybox'
+  windows_rootfs:
+  description: URL to pull the windows rootfs from
+  default: ""
+  ```
+  ## ✨  Built with go 1.21.5
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.45.0...v1.46.0
+  ## Resources
+  - [Download release 1.46.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.46.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.34</td>
+      <td>
+        <details>
+          <summary>3.1.34</summary>
+          <pre style="max-width: 30em">
+  * Updating github-config
+  | name | version | cf_stacks |
+  |-|-|-|
+  | hwc | 26.0.0 | windows, windows2016 |
+  Default binary versions:
+  | name | version |
+  |-|-|
+  | hwc | 26.0.0 |
+  * Uncached buildpack SHA256: 3b4b22929af056a7dcb132505fb27e80c92e2c276bfc74f890db42d6a4994707
+  * Uncached buildpack SHA256: 57a632e04abfe877b87a075c98ba2382e30c89ba37fd759d5ac9a1327ac35357
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>loggregator-agent</td><td>7.7.3</td><td></td></tr>
+    <tr><td>metrics-discovery</td><td>3.2.21</td><td></td></tr>
+    <tr><td>otel-collector</td><td>0.3.1</td><td></td></tr>
+    <tr><td>smoke-tests</td><td>4.8.5</td>
+      <td>
+        <details>
+          <summary>4.8.5</summary>
+          <pre style="max-width: 30em">
+  Create bosh final release 4.8.5
+  ## What's Changed
+  * Upgrade Golang by @tas-operability-bot in https://github.com/pivotal/smoke-tests/pull/126
+  * Upgrade Golang by @tas-operability-bot in https://github.com/pivotal/smoke-tests/pull/127
+  **Full Changelog**: https://github.com/pivotal/smoke-tests/compare/4.8.4...4.8.5
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>winc</td><td>2.20.0</td>
+      <td>
+        <details>
+          <summary>v2.20.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Dependency bumps
+  - Test improvements
+  ## ✨  Built with go 1.21.5
+  **Full Changelog**: https://github.com/cloudfoundry/winc-release/compare/v2.19.0...v2.20.0
+  ## Resources
+  - [Download release 2.20.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry-incubator/winc-release?version=2.20.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-syslog</td><td>1.2.2</td><td></td></tr>
+    <tr><td>windows-utilities</td><td>0.20.0</td><td></td></tr>
+    <tr><td>windowsfs-release</td><td></td><td></td></tr>
+  </tbody>
+</table>
+
+
+
 ### <a id='6.0.0-build.8'></a> 6.0.0-build.8
 
 **Release Date:** 12/08/2023
