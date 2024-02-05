@@ -14,6 +14,83 @@ Before you install the tile, refer to the [Windows Stemcell Compatibility Matrix
 
 ## <a id='releases'></a> Releases
 
+### <a id='2.13.32'></a> 2.13.32
+
+**Release Date:** 02/05/2024
+
+* Bump garden-runc to version `1.48.0`
+* Bump windows-syslog to version `1.2.3`
+* Bump metrics-discovery to version `3.2.22`
+
+<table border="1" class="nice">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+      <th>Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>windows2019 stemcell</td><td>2019.69</td><td></td></tr>
+    <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
+    <tr><td>diego</td><td>2.92.0</td><td></td></tr>
+    <tr><td>envoy-nginx</td><td>0.23.0</td><td></td></tr>
+    <tr><td>event-log</td><td>0.9.0</td><td></td></tr>
+    <tr><td>garden-runc</td><td>1.48.0</td>
+      <td>
+        <details>
+          <summary>v1.48.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - 🔒[runc](https://github.com/opencontainers/runc) + [container](https://github.com/containerd/containerd) have been bumped to address [CVE-2024-21626](https://github.com/advisories/GHSA-xr7r-f8xq-vfvv)
+  - ✈️Many updates to get garden-runc-release's CI configuration working in the [wg-app-platform-runtime-ci](https://github.com/cloudfoundry/wg-app-platform-runtime-ci) repo Thank you @winkingturtle-vmw @ebroberson @MarcPaquette !!!
+  - Docs updates - Thank you @MarcPaquette !!!
+  - Many golang package dependency bumps
+  ## ✨  Built with go 1.21.6
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.47.0...v1.48.0
+  ## Resources
+  - [Download release 1.48.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.48.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-syslog</td><td>1.2.3</td>
+      <td>
+        <details>
+          <summary>v1.2.3</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump dependencies
+  * Bump packaged Golang to go1.21.6
+  **Full Changelog**: https://github.com/cloudfoundry/windows-syslog-release/compare/v1.2.2...v1.2.3
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.34</td><td></td></tr>
+    <tr><td>loggregator-agent</td><td>6.5.17</td><td></td></tr>
+    <tr><td>metrics-discovery</td><td>3.2.22</td>
+      <td>
+        <details>
+          <summary>v3.2.22</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump dependencies
+  * Bump packaged Golang to go1.21.6
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.21...v3.2.22
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>smoke-tests</td><td>4.8.5</td><td></td></tr>
+    <tr><td>winc</td><td>2.20.0</td><td></td></tr>
+    <tr><td>windows-utilities</td><td>0.14.0</td><td></td></tr>
+    <tr><td>windowsfs-release</td><td></td><td></td></tr>
+  </tbody>
+</table>
+
+
+
 ### <a id='2.13.31'></a> 2.13.31
 
 **Release Date:** 01/31/2024
