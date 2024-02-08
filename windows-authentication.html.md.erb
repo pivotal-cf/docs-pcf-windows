@@ -8,13 +8,24 @@ apps using Windows Authentication. With Windows Authentication, you can access a
 
 ## <a id='security'></a> Security considerations
 
-Do not use HTTP routing through the Gorouter for apps that use Windows Authentication. Windows Authentication sessions are cached by source IP and port. The Gorouter [maintains TCP connections](../concepts/http-routing.html#back-end) to application containers and reuses them for subsequent inbound HTTP requests. This implies that a given Gorouter uses the same port to talk to an app for multiple users. User authentication sessions are shared among multiple users making HTTP requests to the Windows Authentication app, which is a serious security issue.
+In some configurations, Windows Authentication sessions are cached by source IP and port. The Gorouter [maintains TCP connections](../concepts/http-routing.html#back-end) to application containers and reuses them for subsequent inbound HTTP requests. If this behavior is not disabled in applications using Windows Authentication, this results in user authentication sessions being shared among multiple users making HTTP requests to the Windows Authentication app. This is a serious security issue for operators and app devs to be aware of!
 
-To avoid this risk, use TCP routing. The TCP router does not maintain connections to application containers in the same way, the Gorouter does, because user authentication sessions are not shared among multiple users.
+To disable this behavior in your applications, ensure the following properties are set correctly:
+
+* **.Net Framework apps using the hwc_buildpack** have the `authPersistSingleRequest` and `authPersistNonNTLM` IIS settings set to false by default. They should remain false. Ensure that any Windows applications using Windows Authentication do not override those properties!
+* **.Net Core apps using the binary_buildpack** need to ensure that the `Microsoft.AspNetCore.Authentication.Negotiate.NegotiateOptions` for `PersistKerberosCredentials` and `PersistNtlmCredentials` are set to false.
+
+If applications cannot be configured to disable this behavior, TCP routing must be used instead. The TCP router does not maintain connections to application containers at all, circumventing this concern completely.
 
 To activate TCP routing, see [Configure networking](../operating/configure-pas.html#networking) for the <%= vars.app_runtime_abbr %> tile.
 
 Apps using Windows Authentication can use the `--no-route` flag for the  `cf push` command, or specify a `routes` section in the app manifest with only a TCP route. The `--no-route` flag no longer unbinds all existing routes associated with the app.
+
+For further reading, consult the following documentation on the .Net Framework + .Net Core authentication properties:
+
+* [.Net Core documentation for the Negotiate auth properties](https://learn.microsoft.com/en-us/dotnet/api/microsoft.aspnetcore.authentication.negotiate.negotiateoptions?view=aspnetcore-8.0)
+* [.Net Framework documentation on IIS settings for Negotiate auth properties](https://learn.microsoft.com/en-us/previous-versions/iis/settings-schema/aa347472(v=vs.90))
+* [Examples for configuring Windows Authentication properties in apps](https://learn.microsoft.com/en-us/aspnet/core/security/authentication/windowsauth?view=aspnetcore-8.0&tabs=visual-studio)
 
 ## <a id='prerequisites'></a> Prerequisites
 
@@ -23,13 +34,17 @@ Before you configure the <%= vars.windows_runtime_abbr %> tile for Windows Authe
 * Your Active Directory instance must be configured with a GMSA and a regular user that has been granted access to the GMSA credentials. See the [Microsoft documentation](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/manage-serviceaccounts) for specifics.
 * Your Windows Diego Cells must have the appropriate [firewall rules](https://learn.microsoft.com/en-us/virtualization/windowscontainers/manage-containers/gmsa-troubleshooting#check-the-firewall-configuration) to access the Active Directory instance.
 * [Application Security Groups](../concepts/asg.html) must be configured to allow traffic from application containers to the Active Directory instance.
-* [TCP routing](../operating/configure-pas.html#networking) must be enabled and configured.
+* Either [TCP routing](../operating/configure-pas.html#networking) must be enabled and configured, or applications must be told not to persist authentication sessions for NTLM + Kerberos.
+* If using Gorouter for routing, ensure that the **Enable support for NTLM authentication in Gorouter** property is enabled in the <%= vars.app_runtime_abbr %> tile's Networking settings. This will allow Gorouter to properly handle NTLM's challenge-response style negotiation when apps are configured with multiple instances. If Routed Isolation Segments are used in front of apps using Windows Authentication, this setting must be set on the <%= vars.segment_runtime_full %> tile as well.
+* **NOTE** Support for  Windows Authentication via Gorouter was added in the following versions of <%= vars.app_runtime_abbr %> + IST:
+  * <%= vars.app_runtime_abbr %> 4.0.18 and IST 4.0.18
+  * <%= vars.app_runtime_abbr %> 5.0.8 + IST 5.0.8
+  * <%= vars.app_runtime_abbr %> 6.0.0 + IST 6.0.0
 
 <p class="note caution">
 <span class="note__title">Caution</span>
-Using Windows Authentication through Gorouter is discouraged because
-it causes authentication sessions for one user being returned to a different user. Apps using Windows Authentication
-must <strong>only</strong> be accessed through TCP routes.</p>
+Using Windows Authentication through Gorouter may have undesirable security consequences if applications are not configured to disable persistent NTLM + Kerberos connections.
+In these situations, the applications must <strong>only</strong> be accessible through TCP routes.</p>
 
 * The **The Gorouter and apps use mutual TLS to verify each other’s identity** setting described in [Advanced Features](installing.html#config-advanced-features) must not be selected, as this deactivates TCP routing.
 * Depending on your IaaS, you might need to configure BOSH DNS handlers so that your application containers can resolve domain resources through the Active Directory instance. See the <a class="external-link" href="https://docs.vmware.com/en/VMware-Tanzu-Operations-Manager/3.0/vmware-tanzu-ops-manager/index.html"><strong>VMware Tanzu Operations Manager Documentation</strong></a> for IaaS-specific instructions.
