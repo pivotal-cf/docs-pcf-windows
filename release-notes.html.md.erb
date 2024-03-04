@@ -14,6 +14,186 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 
 ## <a id='releases'></a> Releases
 
+### <a id='5.0.8'></a> 5.0.8
+
+**Release Date:** 03/04/2024
+
+* **[Feature]** Add support for NTLM authentication in Gorouter
+* **[Bug Fix]** When enabling the CCG plugin on a stemcell without CCG support, a more friendly error is emitted in the ccg-plugin pre-start script
+* **[Security Fix]** Bump docker to address [GHSA-jq35-85cj-fj4p](https://github.com/advisories/GHSA-jq35-85cj-fj4p)
+* **[Feature Improvement]** Garden now emits an `UnkillableContainers` metric to help identify cells that will be unable to redeploy successfully without operator intervention
+* **[Feature Improvement]** A more useful error is now thrown if the (windows) stemcell has not been configured with the necessary CCG support.
+* Bump diego to version `2.94.0`
+* Bump envoy-nginx to version `0.24.0`
+* Bump garden-runc to version `1.49.0`
+* Bump winc to version `2.21.0`
+* Bump windowsfs-release to version `2.63.0`
+
+<table border="1" class="nice">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+      <th>Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>windows2019 stemcell</td><td>2019.70</td><td></td></tr>
+    <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
+    <tr><td>diego</td><td>2.94.0</td>
+      <td>
+        <details>
+          <summary>v2.94.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Fix bosh job spec description for `container_max_cpu_shares`
+  - dockerapplifecycle: Add OCI image spec index type to Accept header
+  - vizzini: Remove CPUWeight test
+  - bbs: Remove cpu_weight limits
+  - guardian: Add tests for unkillable containers
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/rep/spec b/jobs/rep/spec
+  index 24ce303d4..405f90f46 100644
+  --- a/jobs/rep/spec
+  +++ b/jobs/rep/spec
+  @@ -120,7 +120,7 @@ properties:
+  description: "the max concurrent download steps that can be active"
+  default: 5
+  diego.executor.container_max_cpu_shares:
+  -    description: "the maximum number of cpu shares for a container."
+  +    description: "number of CPU shares per 100 CPU weight"
+  default: 1024
+  diego.executor.container_inode_limit:
+  description: "the inode limit enforced on each garden container."
+  diff --git a/jobs/rep_windows/spec b/jobs/rep_windows/spec
+  index bd5e1db9f..0521d1061 100644
+  --- a/jobs/rep_windows/spec
+  +++ b/jobs/rep_windows/spec
+  @@ -116,7 +116,7 @@ properties:
+  description: "the max concurrent download steps that can be active"
+  default: 5
+  diego.executor.container_max_cpu_shares:
+  -    description: "the maximum number of cpu shares for a container."
+  +    description: "number of CPU shares per 100 CPU weight"
+  default: 10000
+  diego.executor.container_inode_limit:
+  description: "the inode limit enforced on each garden container."
+  ```
+  ## ✨  Built with go 1.21.7
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.93.0...v2.94.0
+  ## Resources
+  - [Download release 2.94.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.94.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v2.93.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  -  Add CPU Entitlement gauge metric & Deprecate CPU Entitlement counter metric #897
+  -  Bump docker to 20.10.27 to address GHSA-jq35-85cj-fj4p #906
+  - [golang-1.21-linux (1.21.7)](https://github.com/cloudfoundry/diego-release/commit/36f42cd578ecc742e9d9ad63af599ded1d939f81)
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/rep/spec b/jobs/rep/spec
+  index 8fb49517a..24ce303d4 100644
+  --- a/jobs/rep/spec
+  +++ b/jobs/rep/spec
+  @@ -79,6 +79,10 @@ properties:
+  description: "Cert used to communicate with local metron agent over gRPC"
+  loggregator.key:
+  description: "Key used to communicate with local metron agent over gRPC"
+  +  loggregator.app_metric_exclusion_filter:
+  +    description: "Array of application metrics to not emit"
+  +    default:
+  +    - cpu_entitlement
+  diego.rep.listen_addr_admin:
+  description: "serve (insecure) ping and evacuate requests on this address and port"
+  diff --git a/jobs/rep_windows/spec b/jobs/rep_windows/spec
+  index 023d76f18..bd5e1db9f 100644
+  --- a/jobs/rep_windows/spec
+  +++ b/jobs/rep_windows/spec
+  @@ -75,6 +75,10 @@ properties:
+  description: "Cert used to communicate with local metron agent over gRPC"
+  loggregator.key:
+  description: "Key used to communicate with local metron agent over gRPC"
+  +  loggregator.app_metric_exclusion_filter:
+  +    description: "Array of application metrics to not emit"
+  +    default:
+  +    - cpu_entitlement
+  diego.rep.advertise_domain:
+  description: "base domain at which the rep should advertise its secure API"
+  ```
+  ## ✨  Built with go 1.21.7
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.92.0...v2.93.0
+  ## Resources
+  - [Download release 2.93.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.93.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>envoy-nginx</td><td>0.24.0</td>
+      <td>
+        <details>
+          <summary>v0.24.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bumps `nginx` version from `1.17.x` → `1.25.3`
+  ## ✨  Built with go 1.21.7
+  **Full Changelog**: https://github.com/cloudfoundry/envoy-nginx-release/compare/v0.23.0...v0.24.0
+  ## Resources
+  - [Download release 0.24.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry-incubator/envoy-nginx-release?version=0.24.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>garden-runc</td><td>1.49.0</td>
+      <td>
+        <details>
+          <summary>v1.49.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - ✨guardian is a little more helpful when logging messages about containers that could not be killed, even after sending multiple SIGKILLs. In situations such as this, the only recourse is to reboot the VM, if the container processes are stuck in an unkillable state in the kernel. In addition to making this error stand out more, we've added a new metric for `UnkillableContainers` that guardian emits. When nonzero, there is a container that cannot be killed. See the [CloudFoundrydocs for Component metrics](https://docs.cloudfoundry.org/running/all_metrics.html#garden-linux) for more info.
+  - Golang package dependency bumps
+  - Bumped to Golang 1.21.7
+  ## ✨  Built with go 1.21.7
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.48.0...v1.49.0
+  ## Resources
+  - [Download release 1.49.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.49.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.34</td><td></td></tr>
+    <tr><td>loggregator-agent</td><td>8.0.1</td><td></td></tr>
+    <tr><td>metrics-discovery</td><td>3.2.22</td><td></td></tr>
+    <tr><td>otel-collector</td><td>0.3.2</td><td></td></tr>
+    <tr><td>smoke-tests</td><td>4.8.5</td><td></td></tr>
+    <tr><td>winc</td><td>2.21.0</td>
+      <td>
+        <details>
+          <summary>v2.21.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - ✨The `ccg-plugin` job will now provide a more useful error in its pre-start script if the stemcell has not been configured with the necessary CCG support.
+  - Go package dependency bumps
+  - Golang bumped to v1.21.7
+  ## ✨  Built with go 1.21.7
+  **Full Changelog**: https://github.com/cloudfoundry/winc-release/compare/v2.20.0...v2.21.0
+  ## Resources
+  - [Download release 2.21.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/winc-release?version=2.21.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-syslog</td><td>1.2.3</td><td></td></tr>
+    <tr><td>windows-utilities</td><td>0.20.0</td><td></td></tr>
+    <tr><td>windowsfs-release</td><td>2.63.0</td><td></td></tr>
+  </tbody>
+</table>
+
+
+
 ### <a id='5.0.7'></a> 5.0.7
 
 **Release Date:** 02/05/2024
