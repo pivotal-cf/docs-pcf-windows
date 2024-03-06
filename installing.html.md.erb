@@ -177,7 +177,7 @@ Although these features are fully supported,
 VMware recommends caution when using them in production environments.
 
 For help filling in these text boxes, see
-[Configure Advanced Features](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/installing.html#configure-advanced-features-8) in _Installing and Configuring TAS for VMs [Windows]_ in the VMware documentation.
+[Advanced Features](../operating/config-networking.html).
 
 The following sections describe how to configure the Advanced Features.
 
@@ -319,32 +319,36 @@ To configure your tile resources:
 
 1. Use the drop-down menus to configure the **Windows Diego Cell**. The table shows the recommended Windows Diego Cell disk size for your IaaS:
 
-  <table>
-    <tr>
-      <th>IaaS</th>
-      <th>Recommended Windows Diego Cell Disk Size</th>
-    </tr>
-    <tr>
-      <th>AWS</th>
-      <td>100&nbsp;GB</td>
-    </tr>
-    <tr>
-      <th>Azure</th>
-      <td>150&nbsp;GB</td>
-    </tr>
-    <tr>
-      <th>GCP</th>
-      <td>150&nbsp;GB</td>
-    </tr>
-    <tr>
-      <th>vSphere</th>
-      <td>100&nbsp;GB</td>
-    </tr>
-  </table>
+    <table>
+    <thead>
+      <tr>
+        <th>IaaS</th>
+        <th>Recommended Windows Diego Cell Disk Size</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <th>AWS</th>
+        <td>100&nbsp;GB</td>
+      </tr>
+      <tr>
+        <th>Azure</th>
+        <td>150&nbsp;GB</td>
+      </tr>
+      <tr>
+        <th>GCP</th>
+        <td>150&nbsp;GB</td>
+      </tr>
+      <tr>
+        <th>vSphere</th>
+        <td>100&nbsp;GB</td>
+      </tr>
+    </tbody>
+    </table>
 
-<p class="note">
-<span class="note__title">Note</span>
-Windows stemcells in the v2019.x line support ephemeral disks.</p>
+    <p class="note">
+    <span class="note__title">Note</span>
+    Windows stemcells in the v2019.x line support ephemeral disks.</p>
 
 1. Provision your **Master Compilation Job** with at least 100&nbsp;GB of disk space.
 
@@ -366,10 +370,9 @@ To upload the stemcell:
 <span class="note__title">Important</span>
 If you use vSphere, you must create your own stemcell.
 The default root disk size of Windows stemcells v2019.x line is 30&nbsp;GB.
-
+<br>
 VMware recommends setting the root disk size of your Windows stemcell for vSphere to 30&nbsp;GB.
-For more information, see [Creating a Windows stemcell for vSphere using stembuild](create-vsphere-stemcell-automatically.html).
-</p>
+For more information, see <a href="./create-vsphere-stemcell-automatically.html">Creating a Windows stemcell for vSphere using stembuild</a>.</p>
 
 ## <a id='deploy'></a> Deploying the tile
 

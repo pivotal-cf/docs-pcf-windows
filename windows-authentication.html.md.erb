@@ -1,5 +1,5 @@
 ---
-title: Windows authentication for .Net apps
+title: Windows authentication for .NET apps
 owner: Windows
 ---
 
@@ -17,7 +17,7 @@ To disable this behavior in your applications, ensure the following properties a
 
 If applications cannot be configured to disable this behavior, TCP routing must be used instead. The TCP router does not maintain connections to application containers at all, circumventing this concern completely.
 
-To activate TCP routing, see [Configure networking](../operating/configure-pas.html#networking) for the <%= vars.app_runtime_abbr %> tile.
+To activate TCP routing, see [Networking](../operating/config-networking.html) for the <%= vars.app_runtime_abbr %> tile.
 
 Apps using Windows Authentication can use the `--no-route` flag for the  `cf push` command, or specify a `routes` section in the app manifest with only a TCP route. The `--no-route` flag no longer unbinds all existing routes associated with the app.
 
@@ -40,6 +40,7 @@ Before you configure the <%= vars.windows_runtime_abbr %> tile for Windows Authe
   * <%= vars.app_runtime_abbr %> 4.0.18 and IST 4.0.18
   * <%= vars.app_runtime_abbr %> 5.0.8 + IST 5.0.8
   * <%= vars.app_runtime_abbr %> 6.0.0 + IST 6.0.0
+
 
 <p class="note caution">
 <span class="note__title">Caution</span>
