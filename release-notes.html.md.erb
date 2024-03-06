@@ -14,6 +14,107 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 
 ## <a id='releases'></a> Releases
 
+### <a id='5.0.9'></a> 5.0.9
+
+**Release Date:** 03/06/2024
+
+* Bump diego to version `2.95.0`
+* Bump garden-runc to version `1.50.0`
+* Bump hwc-offline-buildpack to version `3.1.35`
+
+<table border="1" class="nice">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+      <th>Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>windows2019 stemcell</td><td>2019.70</td><td></td></tr>
+    <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
+    <tr><td>diego</td><td>2.95.0</td>
+      <td>
+        <details>
+          <summary>v2.95.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - bbs: ([Issue](https://github.com/cloudfoundry/diego-release/issues/883)) Now uses `DesiredLRPSchedulingInfo` instead of the entire `DesiredLRP` when only the scheduling info is needed, resulting in a 95% decrease in time spent for relevant calls.  Thanks @klapkov!
+  ## ✨  Built with go 1.21.7
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.94.0...v2.95.0
+  ## Resources
+  - [Download release 2.95.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.95.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>envoy-nginx</td><td>0.24.0</td><td></td></tr>
+    <tr><td>garden-runc</td><td>1.50.0</td>
+      <td>
+        <details>
+          <summary>v1.50.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Adds `grootfs.routine_gc` property, which allows operators to configure garden to grootfs to clean up unused container image layers whenever new containers are created.
+  - Previously, to achieve this, operators had to set `grootfs.reserved_space_for_other_jobs_in_mb` to the same value as the ephemeral disk, which is not always easy to obtain programatically.
+  - Bump go dependencies
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/garden/spec b/jobs/garden/spec
+  index c84b5c43..027df351 100644
+  --- a/jobs/garden/spec
+  +++ b/jobs/garden/spec
+  @@ -292,6 +292,10 @@ properties:
+  grootfs.tls.ca_cert:
+  description: "PEM-encoded tls client CA certificate for asset upload/download"
+  +  grootfs.routine_gc:
+  +    description: "Set to true if you want grootfs to perform garbage collection on unused container image layers whenever a new container is created."
+  +    default: false
+  +
+  grootfs.reserved_space_for_other_jobs_in_mb:
+  description: "Amount of space that will be kept free for other jobs. The GrootFS store will be able to grow up to a maximum size of its disk minus this reserved space. Where the reserved space does not allow sufficient size for GrootFS to store container images and root filesystems (currently 15GB), the limit will be a soft limit, and garbage collection will attempt to keep disk space available for other jobs. -1 disables GC and allows GrootFS to potentially use the whole disk."
+  default: 15360
+  ```
+  ## ✨  Built with go 1.21.7
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.49.0...v1.50.0
+  ## Resources
+  - [Download release 1.50.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.50.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.35</td>
+      <td>
+        <details>
+          <summary>3.1.35</summary>
+          <pre style="max-width: 30em">
+  * Add hwc 27.0.0, remove hwc 26.0.0 for stack(s) windows2016, windows
+  | name | version | cf_stacks |
+  |-|-|-|
+  | hwc | 27.0.0 | windows, windows2016 |
+  Default binary versions:
+  | name | version |
+  |-|-|
+  | hwc | 27.0.0 |
+  * Uncached buildpack SHA256: 5c505af4ca255d8b138c7319fee7e52b6473aec081472315c9d8afefdc173674
+  * Uncached buildpack SHA256: 7f08a228fb23baf746e599365950cc8ef9edb50f4eb636bd78222bbba4f6d6af
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>loggregator-agent</td><td>8.0.1</td><td></td></tr>
+    <tr><td>metrics-discovery</td><td>3.2.22</td><td></td></tr>
+    <tr><td>otel-collector</td><td>0.3.2</td><td></td></tr>
+    <tr><td>smoke-tests</td><td>4.8.5</td><td></td></tr>
+    <tr><td>winc</td><td>2.21.0</td><td></td></tr>
+    <tr><td>windows-syslog</td><td>1.2.3</td><td></td></tr>
+    <tr><td>windows-utilities</td><td>0.20.0</td><td></td></tr>
+    <tr><td>windowsfs-release</td><td>2.63.0</td><td></td></tr>
+  </tbody>
+</table>
+
+
+
 ### <a id='5.0.8'></a> 5.0.8
 
 **Release Date:** 03/04/2024
