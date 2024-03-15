@@ -1,5 +1,5 @@
 ---
-title: VMware Tanzu Application Service for Windows v5.0 Release Notes
+title: VMware Tanzu Application Service for Windows v6.0 Release Notes
 owner: Garden Windows
 ---
 
@@ -2610,11 +2610,24 @@ The <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> tile is availab
 
 <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> includes the following major feature:
 
+### Reintroduction of global log rate limit
+
+TAS 3.0 introduced granular app log rate limits for fine-grained control over application log rates.
+
+In <%= vars.windows_runtime_abbr %> 4.0 the older global log rate limit feature **App log rate limit (deprecated)**
+under **App Containers** was removed. This was problematic for operators who were jump upgrading to
+<%= vars.windows_runtime_abbr %> 4.0 without going through <%= vars.windows_runtime_abbr %> 3.0 as logs would not be
+rate limited until application-based log rate limits were applied.
+
+The global log rate limit is being re-added to enable operators to upgrade while retaining a log rate limit. Operators
+should configure the same setting separately for <%= vars.app_runtime_full %> and <%= vars.segment_runtime_full %>.
+
+If you previously had a global log rate limit set then it will be re-applied following the upgrade to
+<%= vars.windows_runtime_abbr %> <%= vars.v_major_version %>.
 
 ## <a id='breaking-changes'></a> Breaking changes
 
 <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> includes the following breaking changes:
-
 
 
 ## <a id='known-issues'></a> Known issues
