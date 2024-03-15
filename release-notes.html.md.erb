@@ -2620,7 +2620,7 @@ under **App Containers**. This was problematic for operators who were performing
 rate limited until application-based log rate limits were applied.
 
 <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> restores the global log rate limit, so that operators can perform upgrades while retaining log rate limits. Operators
-must configure this setting separately for both <%= vars.app_runtime_full %> and <%= vars.segment_runtime_full %>.
+must configure the same setting separately for both <%= vars.app_runtime_full %> and <%= vars.segment_runtime_full %>.
 
 If you had previously set a global log rate limit, this limit is re-applied following the upgrade to
 <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %>.
