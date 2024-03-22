@@ -14,6 +14,78 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 
 ## <a id='releases'></a> Releases
 
+### <a id='6.0.0-build.21'></a> 6.0.0-build.21
+
+**Release Date:** 03/22/2024
+
+* Bump loggregator-agent to version `8.0.2`
+* Bump otel-collector to version `0.4.0`
+* Bump windows-syslog to version `1.2.4`
+* Bump windowsfs-release to version `2.64.0`
+
+<table border="1" class="nice">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+      <th>Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>windows2019 stemcell</td><td>2019.71</td><td></td></tr>
+    <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
+    <tr><td>diego</td><td>2.95.0</td><td></td></tr>
+    <tr><td>envoy-nginx</td><td>0.24.0</td><td></td></tr>
+    <tr><td>garden-runc</td><td>1.50.0</td><td></td></tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.35</td><td></td></tr>
+    <tr><td>loggregator-agent</td><td>8.0.2</td>
+      <td>
+        <details>
+          <summary>v8.0.2</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump dependencies
+  * Bump to [go1.21.8](https://groups.google.com/g/golang-announce/c/5pwGVUPoMbg/m/46oA5yPABQAJ)
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v8.0.1...v8.0.2
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>otel-collector</td><td>0.4.0</td>
+      <td>
+        <details>
+          <summary>v0.4.0</summary>
+          <pre style="max-width: 30em">
+  * Add spec property `ingress.grpc.address` to allow the listen address of the otel collector to be configured.
+  * Add spec property `trace_exporters` to allow exporters to be configured to handle traces. It is not currently possible to register the same exporter name in both metric and trace pipelines.
+  * Bump dependencies
+  * Bump to [go1.21.8](https://groups.google.com/g/golang-announce/c/5pwGVUPoMbg/m/46oA5yPABQAJ)
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>smoke-tests</td><td>4.8.5</td><td></td></tr>
+    <tr><td>winc</td><td>2.21.0</td><td></td></tr>
+    <tr><td>windows-syslog</td><td>1.2.4</td>
+      <td>
+        <details>
+          <summary>v1.2.4</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump dependencies
+  * Bump packaged Golang to go1.21.8
+  **Full Changelog**: https://github.com/cloudfoundry/windows-syslog-release/compare/v1.2.3...v1.2.4
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-utilities</td><td>0.20.0</td><td></td></tr>
+    <tr><td>windowsfs-release</td><td>2.64.0</td><td></td></tr>
+  </tbody>
+</table>
+
+
+
 ### <a id='6.0.0-build.20'></a> 6.0.0-build.20
 
 **Release Date:** 03/13/2024
