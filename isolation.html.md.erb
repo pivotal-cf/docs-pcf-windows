@@ -66,4 +66,12 @@ To assign a <%= vars.windows_runtime_abbr %> tile to an isolation segment:
 1. Under **Segment name**, enter a name that is unique across your TAS for VMs
 [Windows] deployment.  This is the placement tag for your Diego Cells.
 
+1. (Optional) To limit the number of log lines each app instance in your isolation segment can generate per second, select
+**Enable** under **App log rate limit (deprecated)** and enter an integer for **Maximum app log lines
+per second**. At minimum, <%= vars.company_name %> recommends using the default limit of `100`.
+This feature is deactivated by default.
+    <p class='note'><strong>Note:</strong> This method of limiting log output from applications is
+      deprecated. <%= vars.company_name %> recommends using the log rate limiting quota feature
+      which provides more granular control over application log output.</p>
+
 1. Click **Save**.
