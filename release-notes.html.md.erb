@@ -2977,20 +2977,15 @@ You can now log in to your .NET Framework applications using your existing Activ
 
 <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> includes the following breaking change:
 
-### Option to Enable (Deprecated) Global Log Rate Limit is Removed
+### Option to activate (deprecated) Global Log Rate Limit was removed (<%= vars.windows_runtime_abbr %> 4.0.0+LTS-T - <%= vars.windows_runtime_abbr %> 4.0.19+LTS-T)
 
-This feature was in beta until IST v3.0, when it was deprecated. For details, see [VMware Tanzu Application Service for Windows v3.0 Release Notes](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/release-notes.html#global-log-rate-limit-is-deprecated-14)
-following the introduction of app log rate limits. For more information, see [App Log Rate Feature](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/3.0/tas-for-vms/runtime-rn.html#app-log-rate-limits-for-orgs-spaces-and-individual-apps-14).
-This option to enable the feature has now been removed, and you must apply app log rate limits instead.
+The global log rate limit feature was removed in <%= vars.windows_runtime_abbr %> 4.0.0+LTS-T. It was restored in
+<%= vars.windows_runtime_abbr %> 4.0.20+LTS-T to ease migration to the newer granular app log rate limit feature.
 
-Note that if you were using this feature to limit your overall app log
-throughput, then you might see an increase in log load after you upgrade.
-
-To
-mitigate this, either:
-
-* Scale up your logging system before you upgrade to TASW v4.0 to compensate for the increased log load.
-* Upgrade to TAS/TASW v3.0 first to set app-level log rate limits while retaining the global log rate limit. For more details, see [App Log Rate Limits](https://docs.vmware.com/en/VMware-Tanzu-Application-Service/4.0/tas-for-vms/app-log-rate-limits.html).
+<p class="note important">
+<span class="note__title">Important</span> If you were using this feature to limit your overall app log throughput, then you might
+see an increase in log load after you upgrade prior to configuring granular app log rate limiting. To avoid the increase ensure you
+upgrade to <%= vars.windows_runtime_abbr %> 4.0.20+LTS-T or greater to retain the ability to configure a global log rate limit.</p>
 
 ## <a id='known-issues'></a> Known Issues
 
