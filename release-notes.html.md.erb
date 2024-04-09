@@ -1,5 +1,5 @@
 ---
-title: VMware Tanzu Application Service for Windows v6.0 Release Notes
+title: VMware Tanzu Application Service for Windows v7.0 Release Notes
 owner: Garden Windows
 ---
 
@@ -14,99 +14,9 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 
 ## <a id='releases'></a> Releases
 
-### <a id='6.0.0'></a> 6.0.0
+### <a id='7.0.0'></a> 7.0.0
 
-**Release Date:** 04/09/2024
-
-* **[Breaking Change]** Replace cpu entitlement counters with cpu_entitlement percentage gauge
-* **[Breaking Change]** Remove (deprecated) Metrics Agent and Metrics Discovery Release
-* **[Feature]** Add support for NTLM authentication in Gorouter
-* **[Feature]** Adds Diego support for Docker workloads using OCI images
-* **[Feature]** Expose a custom environment identifier on component logs forwarded via syslog
-* **[Feature Improvement]** OTel Collector marks OTLP Sums as monotonic if they originate from a Loggregator counter
-* **[Feature Improvement]** Garden now emits an `UnkillableContainers` metric to help identify cells that will be unable to redeploy successfully without operator intervention
-* **[Feature Improvement]** Make database "encrypt key" setting more intentional, to avoid password-manager autofilling of the field
-* **[Feature Improvement]** Reintroduce global log rate limit
-* **[Feature Improvement]** A more useful error is now thrown if the (windows) stemcell has not been configured with the necessary CCG support.
-
-<table border="1" class="nice">
-  <thead>
-    <tr>
-      <th>Component</th>
-      <th>Version</th>
-      <th>Release Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td>windows2019 stemcell</td><td>2019.71</td><td></td></tr>
-    <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
-    <tr><td>diego</td><td>2.96.0</td>
-      <td>
-        <details>
-          <summary>v2.96.0</summary>
-          <pre style="max-width: 30em">
-  ## Changes
-  - Bump to golang 1.21.8
-  - Golang package dependency bumps
-  - Includes moving from docker v20 to docker v26
-  - Includes moving from pgx v3 to pgx v5
-  - Remove references to Consul from boshrelease + documentation
-  - Many fixes to remove deprecated code and otherwise fix linter violations.
-  ## ✨  Built with go 1.21.8
-  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.95.0...v2.96.0
-  ## Resources
-  - [Download release 2.96.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.96.0).
-          </pre>
-        </details>
-      </td>
-    </tr>
-    <tr><td>envoy-nginx</td><td>0.24.0</td><td></td></tr>
-    <tr><td>garden-runc</td><td>1.51.0</td>
-      <td>
-        <details>
-          <summary>v1.51.0</summary>
-          <pre style="max-width: 30em">
-  ## Changes
-  - Bumped Golang to 1.21.8
-  - Golang package dependency bumps
-  - Many updates to get codebase passing the staticcheck linker
-  - Updated garden-integration-tests to be a little less flakey
-  ## ✨  Built with go 1.21.8
-  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.50.0...v1.51.0
-  ## Resources
-  - [Download release 1.51.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.51.0).
-          </pre>
-        </details>
-      </td>
-    </tr>
-    <tr><td>hwc-offline-buildpack</td><td>3.1.35</td><td></td></tr>
-    <tr><td>loggregator-agent</td><td>8.0.2</td><td></td></tr>
-    <tr><td>otel-collector</td><td>0.4.0</td><td></td></tr>
-    <tr><td>smoke-tests</td><td>4.8.5</td><td></td></tr>
-    <tr><td>winc</td><td>2.22.0</td>
-      <td>
-        <details>
-          <summary>v2.22.0</summary>
-          <pre style="max-width: 30em">
-  ## Changes
-  - Many changes to remove usage of deprecated code + fix linting errors
-  - Bump to golang 1.21.8
-  - Golang package dependency bumps
-  ## ✨  Built with go 1.21.8
-  **Full Changelog**: https://github.com/cloudfoundry/winc-release/compare/v2.21.0...v2.22.0
-  ## Resources
-  - [Download release 2.22.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/winc-release?version=2.22.0).
-          </pre>
-        </details>
-      </td>
-    </tr>
-    <tr><td>windows-syslog</td><td>1.2.4</td><td></td></tr>
-    <tr><td>windows-utilities</td><td>0.20.0</td><td></td></tr>
-    <tr><td>windowsfs-release</td><td>2.64.0</td><td></td></tr>
-  </tbody>
-</table>
-
-
+**Release Date:** TBD
 
 ## <a id='upgrade'></a> How to Upgrade
 
@@ -114,30 +24,15 @@ The <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> tile is availab
 (<%= vars.app_runtime_abbr %>) <%= vars.v_major_version %>. To use the <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> tile, you must install
 <%= vars.ops_manager_full %> v2.10 or later and <%= vars.app_runtime_abbr %> <%= vars.v_major_version %> or later.
 
-
 ## <a id='new-features'></a> New Features in <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %>
 
 <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> includes the following major feature:
 
-### Reintroduction of global log rate limit
-
-TAS v3.0 introduced granular app log rate limits for fine-grained control over application log rates.
-
-<%= vars.windows_runtime_abbr %> v4.0 removed the older global log rate limit feature **App log rate limit (deprecated)**
-under **App Containers**. This was problematic for operators who were performing a jump upgrade to
-<%= vars.windows_runtime_abbr %> v4.0 (skipping v3.0), as logs would not be
-rate limited until application-based log rate limits were applied.
-
-<%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> restores the global log rate limit, so that operators can perform upgrades while retaining log rate limits. Operators
-must configure the same setting separately for both <%= vars.app_runtime_full %> and <%= vars.segment_runtime_full %>.
-
-If you had previously set a global log rate limit, this limit is re-applied following the upgrade to
-<%= vars.windows_runtime_abbr %> <%= vars.v_major_version %>.
+### TBD
 
 ## <a id='breaking-changes'></a> Breaking changes
 
 <%= vars.windows_runtime_abbr %> <%= vars.v_major_version %> includes the following breaking changes:
-
 
 ## <a id='known-issues'></a> Known issues
 
