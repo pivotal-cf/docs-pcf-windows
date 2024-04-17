@@ -18,6 +18,169 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 
 ## <a id='releases'></a> Releases
 
+### <a id='2.11.49'></a> 2.11.49
+
+**Release Date:** 04/17/2024
+
+* Bump diego to version `2.97.0`
+* Bump garden-runc to version `1.51.0`
+* Bump windows-syslog to version `1.2.5`
+* Bump loggregator-agent to version `6.5.19`
+* Bump metrics-discovery to version `3.2.24`
+* Bump smoke-tests to version `4.10.0`
+* Bump winc to version `2.22.0`
+* Bump windowsfs-release to version `2.66.0`
+
+<table border="1" class="nice">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+      <th>Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>windows2019 stemcell</td><td>2019.72</td><td></td></tr>
+    <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
+    <tr><td>diego</td><td>2.97.0</td>
+      <td>
+        <details>
+          <summary>v2.97.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Adds support for comma-delimited destinations in ASGs
+  - See: https://github.com/cloudfoundry/executor/pull/96 and https://github.com/cloudfoundry/bbs/pull/94
+  - Bump bosh package blobs
+  - Bumps `jq` to `1.7.1`
+  - Bumps `tar`
+  - Bump go.mod dependencies
+  ## ✨  Built with go 1.21.8
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.96.0...v2.97.0
+  ## Resources
+  - [Download release 2.97.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.97.0).
+          </pre>
+        </details>
+        <details>
+          <summary>v2.96.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bump to golang 1.21.8
+  - Golang package dependency bumps
+  - Includes moving from docker v20 to docker v26
+  - Includes moving from pgx v3 to pgx v5
+  - Remove references to Consul from boshrelease + documentation
+  - Many fixes to remove deprecated code and otherwise fix linter violations.
+  ## ✨  Built with go 1.21.8
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.95.0...v2.96.0
+  ## Resources
+  - [Download release 2.96.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.96.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>envoy-nginx</td><td>0.24.0</td><td></td></tr>
+    <tr><td>event-log</td><td>0.9.0</td><td></td></tr>
+    <tr><td>garden-runc</td><td>1.51.0</td>
+      <td>
+        <details>
+          <summary>v1.51.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Bumped Golang to 1.21.8
+  - Golang package dependency bumps
+  - Many updates to get codebase passing the staticcheck linker
+  - Updated garden-integration-tests to be a little less flakey
+  ## ✨  Built with go 1.21.8
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.50.0...v1.51.0
+  ## Resources
+  - [Download release 1.51.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.51.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-syslog</td><td>1.2.5</td>
+      <td>
+        <details>
+          <summary>v1.2.5</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump dependencies
+  * Bump packaged Golang to go1.21.9
+  **Full Changelog**: https://github.com/cloudfoundry/windows-syslog-release/compare/v1.2.4...v1.2.5
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.35</td><td></td></tr>
+    <tr><td>loggregator-agent</td><td>6.5.19</td>
+      <td>
+        <details>
+          <summary>v6.5.19</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump dependencies
+  * Bump to [go1.21.9](https://groups.google.com/g/golang-announce/c/YgW0sx8mN3M/m/khALNYGdAAAJ)
+  **Full Changelog**: https://github.com/cloudfoundry/loggregator-agent-release/compare/v6.5.18...v6.5.19
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>metrics-discovery</td><td>3.2.24</td>
+      <td>
+        <details>
+          <summary>v3.2.24</summary>
+          <pre style="max-width: 30em">
+  ## What's Changed
+  * Bump dependencies
+  * Bump to [go1.21.9](https://groups.google.com/g/golang-announce/c/YgW0sx8mN3M/m/khALNYGdAAAJ)
+  **Full Changelog**: https://github.com/cloudfoundry/metrics-discovery-release/compare/v3.2.23...v3.2.24
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>smoke-tests</td><td>4.10.0</td>
+      <td>
+        <details>
+          <summary>4.10.0</summary>
+          <pre style="max-width: 30em">
+  Create bosh final release 4.10.0
+          </pre>
+        </details>
+        <details>
+          <summary>4.9.5</summary>
+          <pre style="max-width: 30em">
+  Create bosh final release 4.9.5
+  ## What's Changed
+  * Upgrade Golang to 1.22 by @tas-operability-bot in https://github.com/pivotal/smoke-tests/pull/138
+  **Full Changelog**: https://github.com/pivotal/smoke-tests/compare/4.9.5...4.9.5
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>winc</td><td>2.22.0</td>
+      <td>
+        <details>
+          <summary>v2.22.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Many changes to remove usage of deprecated code + fix linting errors
+  - Bump to golang 1.21.8
+  - Golang package dependency bumps
+  ## ✨  Built with go 1.21.8
+  **Full Changelog**: https://github.com/cloudfoundry/winc-release/compare/v2.21.0...v2.22.0
+  ## Resources
+  - [Download release 2.22.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/winc-release?version=2.22.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>windows-utilities</td><td>0.14.0</td><td></td></tr>
+    <tr><td>windowsfs-release</td><td>2.66.0</td><td></td></tr>
+  </tbody>
+</table>
+
+
+
 ### <a id='2.11.48'></a> 2.11.48
 
 **Release Date:** 03/22/2024
