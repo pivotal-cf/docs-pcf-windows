@@ -61,7 +61,7 @@ Before you create a BOSH stemcell for Windows on vSphere, you must have:
     <p> A clean ISO file has no custom scripts or tooling. For example, the ISO must have no logging or antivirus tools installed.</p>
 
 * A download of the `stembuild` command line interface (CLI) from a 2019.x release in [Stemcells
-  (Windows)](https://network.pivotal.io/products/stemcells-windows-server) on <%= vars.product_network %>.
+  (Windows)](https://network.tanzu.vmware.com/products/stemcells-windows-server/) on <%= vars.product_network %>.
   * To build a Windows stemcell for <%= vars.windows_runtime_abbr %>, use the vSphere `stembuild` CLI for Windows corresponding to both the operating system of your local host and the stemcell version that you want to build.
   * To build a Windows stemcell for <%= vars.k8s_runtime_abbr %>, use a Windows stemcell and `stembuild` CLI version listed as compatible
     in the **Product Snapshot** table in the release notes for your <%= vars.k8s_runtime_abbr %> version: [Release Notes](https://docs.vmware.com/en/VMware-Tanzu-Kubernetes-Grid-Integrated-Edition/index.html)

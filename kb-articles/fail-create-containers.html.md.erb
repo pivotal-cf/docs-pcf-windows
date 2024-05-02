@@ -1,0 +1,139 @@
+---
+title: Failure to create containers when upgrading with shared Microsoft base image
+owner: Windows
+---
+
+<!--- https://community.pivotal.io/s/article/knowledge-base-failure-to-create-containers-when-upgrading-with-shared-microsoft-base-image?language=en_US
+--->
+
+When upgrading between versions of the Windows `rootfs` (windows1803fs or windows2019fs) in VMware Tanzu Application Service for VMs (TAS for VMs) that have a shared Microsoft base layer, there may be failures to create containers, causing the upgrade to fail.
+
+When upgrading between versions of the Windows `rootfs` (windows1803fs or windows2019fs) in TAS for VMs [Windows] that have a shared Microsoft base layer, there may be failures to create containers, causing the deployment to fail. If there are stemcell changes or if the Microsoft base layer changes, this error likely does not occur. When the stemcell changes, the Windows Diego Cells are recreated during the upgrade so any corruption of the Microsoft base layer is irrelevant. When the Microsoft base layer changes, if there is corruption to the old base layer, it will not impact the upgrade because the new layer will replace the old one instead of being shared.
+
+This error has been seen with Windows Server 1803 and Windows Server 2019, and on GCP, Azure, vSphere, and AWS.
+
+To investigate this issue, you will need to be able to SSH to the Tanzu Operations Manager VM and run commands with the BOSH CLI.
+
+## Error Type #1: The pre-start script for the Windowsfs job fails which causes the TAS for VMs [Windows] upgrade to fail
+
+This one occurs when there is a custom CA certificate injection that occurs when the `rootfs` job starts up because we try to create a container in order to add the new layer with the certificates in it.
+
+**Operations Manager output**
+
+```
+Task 308031 | 13:47:04 | Preparing deployment: Preparing deployment (00:00:03)
+
+Task 308031 | 13:47:11 | Preparing package compilation: Finding packages to compile (00:00:00)
+
+Task 308031 | 13:47:21 | Updating instance windows_diego_cell: windows_diego_cell/44c5841f-7580-4e9c-9856-89fcbe08ab0d (2) (canary) (00:00:35)
+
+L Error: Action Failed get_task: Task 59ba76d1-14c5-4d7b-681c-08b9ec4bd64d result: 1 of 10 pre-start scripts failed. Failed Jobs: windows1803fs. Successful Jobs: set_kms_host, groot, loggregator_agent_windows, bosh-dns-windows, rep_windows, winc-network-1803, set_password, enable_ssh, enable_rdp.
+
+Task 308031 | 13:47:56 | Error: Action Failed get_task: Task 59ba76d1-14c5-4d7b-681c-08b9ec4bd64d result: 1 of 10 pre-start scripts failed. Failed Jobs: windows1803fs. Successful Jobs: set_kms_host, groot, loggregator_agent_windows, bosh-dns-windows, rep_windows, winc-network-1803, set_password, enable_ssh, enable_rdp.
+```
+
+### BOSH Job logs
+
+1. Run `bosh deployments` and look for the `pas-windows-GUID` deployment name.
+
+1. Run `export BOSH_DEPLOYMENT=<pas-windows-GUID>`
+
+1. Run `bosh vms` and look for the name of the failing Windows Diego cell.
+
+1. Run `bosh logs windows_diego_cell/GUID` with the GUID of the failing Windows Diego cell.
+
+1. In the `windows1803fs` or `windows2019fs` `pre-start.stderr.log`, search for an error that looks similar to this:
+
+    ```
+    container layer-1557177919 encountered an error during Start: failure in a Windows system call: The compute system exited unexpectedly. (0xc0370106)
+    ```
+
+## Error Type #2: The post-start script for the rep_windows job fails which causes the TAS for VMs [Windows] upgrade to fail
+
+This error occurs if there is a problem with the base image and there are no custom certificates to inject. If there are no custom certificates to inject, the `rootfs` job (i.e. `windows1803fs`) will not try to create a container and will successfully start up. After all of the jobs have started, the `post-start` scripts get run. In the `rep_window`s job, the p`ost-start` script tries to create a container first and it will be the one to fail.
+
+**Operations Manager Output**
+
+```
+Task 8192 | 21:12:30 | Updating instance windows2019-cell: windows2019-cell/bd6d70b9-ed1f-412f-9d49-8045627f4ab3 (0) (canary) (00:17:24)
+                     L Error: Action Failed get_task: Task a9555020-1a3b-40c7-677c-d6fc392ce135 result: 1 of 3 post-start scripts failed. Failed Jobs: rep_windows. Successful Jobs: route_emitter_windows, bosh-dns-windows.
+Task 8192 | 21:29:55 | Error: Action Failed get_task: Task a9555020-1a3b-40c7-677c-d6fc392ce135 result: 1 of 3 post-start scripts failed. Failed Jobs: rep_windows. Successful Jobs: route_emitter_windows, bosh-dns-windows.
+```
+
+### BOSH Job logs
+
+1. Run `bosh deployments` and look for the `pas-windows-GUID` deployment name.
+
+1. Run `export BOSH_DEPLOYMENT=<pas-windows-GUID>`
+
+1. Run `bosh vms` and look for the name of the failing Windows Diego cell.
+
+1. Run `bosh logs windows_diego_cell/GUID` with the GUID of the failing Windows Diego cell.
+
+1. In the `rep_windows` directory, in the `rep_windows` subdirectory, search the `job-service-wrapper.out.log` for an error that looks similar to this:
+
+    ```
+    {"timestamp":"2019-07-29T14:59:56.406860500Z","level":"error","source":"rep","message":"rep.exited-with-failure","data":{"error":"Exit trace for group:\ngarden_health_checker exited with error: runc run: exit status 1: container check-c403ce0e-7875-4c04-517a-b1a790e2d323 encountered an error during Start: failure in a Windows system call: The virtual machine or container exited unexpectedly. (0xc0370106)\ncontainer-metrics-reporter exited with nil\nhub-closer exited with nil\nmetrics-reporter exited with nil\nvolman-driver-syncer exited with nil\ndebug-server exited with nil\n"}}
+    ```
+
+## Workaround #1: Recreate all of the Windows Diego cells, then restart the upgrade
+
+(Time: High; Difficulty Level: Low)
+
+This workaround recreates the Windows Diego cells on upgrade in order for the Microsoft base image to be usable.
+
+Steps:
+
+1. Go to the BOSH Director tile.
+
+1. In the **Settings** tab, go to **Director Config**, enable **Recreate All VMs**, and click **Save**.
+
+1. Return to the dashboard, and go to **Review Pending Changes**.
+
+1. (Optional) Unselect **Pending changes for Tanzu Application Service**. This will allow re-creation of only TAS for VMs [Windows] deployments, which will make the upgrade faster.
+
+1. Click **Apply Changes**.
+
+## Workaround #2: Delete the size file in the shared base image on each Windows Diego cell then restart the upgrade in the Operations Manager UI
+
+(Time: Medium; Difficulty Level: High)
+
+This workaround requires Enable BOSH-native SSH support on all VMs (beta) to be enabled in the **TAS for VMs [Windows]** > **VM Options** configuration. By deleting the Size file, our BOSH jobs will replace this layer even if it is shared between the old `rootfs` and the `rootfs` we are upgrading to and that will fix the issue. It will increase the upgrade time by a couple of minutes because each VM will need to re-extract the Microsoft base layer, which is rather large. After you have deleted the Size file in the base layer directory on each VM, you can proceed with the upgrade in the Operations Manager UI.
+
+Steps:
+
+1. Run `bosh deployments` and look for the name of the `pas-windows-GUID` deployment.
+
+1. Run export `BOSH_DEPLOYMENT=<pas-windows-GUID>`.
+1. ​​Run `bosh vms`.
+
+1. Do the following for every windows Diego cell:
+
+    1. Run `bosh ssh windows_diego_cell/GUID`
+    1. Run `powershell` 
+    1. Run `stop-service rep_windows`
+    1. Run `cd C:\var\vcap\data\groot\layers`
+    1. Run:
+        
+        ```
+        $largest=[long]"0"; $largestSha=""; Get-ChildItem | ForEach-Object { If( [long](Get-Content $_\size) -Gt $largest){ $largest=[long](Get-Content $_\size); $largestSha=$_.Name } }; cd $largestSha; rm size
+        ```
+
+        This will remove the `size` file from the base layer directory.
+
+    1. Exit powershell.
+    1. Exit the cell.
+
+1. Continue the upgrade in the Operations Manager UI.
+
+## Workaround #3: Power-cycle the VM then restart the upgrade in the Operations Manager
+
+(Time: High; Difficulty Level: High)
+
+This workaround is dependent on your IaaS. It involves turning on RDP for each cell and creating an Administrator user whose password is known, calling `bosh stop` on each cell, logging in to your IaaS console, turning off each VM (each Windows Diego Cell), and then turning them back on.
+
+After each VM has restarted, you will need to RDP onto the cell and manually start the `bosh-agent` service by running `Start-Service bosh-agent` in Powershell. SSH cannot be used in this step because the BOSH agent is stopped and the job that allows SSH is stopped, therefore, RDP is necessary.
+
+With this workaround, you do not require access to the Operations Manager VM or BOSH director. This workaround appears to work because it powers off all the Windows services, then turns them back on, and the shared Microsoft base layer is usable again.
+
+This workaround is different from `bosh restart`, which stops and starts only our BOSH jobs. After you have power-cycled each VM and turned the `bosh-agent` service back on, you can proceed with the upgrade in the Operations Manager UI.
