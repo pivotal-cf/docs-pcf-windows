@@ -14,6 +14,145 @@ Before you install the tile, review the [Windows Stemcell Compatibility Matrix](
 
 ## <a id='releases'></a> Releases
 
+### <a id='6.0.4'></a> 6.0.4
+
+**Release Date:** 05/29/2024
+
+* **[Bug Fix]** Remove replication-canary
+* Bump diego to version `2.99.0`
+* Bump garden-runc to version `1.53.0`
+
+<table border="1" class="nice">
+  <thead>
+    <tr>
+      <th>Component</th>
+      <th>Version</th>
+      <th>Release Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>windows2019 stemcell</td><td>2019.73</td><td></td></tr>
+    <tr><td>count-cores-indicator</td><td>2.0.0</td><td></td></tr>
+    <tr><td>diego</td><td>2.99.0</td>
+      <td>
+        <details>
+          <summary>v2.99.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - Do not remove evacuating actual LRP during cleanup ([rep#53](https://github.com/cloudfoundry/rep/pull/53))
+  - Add additional retries when apps make use of credhub for credentials. ([buildpackapplifecycle#71](https://github.com/cloudfoundry/buildpackapplifecycle/pull/71))
+  - Prevent panics in BBS by checking for all types of errors ([bbs#95](https://github.com/cloudfoundry/bbs/pull/95))
+  - Add retry logic and more explicit failure in router emitter start-up ([router-emitter#34](https://github.com/cloudfoundry/route-emitter/pull/34))
+  - Bump envoy blob version to `1.28.3`
+  - Go mod dependency bumps
+  ## ✨  Built with go 1.22.3
+  **Full Changelog**: https://github.com/cloudfoundry/diego-release/compare/v2.98.0...v2.99.0
+  ## Resources
+  - [Download release 2.99.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/diego-release?version=2.99.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>envoy-nginx</td><td>0.25.0</td><td></td></tr>
+    <tr><td>garden-runc</td><td>1.53.0</td>
+      <td>
+        <details>
+          <summary>v1.53.0</summary>
+          <pre style="max-width: 30em">
+  ## Changes
+  - **DEPRECATION NOTICE** The `garden.experimental_use_containerd_mode_for_processes` property and usage of Garden when run in containerd mode for processes is now deprecated and no longer tested.
+  -  **DEFAULT CHANGE** - The default mode for garden containers is now containerd. This has been the default in cf-deployment since 2018.
+  -  **REMOVAL OF EXPERIMENTAL FUNCTIONALITY NOTICE**  The experimental option to run the garden server process in rootless mode has been removed, as it did not work as expected and was an abandoned feature.
+  - Go package dependency bumps
+  ## Bosh Job Spec changes:
+  ```diff
+  diff --git a/jobs/garden-binaries/spec b/jobs/garden-binaries/spec
+  index 0433639a..a8a96bae 100644
+  --- a/jobs/garden-binaries/spec
+  +++ b/jobs/garden-binaries/spec
+  @@ -15,7 +15,6 @@ packages:
+  - grootfs
+  - xfs-progs
+  - thresholder
+  -  - netplugin-shim
+  - dontpanic
+  - tini
+  diff --git a/jobs/garden/spec b/jobs/garden/spec
+  index 027df351..093e53e1 100644
+  --- a/jobs/garden/spec
+  +++ b/jobs/garden/spec
+  @@ -36,7 +36,6 @@ packages:
+  - grootfs
+  - xfs-progs
+  - thresholder
+  -  - netplugin-shim
+  - dontpanic
+  - tini
+  @@ -199,10 +198,6 @@ properties:
+  description: AppArmor profile to use for unprivileged container processes
+  default: garden-default
+  -  garden.experimental_rootless_mode:
+  -    description: A boolean stating whether or not to run garden-server as a non-root user
+  -    default: false
+  -
+  # We believe this defaults to false to help concourse: https://github.com/cloudfoundry/garden-runc-release/releases/tag/v1.5.0
+  # For diego/cf, this should be set to true
+  garden.cleanup_process_dirs_on_wait:
+  @@ -210,8 +205,8 @@ properties:
+  default: false
+  garden.containerd_mode:
+  -    description: "Use containerd for container lifecycle management. NOTE: cannot be used in combination with bpm or rootless"
+  -    default: false
+  +    description: "Use containerd for container lifecycle management. NOTE: cannot be used in combination with bpm"
+  +    default: true
+  garden.tcp_keepalive_time:
+  description: Sets the `net.ipv4.tcp_keepalive_time` kernel parameter in containers. If not specified, the value from the linux init_net namespace is used.
+  @@ -229,7 +224,7 @@ properties:
+  description: Sets the `net.ipv4.tcp_retries2` kernel parameter in containers. If not specified, the value from the linux init_net namespace is used.
+  garden.experimental_use_containerd_mode_for_processes:
+  -    description: "(Under development) Use containerd for container process management. Must be used with containerd_mode also set to true. NOTE: cannot be used in combination with bpm or rootless"
+  +    description: "(Deprecated) No longer used/tested."
+  default: false
+  garden.experimental_cpu_throttling:
+  diff --git a/jobs/gats/spec b/jobs/gats/spec
+  index 916a35eb..065e3ace 100644
+  --- a/jobs/gats/spec
+  +++ b/jobs/gats/spec
+  @@ -22,12 +22,6 @@ properties:
+  garden_test_rootfs:
+  description: Test rootfs to use
+  default: 'docker:///cloudfoundry/garden-rootfs'
+  -  containerd_for_processes:
+  -    description: Run GATS with CONTAINERD_FOR_PROCESSES_ENABLED
+  -    default: false
+  -  rootless:
+  -    description: Run GATS with ROOTLESS env var
+  -    default: false
+  cpu_throttling:
+  description: Run GATS with CPU_THROTTLING_ENABLED
+  default: false
+  ```
+  ## ✨  Built with go 1.22.3
+  **Full Changelog**: https://github.com/cloudfoundry/garden-runc-release/compare/v1.52.0...v1.53.0
+  ## Resources
+  - [Download release 1.53.0 from bosh.io](https://bosh.io/releases/github.com/cloudfoundry/garden-runc-release?version=1.53.0).
+          </pre>
+        </details>
+      </td>
+    </tr>
+    <tr><td>hwc-offline-buildpack</td><td>3.1.36</td><td></td></tr>
+    <tr><td>loggregator-agent</td><td>8.1.1</td><td></td></tr>
+    <tr><td>otel-collector</td><td>0.4.1</td><td></td></tr>
+    <tr><td>smoke-tests</td><td>4.10.0</td><td></td></tr>
+    <tr><td>winc</td><td>2.24.0</td><td></td></tr>
+    <tr><td>windows-syslog</td><td>1.3.0</td><td></td></tr>
+    <tr><td>windows-utilities</td><td>0.20.0</td><td></td></tr>
+    <tr><td>windowsfs-release</td><td>2.66.0</td><td></td></tr>
+  </tbody>
+</table>
+
+
+
 ### <a id='6.0.3'></a> 6.0.3
 
 **Release Date:** 05/03/2024
